@@ -2,13 +2,13 @@
 //  FirstViewController.swift
 //  CarLess
 //
-//  Created by Evie Hahaha on 6/25/15.
+//  Created by Whyceewhite on 6/25/15.
 //  Copyright (c) 2015 Galloway Mobile. All rights reserved.
 //
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class ActivityController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

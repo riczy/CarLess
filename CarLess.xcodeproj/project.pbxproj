@@ -7,13 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84440B4E1B45C68F008A983A /* ModesTableViewController.swift */; };
+		844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* ModeType.swift */; };
+		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		848929131B3C486B0045C39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929121B3C486B0045C39E /* AppDelegate.swift */; };
-		848929151B3C486B0045C39E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929141B3C486B0045C39E /* FirstViewController.swift */; };
-		848929171B3C486B0045C39E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* SecondViewController.swift */; };
+		848929151B3C486B0045C39E /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929141B3C486B0045C39E /* ActivityController.swift */; };
+		848929171B3C486B0045C39E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* SettingsController.swift */; };
 		8489291A1B3C486B0045C39E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848929181B3C486B0045C39E /* Main.storyboard */; };
 		8489291C1B3C486B0045C39E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8489291B1B3C486B0045C39E /* Images.xcassets */; };
 		8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8489291D1B3C486B0045C39E /* LaunchScreen.xib */; };
 		8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489292A1B3C486B0045C39E /* CarLessTests.swift */; };
+		8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* LogTableViewController.swift */; };
+		8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929691B4431630045C39E /* ModesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,17 +32,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84440B4E1B45C68F008A983A /* ModesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewController.swift; sourceTree = "<group>"; };
+		844B61D81B4A19E400A32D77 /* ModeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
+		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929111B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929121B3C486B0045C39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		848929141B3C486B0045C39E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		848929161B3C486B0045C39E /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		848929141B3C486B0045C39E /* ActivityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityController.swift; sourceTree = "<group>"; };
+		848929161B3C486B0045C39E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		848929191B3C486B0045C39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8489291B1B3C486B0045C39E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8489291E1B3C486B0045C39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		848929241B3C486B0045C39E /* CarLessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarLessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929291B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8489292A1B3C486B0045C39E /* CarLessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLessTests.swift; sourceTree = "<group>"; };
+		848929391B3E41C80045C39E /* LogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
+		848929691B4431630045C39E /* ModesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,13 +89,18 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
+				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
+				848929141B3C486B0045C39E /* ActivityController.swift */,
+				848929161B3C486B0045C39E /* SettingsController.swift */,
+				848929391B3E41C80045C39E /* LogTableViewController.swift */,
 				848929121B3C486B0045C39E /* AppDelegate.swift */,
-				848929141B3C486B0045C39E /* FirstViewController.swift */,
-				848929161B3C486B0045C39E /* SecondViewController.swift */,
 				848929181B3C486B0045C39E /* Main.storyboard */,
 				8489291B1B3C486B0045C39E /* Images.xcassets */,
 				8489291D1B3C486B0045C39E /* LaunchScreen.xib */,
 				848929101B3C486B0045C39E /* Supporting Files */,
+				84440B4E1B45C68F008A983A /* ModesTableViewController.swift */,
+				848929691B4431630045C39E /* ModesTableViewCell.swift */,
+				844B61D81B4A19E400A32D77 /* ModeType.swift */,
 			);
 			path = CarLess;
 			sourceTree = "<group>";
@@ -215,9 +230,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				848929171B3C486B0045C39E /* SecondViewController.swift in Sources */,
+				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
-				848929151B3C486B0045C39E /* FirstViewController.swift in Sources */,
+				8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */,
+				844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */,
+				8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */,
+				84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */,
+				848929151B3C486B0045C39E /* ActivityController.swift in Sources */,
+				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +435,7 @@
 				848929301B3C486B0045C39E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		848929311B3C486B0045C39E /* Build configuration list for PBXNativeTarget "CarLessTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +444,7 @@
 				848929331B3C486B0045C39E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
