@@ -47,16 +47,14 @@ class ModesTableViewController: UITableViewController {
     }
 
     private struct Storyboard {
-        static let CellReuseIdentifier = "ModeType"
+        static let CellReuseIdentifier = "ModeTypeTableCell"
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! ModesTableViewCell
 
-        let mode = modes[indexPath.row]
+        cell.modeType = modes[indexPath.row]
         
-        cell.modeType = mode
-
         return cell
     }
 
