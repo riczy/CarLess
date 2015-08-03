@@ -17,7 +17,7 @@ class ModesTableViewCell: UITableViewCell {
     @IBAction func selectMode(sender: UIButton) {
     }
     
-    var modeType: ModeType? {
+    var mode: Mode? {
         didSet {
             updateUI()
         }
@@ -28,8 +28,8 @@ class ModesTableViewCell: UITableViewCell {
         modeImage?.image = nil
         modeName?.text = nil
         
-        if let modeType = self.modeType {
-            modeName?.text = modeType.name
+        if let modeType = self.mode {
+            modeName?.text = modeType.description
             modeImage?.image = UIImage(named: modeType.imageFilename)
         }
     }

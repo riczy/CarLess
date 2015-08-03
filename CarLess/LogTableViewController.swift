@@ -1,102 +1,79 @@
-//
-//  LogTableViewController.swift
-//  CarLess
-//
-//  Created by Whyceewhite on 6/26/15.
-//  Copyright (c) 2015 Galloway Mobile. All rights reserved.
-//
-
 import UIKit
 
 class LogTableViewController: UITableViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
+    private struct Storyboard {
+        
+        static let TripDateSegue = "TripDateSegue"
+        static let TripModeSegue = "TripModeSegue"
     }
+    
+    private var trip = Trip()
+    
+    private var dateFormatter: NSDateFormatter!
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBOutlet weak var tripDateLabel: UILabel!
+    
+    @IBOutlet weak var tripModeLabel: UILabel!
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        
+        tripDateLabel.text! = dateFormatter.stringFromDate(trip.date)
+        tripModeLabel.text! = trip.mode.description
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
+
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
+
         return 4
     }
     
     @IBAction
-    func goBack(segue: UIStoryboardSegue) {
-        println("someone unwound me")
+    func cancel(segue: UIStoryboardSegue) {
+        // do nothing
+    }
+    
+    @IBAction
+    func saveModeSelection(segue: UIStoryboardSegue) {
+        
+        let modesVc: ModesTableViewController = segue.sourceViewController as! ModesTableViewController
+        trip.mode = modesVc.mode!
+        tripModeLabel!.text = modesVc.mode!.description
+    }
+    
+    @IBAction
+    func saveDateSelection(segue: UIStoryboardSegue) {
+        
+        let dateVc: DateViewController = segue.sourceViewController as! DateViewController
+        trip.date = dateVc.date
+        tripDateLabel!.text = dateFormatter.stringFromDate(dateVc.date)
     }
 
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+     // MARK: - Navigation
 
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        
+        let segueId = segue.identifier!
+        let dvc: AnyObject = segue.destinationViewController
+        if segueId == Storyboard.TripDateSegue {
+            let dateVc = dvc.topViewController as! DateViewController
+            dateVc.initialDate = trip.date
+        } else if segueId == Storyboard.TripModeSegue {
+            let modesVc = dvc.topViewController as! ModesTableViewController
+            modesVc.mode = trip.mode
+        }
     }
-    */
 
 }

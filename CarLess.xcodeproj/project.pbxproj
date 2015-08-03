@@ -10,6 +10,9 @@
 		84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84440B4E1B45C68F008A983A /* ModesTableViewController.swift */; };
 		844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* ModeType.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
+		84760EC01B65843F00355E52 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EBF1B65843F00355E52 /* DateViewController.swift */; };
+		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
+		84760EC51B6808A700355E52 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* Trip.swift */; };
 		848929131B3C486B0045C39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929121B3C486B0045C39E /* AppDelegate.swift */; };
 		848929151B3C486B0045C39E /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929141B3C486B0045C39E /* ActivityController.swift */; };
 		848929171B3C486B0045C39E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* SettingsController.swift */; };
@@ -35,6 +38,9 @@
 		84440B4E1B45C68F008A983A /* ModesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewController.swift; sourceTree = "<group>"; };
 		844B61D81B4A19E400A32D77 /* ModeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		84760EBF1B65843F00355E52 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		84760EC41B6808A700355E52 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929111B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929121B3C486B0045C39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +74,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84760EC11B670EF900355E52 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84760EC21B670F2200355E52 /* DateExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		84760EC61B680DBF00355E52 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				844B61D81B4A19E400A32D77 /* ModeType.swift */,
+				84760EC41B6808A700355E52 /* Trip.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		848929041B3C486B0045C39E = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +112,8 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
+				84760EC61B680DBF00355E52 /* Models */,
+				84760EC11B670EF900355E52 /* Extensions */,
 				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
 				848929141B3C486B0045C39E /* ActivityController.swift */,
 				848929161B3C486B0045C39E /* SettingsController.swift */,
@@ -100,7 +125,7 @@
 				848929101B3C486B0045C39E /* Supporting Files */,
 				84440B4E1B45C68F008A983A /* ModesTableViewController.swift */,
 				848929691B4431630045C39E /* ModesTableViewCell.swift */,
-				844B61D81B4A19E400A32D77 /* ModeType.swift */,
+				84760EBF1B65843F00355E52 /* DateViewController.swift */,
 			);
 			path = CarLess;
 			sourceTree = "<group>";
@@ -230,13 +255,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84760EC51B6808A700355E52 /* Trip.swift in Sources */,
 				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
+				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */,
 				844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */,
 				84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */,
 				848929151B3C486B0045C39E /* ActivityController.swift in Sources */,
+				84760EC01B65843F00355E52 /* DateViewController.swift in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
