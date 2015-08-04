@@ -1,31 +1,19 @@
 {
   "images" : [
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "fill",
-          "width" : 1,
-          "height" : 1
-        },
-        "capInsets" : {
-          "bottom" : 256,
-          "top" : 255,
-          "right" : 256,
-          "left" : 255
-        }
-      },
       "idiom" : "universal",
-      "filename" : "man-silhouette1.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "walking2-1x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "walking2-2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "walking2-3x.png"
     }
   ],
   "info" : {

@@ -40,6 +40,8 @@ class LogTableViewController: UITableViewController {
         return 4
     }
     
+    // MARK: - Child Scene Actions
+    
     @IBAction
     func cancel(segue: UIStoryboardSegue) {
         // do nothing

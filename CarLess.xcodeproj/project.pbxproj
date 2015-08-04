@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84440B4E1B45C68F008A983A /* ModesTableViewController.swift */; };
-		844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* ModeType.swift */; };
+		844B61D91B4A19E400A32D77 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* Mode.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		84760EC01B65843F00355E52 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EBF1B65843F00355E52 /* DateViewController.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
@@ -22,6 +22,7 @@
 		8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489292A1B3C486B0045C39E /* CarLessTests.swift */; };
 		8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* LogTableViewController.swift */; };
 		8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929691B4431630045C39E /* ModesTableViewCell.swift */; };
+		84E71D1B1B703E8F0026D56B /* ManualRouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +37,7 @@
 
 /* Begin PBXFileReference section */
 		84440B4E1B45C68F008A983A /* ModesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewController.swift; sourceTree = "<group>"; };
-		844B61D81B4A19E400A32D77 /* ModeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModeType.swift; sourceTree = "<group>"; };
+		844B61D81B4A19E400A32D77 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84760EBF1B65843F00355E52 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -54,6 +55,7 @@
 		8489292A1B3C486B0045C39E /* CarLessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLessTests.swift; sourceTree = "<group>"; };
 		848929391B3E41C80045C39E /* LogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
 		848929691B4431630045C39E /* ModesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewCell.swift; sourceTree = "<group>"; };
+		84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualRouteController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +87,7 @@
 		84760EC61B680DBF00355E52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				844B61D81B4A19E400A32D77 /* ModeType.swift */,
+				844B61D81B4A19E400A32D77 /* Mode.swift */,
 				84760EC41B6808A700355E52 /* Trip.swift */,
 			);
 			name = Models;
@@ -118,12 +120,12 @@
 				848929141B3C486B0045C39E /* ActivityController.swift */,
 				848929161B3C486B0045C39E /* SettingsController.swift */,
 				848929391B3E41C80045C39E /* LogTableViewController.swift */,
-				848929121B3C486B0045C39E /* AppDelegate.swift */,
 				848929181B3C486B0045C39E /* Main.storyboard */,
 				8489291B1B3C486B0045C39E /* Images.xcassets */,
 				8489291D1B3C486B0045C39E /* LaunchScreen.xib */,
 				848929101B3C486B0045C39E /* Supporting Files */,
 				84440B4E1B45C68F008A983A /* ModesTableViewController.swift */,
+				84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */,
 				848929691B4431630045C39E /* ModesTableViewCell.swift */,
 				84760EBF1B65843F00355E52 /* DateViewController.swift */,
 			);
@@ -133,6 +135,7 @@
 		848929101B3C486B0045C39E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				848929121B3C486B0045C39E /* AppDelegate.swift */,
 				848929111B3C486B0045C39E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,12 +263,13 @@
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */,
-				844B61D91B4A19E400A32D77 /* ModeType.swift in Sources */,
+				844B61D91B4A19E400A32D77 /* Mode.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */,
 				84440B4F1B45C68F008A983A /* ModesTableViewController.swift in Sources */,
 				848929151B3C486B0045C39E /* ActivityController.swift in Sources */,
 				84760EC01B65843F00355E52 /* DateViewController.swift in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
+				84E71D1B1B703E8F0026D56B /* ManualRouteController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

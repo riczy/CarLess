@@ -16,3 +16,12 @@ class Trip {
     var mode: Mode = Mode.Bicycle
     
 }
+
+class ManualRoute {
+    
+    var startLocation: String?
+    
+    var endLocation: String?
+    
+    var distance: Int = 10
+}
