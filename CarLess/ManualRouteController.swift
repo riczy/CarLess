@@ -4,22 +4,17 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
     
     private struct Constants {
         
-        static let StartLocationFieldTag = 100
-        static let EndLocationFieldTag = 101
-        static let DistanceFieldTag = 102
+        static let RouteNameFieldTag = 100
+        static let DistanceFieldTag = 101
     }
 
     var route: ManualRoute = ManualRoute()
     
     private var formatter: NSNumberFormatter!
     
-    @IBOutlet weak var startLocationField: UITextField!
-    @IBOutlet weak var endLocationField: UITextField!
+    @IBOutlet weak var routeNameField: UITextField!
     @IBOutlet weak var distanceField: UITextField!
-    @IBOutlet weak var distanceStepper: UIStepper!
-    
-    @IBAction func stepDistance(sender: UIStepper) {
-    }
+    @IBOutlet weak var distanceUnitLabel: UILabel!
     
     required init(coder aDecoder: NSCoder) {
         
@@ -33,26 +28,17 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         
-        distanceStepper.minimumValue = 1
-        distanceStepper.maximumValue = 100
-        
-        startLocationField.tag = Constants.StartLocationFieldTag
-        endLocationField.tag = Constants.EndLocationFieldTag
+        routeNameField.tag = Constants.RouteNameFieldTag
         distanceField.tag = Constants.DistanceFieldTag
         
-        startLocationField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
-        endLocationField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
+        routeNameField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
         distanceField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
         distanceField.delegate = self
         
-        if route.startLocation != nil {
-            startLocationField.text = route.startLocation!
-        }
-        
-        if route.endLocation != nil {
-            endLocationField.text = route.endLocation!
-        }
-        
+        distanceUnitLabel.text = route.distanceUnit.abbreviation
+        if route.routeName != nil {
+            routeNameField.text = route.routeName!
+        }        
         if route.distance != nil {
             distanceField.text = "\(route.distance!)"
         }
@@ -68,10 +54,8 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
     
     func textFieldChanged(textField: UITextField) {
         
-        if textField.tag == Constants.StartLocationFieldTag {
-            route.startLocation = textField.text
-        } else if textField.tag == Constants.EndLocationFieldTag {
-            route.endLocation = textField.text
+        if textField.tag == Constants.RouteNameFieldTag {
+            route.routeName = textField.text
         } else if textField.tag == Constants.DistanceFieldTag {
             if let newValue = formatter.numberFromString(textField.text) {
                 route.distance = newValue.doubleValue

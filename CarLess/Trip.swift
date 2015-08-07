@@ -21,40 +21,31 @@ class Trip {
 
 struct ManualRoute {
     
-    var startLocation: String?
-    
-    var endLocation: String?
-    
+    var routeName: String?
     var distance: Double?
-    
     var distanceUnit = LengthUnit.Mile
     
-    func toString() -> String {
+    func toLongString() -> String {
         
         var text = ""
         
-        let hasStart = startLocation != nil && !startLocation!.isEmpty
-        let hasEnd = endLocation != nil && !endLocation!.isEmpty
+        let hasName = routeName != nil && !routeName!.isEmpty
         let hasDistance = distance != nil
         
-        if hasStart {
-            text += startLocation!
-        }
-        if hasEnd {
-            if hasStart {
-                text += " - "
-            }
-            text += endLocation!
+        if hasName {
+            text += routeName!
         }
         if hasDistance {
-            if hasStart && hasEnd {
-                text += " ("
+            if hasName {
+                text += " @ "
             }
             text += "\(distance!) \(distanceUnit.abbreviation)"
-            if hasStart && hasEnd {
-                text += ")"
-            }
         }
         return text
+    }
+    
+    func toString() -> String {
+        
+        return distance == nil ? "" : "\(distance!) \(distanceUnit.abbreviation)"
     }
 }
