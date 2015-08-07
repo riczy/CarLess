@@ -6,6 +6,7 @@ class LogTableViewController: UITableViewController {
         
         static let TripDateSegue = "TripDateSegue"
         static let TripModeSegue = "TripModeSegue"
+        static let TripRouteSegue = "TripRouteSegue"
     }
     
     private var trip = Trip()
@@ -13,8 +14,8 @@ class LogTableViewController: UITableViewController {
     private var dateFormatter: NSDateFormatter!
 
     @IBOutlet weak var tripDateLabel: UILabel!
-    
     @IBOutlet weak var tripModeLabel: UILabel!
+    @IBOutlet weak var tripRouteLabel: UILabel!
     
     override func viewDidLoad() {
         
@@ -26,6 +27,7 @@ class LogTableViewController: UITableViewController {
         
         tripDateLabel.text! = dateFormatter.stringFromDate(trip.date)
         tripModeLabel.text! = trip.mode.description
+        tripRouteLabel.text! = trip.route.toString()
     }
 
     // MARK: - Table view data source
@@ -62,6 +64,14 @@ class LogTableViewController: UITableViewController {
         trip.date = dateVc.date
         tripDateLabel!.text = dateFormatter.stringFromDate(dateVc.date)
     }
+    
+    @IBAction
+    func saveRouteEntry(segue: UIStoryboardSegue) {
+        
+        let vc: ManualRouteController = segue.sourceViewController as! ManualRouteController
+        trip.route = vc.route
+        tripRouteLabel!.text = trip.route.toString()
+    }
 
      // MARK: - Navigation
 
@@ -75,6 +85,9 @@ class LogTableViewController: UITableViewController {
         } else if segueId == Storyboard.TripModeSegue {
             let modesVc = dvc.topViewController as! ModesTableViewController
             modesVc.mode = trip.mode
+        } else if segueId == Storyboard.TripRouteSegue {
+            let routeVc = dvc.topViewController as! ManualRouteController
+            routeVc.route = trip.route
         }
     }
 

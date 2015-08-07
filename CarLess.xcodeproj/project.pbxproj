@@ -23,6 +23,7 @@
 		8489293A1B3E41C80045C39E /* LogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* LogTableViewController.swift */; };
 		8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929691B4431630045C39E /* ModesTableViewCell.swift */; };
 		84E71D1B1B703E8F0026D56B /* ManualRouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */; };
+		84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1C1B7110940026D56B /* LengthUnit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		848929391B3E41C80045C39E /* LogTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTableViewController.swift; sourceTree = "<group>"; };
 		848929691B4431630045C39E /* ModesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModesTableViewCell.swift; sourceTree = "<group>"; };
 		84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualRouteController.swift; sourceTree = "<group>"; };
+		84E71D1C1B7110940026D56B /* LengthUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				844B61D81B4A19E400A32D77 /* Mode.swift */,
 				84760EC41B6808A700355E52 /* Trip.swift */,
+				84E71D1C1B7110940026D56B /* LengthUnit.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			files = (
 				84760EC51B6808A700355E52 /* Trip.swift in Sources */,
 				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
+				84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */,
