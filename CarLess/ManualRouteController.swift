@@ -10,19 +10,9 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
 
     var route: ManualRoute = ManualRoute()
     
-    private var formatter: NSNumberFormatter!
-    
     @IBOutlet weak var routeNameField: UITextField!
     @IBOutlet weak var distanceField: UITextField!
     @IBOutlet weak var distanceUnitLabel: UILabel!
-    
-    required init(coder aDecoder: NSCoder) {
-        
-        super.init(coder: aDecoder)
-        formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        formatter.minimum = 0
-   }
     
     override func viewDidLoad() {
         
@@ -31,8 +21,8 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
         routeNameField.tag = Constants.RouteNameFieldTag
         distanceField.tag = Constants.DistanceFieldTag
         
-        routeNameField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
-        distanceField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingDidEnd)
+        routeNameField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
+        distanceField.addTarget(self, action: "textFieldChanged:", forControlEvents: UIControlEvents.EditingChanged)
         distanceField.delegate = self
         
         distanceUnitLabel.text = route.distanceUnit.abbreviation
@@ -47,7 +37,7 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
         if textField.tag == Constants.DistanceFieldTag {
-            return formatter.numberFromString("\(textField.text)\(string)") != nil
+            return ManualRoute.formatter.numberFromString("\(textField.text)\(string)") != nil
         }
         return true
     }
@@ -57,7 +47,7 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
         if textField.tag == Constants.RouteNameFieldTag {
             route.routeName = textField.text
         } else if textField.tag == Constants.DistanceFieldTag {
-            if let newValue = formatter.numberFromString(textField.text) {
+            if let newValue = ManualRoute.formatter.numberFromString(textField.text) {
                 route.distance = newValue.doubleValue
             }
         }

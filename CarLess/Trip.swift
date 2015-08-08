@@ -21,6 +21,19 @@ class Trip {
 
 struct ManualRoute {
     
+    private static var _formatter: NSNumberFormatter?
+    static var formatter: NSNumberFormatter {
+        get {
+            if _formatter == nil {
+                _formatter = NSNumberFormatter()
+                _formatter!.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                _formatter!.minimum = 0
+                _formatter!.maximumFractionDigits = 1
+            }
+            return _formatter!
+        }
+    }
+    
     var routeName: String?
     var distance: Double?
     var distanceUnit = LengthUnit.Mile
@@ -39,13 +52,14 @@ struct ManualRoute {
             if hasName {
                 text += " @ "
             }
-            text += "\(distance!) \(distanceUnit.abbreviation)"
+            text += ManualRoute.formatter.stringFromNumber(distance!)!
+            text += " \(distanceUnit.abbreviation)"
         }
         return text
     }
     
     func toString() -> String {
         
-        return distance == nil ? "" : "\(distance!) \(distanceUnit.abbreviation)"
+        return distance == nil ? "" : "\(ManualRoute.formatter.stringFromNumber(distance!)!) \(distanceUnit.abbreviation)"
     }
 }

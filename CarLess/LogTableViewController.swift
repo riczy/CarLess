@@ -54,7 +54,7 @@ class LogTableViewController: UITableViewController {
         
         let modesVc: ModesTableViewController = segue.sourceViewController as! ModesTableViewController
         trip.mode = modesVc.mode!
-        tripModeLabel!.text = modesVc.mode!.description
+        tripModeLabel.text = modesVc.mode!.description
     }
     
     @IBAction
@@ -62,7 +62,7 @@ class LogTableViewController: UITableViewController {
         
         let dateVc: DateViewController = segue.sourceViewController as! DateViewController
         trip.date = dateVc.date
-        tripDateLabel!.text = dateFormatter.stringFromDate(dateVc.date)
+        tripDateLabel.text = dateFormatter.stringFromDate(dateVc.date)
     }
     
     @IBAction
@@ -70,7 +70,7 @@ class LogTableViewController: UITableViewController {
         
         let vc: ManualRouteController = segue.sourceViewController as! ManualRouteController
         trip.route = vc.route
-        tripRouteLabel!.text = trip.route.toString()
+        tripRouteLabel.text = trip.route.toString()
     }
 
      // MARK: - Navigation
