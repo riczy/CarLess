@@ -12,10 +12,14 @@ class LogTableViewController: UITableViewController {
     private var trip = Trip()
     
     private var dateFormatter: NSDateFormatter!
-
+    
     @IBOutlet weak var tripDateLabel: UILabel!
     @IBOutlet weak var tripModeLabel: UILabel!
     @IBOutlet weak var tripRouteLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
+    
+    @IBAction func save(sender: UIButton) {
+    }
     
     override func viewDidLoad() {
         
@@ -39,7 +43,7 @@ class LogTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 4
+        return 3
     }
     
     // MARK: - Child Scene Actions
