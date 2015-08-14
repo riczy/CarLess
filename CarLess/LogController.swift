@@ -1,6 +1,6 @@
 import UIKit
 
-class LogTableViewController: UITableViewController {
+class LogController: UITableViewController {
     
     private struct Storyboard {
         
@@ -56,7 +56,7 @@ class LogTableViewController: UITableViewController {
     @IBAction
     func saveModeSelection(segue: UIStoryboardSegue) {
         
-        let modesVc: ModesTableViewController = segue.sourceViewController as! ModesTableViewController
+        let modesVc: CaModeListController = segue.sourceViewController as! CaModeListController
         trip.mode = modesVc.mode!
         tripModeLabel.text = modesVc.mode!.description
     }
@@ -87,7 +87,7 @@ class LogTableViewController: UITableViewController {
             let dateVc = dvc.topViewController as! DateViewController
             dateVc.initialDate = trip.date
         } else if segueId == Storyboard.TripModeSegue {
-            let modesVc = dvc.topViewController as! ModesTableViewController
+            let modesVc = dvc.topViewController as! CaModeListController
             modesVc.mode = trip.mode
         } else if segueId == Storyboard.TripRouteSegue {
             let routeVc = dvc.topViewController as! ManualRouteController

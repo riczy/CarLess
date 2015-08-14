@@ -1,6 +1,10 @@
 import UIKit
 
-class ModesTableViewController: UITableViewController {
+class CaModeListController: UITableViewController {
+    
+    private struct Identifier {
+        static let ModeCell = "ModeTypeTableCell"
+    }
     
     
     var mode: Mode?
@@ -47,7 +51,7 @@ class ModesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as! ModesTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(Identifier.ModeCell, forIndexPath: indexPath) as! ModesTableViewCell
 
         cell.mode = modes[indexPath.row]
         
@@ -57,9 +61,5 @@ class ModesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         mode = modes[indexPath.row]
-    }
-    
-    private struct Storyboard {
-        static let CellReuseIdentifier = "ModeTypeTableCell"
     }
 }
