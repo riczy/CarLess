@@ -4,33 +4,36 @@ import MapKit
 class CaMappedRouteController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var startTrackingButton: UIButton!
+    @IBOutlet weak var trackingButton: UIButton!
     
-    var locationManager = CLLocationManager()
+    lazy private var locationManager: CLLocationManager! = {
+            let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        manager.delegate = self
+        manager.requestAlwaysAuthorization()
+        return manager
+    }()
     
-    private var startLocation: CLLocationCoordinate2D?
-    private var endLocation: CLLocationCoordinate2D?
+    private var mode = Mode.allValues.first
+    private var isTracking = false
+    private var locations = [MKPointAnnotation]()
+    
+    // MARK: - UI Lifecycle
     
     override func viewDidLoad() {
+        
+        println("viewDidLoad")
         super.viewDidLoad()
         
         mapView.mapType = MKMapType.Standard
         mapView.delegate = self
         
-//        mapView.showsUserLocation = true
-//        
-//        let userLocation = mapView.userLocation?.location
-//        println("coordinate= \(userLocation?.coordinate)")
-//        println("altitude= \(userLocation?.altitude)")
-//        println("timestamp= \(userLocation?.timestamp)")
-        
-        
-//        locationManager = CLLocationManager()
-//        locationManager.requestAlwaysAuthorization()
-//        locationManager.delegate = self
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        locationManager.distanceFilter = 500 // meters
-//        locationManager.startMonitoringSignificantLocationChanges()
+        trackingButton.addTarget(self, action: "toggleTracking:", forControlEvents: UIControlEvents.TouchUpInside)
+        if isTracking {
+            showStopTrackingButton()
+        } else {
+            showStartTrackingButton()
+        }
         
     }
     
@@ -38,7 +41,11 @@ class CaMappedRouteController: UIViewController, CLLocationManagerDelegate, MKMa
         
         println("viewDidAppear")
         super.viewDidAppear(animated)
-        checkLocationAuthorizationStatus()
+        if isLocationServicesAvailable() {
+            mapView.showsUserLocation = true
+        } else {
+            locationManager.requestAlwaysAuthorization()
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -50,16 +57,8 @@ class CaMappedRouteController: UIViewController, CLLocationManagerDelegate, MKMa
         }
     }
     
-    func checkLocationAuthorizationStatus() {
-    
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-            mapView.showsUserLocation = true
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
-    }
-    
     // MARK: - Map View Delegation
+    
     func mapView(mapView: MKMapView!, didFailToLocateUserWithError error: NSError!) {
         println("didFailToLocateUserWithError")
     }
@@ -69,8 +68,8 @@ class CaMappedRouteController: UIViewController, CLLocationManagerDelegate, MKMa
     }
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        println("mapView: didUpdateUserLocation:")
         
+        println("mapView: didUpdateUserLocation: - \(userLocation.coordinate.latitude), \(userLocation.coordinate.longitude)")
         let span = MKCoordinateSpanMake(0.03, 0.03)
         let userLocationCoordinate = userLocation.coordinate
         let region = MKCoordinateRegion(center: userLocationCoordinate, span: span)
@@ -78,19 +77,112 @@ class CaMappedRouteController: UIViewController, CLLocationManagerDelegate, MKMa
         
     }
     
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    // MARK: - Location Manager Delegation
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
-        println("locations size = \(locations.count)")
+        if isLocationServicesAvailable() && !mapView.showsUserLocation {
+            mapView.showsUserLocation = true
+        }
     }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        println("locationManager: didUpdateToLocation: fromLocation: - \(newLocation.coordinate.latitude), \(newLocation.coordinate.longitude)")
+        // Add another annotation to the map.
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = newLocation.coordinate
+        
+        // Also add to our map so we can remove old values later
+        locations.append(annotation)
+        
+        // Remove values if the array is too big
+        while locations.count > 100 {
+            let annotationToRemove = locations.first!
+            locations.removeAtIndex(0)
+            
+            // Also remove from the map
+            mapView.removeAnnotation(annotationToRemove)
+        }
+        
+        if UIApplication.sharedApplication().applicationState == .Active {
+            mapView.showAnnotations(locations, animated: true)
+        } else {
+            NSLog("App is backgrounded. New location is %@", newLocation)
+        }}
+    
+    
+    // MARK: - Private functions
+    
+    private func isLocationServicesAvailable() -> Bool {
+        
+        return CLLocationManager.locationServicesEnabled() &&
+            CLLocationManager.authorizationStatus() != CLAuthorizationStatus.Denied &&
+            CLLocationManager.authorizationStatus() != CLAuthorizationStatus.Restricted &&
+            CLLocationManager.authorizationStatus() != CLAuthorizationStatus.NotDetermined
     }
-    */
+    
+    func toggleTracking(sender: UIButton) {
+        
+        if isTracking {
+            stopTracking()
+        } else {
+            startTracking()
+        }
+    }
+    
+    private func startTracking() {
+        
+        if isLocationServicesAvailable() {
+            let locationSettings = getActivityTypeAndAccuracyForMode()
+            locationManager.activityType = locationSettings.activityType
+            locationManager.desiredAccuracy = locationSettings.accuracy
+            locationManager.startUpdatingLocation()
+            showStopTrackingButton()
+            isTracking = true
+        } else {
+            locationManager.requestAlwaysAuthorization()
+        }
+    }
+    
+    private func stopTracking() {
+        
+        // display cancel or continue alert
+        locationManager.stopUpdatingLocation()
+        showStartTrackingButton()
+        isTracking = false
+    }
+    
+    private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {
+        
+        if mode == Mode.Bicycle || mode == Mode.Walk {
+            return (CLActivityType.Fitness, kCLLocationAccuracyNearestTenMeters)
+        } else if mode == Mode.Bus || mode == Mode.Rideshare {
+            return (CLActivityType.AutomotiveNavigation, kCLLocationAccuracyNearestTenMeters)
+        } else if mode == Mode.Train {
+            return (CLActivityType.OtherNavigation, kCLLocationAccuracyHundredMeters)
+        }
+        return (CLActivityType.Other, kCLLocationAccuracyKilometer)
+    }
+    
+    private func showStartTrackingButton() {
+        
+        trackingButton.setTitle("Start", forState: UIControlState.Normal)
+        trackingButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        trackingButton.backgroundColor = UIColor.blueColor()
+        trackingButton.layer.borderColor = UIColor.blueColor().CGColor
+        trackingButton.layer.cornerRadius = 8
+        trackingButton.layer.borderWidth = 1
+    }
+    
+    private func showStopTrackingButton() {
+        
+        trackingButton.setTitle("Stop", forState: UIControlState.Normal)
+        trackingButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        trackingButton.backgroundColor = UIColor.redColor()
+        trackingButton.layer.borderColor = UIColor.whiteColor().CGColor
+        trackingButton.layer.cornerRadius = 8
+        trackingButton.layer.borderWidth = 1
+    }
 
 }
