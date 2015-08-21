@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Washington_DC_Walking_Tour.gpx">
-   </FileRef>
-   <FileRef
       location = "self:CarLess.xcodeproj">
    </FileRef>
 </Workspace>

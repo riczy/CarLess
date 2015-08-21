@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  CarLess
-//
-//  Created by Whyceewhite on 6/25/15.
-//  Copyright (c) 2015 Galloway Mobile. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain

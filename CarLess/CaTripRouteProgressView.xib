@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaTripRouteProgressView" customModule="CarLess" customModuleProvider="target">
+            <connections>
+                <outlet property="distanceLabel" destination="WIj-Pu-LQR" id="ocj-x4-z96"/>
+                <outlet property="distanceValueLabel" destination="GjY-6K-nFi" id="tCg-CE-ruV"/>
+                <outlet property="durationLabel" destination="qE4-Nx-X2R" id="day-2r-1rE"/>
+                <outlet property="durationValueLabel" destination="niA-45-W8Z" id="IZu-3h-g9t"/>
+                <outlet property="modeLabel" destination="Mi2-vl-KTa" id="FHs-gP-1HF"/>
+                <outlet property="modeValueLabel" destination="KAx-sG-a1g" id="een-YX-zQ7"/>
+                <outlet property="view" destination="iN0-l3-epB" id="VIW-nQ-Xul"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="1" y="0.0" width="155" height="236"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISTANCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIj-Pu-LQR">
+                    <rect key="frame" x="0.0" y="8" width="155" height="17"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DURATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Nx-X2R">
+                    <rect key="frame" x="0.0" y="91" width="155" height="17"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MODE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi2-vl-KTa">
+                    <rect key="frame" x="0.0" y="174" width="155" height="17"/>
+                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjY-6K-nFi">
+                    <rect key="frame" x="14" y="33" width="123" height="28"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niA-45-W8Z">
+                    <rect key="frame" x="0.0" y="116" width="155" height="28"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bicycle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAx-sG-a1g">
+                    <rect key="frame" x="0.0" y="199" width="155" height="28"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="GjY-6K-nFi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="3ZE-jb-iwq"/>
+                <constraint firstAttribute="trailing" secondItem="qE4-Nx-X2R" secondAttribute="trailing" id="8hL-QT-pOC"/>
+                <constraint firstAttribute="trailing" secondItem="WIj-Pu-LQR" secondAttribute="trailing" id="Aft-bK-CHW"/>
+                <constraint firstItem="WIj-Pu-LQR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="BUG-Sb-gQq"/>
+                <constraint firstItem="niA-45-W8Z" firstAttribute="top" secondItem="qE4-Nx-X2R" secondAttribute="bottom" constant="8" id="CEO-cF-zlh"/>
+                <constraint firstItem="WIj-Pu-LQR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EXb-c3-QBI"/>
+                <constraint firstItem="KAx-sG-a1g" firstAttribute="top" secondItem="Mi2-vl-KTa" secondAttribute="bottom" constant="8" id="JIK-pz-2HV"/>
+                <constraint firstItem="qE4-Nx-X2R" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ksa-ja-mI5"/>
+                <constraint firstItem="qE4-Nx-X2R" firstAttribute="top" secondItem="GjY-6K-nFi" secondAttribute="bottom" constant="30" id="NmG-WJ-nu8"/>
+                <constraint firstItem="Mi2-vl-KTa" firstAttribute="top" secondItem="niA-45-W8Z" secondAttribute="bottom" constant="30" id="RZV-We-9hD"/>
+                <constraint firstItem="niA-45-W8Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VKw-a9-8vJ"/>
+                <constraint firstItem="GjY-6K-nFi" firstAttribute="top" secondItem="WIj-Pu-LQR" secondAttribute="bottom" constant="8" id="VfV-3T-zna"/>
+                <constraint firstItem="KAx-sG-a1g" firstAttribute="top" secondItem="Mi2-vl-KTa" secondAttribute="bottom" constant="8" id="ZwR-8x-dly"/>
+                <constraint firstAttribute="trailing" secondItem="GjY-6K-nFi" secondAttribute="trailing" constant="18" id="bog-I5-b6B"/>
+                <constraint firstAttribute="trailing" secondItem="KAx-sG-a1g" secondAttribute="trailing" id="gDu-c1-7gf"/>
+                <constraint firstItem="KAx-sG-a1g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h9q-SW-xPZ"/>
+                <constraint firstItem="GjY-6K-nFi" firstAttribute="top" secondItem="WIj-Pu-LQR" secondAttribute="bottom" constant="8" id="kx3-kE-cTk"/>
+                <constraint firstAttribute="trailing" secondItem="niA-45-W8Z" secondAttribute="trailing" id="lSr-3v-0yz"/>
+                <constraint firstItem="niA-45-W8Z" firstAttribute="top" secondItem="qE4-Nx-X2R" secondAttribute="bottom" constant="8" id="o00-1n-DS8"/>
+                <constraint firstItem="Mi2-vl-KTa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="our-CK-Yq1"/>
+                <constraint firstItem="qE4-Nx-X2R" firstAttribute="top" secondItem="GjY-6K-nFi" secondAttribute="bottom" constant="30" id="r1H-cY-Zsa"/>
+                <constraint firstAttribute="trailing" secondItem="Mi2-vl-KTa" secondAttribute="trailing" id="umK-r2-DpO"/>
+                <constraint firstItem="Mi2-vl-KTa" firstAttribute="top" secondItem="niA-45-W8Z" secondAttribute="bottom" constant="30" id="xif-H6-Bn8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="574.5" y="195"/>
+        </view>
+    </objects>
+</document>

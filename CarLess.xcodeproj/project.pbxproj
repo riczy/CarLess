@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		84278FEF1B7C16A200F20BA7 /* CaRouteParametersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FEE1B7C16A200F20BA7 /* CaRouteParametersController.swift */; };
 		84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */; };
+		84278FF41B83848B00F20BA7 /* CaMappedRouteProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF31B83848B00F20BA7 /* CaMappedRouteProgressController.swift */; };
+		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
 		84440B4F1B45C68F008A983A /* CaModeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84440B4E1B45C68F008A983A /* CaModeListController.swift */; };
 		844B61D91B4A19E400A32D77 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* Mode.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
@@ -27,6 +29,9 @@
 		84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */; };
 		84E4F0E51B78D9170006C069 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4F0E41B78D9170006C069 /* MapKit.framework */; };
 		84E4F0E71B7A75D30006C069 /* CaMappedRouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E61B7A75D30006C069 /* CaMappedRouteController.swift */; };
+		84E6953A1B86687D000185BE /* CaTripRouteProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E695391B86687D000185BE /* CaTripRouteProgressView.swift */; };
+		84E6953C1B8668E6000185BE /* CaTripRouteProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E6953B1B8668E6000185BE /* CaTripRouteProgressView.xib */; };
+		84E6953E1B86B56D000185BE /* CaMappedRouteSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6953D1B86B56D000185BE /* CaMappedRouteSummaryController.swift */; };
 		84E71D1B1B703E8F0026D56B /* ManualRouteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */; };
 		84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1C1B7110940026D56B /* LengthUnit.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +49,8 @@
 /* Begin PBXFileReference section */
 		84278FEE1B7C16A200F20BA7 /* CaRouteParametersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaRouteParametersController.swift; sourceTree = "<group>"; };
 		84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaStoryboard.swift; sourceTree = "<group>"; };
+		84278FF31B83848B00F20BA7 /* CaMappedRouteProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaMappedRouteProgressController.swift; sourceTree = "<group>"; };
+		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
 		84440B4E1B45C68F008A983A /* CaModeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaModeListController.swift; sourceTree = "<group>"; };
 		844B61D81B4A19E400A32D77 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +73,9 @@
 		84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarLess.xcdatamodel; sourceTree = "<group>"; };
 		84E4F0E41B78D9170006C069 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84E4F0E61B7A75D30006C069 /* CaMappedRouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaMappedRouteController.swift; sourceTree = "<group>"; };
+		84E695391B86687D000185BE /* CaTripRouteProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripRouteProgressView.swift; sourceTree = "<group>"; };
+		84E6953B1B8668E6000185BE /* CaTripRouteProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaTripRouteProgressView.xib; sourceTree = "<group>"; };
+		84E6953D1B86B56D000185BE /* CaMappedRouteSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaMappedRouteSummaryController.swift; sourceTree = "<group>"; };
 		84E71D1A1B703E8F0026D56B /* ManualRouteController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualRouteController.swift; sourceTree = "<group>"; };
 		84E71D1C1B7110940026D56B /* LengthUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,8 +104,11 @@
 			children = (
 				84278FEE1B7C16A200F20BA7 /* CaRouteParametersController.swift */,
 				84E4F0E61B7A75D30006C069 /* CaMappedRouteController.swift */,
+				84278FF31B83848B00F20BA7 /* CaMappedRouteProgressController.swift */,
+				84E6953D1B86B56D000185BE /* CaMappedRouteSummaryController.swift */,
 				84440B4E1B45C68F008A983A /* CaModeListController.swift */,
 				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
+				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
 			);
 			name = Ca;
 			sourceTree = "<group>";
@@ -140,6 +153,7 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
+				84E695381B8667E2000185BE /* Views */,
 				84278FF01B7C16F500F20BA7 /* Ca */,
 				84760EC61B680DBF00355E52 /* Models */,
 				84760EC11B670EF900355E52 /* Extensions */,
@@ -183,6 +197,15 @@
 				848929291B3C486B0045C39E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84E695381B8667E2000185BE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84E695391B86687D000185BE /* CaTripRouteProgressView.swift */,
+				84E6953B1B8668E6000185BE /* CaTripRouteProgressView.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +298,7 @@
 			files = (
 				8489291A1B3C486B0045C39E /* Main.storyboard in Resources */,
 				8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */,
+				84E6953C1B8668E6000185BE /* CaTripRouteProgressView.xib in Resources */,
 				8489291C1B3C486B0045C39E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,17 +318,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				84760EC51B6808A700355E52 /* Trip.swift in Sources */,
+				84E6953E1B86B56D000185BE /* CaMappedRouteSummaryController.swift in Sources */,
+				84278FF41B83848B00F20BA7 /* CaMappedRouteProgressController.swift in Sources */,
 				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
 				84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				84278FEF1B7C16A200F20BA7 /* CaRouteParametersController.swift in Sources */,
+				84E6953A1B86687D000185BE /* CaTripRouteProgressView.swift in Sources */,
 				8489296A1B4431630045C39E /* ModesTableViewCell.swift in Sources */,
 				844B61D91B4A19E400A32D77 /* Mode.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogController.swift in Sources */,
 				84440B4F1B45C68F008A983A /* CaModeListController.swift in Sources */,
 				848929151B3C486B0045C39E /* ActivityController.swift in Sources */,
+				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
 				84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */,
 				84760EC01B65843F00355E52 /* DateViewController.swift in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,

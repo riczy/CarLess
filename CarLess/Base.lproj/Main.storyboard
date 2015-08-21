@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Bpz-id-yht">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -152,7 +152,6 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="Bpz-id-yht" kind="relationship" relationship="viewControllers" id="TLd-FP-FDH"/>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                     </connections>
                 </tabBarController>
@@ -315,7 +314,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hpX-Gf-YcP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yQJ-dY-VIj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-882" y="521"/>
+            <point key="canvasLocation" x="-854" y="503"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Dcl-GB-OCt">
@@ -333,12 +332,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7et-Cq-xGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1652" y="521"/>
+            <point key="canvasLocation" x="-1531" y="509"/>
         </scene>
-        <!--Enter Map Route -->
+        <!--Map Route Tracking-->
         <scene sceneID="Y3b-0k-Bbk">
             <objects>
-                <viewController title="Enter Map Route " id="Bpz-id-yht" customClass="CaMappedRouteController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Map Route Tracking" id="Bpz-id-yht" customClass="CaMappedRouteController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ajr-Ta-Pfp"/>
                         <viewControllerLayoutGuide type="bottom" id="FZt-rG-tii"/>
@@ -348,7 +347,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="unW-DA-knf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </mapView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y24-fv-cCB">
                                 <rect key="frame" x="180" y="30" width="240" height="65"/>
@@ -367,14 +366,18 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vWD-QM-aPC">
-                                <rect key="frame" x="250" y="497" width="100" height="34"/>
+                                <rect key="frame" x="250" y="546" width="100" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Msf-1S-Phz"/>
                                 </constraints>
-                                <state key="normal" title="Tracking">
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Start">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="1fr-d2-bnx" kind="show" identifier="MappedRouteToInProgressSegue" id="4X5-M1-UlP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -429,7 +432,135 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMf-Q4-ShZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2441" y="10"/>
+            <point key="canvasLocation" x="-2931" y="503"/>
+        </scene>
+        <!--Map Route Progress-->
+        <scene sceneID="buC-La-5sD">
+            <objects>
+                <viewController title="Map Route Progress" id="1fr-d2-bnx" customClass="CaMappedRouteProgressController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GeQ-zb-ofB"/>
+                        <viewControllerLayoutGuide type="bottom" id="gox-R1-pXZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hsE-2q-AgY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mg4-id-Wyn">
+                                <rect key="frame" x="250" y="550" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="DTq-9Q-wuI"/>
+                                </constraints>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eoF-3N-FD0" customClass="CaTripRouteProgressView" customModule="CarLess" customModuleProvider="target">
+                                <rect key="frame" x="223" y="142" width="155" height="236"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="KZY-7R-WYo"/>
+                                    <constraint firstAttribute="height" constant="236" id="hIe-kU-7iy"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="mg4-id-Wyn" secondAttribute="centerX" id="N04-Vu-iSc"/>
+                            <constraint firstAttribute="centerY" secondItem="eoF-3N-FD0" secondAttribute="centerY" constant="40" id="N06-Kg-pLh"/>
+                            <constraint firstItem="eoF-3N-FD0" firstAttribute="top" secondItem="GeQ-zb-ofB" secondAttribute="bottom" constant="10" id="bVq-O5-4DC"/>
+                            <constraint firstItem="eoF-3N-FD0" firstAttribute="leading" secondItem="hsE-2q-AgY" secondAttribute="leadingMargin" constant="135" id="fU6-tn-5FN"/>
+                            <constraint firstItem="gox-R1-pXZ" firstAttribute="top" secondItem="mg4-id-Wyn" secondAttribute="bottom" constant="20" id="hR8-fz-eFj"/>
+                            <constraint firstAttribute="centerX" secondItem="eoF-3N-FD0" secondAttribute="centerX" id="wLs-Xq-mnB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="bVq-O5-4DC"/>
+                                <exclude reference="fU6-tn-5FN"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="progressView" destination="eoF-3N-FD0" id="D0y-WL-wvX"/>
+                        <outlet property="stopButton" destination="mg4-id-Wyn" id="a8E-Ep-lRU"/>
+                        <segue destination="Ou4-FC-MJj" kind="show" identifier="MappedRouteProgressToSummary" id="IaS-6K-ilb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yda-hS-thl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2877" y="1250"/>
+        </scene>
+        <!--Map Route Summary-->
+        <scene sceneID="Ycj-V5-V7r">
+            <objects>
+                <viewController title="Map Route Summary" id="Ou4-FC-MJj" customClass="CaMappedRouteSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wGD-Qo-DGo"/>
+                        <viewControllerLayoutGuide type="bottom" id="M65-XW-8xB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3XA-nR-NJj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5M-qe-WD2">
+                                <rect key="frame" x="180" y="550" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="82R-Z7-mEQ"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpZ-9W-FRt">
+                                <rect key="frame" x="320" y="550" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="CWb-C5-kDF"/>
+                                </constraints>
+                                <state key="normal" title="Discard">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6FO-1O-Eie">
+                                <rect key="frame" x="290" y="570" width="20" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="RSf-bI-UD3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIk-Sp-oaj" customClass="CaTripRouteProgressView" customModule="CarLess" customModuleProvider="target">
+                                <rect key="frame" x="223" y="142" width="155" height="236"/>
+                                <color key="backgroundColor" red="0.34970568950000003" green="0.77791587750000002" blue="0.61113606929999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="236" id="Hqd-gu-KTZ"/>
+                                    <constraint firstAttribute="width" constant="155" id="QZ1-9m-fya"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="tIk-Sp-oaj" secondAttribute="centerY" constant="40" id="9kl-eg-8Ua"/>
+                            <constraint firstItem="YpZ-9W-FRt" firstAttribute="leading" secondItem="6FO-1O-Eie" secondAttribute="trailing" constant="10" id="FR7-M6-xmh"/>
+                            <constraint firstAttribute="centerX" secondItem="tIk-Sp-oaj" secondAttribute="centerX" id="NkN-Fu-Y8E"/>
+                            <constraint firstItem="M65-XW-8xB" firstAttribute="top" secondItem="p5M-qe-WD2" secondAttribute="bottom" constant="20" id="PoM-hz-T9f"/>
+                            <constraint firstItem="M65-XW-8xB" firstAttribute="top" secondItem="YpZ-9W-FRt" secondAttribute="bottom" constant="20" id="Qo0-g5-AGF"/>
+                            <constraint firstItem="6FO-1O-Eie" firstAttribute="leading" secondItem="p5M-qe-WD2" secondAttribute="trailing" constant="10" id="QrH-Uu-dci"/>
+                            <constraint firstItem="M65-XW-8xB" firstAttribute="top" secondItem="6FO-1O-Eie" secondAttribute="bottom" constant="30" id="WfS-AE-Xh4"/>
+                            <constraint firstAttribute="centerX" secondItem="6FO-1O-Eie" secondAttribute="centerX" id="yq5-6r-yx6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="discardButton" destination="YpZ-9W-FRt" id="mHW-dt-DFM"/>
+                        <outlet property="saveButton" destination="p5M-qe-WD2" id="Wuw-9k-wjs"/>
+                        <outlet property="summaryView" destination="tIk-Sp-oaj" id="sjp-6r-5qS"/>
+                        <segue destination="cVO-pp-O8B" kind="unwind" identifier="MappedRouteSummaryToMain" unwindAction="unwindToTripTrackingBeginning:" id="mkN-DN-x08"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="cVO-pp-O8B" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-2194" y="1249"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aFI-VX-nHL">
@@ -447,7 +578,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VzO-er-Xtq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1519" y="1465"/>
+            <point key="canvasLocation" x="-1547" y="1465"/>
         </scene>
         <!--Route Parameters-->
         <scene sceneID="Bs1-YH-gqE">
@@ -498,7 +629,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xHg-hf-Paw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2441" y="520.5"/>
+            <point key="canvasLocation" x="-2343" y="502.5"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="CvX-ts-az6">
+            <objects>
+                <viewController id="RaA-XU-yGf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="07L-8j-Bam"/>
+                        <viewControllerLayoutGuide type="bottom" id="y0V-Dx-upf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WD2-Kp-Ybx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZWE-pB-DQR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
