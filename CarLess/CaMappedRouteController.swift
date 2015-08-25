@@ -1,42 +1,61 @@
 import UIKit
 import MapKit
 
-class CaMappedRouteController: UIViewController, MKMapViewDelegate {
+class CaMappedRouteController: UIViewController {
 
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var trackingButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
     
-    private var mode = Mode.allValues.first
-    
-    // MARK: - UI Lifecycle
+    @IBOutlet weak var modeImage: UIImageView!
+    @IBOutlet weak var modeLabel: UILabel!
+    @IBOutlet weak var modeNavigationLabel: UILabel!
+
+    private var modeLabelTapRecognizer = UITapGestureRecognizer()
+    private var modeNavigationTapRecognizer = UITapGestureRecognizer()
+
+    private var _mode: Mode?
+    private var mode: Mode {
+        get {
+            if _mode == nil {
+                _mode = Mode.allValues.first
+                updateDisplayForMode(_mode!)
+            }
+            return _mode!
+        }
+        set {
+            _mode = newValue
+            updateDisplayForMode(_mode!)
+        }
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        mapView.mapType = MKMapType.Standard
-        mapView.delegate = self
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         
-        super.viewDidAppear(animated)
-        if CaLocationManager.isLocationServiceAvailable() {
-            mapView.showsUserLocation = true
-        } else {
-            CaLocationManager.instance.requestAlwaysAuthorization()
-        }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
+        modeLabelTapRecognizer.numberOfTapsRequired = 1
+        modeLabelTapRecognizer.numberOfTouchesRequired = 1
+        modeLabelTapRecognizer.addTarget(self, action: "handleModeTapGesture:")
         
-        super.viewDidDisappear(animated)
-        if mapView.showsUserLocation {
-            mapView.showsUserLocation = false
-        }
+        modeNavigationTapRecognizer.numberOfTapsRequired = 1
+        modeNavigationTapRecognizer.numberOfTouchesRequired = 1
+        modeNavigationTapRecognizer.addTarget(self, action: "handleModeTapGesture:")
+        
+        modeLabel.userInteractionEnabled = true
+        modeLabel.adjustsFontSizeToFitWidth = true
+        modeLabel.addGestureRecognizer(modeLabelTapRecognizer)
+        
+        modeNavigationLabel.userInteractionEnabled = true
+        modeNavigationLabel.addGestureRecognizer(modeNavigationTapRecognizer)
+        
+        // Initialize mode
+        mode = Mode.allValues.first!
     }
     
-    // MARK: - UI Navigation
+    func handleModeTapGesture(gesture: UITapGestureRecognizer) {
+        
+        performSegueWithIdentifier(CaSegue.MappedRouteToModeList, sender: nil)
+    }
     
+
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
         if identifier == CaSegue.MappedRouteToInProgress {
@@ -56,34 +75,33 @@ class CaMappedRouteController: UIViewController, MKMapViewDelegate {
         if segue.identifier == CaSegue.MappedRouteToInProgress {
             let vc = segue.destinationViewController as! CaMappedRouteProgressController
             vc.mode = mode
+        } else if segue.identifier == CaSegue.MappedRouteToModeList {
+            // It's a modal segue to the mode list vc; thus, get top vc
+            let vc = segue.destinationViewController.topViewController as! CaModeListController
+            vc.mode = mode
         }
     }
     
+    @IBAction
+    func cancelMappedRouteModeSelection(segue: UIStoryboardSegue) {
+        // do nothing
+    }
+    
+    @IBAction
+    func saveMappedRouteModeSelection(segue: UIStoryboardSegue) {
+        
+        let vc: CaModeListController = segue.sourceViewController as! CaModeListController
+        mode = vc.mode!
+    }
     
     @IBAction
     func unwindToTripTrackingBeginning(segue: UIStoryboardSegue) {
-        
     }
     
-    // MARK: - Map View Delegation
-    
-    
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    private func updateDisplayForMode(mode: Mode) {
         
-        let span = MKCoordinateSpanMake(0.03, 0.03)
-        let userLocationCoordinate = userLocation.coordinate
-        let region = MKCoordinateRegion(center: userLocationCoordinate, span: span)
-        mapView.setRegion(region, animated: true)
-        
-    }
-    
-    // MARK: - Location Manager Delegation
-    
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        
-        if CaLocationManager.isLocationServiceAvailable() && !mapView.showsUserLocation {
-            mapView.showsUserLocation = true
-        }
+        modeLabel.text! = mode.description
+        modeImage?.image = UIImage(named: mode.imageFilename)
     }
     
 }

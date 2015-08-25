@@ -45,9 +45,9 @@
 		<string>MKDirectionsModeSubway</string>
 		<string>MKDirectionsModeTrain</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location is used to track your commute distance and route.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Your location is used to track your commute distance and route.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is used to track your commute distance and route.</string>
 	<key>UIBackgroundModes</key>
 	<array>
@@ -74,8 +74,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

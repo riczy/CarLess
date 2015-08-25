@@ -1,14 +1,25 @@
 import UIKit
 import MapKit
 
-class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelegate {
+class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
-    @IBOutlet weak var progressView: CaTripRouteProgressView!
     @IBOutlet weak var stopButton: UIButton!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var modeValueLabel: UILabel!
+    @IBOutlet weak var distanceValueLabel: UILabel!
     
     var mode: Mode!
     
+    private var distanceTraveled: Double = 0.0 {
+        didSet {
+            distanceValueLabel.text! = "\(self.distanceTraveled)"
+        }
+    }
+    
+    private var lastLocation: CLLocation!
+    
     private var locations = [MKPointAnnotation]()
+    
     private var startTimestamp: NSDate!
     
     lazy private var locationManager: CLLocationManager! = {
@@ -22,21 +33,60 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        renderStopButton()
+        
+        modeValueLabel.text! = mode.description
+        distanceValueLabel.text! = "\(distanceTraveled)"
+        
+        //renderStopButton()
         stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
+
+        mapView.mapType = MKMapType.Standard
+        mapView.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
         
-        startTracking()
+        super.viewDidAppear(animated)
+        if CaLocationManager.isLocationServiceAvailable() {
+            mapView.showsUserLocation = true
+            startTracking()
+        } else {
+            CaLocationManager.instance.requestAlwaysAuthorization()
+        }
     }
 
-    func locationManager(manager: CLLocationManager!, didUpdateToLocation newLocation: CLLocation!, fromLocation oldLocation: CLLocation!) {
+    override func viewDidDisappear(animated: Bool) {
+
+        // DO I need to do this??
         
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = newLocation.coordinate
-        locations.append(annotation)
-        println("location update: long=\(newLocation.coordinate.longitude), lat=\(newLocation.coordinate.latitude)")
+        super.viewDidDisappear(animated)
+        if mapView.showsUserLocation {
+            mapView.showsUserLocation = false
+        }
+    }
+
+    // MARK: - Map View Delegation
+    
+    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+        
+        let span = MKCoordinateSpanMake(0.03, 0.03)
+        let userLocationCoordinate = userLocation.coordinate
+        let region = MKCoordinateRegion(center: userLocationCoordinate, span: span)
+        mapView.setRegion(region, animated: true)
+        
+    }
+   
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        if lastLocation == nil {
+            lastLocation = locations.first as! CLLocation
+        } else {
+            let newestLocation = locations.last as! CLLocation
+            distanceTraveled += lastLocation.distanceFromLocation(newestLocation) + 0.3
+            lastLocation = newestLocation
+            println("lastLocation = long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude)")
+            println("distance travelled = \(distanceTraveled)")
+        }
     }
     
 
@@ -87,7 +137,7 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
         stopButton.setTitle("STOP", forState: UIControlState.Normal)
         stopButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         stopButton.backgroundColor = UIColor(red: 254.0/255.0, green: 73.0/255.0, blue: 2.0/255.0, alpha: 1.0)
-        //stopButton.layer.borderColor = UIColor.whiteColor().CGColor
+        stopButton.layer.borderColor = UIColor.whiteColor().CGColor
         stopButton.layer.cornerRadius = 2
         stopButton.layer.borderWidth = 1
     }

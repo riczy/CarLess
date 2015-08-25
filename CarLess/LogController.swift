@@ -54,14 +54,6 @@ class LogController: UITableViewController {
     }
     
     @IBAction
-    func saveModeSelection(segue: UIStoryboardSegue) {
-        
-        let modesVc: CaModeListController = segue.sourceViewController as! CaModeListController
-        trip.mode = modesVc.mode!
-        tripModeLabel.text = modesVc.mode!.description
-    }
-    
-    @IBAction
     func saveDateSelection(segue: UIStoryboardSegue) {
         
         let dateVc: DateViewController = segue.sourceViewController as! DateViewController
