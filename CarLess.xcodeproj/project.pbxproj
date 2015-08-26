@@ -13,11 +13,10 @@
 		84440B4F1B45C68F008A983A /* CaModeListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84440B4E1B45C68F008A983A /* CaModeListController.swift */; };
 		844B61D91B4A19E400A32D77 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* Mode.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
-		846F1F101B8AAE840002E19D /* DisplayBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F1F0F1B8AAE840002E19D /* DisplayBoxView.swift */; };
-		846F1F121B8AAECE0002E19D /* DisplayBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 846F1F111B8AAECE0002E19D /* DisplayBoxView.xib */; };
 		84760EC01B65843F00355E52 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EBF1B65843F00355E52 /* DateViewController.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* Trip.swift */; };
+		847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */; };
 		848929131B3C486B0045C39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929121B3C486B0045C39E /* AppDelegate.swift */; };
 		848929151B3C486B0045C39E /* ActivityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929141B3C486B0045C39E /* ActivityController.swift */; };
 		848929171B3C486B0045C39E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* SettingsController.swift */; };
@@ -54,11 +53,10 @@
 		84440B4E1B45C68F008A983A /* CaModeListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaModeListController.swift; sourceTree = "<group>"; };
 		844B61D81B4A19E400A32D77 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		846F1F0F1B8AAE840002E19D /* DisplayBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayBoxView.swift; sourceTree = "<group>"; };
-		846F1F111B8AAECE0002E19D /* DisplayBoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisplayBoxView.xib; sourceTree = "<group>"; };
 		84760EBF1B65843F00355E52 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaManualEntryController.swift; sourceTree = "<group>"; };
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929111B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929121B3C486B0045C39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +102,7 @@
 		84278FF01B7C16F500F20BA7 /* Ca */ = {
 			isa = PBXGroup;
 			children = (
+				847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */,
 				84E4F0E61B7A75D30006C069 /* CaMappedRouteController.swift */,
 				84278FF31B83848B00F20BA7 /* CaMappedRouteProgressController.swift */,
 				84E6953D1B86B56D000185BE /* CaMappedRouteSummaryController.swift */,
@@ -205,8 +204,6 @@
 			children = (
 				84E695391B86687D000185BE /* CaTripRouteProgressView.swift */,
 				84E6953B1B8668E6000185BE /* CaTripRouteProgressView.xib */,
-				846F1F0F1B8AAE840002E19D /* DisplayBoxView.swift */,
-				846F1F111B8AAECE0002E19D /* DisplayBoxView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -299,7 +296,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				846F1F121B8AAECE0002E19D /* DisplayBoxView.xib in Resources */,
 				8489291A1B3C486B0045C39E /* Main.storyboard in Resources */,
 				8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */,
 				84E6953C1B8668E6000185BE /* CaTripRouteProgressView.xib in Resources */,
@@ -321,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */,
 				84760EC51B6808A700355E52 /* Trip.swift in Sources */,
 				84E6953E1B86B56D000185BE /* CaMappedRouteSummaryController.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaMappedRouteProgressController.swift in Sources */,
@@ -339,7 +336,6 @@
 				84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */,
 				84760EC01B65843F00355E52 /* DateViewController.swift in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
-				846F1F101B8AAE840002E19D /* DisplayBoxView.swift in Sources */,
 				84E4F0E71B7A75D30006C069 /* CaMappedRouteController.swift in Sources */,
 				84E71D1B1B703E8F0026D56B /* ManualRouteController.swift in Sources */,
 			);

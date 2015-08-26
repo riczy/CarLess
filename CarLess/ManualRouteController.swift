@@ -7,6 +7,14 @@ class ManualRouteController: UIViewController, UITextFieldDelegate {
         static let RouteNameFieldTag = 100
         static let DistanceFieldTag = 101
     }
+    
+    struct ManualRoute {
+        
+        static let formatter = NSNumberFormatter()
+        var routeName: String?
+        var distance: Double?
+        var distanceUnit = LengthUnit.Mile
+    }
 
     var route: ManualRoute = ManualRoute()
     

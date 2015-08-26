@@ -29,9 +29,6 @@ class LogController: UITableViewController {
         dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
         
-        tripDateLabel.text! = dateFormatter.stringFromDate(trip.date)
-        tripModeLabel.text! = trip.mode.description
-        tripRouteLabel.text! = trip.route.toString()
     }
 
     // MARK: - Table view data source
@@ -48,26 +45,7 @@ class LogController: UITableViewController {
     
     // MARK: - Child Scene Actions
     
-    @IBAction
-    func cancel(segue: UIStoryboardSegue) {
-        // do nothing
-    }
     
-    @IBAction
-    func saveDateSelection(segue: UIStoryboardSegue) {
-        
-        let dateVc: DateViewController = segue.sourceViewController as! DateViewController
-        trip.date = dateVc.date
-        tripDateLabel.text = dateFormatter.stringFromDate(dateVc.date)
-    }
-    
-    @IBAction
-    func saveRouteEntry(segue: UIStoryboardSegue) {
-        
-        let vc: ManualRouteController = segue.sourceViewController as! ManualRouteController
-        trip.route = vc.route
-        tripRouteLabel.text = trip.route.toString()
-    }
 
      // MARK: - Navigation
 
@@ -83,7 +61,7 @@ class LogController: UITableViewController {
             modesVc.mode = trip.mode
         } else if segueId == Storyboard.TripRouteSegue {
             let routeVc = dvc.topViewController as! ManualRouteController
-            routeVc.route = trip.route
+//            routeVc.route = trip.route
         }
     }
 
