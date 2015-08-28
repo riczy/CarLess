@@ -1,11 +1,3 @@
-//
-//  MainViewController.swift
-//  CarLess
-//
-//  Created by Whyceewhite on 7/6/15.
-//  Copyright (c) 2015 Galloway Mobile. All rights reserved.
-//
-
 import UIKit
 
 class MainViewController: UITabBarController {
@@ -18,20 +10,13 @@ class MainViewController: UITabBarController {
         selectedIndex = defaultIndex
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+     * This override is needed to get the unwind segues to properly work.
+     * See http://stackoverflow.com/questions/25654941/unwind-segue-not-working-in-ios-8
+     */
+    override func viewControllerForUnwindSegueAction(action: Selector, fromViewController: UIViewController, withSender sender: AnyObject?) -> UIViewController? {
+        
+        var resultVC = self.selectedViewController?.viewControllerForUnwindSegueAction(action, fromViewController: fromViewController, withSender: sender)
+        return resultVC
     }
-    */
-
 }

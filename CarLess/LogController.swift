@@ -1,68 +1,63 @@
 import UIKit
 
-class LogController: UITableViewController {
+class LogController: UIViewController {
     
-    private struct Storyboard {
-        
-        static let TripDateSegue = "TripDateSegue"
-        static let TripModeSegue = "TripModeSegue"
-        static let TripRouteSegue = "TripRouteSegue"
-    }
+    
+    @IBOutlet weak var logModeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var manualLogEntryView: UIView!
+    @IBOutlet weak var trackedLogEntryView: UIView!
     
     private var trip = Trip()
     
-    private var dateFormatter: NSDateFormatter!
-    
-    @IBOutlet weak var tripDateLabel: UILabel!
-    @IBOutlet weak var tripModeLabel: UILabel!
-    @IBOutlet weak var tripRouteLabel: UILabel!
-    @IBOutlet weak var saveButton: UIButton!
-    
-    @IBAction func save(sender: UIButton) {
+    struct LogModeControl {
+        static let TrackSegment = 0
+        static let ManualSegment = 1
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.NoStyle
+        logModeSegmentedControl.addTarget(self, action: "logModeControlPressed", forControlEvents: UIControlEvents.ValueChanged)
+        logModeSegmentedControl.setTitle("Track", forSegmentAtIndex: LogModeControl.TrackSegment)
+        logModeSegmentedControl.setTitle("Manual", forSegmentAtIndex: LogModeControl.ManualSegment)
+        
+        logModeSegmentedControl.selectedSegmentIndex = LogModeControl.TrackSegment
+        logModeControlPressed()
         
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-
-        return 1
+    func logModeControlPressed() {
+        
+        if logModeSegmentedControl.selectedSegmentIndex == LogModeControl.TrackSegment {
+            manualLogEntryView.hidden = true
+            trackedLogEntryView.hidden = false
+        } else if logModeSegmentedControl.selectedSegmentIndex == LogModeControl.ManualSegment {
+            manualLogEntryView.hidden = false
+            trackedLogEntryView.hidden = true
+        }
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 3
+    
+    @IBAction func backToLogMain() {
+        // help
     }
     
-    // MARK: - Child Scene Actions
-    
-    
-
-     // MARK: - Navigation
+    // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        let segueId = segue.identifier!
-        let dvc: AnyObject = segue.destinationViewController
-        if segueId == Storyboard.TripDateSegue {
-            let dateVc = dvc.topViewController as! DateViewController
-            dateVc.initialDate = trip.date
-        } else if segueId == Storyboard.TripModeSegue {
-            let modesVc = dvc.topViewController as! CaModeListController
-            modesVc.mode = trip.mode
-        } else if segueId == Storyboard.TripRouteSegue {
-            let routeVc = dvc.topViewController as! ManualRouteController
+//        let segueId = segue.identifier!
+//        let dvc: AnyObject = segue.destinationViewController
+//        if segueId == Storyboard.TripDateSegue {
+//            let dateVc = dvc.topViewController as! DateViewController
+//            dateVc.initialDate = trip.date
+//        } else if segueId == Storyboard.TripModeSegue {
+//            let modesVc = dvc.topViewController as! CaModeListController
+//            modesVc.mode = trip.mode
+//        } else if segueId == Storyboard.TripRouteSegue {
+//            let routeVc = dvc.topViewController as! ManualRouteController
 //            routeVc.route = trip.route
-        }
+//        }
     }
 
 }

@@ -1,30 +1,30 @@
 import UIKit
 
-class CaMappedRouteSummaryController: UIViewController {
+class CaTrackedSummaryController: UIViewController {
     
-    @IBOutlet weak var summaryView: CaTripRouteProgressView!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var discardButton: UIButton!
     
+    var trip: Trip?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
         discardButton.addTarget(self, action: "discard", forControlEvents: UIControlEvents.TouchUpInside)
-        
-        summaryView.setLabelColor(UIColor.whiteColor())
-        summaryView.setValueColor(UIColor.whiteColor())
     }
+    
+    // MARK: - Scene Actions
     
     func save() {
         
-        performSegueWithIdentifier(CaSegue.MappedRouteSummaryToMain, sender: self)
+        performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
     }
     
     func discard() {
         
-        performSegueWithIdentifier(CaSegue.MappedRouteSummaryToMain, sender: self)
+        performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
     }
-    
 
 }

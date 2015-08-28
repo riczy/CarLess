@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -29,6 +29,8 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
         manager.requestAlwaysAuthorization()
         return manager
     }()
+    
+    // MARK: - View Events
     
     override func viewDidLoad() {
         
@@ -64,6 +66,22 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
             mapView.showsUserLocation = false
         }
     }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == CaSegue.TrackedProgressToSummary {
+            var trip = Trip()
+            trip.mode = self.mode
+            trip.date = self.startTimestamp
+            trip.distance = self.distanceTraveled
+            trip.distanceUnit = LengthUnit.Mile
+            let vc = segue.destinationViewController as! CaTrackedSummaryController
+            vc.trip = trip
+        }
+    }
+
 
     // MARK: - Map View Delegation
     
@@ -82,13 +100,14 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
             lastLocation = locations.first as! CLLocation
         } else {
             let newestLocation = locations.last as! CLLocation
-            distanceTraveled += lastLocation.distanceFromLocation(newestLocation) + 0.3
+            distanceTraveled += lastLocation.distanceFromLocation(newestLocation) + 0.1
             lastLocation = newestLocation
             println("lastLocation = long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude)")
             println("distance travelled = \(distanceTraveled)")
         }
     }
     
+    // MARK: - Scene Actions
 
     private func startTracking() {
         
@@ -117,7 +136,7 @@ class CaMappedRouteProgressController: UIViewController, CLLocationManagerDelega
     private func stopTracking() {
         
         locationManager.stopUpdatingLocation()
-        performSegueWithIdentifier(CaSegue.MappedRouteProgressToSummary, sender: self)
+        performSegueWithIdentifier(CaSegue.TrackedProgressToSummary, sender: self)
     }
     
     private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {
