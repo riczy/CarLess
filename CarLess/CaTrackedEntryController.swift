@@ -40,7 +40,7 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
             if CaLocationManager.isLocationServiceAvailable() {
                 return true
             } else {
-                CaLocationManager.instance.requestAlwaysAuthorization()
+                CaLocationManager.requestAlwaysAuthorization()
                 return false
             }
         }

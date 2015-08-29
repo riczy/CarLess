@@ -4,12 +4,7 @@ class CaLocationManager {
     
     static let instance = CaLocationManager()
     
-    private var _locationManager: CLLocationManager! = {
-        
-        let manager = CLLocationManager()
-        manager.requestAlwaysAuthorization()
-        return manager
-    }()
+    private var _locationManager = CLLocationManager()
     
     var locationManager: CLLocationManager {
         
@@ -17,15 +12,29 @@ class CaLocationManager {
             return _locationManager
         }
     }
-    
-    
-    private init() {
         
+    private init() {
     }
     
-    func requestAlwaysAuthorization() {
+    static func startUpdatingLocation() {
         
-        locationManager.requestAlwaysAuthorization()
+        instance.locationManager.startUpdatingLocation()
+    }
+    
+    static func stopUpdatingLocation() {
+        
+        instance.locationManager.stopUpdatingLocation()
+    }
+    
+    static func setActivityType(activityType: CLActivityType, andAccuracy accuracy: CLLocationAccuracy) {
+        
+        instance.locationManager.activityType = activityType
+        instance.locationManager.desiredAccuracy = accuracy
+    }
+    
+    static func requestAlwaysAuthorization() {
+        
+        instance.locationManager.requestAlwaysAuthorization()
     }
     
     static func isLocationServiceAvailable() -> Bool {

@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410EDF51B90D0880044E714 /* CaDataManager.swift */; };
 		84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */; };
 		84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */; };
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
-		844B61D91B4A19E400A32D77 /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61D81B4A19E400A32D77 /* Mode.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* Trip.swift */; };
@@ -27,7 +27,6 @@
 		84E4F0E51B78D9170006C069 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4F0E41B78D9170006C069 /* MapKit.framework */; };
 		84E4F0E71B7A75D30006C069 /* CaTrackedEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E61B7A75D30006C069 /* CaTrackedEntryController.swift */; };
 		84E6953E1B86B56D000185BE /* CaTrackedSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */; };
-		84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E71D1C1B7110940026D56B /* LengthUnit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8410EDF51B90D0880044E714 /* CaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDataManager.swift; sourceTree = "<group>"; };
 		84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaStoryboard.swift; sourceTree = "<group>"; };
 		84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedProgressController.swift; sourceTree = "<group>"; };
 		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
-		844B61D81B4A19E400A32D77 /* Mode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
@@ -65,7 +64,6 @@
 		84E4F0E41B78D9170006C069 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84E4F0E61B7A75D30006C069 /* CaTrackedEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedEntryController.swift; sourceTree = "<group>"; };
 		84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedSummaryController.swift; sourceTree = "<group>"; };
-		84E71D1C1B7110940026D56B /* LengthUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthUnit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +94,7 @@
 				84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */,
 				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
 				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
+				8410EDF51B90D0880044E714 /* CaDataManager.swift */,
 			);
 			name = Ca;
 			sourceTree = "<group>";
@@ -111,9 +110,7 @@
 		84760EC61B680DBF00355E52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				844B61D81B4A19E400A32D77 /* Mode.swift */,
 				84760EC41B6808A700355E52 /* Trip.swift */,
-				84E71D1C1B7110940026D56B /* LengthUnit.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -295,11 +292,10 @@
 				84E6953E1B86B56D000185BE /* CaTrackedSummaryController.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */,
 				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
-				84E71D1D1B7110940026D56B /* LengthUnit.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
-				844B61D91B4A19E400A32D77 /* Mode.swift in Sources */,
+				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogController.swift in Sources */,
 				848929151B3C486B0045C39E /* ActivityController.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,

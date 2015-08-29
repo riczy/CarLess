@@ -8,19 +8,37 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var modeValueLabel: UILabel!
     @IBOutlet weak var distanceValueLabel: UILabel!
     
-    var mode: Mode!
+    var mode: Mode? {
+        get {
+            return trip.mode
+        }
+        set {
+            trip.mode = newValue
+        }
+    }
     
-    private var distanceTraveled: Double = 0.0 {
-        didSet {
-            distanceValueLabel.text! = "\(self.distanceTraveled)"
+    private var trip = Trip()
+    
+    private var distanceTraveled: Double {
+        get {
+            return trip.distance == nil ? 0.0 : trip.distance!
+        }
+        set {
+            let formattedDistance = Trip.formatter.stringFromNumber(newValue)
+            if formattedDistance == nil {
+                // This should never be nil.
+                distanceValueLabel.text = ""
+                trip.distance = nil
+            } else {
+                distanceValueLabel.text = formattedDistance!
+                trip.distance = Trip.formatter.numberFromString(formattedDistance!)?.doubleValue
+            }
         }
     }
     
     private var lastLocation: CLLocation!
     
     private var locations = [MKPointAnnotation]()
-    
-    private var startTimestamp: NSDate!
     
     lazy private var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -36,7 +54,9 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         
         super.viewDidLoad()
         
-        modeValueLabel.text! = mode.description
+        reset()
+        
+        modeValueLabel.text! = mode!.description
         distanceValueLabel.text! = "\(distanceTraveled)"
         
         //renderStopButton()
@@ -44,19 +64,19 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
 
         mapView.mapType = MKMapType.Standard
         mapView.delegate = self
+        
+        startTracking()
     }
+    
     
     override func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
-        if CaLocationManager.isLocationServiceAvailable() {
+        if !mapView.showsUserLocation {
             mapView.showsUserLocation = true
-            startTracking()
-        } else {
-            CaLocationManager.instance.requestAlwaysAuthorization()
         }
     }
-
+    
     override func viewDidDisappear(animated: Bool) {
 
         // DO I need to do this??
@@ -72,11 +92,6 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.TrackedProgressToSummary {
-            var trip = Trip()
-            trip.mode = self.mode
-            trip.date = self.startTimestamp
-            trip.distance = self.distanceTraveled
-            trip.distanceUnit = LengthUnit.Mile
             let vc = segue.destinationViewController as! CaTrackedSummaryController
             vc.trip = trip
         }
@@ -102,8 +117,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             let newestLocation = locations.last as! CLLocation
             distanceTraveled += lastLocation.distanceFromLocation(newestLocation) + 0.1
             lastLocation = newestLocation
-            println("lastLocation = long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude)")
-            println("distance travelled = \(distanceTraveled)")
+            println("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), distance = \(distanceTraveled)")
         }
     }
     
@@ -112,10 +126,12 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func startTracking() {
         
         if CaLocationManager.isLocationServiceAvailable() {
+            mapView.showsUserLocation = true
             let locationSettings = getActivityTypeAndAccuracyForMode()
             locationManager.activityType = locationSettings.activityType
             locationManager.desiredAccuracy = locationSettings.accuracy
             locationManager.startUpdatingLocation()
+            trip.startTimestamp = NSDate()
         } else {
             locationManager.requestAlwaysAuthorization()
         }
@@ -136,9 +152,23 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func stopTracking() {
         
         locationManager.stopUpdatingLocation()
+        trip.endTimestamp = NSDate()
         performSegueWithIdentifier(CaSegue.TrackedProgressToSummary, sender: self)
     }
     
+    // MARK: - Miscellaneous
+    
+    private func reset() {
+        
+        lastLocation = nil
+        locations.removeAll(keepCapacity: false)
+        trip.distance = 0.0
+        trip.distanceUnit = LengthUnit.Mile
+        trip.endTimestamp = nil
+        trip.logType = LogType.Tracked
+        trip.startTimestamp = nil
+    }
+
     private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {
         
         if mode == Mode.Bicycle || mode == Mode.Walk {

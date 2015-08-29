@@ -19,12 +19,25 @@ class CaTrackedSummaryController: UIViewController {
     
     func save() {
         
-        performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
+        if validate() {
+            CaDataManager.instance.saveTrip(trip!)
+            performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
+        }
     }
     
     func discard() {
         
         performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
+    }
+    
+    // MARK: - Miscellaneous Methods
+    
+    private func validate() -> Bool {
+        
+        if trip == nil {
+            return false
+        }
+        return true
     }
 
 }

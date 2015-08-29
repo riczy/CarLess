@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 
 class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -26,13 +27,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
 
-        // Call reset() instead
-        
-        trip.date = NSDate()
-        trip.distance = 0.0
-        trip.distanceUnit = LengthUnit.Mile
-        trip.mode = Mode.allValues[lastSelectedModeIndex]
-        
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
@@ -41,12 +35,9 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
         distanceTextField.keyboardType = UIKeyboardType.DecimalPad
         distanceTextField.delegate = self
-        distanceTextField.text = ""
         distanceTextField.placeholder = "0.00"
         
-        modeTextField.text = trip.mode?.description
-        timestampTextField.text = dateFormatter.stringFromDate(trip.date!)
-        
+        reset()
     }
     
     // MARK: - View Load Initializations
@@ -55,7 +46,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         
         datePicker = UIDatePicker()
         datePicker.datePickerMode = UIDatePickerMode.DateAndTime
-        datePicker.date = trip.date!
         
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.Default
@@ -106,8 +96,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
        
         modeTextField.inputView = modePicker
         modeTextField.inputAccessoryView = toolbar
-        
-        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
     // MARK: - View Actions
@@ -115,6 +103,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     @IBAction func saveEntry(sender: UIButton) {
         
         if validate() {
+            CaDataManager.instance.saveTrip(trip)
+            CaDataManager.instance.fetchAllTrips()
             reset()
         }
     }
@@ -127,26 +117,26 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     private func reset() {
         
+        lastSelectedModeIndex = 0
+
         trip = Trip()
-        trip.date = NSDate()
+        trip.startTimestamp = NSDate()
         trip.distance = nil
         trip.distanceUnit = LengthUnit.Mile
-        lastSelectedModeIndex = 0
+        trip.logType = LogType.Manual
         trip.mode = Mode.allValues[lastSelectedModeIndex]
         
-        timestampTextField.text = dateFormatter.stringFromDate(trip.date!)
-        datePicker.date = trip.date!
-        
+        timestampTextField.text = dateFormatter.stringFromDate(trip.startTimestamp!)
         distanceTextField.text = ""
-        
-        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
         modeTextField.text = trip.mode?.description
-        
+
+        datePicker.date = trip.startTimestamp!
+        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
     func datePickerDone() {
         
-        trip.date = datePicker.date
+        trip.startTimestamp = datePicker.date
         timestampTextField.text = dateFormatter.stringFromDate(datePicker.date)
         timestampTextField.resignFirstResponder()
     }
