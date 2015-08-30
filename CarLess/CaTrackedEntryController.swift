@@ -134,4 +134,18 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         return Mode.allValues[row].description
     }
     
+    // MARK: - Component Styling
+    
+    private func renderButton() {
+        
+        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        button.frame = CGRectMake(0, 0, 100, 36)
+        button.setTitle("Start", forState: UIControlState.Normal)
+        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        button.layer.backgroundColor = UIColor.orangeColor().CGColor
+        button.layer.cornerRadius = 18
+        button.layer.borderWidth = 0
+       self.view.addSubview(button)
+    }
+    
 }

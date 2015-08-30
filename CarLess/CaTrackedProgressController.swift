@@ -24,14 +24,14 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             return trip.distance == nil ? 0.0 : trip.distance!
         }
         set {
-            let formattedDistance = Trip.formatter.stringFromNumber(newValue)
+            let formattedDistance = CaFormatter.distance.stringFromNumber(newValue)
             if formattedDistance == nil {
                 // This should never be nil.
                 distanceValueLabel.text = ""
                 trip.distance = nil
             } else {
                 distanceValueLabel.text = formattedDistance!
-                trip.distance = Trip.formatter.numberFromString(formattedDistance!)?.doubleValue
+                trip.distance = CaFormatter.distance.numberFromString(formattedDistance!)?.doubleValue
             }
         }
     }

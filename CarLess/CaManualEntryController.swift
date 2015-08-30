@@ -11,7 +11,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     var trip = Trip()
     private var lastSelectedModeIndex = 0
     
-    private var dateFormatter = NSDateFormatter()
     private var datePicker: UIDatePicker!
     private var modePicker: UIPickerView!
     
@@ -24,9 +23,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         
         super.viewDidLoad()
         
-        dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
-
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
@@ -126,7 +122,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         trip.logType = LogType.Manual
         trip.mode = Mode.allValues[lastSelectedModeIndex]
         
-        timestampTextField.text = dateFormatter.stringFromDate(trip.startTimestamp!)
+        timestampTextField.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp!)
         distanceTextField.text = ""
         modeTextField.text = trip.mode?.description
 
@@ -137,7 +133,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     func datePickerDone() {
         
         trip.startTimestamp = datePicker.date
-        timestampTextField.text = dateFormatter.stringFromDate(datePicker.date)
+        timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         timestampTextField.resignFirstResponder()
     }
     
@@ -148,7 +144,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     func decimalPadDone() {
         
-        if let tempDistance = Trip.formatter.numberFromString(distanceTextField.text) {
+        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text) {
             trip.distance = Double(tempDistance)
         } else {
             trip.distance = nil
@@ -196,7 +192,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
         if textField.tag == Tag.DistanceField {
-            return Trip.formatter.numberFromString("\(textField.text)\(string)") != nil
+            return CaFormatter.distance.numberFromString("\(textField.text)\(string)") != nil
         }
         return true
     }

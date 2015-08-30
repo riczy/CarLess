@@ -2,19 +2,6 @@ import Foundation
 
 class Trip {
     
-    private static var _formatter: NSNumberFormatter?
-    static var formatter: NSNumberFormatter {
-        get {
-            if _formatter == nil {
-                _formatter = NSNumberFormatter()
-                _formatter!.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                _formatter!.minimum = 0
-                _formatter!.maximumFractionDigits = 2
-            }
-            return _formatter!
-        }
-    }
-    
     var id: String?
     
     var startTimestamp: NSDate?
@@ -103,3 +90,33 @@ enum LogType: String {
     case Manual = "Manual"
     case Tracked = "Tracked"
 }
+
+struct CaFormatter {
+    
+    private static var _distance: NSNumberFormatter?
+    static var distance: NSNumberFormatter {
+        get {
+            if _distance == nil {
+                _distance = NSNumberFormatter()
+                _distance!.numberStyle = NSNumberFormatterStyle.DecimalStyle
+                _distance!.minimum = 0
+                _distance!.maximumFractionDigits = 2
+            }
+            return _distance!
+        }
+    }
+    
+    private static var _timestamp: NSDateFormatter?
+    static var timestamp: NSDateFormatter {
+        get {
+            if _timestamp == nil {
+                _timestamp = NSDateFormatter()
+                _timestamp!.dateStyle = NSDateFormatterStyle.ShortStyle
+                _timestamp!.timeStyle = NSDateFormatterStyle.ShortStyle
+            }
+            return _timestamp!
+        }
+    }
+    
+}
+
