@@ -3,21 +3,31 @@ import CoreData
 
 class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    // MARK: - UI Properties
+    
+    @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var distanceTextField: UITextField!
+    @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var timestampTextField: UITextField!
+    @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var modeTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    private var datePicker: UIDatePicker!
+    private var modePicker: UIPickerView!
+    private var spinnerView: UIActivityIndicatorView!
+    
+ 
+    // MARK: - Properties
     
     var trip = Trip()
     private var lastSelectedModeIndex = 0
-    
-    private var datePicker: UIDatePicker!
-    private var modePicker: UIPickerView!
-    
+   
     
     private struct Tag {
         static let DistanceField = 200
     }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         
@@ -26,6 +36,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
+        initializeSpinner()
+        initializeStyle()
         
         distanceTextField.tag = Tag.DistanceField
         distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
@@ -36,7 +48,22 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         reset()
     }
     
-    // MARK: - View Load Initializations
+    // MARK: - View Initializations
+    
+    private func initializeStyle() {
+        
+        view.backgroundColor = CaLogStyle.ViewBgColor
+        
+        distanceLabel.textColor = CaLogStyle.ViewLabelColor
+        timestampLabel.textColor = CaLogStyle.ViewLabelColor
+        modeLabel.textColor = CaLogStyle.ViewLabelColor
+        
+        distanceTextField.textColor = CaLogStyle.ViewFieldColor
+        timestampTextField.textColor = CaLogStyle.ViewFieldColor
+        modeTextField.textColor = CaLogStyle.ViewFieldColor
+        
+        spinnerView.color = CaLogStyle.ActivitySpinnerColor
+    }
     
     private func initializeDatePicker() {
         
@@ -94,14 +121,22 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         modeTextField.inputAccessoryView = toolbar
     }
     
+    private func initializeSpinner() {
+        
+        spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        spinnerView.center = view.center
+        spinnerView.hidesWhenStopped = true
+        view.addSubview(spinnerView)
+    }
+    
     // MARK: - View Actions
     
     @IBAction func saveEntry(sender: UIButton) {
         
         if validate() {
+            preSave()
             CaDataManager.instance.saveTrip(trip)
-            CaDataManager.instance.fetchAllTrips()
-            reset()
+            postSave()
         }
     }
     
@@ -109,6 +144,24 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         
         // It's impossible for the date and mode values to be nil since they have defaults.
         return trip.distance != nil
+    }
+    
+    private func preSave() {
+        
+        view.alpha = CaConstants.SaveDisplayAlpha
+        saveButton.enabled = false
+        spinnerView.startAnimating()
+    }
+    
+    private func postSave() {
+        
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(CaConstants.SaveActivityDelay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.spinnerView.stopAnimating()
+            self.saveButton.enabled = true
+            self.view.alpha = 1.0
+            self.reset()
+        }
     }
     
     private func reset() {

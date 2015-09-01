@@ -5,8 +5,10 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
 
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var modeValueLabel: UILabel!
+    @IBOutlet weak var distanceTitleLabel: UILabel!
     @IBOutlet weak var distanceValueLabel: UILabel!
+    @IBOutlet weak var modeTitleLabel: UILabel!
+    @IBOutlet weak var modeImageView: UIImageView!
     
     var mode: Mode? {
         get {
@@ -48,16 +50,15 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         return manager
     }()
     
-    // MARK: - View Events
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        initializeStyle()
         reset()
         
-        modeValueLabel.text! = mode!.description
-        distanceValueLabel.text! = "\(distanceTraveled)"
+        modeImageView?.image = UIImage(named: mode!.imageFilename)
         
         //renderStopButton()
         stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
@@ -86,6 +87,17 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             mapView.showsUserLocation = false
         }
     }
+    
+    // MARK: - View Initializations
+    
+    private func initializeStyle() {
+        
+        view.backgroundColor = CaLogStyle.SegmentBarBgColor
+        modeTitleLabel.textColor = CaLogStyle.ViewLabelColor
+        distanceTitleLabel.textColor = CaLogStyle.ViewLabelColor
+        distanceValueLabel.textColor = CaLogStyle.ViewFieldColor
+    }
+
     
     // MARK: - Navigation
     

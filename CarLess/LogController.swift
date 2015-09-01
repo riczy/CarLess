@@ -17,14 +17,26 @@ class LogController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        logModeSegmentedControl.addTarget(self, action: "logModeControlPressed", forControlEvents: UIControlEvents.ValueChanged)
-        logModeSegmentedControl.setTitle("Track", forSegmentAtIndex: LogModeControl.TrackSegment)
-        logModeSegmentedControl.setTitle("Manual", forSegmentAtIndex: LogModeControl.ManualSegment)
-        
-        logModeSegmentedControl.selectedSegmentIndex = LogModeControl.TrackSegment
+        initializeStyle()
+        initializeLogModeSegmentControl()
         logModeControlPressed()
         
+    }
+    
+    private func initializeStyle() {
+        
+        view.backgroundColor = CaLogStyle.SegmentBarBgColor
+    }
+    
+    private func initializeLogModeSegmentControl() {
+        
+        logModeSegmentedControl.setTitle("Track", forSegmentAtIndex: LogModeControl.TrackSegment)
+        logModeSegmentedControl.setTitle("Manual", forSegmentAtIndex: LogModeControl.ManualSegment)
+        logModeSegmentedControl.tintColor = CaLogStyle.SegmentControlColor
+        
+        logModeSegmentedControl.addTarget(self, action: "logModeControlPressed", forControlEvents: UIControlEvents.ValueChanged)
+
+        logModeSegmentedControl.selectedSegmentIndex = LogModeControl.TrackSegment
     }
 
     func logModeControlPressed() {
@@ -42,22 +54,4 @@ class LogController: UIViewController {
         // help
     }
     
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-//        let segueId = segue.identifier!
-//        let dvc: AnyObject = segue.destinationViewController
-//        if segueId == Storyboard.TripDateSegue {
-//            let dateVc = dvc.topViewController as! DateViewController
-//            dateVc.initialDate = trip.date
-//        } else if segueId == Storyboard.TripModeSegue {
-//            let modesVc = dvc.topViewController as! CaModeListController
-//            modesVc.mode = trip.mode
-//        } else if segueId == Storyboard.TripRouteSegue {
-//            let routeVc = dvc.topViewController as! ManualRouteController
-//            routeVc.route = trip.route
-//        }
-    }
-
 }

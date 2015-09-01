@@ -3,12 +3,16 @@ import MapKit
 
 class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    // MARK: - UI Properties
+    
     @IBOutlet weak var startButton: UIButton!
-    
-    @IBOutlet weak var modeImage: UIImageView!
+    @IBOutlet weak var headingLabel: UILabel!
     @IBOutlet weak var modeTextField: UITextField!
-    
     private var modePicker: UIPickerView!
+    private var button: UIButton!
+    
+    // MARK: - Properties
+    
     private var lastSelectedModeIndex = 0
 
     private var _mode: Mode?
@@ -26,13 +30,18 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         }
     }
     
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        initializeStyle()
         initializeModePicker()
+        //initializeStartButton()
         reset()
     }
     
+    // MARK: - Navigation
 
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
@@ -70,6 +79,15 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         reset()
     }
     
+    // MARK: - View Initializations
+    
+    private func initializeStyle() {
+        
+        view.backgroundColor = CaLogStyle.ViewBgColor
+        headingLabel.textColor = CaLogStyle.ViewLabelColor
+        modeTextField.textColor = CaLogStyle.ViewFieldColor
+    }
+    
     private func initializeModePicker() {
         
         modePicker = UIPickerView()
@@ -93,10 +111,29 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
+    private func initializeStartButton() {
+        
+        button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        button.setTitle("Start", forState: UIControlState.Normal)
+        button.setTitleColor(CaLogStyle.StartButtonColor, forState: UIControlState.Normal)
+        button.layer.backgroundColor = CaLogStyle.StartButtonBgColor.CGColor
+        button.layer.borderColor = CaLogStyle.StartButtonBorderColor.CGColor
+        button.layer.cornerRadius = CaStyle.ButtonHeight/2.0
+        button.layer.borderWidth = CaStyle.ButtonBorderWidth
+        self.view.addSubview(button)
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+    }
+   
     private func updateDisplayForMode(mode: Mode) {
         
         modeTextField.text = mode.description
-        modeImage?.image = UIImage(named: mode.imageFilename)
+        //modeImage?.image = UIImage(named: mode.imageFilename)
     }
     
     // MARK: - Scene Actions
@@ -132,20 +169,6 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         
         return Mode.allValues[row].description
-    }
-    
-    // MARK: - Component Styling
-    
-    private func renderButton() {
-        
-        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.frame = CGRectMake(0, 0, 100, 36)
-        button.setTitle("Start", forState: UIControlState.Normal)
-        button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        button.layer.backgroundColor = UIColor.orangeColor().CGColor
-        button.layer.cornerRadius = 18
-        button.layer.borderWidth = 0
-       self.view.addSubview(button)
     }
     
 }
