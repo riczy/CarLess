@@ -8,8 +8,17 @@
         <attribute name="logType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="modeType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="waypoints" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Waypoint" inverseName="trip" inverseEntity="Waypoint" syncable="YES"/>
+    </entity>
+    <entity name="Waypoint" syncable="YES">
+        <attribute name="latitude" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" attributeType="Date" syncable="YES"/>
+        <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="waypoints" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Trip" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Trip" positionX="-396" positionY="54" width="128" height="163"/>
+        <element name="Waypoint" positionX="-101" positionY="189" width="128" height="118"/>
     </elements>
 </model>

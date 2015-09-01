@@ -2,6 +2,8 @@ import UIKit
 import MapKit
 
 class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+    
+    // MARK: - UI Properties
 
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -9,6 +11,8 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var distanceValueLabel: UILabel!
     @IBOutlet weak var modeTitleLabel: UILabel!
     @IBOutlet weak var modeImageView: UIImageView!
+    
+    // MARK: - Properties
     
     var mode: Mode? {
         get {
