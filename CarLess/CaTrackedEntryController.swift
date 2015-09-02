@@ -5,11 +5,10 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
 
     // MARK: - UI Properties
     
-    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var headingLabel: UILabel!
     @IBOutlet weak var modeTextField: UITextField!
     private var modePicker: UIPickerView!
-    private var button: UIButton!
+    private var startButton: UIButton!
     
     // MARK: - Properties
     
@@ -37,7 +36,7 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         super.viewDidLoad()
         initializeStyle()
         initializeModePicker()
-        //initializeStartButton()
+        renderStartButton()
         reset()
     }
     
@@ -65,6 +64,14 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         }
     }
     
+    // MARK: - Scene Actions
+    
+    func startTracking() {
+        
+        if shouldPerformSegueWithIdentifier(CaSegue.TrackedHomeToProgress, sender: self) {
+            performSegueWithIdentifier(CaSegue.TrackedHomeToProgress, sender: self)
+        }
+    }
     
     private func reset() {
         
@@ -111,23 +118,18 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
-    private func initializeStartButton() {
+    private func renderStartButton() {
         
-        button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
-        button.setTitle("Start", forState: UIControlState.Normal)
-        button.setTitleColor(CaLogStyle.StartButtonColor, forState: UIControlState.Normal)
-        button.layer.backgroundColor = CaLogStyle.StartButtonBgColor.CGColor
-        button.layer.borderColor = CaLogStyle.StartButtonBorderColor.CGColor
-        button.layer.cornerRadius = CaStyle.ButtonHeight/2.0
-        button.layer.borderWidth = CaStyle.ButtonBorderWidth
-        self.view.addSubview(button)
+        startButton = CaComponent.createButton(title: "Start", color: CaLogStyle.StartButtonColor, bgColor: CaLogStyle.StartButtonBgColor, borderColor: CaLogStyle.StartButtonBorderColor)
+        self.view.addSubview(startButton)
         
         
-        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
-        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: button, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        
+        startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
     }
    
     private func updateDisplayForMode(mode: Mode) {

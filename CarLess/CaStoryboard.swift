@@ -17,28 +17,10 @@ struct CaConstants {
 
 struct CaColor {
 
-    // Hex = 00B3A9
-    static let AquaTeal = UIColor(red: 0.0/255.0, green: 179.0/255.0, blue: 169.0/255.0, alpha: 1.0)
-
-    // Hex = 004F4A
-    static let DarkTeal = UIColor(red: 0.0/255.0, green: 79.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-    
-    // Hex = DA3A0A
-    static let Orange = UIColor(red: 218.0/255.0, green: 58.0/255.0, blue: 10.0/255.0, alpha: 1.0)
-    
-    // Hex = BDE7BD
-    static let PaleMintGreen = UIColor(red: 189.0/255.0, green: 231.0/255.0, blue: 189.0/255.0, alpha: 1.0)
-    
-    // Hex = 3B3833
+    // Hex 3B3833
     static let FadedSlateGray = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 1.0)
-    
-    
-    // ---
-    
-    // Hex = 5E9CA0
-    static let MediumTeal = UIColor(red: 94.0/255.0, green: 156.0/255.0, blue: 160.0/255.0, alpha: 1.0)
 
-    // Hex = E9BC1B
+    // Hex E9BC1B
     static let Mustard = UIColor(red: 233.0/255.0, green: 188.0/255.0, blue: 27.0/255.0, alpha: 1.0)
 
     // Hex F5EACD
@@ -47,12 +29,10 @@ struct CaColor {
     // Hex EE4B3E
     static let RedOrange = UIColor(red: 238.0/255.0, green: 75.0/255.0, blue: 62.0/255.0, alpha: 1.0)
     
-    // Hex 1FDA9A
-    static let MintGreen = UIColor(red: 31.0/255.0, green: 218.0/255.0, blue: 154.0/255.0, alpha: 1.0)
-    
-    // 1FDACE
-    static let LightBlue = UIColor(red: 31.0/255.0, green: 218.0/255.0, blue: 206.0/255.0, alpha: 1.0)
+    // Hex 096EA0
+    static let LightBlue = UIColor(red: 9.0/255.0, green: 110.0/255.0, blue: 160.0/255.0, alpha: 1.0)
 
+    // Hex 1F784F
     static let HunterGreen = UIColor(red: 31.0/255.0, green: 120.0/255.0, blue: 79.0/255.0, alpha: 1.0)
 
 }
@@ -76,5 +56,30 @@ struct CaLogStyle {
     static let StartButtonColor = UIColor.whiteColor()
     static let StartButtonBgColor = CaColor.HunterGreen
     static let StartButtonBorderColor = CaColor.FadedSlateGray
+    static let StopButtonColor = UIColor.whiteColor()
+    static let StopButtonBgColor = CaColor.RedOrange
+    static let StopButtonBorderColor = CaColor.FadedSlateGray
+    static let SaveButtonColor = UIColor.whiteColor()
+    static let SaveButtonBgColor = CaColor.LightBlue
+    static let SaveButtonBorderColor = CaColor.LightBlue
+    static let DiscardButtonColor = UIColor.whiteColor()
+    static let DiscardButtonBgColor = CaColor.FadedSlateGray
+    static let DiscardButtonBorderColor = CaColor.FadedSlateGray
+   
+}
+
+class CaComponent {
     
+    static func createButton(#title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {
+    
+        var button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        button.setTitle(title, forState: UIControlState.Normal)
+        button.setTitleColor(color, forState: UIControlState.Normal)
+        button.layer.backgroundColor = bgColor.CGColor
+        button.layer.borderColor = borderColor.CGColor
+        button.layer.cornerRadius = CaStyle.ButtonHeight/2.0
+        button.layer.borderWidth = CaStyle.ButtonBorderWidth
+        return button
+    }
 }

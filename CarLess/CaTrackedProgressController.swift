@@ -5,12 +5,12 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     // MARK: - UI Properties
 
-    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var distanceTitleLabel: UILabel!
     @IBOutlet weak var distanceValueLabel: UILabel!
     @IBOutlet weak var modeTitleLabel: UILabel!
     @IBOutlet weak var modeImageView: UIImageView!
+    private var stopButton: UIButton!
     
     // MARK: - Properties
     
@@ -64,8 +64,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         
         modeImageView?.image = UIImage(named: mode!.imageFilename)
         
-        //renderStopButton()
-        stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
+        renderStopButton()
 
         mapView.mapType = MKMapType.Standard
         mapView.delegate = self
@@ -96,12 +95,26 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     private func initializeStyle() {
         
-        view.backgroundColor = CaLogStyle.SegmentBarBgColor
+        view.backgroundColor = CaLogStyle.ViewBgColor
         modeTitleLabel.textColor = CaLogStyle.ViewLabelColor
         distanceTitleLabel.textColor = CaLogStyle.ViewLabelColor
         distanceValueLabel.textColor = CaLogStyle.ViewFieldColor
     }
 
+    
+    private func renderStopButton() {
+        
+        stopButton = CaComponent.createButton(title: "Stop", color: CaLogStyle.StopButtonColor, bgColor: CaLogStyle.StopButtonBgColor, borderColor: CaLogStyle.StopButtonBorderColor)
+        self.view.addSubview(stopButton)
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        
+        stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
+    }
     
     // MARK: - Navigation
     
@@ -196,15 +209,4 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         }
         return (CLActivityType.Other, kCLLocationAccuracyKilometer)
     }
-    
-    private func renderStopButton() {
-        
-        stopButton.setTitle("STOP", forState: UIControlState.Normal)
-        stopButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        stopButton.backgroundColor = UIColor(red: 254.0/255.0, green: 73.0/255.0, blue: 2.0/255.0, alpha: 1.0)
-        stopButton.layer.borderColor = UIColor.whiteColor().CGColor
-        stopButton.layer.cornerRadius = 2
-        stopButton.layer.borderWidth = 1
-    }
-
 }

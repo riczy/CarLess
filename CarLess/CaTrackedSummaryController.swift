@@ -5,13 +5,13 @@ class CaTrackedSummaryController: UIViewController {
     
     // MARK: - UI Properties
     
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var discardButton: UIButton!
     @IBOutlet weak var activityHeadingLabel: UILabel!
     @IBOutlet weak var startTimestampLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
     private var spinnerView: UIActivityIndicatorView!
+    private var saveButton: UIButton!
+    private var discardButton: UIButton!
     
     // MARK: - Properties
     
@@ -23,9 +23,9 @@ class CaTrackedSummaryController: UIViewController {
         
         super.viewDidLoad()
         initializeSpinner()
+        renderSaveButton()
+        renderDiscardButton()
         initializeStyle()
-        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
-        discardButton.addTarget(self, action: "discard", forControlEvents: UIControlEvents.TouchUpInside)
         
         if trip != nil {
             
@@ -55,6 +55,43 @@ class CaTrackedSummaryController: UIViewController {
         spinnerView.hidesWhenStopped = true
         view.addSubview(spinnerView)
     }
+    
+    private func renderSaveButton() {
+        
+        saveButton = CaComponent.createButton(title: "Save", color: CaLogStyle.SaveButtonColor, bgColor: CaLogStyle.SaveButtonBgColor, borderColor: CaLogStyle.SaveButtonBorderColor)
+        self.view.addSubview(saveButton)
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: -5.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        
+        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    
+    private func renderDiscardButton() {
+        
+        discardButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
+        discardButton.setTranslatesAutoresizingMaskIntoConstraints(false)
+        discardButton.setTitle("Discard", forState: UIControlState.Normal)
+        discardButton.setTitleColor(CaLogStyle.DiscardButtonColor, forState: UIControlState.Normal)
+        discardButton.layer.backgroundColor = CaLogStyle.DiscardButtonBgColor.CGColor
+        discardButton.layer.borderColor = CaLogStyle.DiscardButtonBorderColor.CGColor
+        discardButton.layer.cornerRadius = CaStyle.ButtonHeight/2.0
+        discardButton.layer.borderWidth = CaStyle.ButtonBorderWidth
+        self.view.addSubview(discardButton)
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 5.0))
+        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        
+        discardButton.addTarget(self, action: "discard", forControlEvents: UIControlEvents.TouchUpInside)
+    }
+
   
     // MARK: - Scene Actions
     
@@ -69,10 +106,7 @@ class CaTrackedSummaryController: UIViewController {
     
     private func validate() -> Bool {
         
-        if trip == nil {
-            return false
-        }
-        return true
+        return trip != nil
     }
     
     private func preSave() {

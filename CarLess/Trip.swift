@@ -16,6 +16,45 @@ class Trip {
     
     var logType: LogType?
     
+    var waypoints: [Waypoint]?
+    
+    func addWaypoint(waypoint: Waypoint) {
+        
+        if waypoints == nil {
+            waypoints = [Waypoint()]
+        }
+        waypoints!.append(waypoint)
+    }
+    
+    func addWaypoint(#latitude: Double, longitude: Double, timestamp: NSDate, name: String?) {
+            
+        addWaypoint(Waypoint(latitude: latitude, longitude: longitude, timestamp: timestamp, name: name))
+    }
+    
+}
+
+class Waypoint {
+    
+    var latitude: Double?
+    
+    var longitude: Double?
+    
+    var timestamp: NSDate?
+    
+    var name: String?
+    
+    init() {
+        
+    }
+    
+    convenience init(latitude: Double, longitude: Double, timestamp: NSDate, name: String?) {
+        
+        self.init()
+        self.latitude = latitude
+        self.longitude = longitude
+        self.timestamp = timestamp
+        self.name = name
+    }
 }
 
 // Indicates the mode of transportation that was used for a commuting trip.

@@ -11,7 +11,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     @IBOutlet weak var timestampTextField: UITextField!
     @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var modeTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
+    private var saveButton: UIButton!
     private var datePicker: UIDatePicker!
     private var modePicker: UIPickerView!
     private var spinnerView: UIActivityIndicatorView!
@@ -37,6 +37,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         initializeModePicker()
         initializeDecimalPad()
         initializeSpinner()
+        renderSaveButton()
         initializeStyle()
         
         distanceTextField.tag = Tag.DistanceField
@@ -63,6 +64,20 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         modeTextField.textColor = CaLogStyle.ViewFieldColor
         
         spinnerView.color = CaLogStyle.ActivitySpinnerColor
+    }
+    
+    private func renderSaveButton() {
+        
+        saveButton = CaComponent.createButton(title: "Save", color: CaLogStyle.SaveButtonColor, bgColor: CaLogStyle.SaveButtonBgColor, borderColor: CaLogStyle.SaveButtonBorderColor)
+        self.view.addSubview(saveButton)
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        
+        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func initializeDatePicker() {
@@ -131,8 +146,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     // MARK: - View Actions
     
-    @IBAction func saveEntry(sender: UIButton) {
-        
+    func save() {
+
         if validate() {
             preSave()
             CaDataManager.instance.saveTrip(trip)
