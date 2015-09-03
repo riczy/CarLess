@@ -14,12 +14,16 @@ class CaDataManager {
     private init() {
     }
     
+    func getDistanceUnitDisplaySetting() -> LengthUnit {
+        
+        return LengthUnit.Mile
+    }
+    
     func saveTrip(trip: Trip) {
         
         var newTrip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: context) as! NSManagedObject
         newTrip.setValue(NSUUID().UUIDString, forKey: "id")
         newTrip.setValue(trip.distance, forKey: "distance")
-        newTrip.setValue(trip.distanceUnit?.rawValue, forKey: "distanceUnit")
         newTrip.setValue(trip.logType?.rawValue, forKey: "logType")
         newTrip.setValue(trip.mode?.rawValue, forKey: "modeType")
         newTrip.setValue(trip.startTimestamp, forKey: "startTimestamp")

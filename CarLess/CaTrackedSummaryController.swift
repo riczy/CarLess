@@ -26,16 +26,20 @@ class CaTrackedSummaryController: UIViewController {
         renderSaveButton()
         renderDiscardButton()
         initializeStyle()
-        
-        if trip != nil {
-            
-            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp!)
-            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.distance!)!) \(trip!.distanceUnit!.abbreviation)"
-            modeLabel.text = trip?.mode?.description
-        }
+        setDisplayText()
     }
     
     // MARK: - View Initializations
+    
+    private func setDisplayText() {
+        
+        if trip != nil {
+            let distanceUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
+            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
+            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp!)
+            modeLabel.text = trip?.mode?.description
+        }
+    }
     
     private func initializeStyle() {
         

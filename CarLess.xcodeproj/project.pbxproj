@@ -85,18 +85,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		84278FF01B7C16F500F20BA7 /* Ca */ = {
+		84278FF01B7C16F500F20BA7 /* Log */ = {
 			isa = PBXGroup;
 			children = (
+				848929391B3E41C80045C39E /* LogController.swift */,
 				847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */,
 				84E4F0E61B7A75D30006C069 /* CaTrackedEntryController.swift */,
 				84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */,
 				84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */,
-				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
-				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
-				8410EDF51B90D0880044E714 /* CaDataManager.swift */,
 			);
-			name = Ca;
+			name = Log;
 			sourceTree = "<group>";
 		};
 		84760EC11B670EF900355E52 /* Extensions */ = {
@@ -137,14 +135,16 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
-				84278FF01B7C16F500F20BA7 /* Ca */,
+				84278FF01B7C16F500F20BA7 /* Log */,
 				84760EC61B680DBF00355E52 /* Models */,
 				84760EC11B670EF900355E52 /* Extensions */,
 				848929181B3C486B0045C39E /* Main.storyboard */,
+				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
+				8410EDF51B90D0880044E714 /* CaDataManager.swift */,
+				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
 				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
 				848929141B3C486B0045C39E /* ActivityController.swift */,
 				848929161B3C486B0045C39E /* SettingsController.swift */,
-				848929391B3E41C80045C39E /* LogController.swift */,
 				848929101B3C486B0045C39E /* Supporting Files */,
 			);
 			path = CarLess;

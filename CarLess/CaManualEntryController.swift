@@ -21,7 +21,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     var trip = Trip()
     private var lastSelectedModeIndex = 0
-   
+    private var distanceDisplayUnit: LengthUnit!
     
     private struct Tag {
         static let DistanceField = 200
@@ -45,6 +45,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         distanceTextField.keyboardType = UIKeyboardType.DecimalPad
         distanceTextField.delegate = self
         distanceTextField.placeholder = "0.00"
+        distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
         
         reset()
     }
@@ -186,7 +187,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         trip = Trip()
         trip.startTimestamp = NSDate()
         trip.distance = nil
-        trip.distanceUnit = LengthUnit.Mile
         trip.logType = LogType.Manual
         trip.mode = Mode.allValues[lastSelectedModeIndex]
         
@@ -213,7 +213,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     func decimalPadDone() {
         
         if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text) {
-            trip.distance = Double(tempDistance)
+            trip.setDistance(Double(tempDistance), unitType: distanceDisplayUnit)
         } else {
             trip.distance = nil
         }

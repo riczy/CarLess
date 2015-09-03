@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 import MapKit
 
 class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
@@ -11,6 +12,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var modeTitleLabel: UILabel!
     @IBOutlet weak var modeImageView: UIImageView!
     private var stopButton: UIButton!
+    private var distanceDisplayUnit: LengthUnit!
     
     // MARK: - Properties
     
@@ -30,21 +32,13 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             return trip.distance == nil ? 0.0 : trip.distance!
         }
         set {
-            let formattedDistance = CaFormatter.distance.stringFromNumber(newValue)
-            if formattedDistance == nil {
-                // This should never be nil.
-                distanceValueLabel.text = ""
-                trip.distance = nil
-            } else {
-                distanceValueLabel.text = formattedDistance!
-                trip.distance = CaFormatter.distance.numberFromString(formattedDistance!)?.doubleValue
-            }
+            trip.distance = newValue
+            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceDisplayUnit)!)
         }
     }
     
     private var lastLocation: CLLocation!
-    
-    private var locations = [MKPointAnnotation]()
+    private var waypoints: [CLLocation] = []
     
     lazy private var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -69,27 +63,11 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         mapView.mapType = MKMapType.Standard
         mapView.delegate = self
         
+        distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
+        
         startTracking()
     }
     
-    
-    override func viewDidAppear(animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        if !mapView.showsUserLocation {
-            mapView.showsUserLocation = true
-        }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-
-        // DO I need to do this??
-        
-        super.viewDidDisappear(animated)
-        if mapView.showsUserLocation {
-            mapView.showsUserLocation = false
-        }
-    }
     
     // MARK: - View Initializations
     
@@ -131,22 +109,47 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
         
-        let span = MKCoordinateSpanMake(0.03, 0.03)
-        let userLocationCoordinate = userLocation.coordinate
-        let region = MKCoordinateRegion(center: userLocationCoordinate, span: span)
+        let span = MKCoordinateSpanMake(0.009, 0.009)
+        let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
         mapView.setRegion(region, animated: true)
-        
     }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        
+        if overlay is MKPolyline {
+            var polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = CaLogStyle.MapRouteLineColor
+            polylineRenderer.lineWidth = CaLogStyle.MapRouteLineWidth
+            return polylineRenderer
+        }
+        return nil
+    }
+    
+    // MARK: - Location Manager Delegation
    
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
         if lastLocation == nil {
+            
             lastLocation = locations.first as! CLLocation
+            waypoints.append(lastLocation)
         } else {
-            let newestLocation = locations.last as! CLLocation
-            distanceTraveled += lastLocation.distanceFromLocation(newestLocation) + 0.1
-            lastLocation = newestLocation
-            println("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), distance = \(distanceTraveled)")
+            
+            let newestLocation = locations.first as! CLLocation
+            let newestDistanceTraveled = lastLocation.distanceFromLocation(newestLocation)
+            if newestDistanceTraveled > 0 {
+                distanceTraveled += newestDistanceTraveled
+                lastLocation = newestLocation
+                waypoints.append(newestLocation)
+                println("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
+            }
+            
+            if waypoints.count > 1 {
+                let stepBeginCoordinate = waypoints[waypoints.count - 2].coordinate
+                let stepEndCoordinate = waypoints[waypoints.count - 1].coordinate
+                var stepCoordinates = [stepEndCoordinate, stepBeginCoordinate]
+                mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
+            }
         }
     }
     
@@ -181,6 +184,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func stopTracking() {
         
         locationManager.stopUpdatingLocation()
+        mapView.showsUserLocation = false
         trip.endTimestamp = NSDate()
         performSegueWithIdentifier(CaSegue.TrackedProgressToSummary, sender: self)
     }
@@ -190,12 +194,12 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func reset() {
         
         lastLocation = nil
-        locations.removeAll(keepCapacity: false)
+        waypoints.removeAll(keepCapacity: false)
         trip.distance = 0.0
-        trip.distanceUnit = LengthUnit.Mile
         trip.endTimestamp = nil
         trip.logType = LogType.Tracked
         trip.startTimestamp = nil
+        trip.waypoints = []
     }
 
     private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {

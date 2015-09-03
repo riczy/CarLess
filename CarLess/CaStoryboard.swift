@@ -65,6 +65,8 @@ struct CaLogStyle {
     static let DiscardButtonColor = UIColor.whiteColor()
     static let DiscardButtonBgColor = CaColor.FadedSlateGray
     static let DiscardButtonBorderColor = CaColor.FadedSlateGray
+    static let MapRouteLineColor =  CaColor.LightBlue
+    static let MapRouteLineWidth: CGFloat = 4
    
 }
 

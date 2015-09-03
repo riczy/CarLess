@@ -2,7 +2,6 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Trip" syncable="YES">
         <attribute name="distance" optional="YES" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="distanceUnit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="logType" optional="YES" attributeType="String" syncable="YES"/>
@@ -18,7 +17,7 @@
         <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="waypoints" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Trip" positionX="-396" positionY="54" width="128" height="163"/>
+        <element name="Trip" positionX="-396" positionY="54" width="128" height="150"/>
         <element name="Waypoint" positionX="-101" positionY="189" width="128" height="118"/>
     </elements>
 </model>

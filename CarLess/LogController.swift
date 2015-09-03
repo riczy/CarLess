@@ -19,8 +19,7 @@ class LogController: UIViewController {
         super.viewDidLoad()
         initializeStyle()
         initializeLogModeSegmentControl()
-        logModeControlPressed()
-        
+        logModeControlPressed()        
     }
     
     private func initializeStyle() {

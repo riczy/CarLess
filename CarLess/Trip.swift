@@ -12,8 +12,6 @@ class Trip {
     
     var distance: Double?
     
-    var distanceUnit: LengthUnit?
-    
     var logType: LogType?
     
     var waypoints: [Waypoint]?
@@ -29,6 +27,17 @@ class Trip {
     func addWaypoint(#latitude: Double, longitude: Double, timestamp: NSDate, name: String?) {
             
         addWaypoint(Waypoint(latitude: latitude, longitude: longitude, timestamp: timestamp, name: name))
+    }
+    
+    func getDistanceInUnit(unit: LengthUnit) -> Double? {
+        
+        return distance == nil ? nil : distance! * unit.conversionFactor
+    }
+    
+    func setDistance(distance: Double?, unitType unit: LengthUnit) {
+        
+        // Convert distance to meters
+        self.distance = distance == nil ? nil : distance! / unit.conversionFactor
     }
     
 }
@@ -101,6 +110,8 @@ enum Mode: String {
 enum LengthUnit : String {
     
     case Mile = "Mile"
+    case Meter = "Meter"
+    case Kilometer = "Kilometer"
     
     var abbreviation: String {
         
@@ -108,6 +119,37 @@ enum LengthUnit : String {
             switch self {
             case .Mile:
                 return "mi"
+            case .Meter:
+                return "m"
+            case .Kilometer:
+                return "km"
+            }
+        }
+    }
+    
+    // The conversion factor need to convert this unit to a meter unit or vice
+    // versa.
+    //
+    // If given a measurement in meters then divide by the conversionFactor
+    // to get the desired unit. 
+    //
+    //     Unit / conversionFactor = Meter
+    //
+    // If given a measurement in the unit then multiply by the conversionFactor
+    // to get meters.
+    //
+    //     Meter * conversionFactor = Unit
+    //
+    var conversionFactor: Double {
+        
+        get {
+            switch self {
+            case .Mile:
+                return 0.00062137
+            case .Meter:
+                return 1.0
+            case .Kilometer:
+                return 0.001
             }
         }
     }
@@ -119,7 +161,7 @@ enum LengthUnit : String {
         }
     }
     
-    static let allValues = [ Mile ]
+    static let allValues = [ Mile, Meter, Kilometer ]
 }
 
 // Indicates the type of log entry made for a commuting trip.
