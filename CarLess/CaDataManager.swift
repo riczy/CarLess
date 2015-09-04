@@ -1,15 +1,16 @@
 import UIKit
 import CoreData
+import CoreLocation
 
 class CaDataManager {
     
     static let instance = CaDataManager()
     
-    private var context: NSManagedObjectContext = {
-    
-        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.managedObjectContext!
-    }()
+    var context: NSManagedObjectContext {
+        get {
+            return (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        }
+    }
     
     private init() {
     }
@@ -19,23 +20,55 @@ class CaDataManager {
         return LengthUnit.Mile
     }
     
-    func saveTrip(trip: Trip) {
+    func initTrip() -> Trip {
         
-        var newTrip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: context) as! NSManagedObject
-        newTrip.setValue(NSUUID().UUIDString, forKey: "id")
-        newTrip.setValue(trip.distance, forKey: "distance")
-        newTrip.setValue(trip.logType?.rawValue, forKey: "logType")
-        newTrip.setValue(trip.mode?.rawValue, forKey: "modeType")
-        newTrip.setValue(trip.startTimestamp, forKey: "startTimestamp")
-        newTrip.setValue(trip.endTimestamp, forKey: "endTimestamp")
+        let entityDescription = NSEntityDescription.entityForName("Trip", inManagedObjectContext: context)
         
+        var trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
+        trip.id = NSUUID().UUIDString
+        trip.distance = 0.0
         
-        context.save(nil)
-        
-        println(newTrip)
-        println("Object saved")
-        
+        return trip
     }
+    
+    func initWaypoint() -> Waypoint {
+        
+        let entityDescription = NSEntityDescription.entityForName("Waypoint", inManagedObjectContext: context)
+        return NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Waypoint
+    }
+    
+    func initWaypointWithLocation(location: CLLocation, trip: Trip) -> Waypoint {
+        
+        var waypoint = initWaypoint()
+        waypoint.trip = trip
+        waypoint.setUsingLocation(location)
+        return waypoint
+    }
+    
+    func save(#trip: Trip) {
+        
+        trip.managedObjectContext!.save(nil)
+        println(trip)
+    }
+    
+//    func saveTrip(trip: Trip) {
+//        
+//        var newTrip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: context) as! NSManagedObject
+//        newTrip.setValue(NSUUID().UUIDString, forKey: "id")
+//        newTrip.setValue(trip.distance, forKey: "distance")
+//        newTrip.setValue(trip.logType?.rawValue, forKey: "logType")
+//        newTrip.setValue(trip.mode?.rawValue, forKey: "modeType")
+//        newTrip.setValue(trip.startTimestamp, forKey: "startTimestamp")
+//        newTrip.setValue(trip.endTimestamp, forKey: "endTimestamp")
+//        newTrip.setValue(NSSet(array: trip.waypoints), forKey: "waypoints")
+//        
+//        
+//        context.save(nil)
+//        
+//        println(newTrip)
+//        println("Object saved")
+//        
+//    }
     
     func fetchAllTrips() {
         

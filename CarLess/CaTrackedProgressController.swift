@@ -16,20 +16,12 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     // MARK: - Properties
     
-    var mode: Mode? {
-        get {
-            return trip.mode
-        }
-        set {
-            trip.mode = newValue
-        }
-    }
-    
-    private var trip = Trip()
+    var mode: Mode!
+    private var trip: Trip!
     
     private var distanceTraveled: Double {
         get {
-            return trip.distance == nil ? 0.0 : trip.distance!
+            return trip.distance.doubleValue
         }
         set {
             trip.distance = newValue
@@ -38,7 +30,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     }
     
     private var lastLocation: CLLocation!
-    private var waypoints: [CLLocation] = []
+    private var nextToLastLocation: CLLocation!
     
     lazy private var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
@@ -53,12 +45,11 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        initializeStyle()
         reset()
-        
-        modeImageView?.image = UIImage(named: mode!.imageFilename)
-        
+        initializeStyle()
         renderStopButton()
+        
+        modeImageView?.image = UIImage(named: trip.modeType.imageFilename)
 
         mapView.mapType = MKMapType.Standard
         mapView.delegate = self
@@ -132,22 +123,21 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         if lastLocation == nil {
             
             lastLocation = locations.first as! CLLocation
-            waypoints.append(lastLocation)
+            addTripWaypoint(lastLocation)
         } else {
             
             let newestLocation = locations.first as! CLLocation
             let newestDistanceTraveled = lastLocation.distanceFromLocation(newestLocation)
             if newestDistanceTraveled > 0 {
                 distanceTraveled += newestDistanceTraveled
+                nextToLastLocation = lastLocation
                 lastLocation = newestLocation
-                waypoints.append(newestLocation)
+                addTripWaypoint(newestLocation)
                 println("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
             }
             
-            if waypoints.count > 1 {
-                let stepBeginCoordinate = waypoints[waypoints.count - 2].coordinate
-                let stepEndCoordinate = waypoints[waypoints.count - 1].coordinate
-                var stepCoordinates = [stepEndCoordinate, stepBeginCoordinate]
+            if lastLocation != nil && nextToLastLocation != nil {
+                var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
                 mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
             }
         }
@@ -194,21 +184,27 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func reset() {
         
         lastLocation = nil
-        waypoints.removeAll(keepCapacity: false)
+        nextToLastLocation = nil
+        
+        trip = CaDataManager.instance.initTrip()
         trip.distance = 0.0
         trip.endTimestamp = nil
         trip.logType = LogType.Tracked
-        trip.startTimestamp = nil
-        trip.waypoints = []
+        trip.modeType = mode
+    }
+    
+    private func addTripWaypoint(location: CLLocation) {
+        
+        trip.waypoints.addObject(CaDataManager.instance.initWaypointWithLocation(lastLocation, trip: trip))
     }
 
     private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {
         
-        if mode == Mode.Bicycle || mode == Mode.Walk {
+        if trip.modeType == Mode.Bicycle || trip.modeType == Mode.Walk {
             return (CLActivityType.Fitness, kCLLocationAccuracyNearestTenMeters)
-        } else if mode == Mode.Bus || mode == Mode.Rideshare {
+        } else if trip.modeType == Mode.Bus || trip.modeType == Mode.Rideshare {
             return (CLActivityType.AutomotiveNavigation, kCLLocationAccuracyNearestTenMeters)
-        } else if mode == Mode.Train {
+        } else if trip.modeType == Mode.Train {
             return (CLActivityType.OtherNavigation, kCLLocationAccuracyHundredMeters)
         }
         return (CLActivityType.Other, kCLLocationAccuracyKilometer)

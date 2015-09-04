@@ -15,7 +15,7 @@ class CaTrackedSummaryController: UIViewController {
     
     // MARK: - Properties
     
-    var trip: Trip?
+    var trip: Trip!
     
     // MARK: - View Lifecycle Methods
     
@@ -35,9 +35,9 @@ class CaTrackedSummaryController: UIViewController {
         
         if trip != nil {
             let distanceUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
-            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
-            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp!)
-            modeLabel.text = trip?.mode?.description
+            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
+            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp)
+            modeLabel.text = trip.modeType.description
         }
     }
     
@@ -103,14 +103,14 @@ class CaTrackedSummaryController: UIViewController {
         
         if validate() {
             preSave()
-            CaDataManager.instance.saveTrip(trip!)
+            CaDataManager.instance.save(trip: trip)
             postSave()
         }
     }
     
     private func validate() -> Bool {
         
-        return trip != nil
+        return true
     }
     
     private func preSave() {

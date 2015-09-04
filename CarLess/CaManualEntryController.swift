@@ -1,4 +1,4 @@
-import UIKit
+ import UIKit
 import CoreData
 
 class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -19,7 +19,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
  
     // MARK: - Properties
     
-    var trip = Trip()
+    private var trip: Trip!
     private var lastSelectedModeIndex = 0
     private var distanceDisplayUnit: LengthUnit!
     
@@ -33,12 +33,14 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         
         super.viewDidLoad()
         
+        
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
         initializeSpinner()
         renderSaveButton()
         initializeStyle()
+        reset()
         
         distanceTextField.tag = Tag.DistanceField
         distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
@@ -47,7 +49,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         distanceTextField.placeholder = "0.00"
         distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
         
-        reset()
     }
     
     // MARK: - View Initializations
@@ -151,15 +152,14 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
 
         if validate() {
             preSave()
-            CaDataManager.instance.saveTrip(trip)
+            CaDataManager.instance.save(trip: trip)
             postSave()
         }
     }
     
     private func validate() -> Bool {
         
-        // It's impossible for the date and mode values to be nil since they have defaults.
-        return trip.distance != nil
+        return trip.distance.doubleValue > 0.0
     }
     
     private func preSave() {
@@ -183,18 +183,19 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     private func reset() {
         
         lastSelectedModeIndex = 0
-
-        trip = Trip()
-        trip.startTimestamp = NSDate()
-        trip.distance = nil
-        trip.logType = LogType.Manual
-        trip.mode = Mode.allValues[lastSelectedModeIndex]
         
-        timestampTextField.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp!)
+        trip = CaDataManager.instance.initTrip()
+        trip.distance = 0.0
+        trip.logType = LogType.Manual
+        trip.modeType = Mode.allValues[lastSelectedModeIndex]
+        trip.startTimestamp = NSDate()
+        trip.endTimestamp = nil
+        
+        timestampTextField.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp)
         distanceTextField.text = ""
-        modeTextField.text = trip.mode?.description
-
-        datePicker.date = trip.startTimestamp!
+        modeTextField.text = trip.modeType.description
+        
+        datePicker.date = trip.startTimestamp
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
@@ -213,9 +214,9 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     func decimalPadDone() {
         
         if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text) {
-            trip.setDistance(Double(tempDistance), unitType: distanceDisplayUnit)
+            trip.setDistance(tempDistance, hasUnitType: distanceDisplayUnit)
         } else {
-            trip.distance = nil
+            trip.setDistance(0.0, hasUnitType: distanceDisplayUnit)
         }
         distanceTextField.resignFirstResponder()
     }
@@ -226,7 +227,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         if selectedModeIndex > -1 {
             let selectedMode = Mode.allValues[selectedModeIndex]
             modeTextField.text = selectedMode.description
-            trip.mode = selectedMode
+            trip.modeType = selectedMode
             lastSelectedModeIndex = selectedModeIndex
         }
         modeTextField.resignFirstResponder()
