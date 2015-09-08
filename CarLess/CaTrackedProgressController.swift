@@ -52,6 +52,10 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         modeImageView?.image = UIImage(named: trip.modeType.imageFilename)
 
         mapView.mapType = MKMapType.Standard
+        mapView.zoomEnabled = true
+        mapView.scrollEnabled = true
+        mapView.rotateEnabled = true
+        mapView.pitchEnabled = false
         mapView.delegate = self
         
         distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
@@ -94,12 +98,11 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             vc.trip = trip
         }
     }
-
-
+    
     // MARK: - Map View Delegation
     
     func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-        
+
         let span = MKCoordinateSpanMake(0.009, 0.009)
         let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
         mapView.setRegion(region, animated: true)

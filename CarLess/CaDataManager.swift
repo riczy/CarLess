@@ -51,78 +51,30 @@ class CaDataManager {
         println(trip)
     }
     
-//    func saveTrip(trip: Trip) {
-//        
-//        var newTrip = NSEntityDescription.insertNewObjectForEntityForName("Trip", inManagedObjectContext: context) as! NSManagedObject
-//        newTrip.setValue(NSUUID().UUIDString, forKey: "id")
-//        newTrip.setValue(trip.distance, forKey: "distance")
-//        newTrip.setValue(trip.logType?.rawValue, forKey: "logType")
-//        newTrip.setValue(trip.mode?.rawValue, forKey: "modeType")
-//        newTrip.setValue(trip.startTimestamp, forKey: "startTimestamp")
-//        newTrip.setValue(trip.endTimestamp, forKey: "endTimestamp")
-//        newTrip.setValue(NSSet(array: trip.waypoints), forKey: "waypoints")
-//        
-//        
-//        context.save(nil)
-//        
-//        println(newTrip)
-//        println("Object saved")
-//        
-//    }
-    
-    func fetchAllTrips() {
+    func fetchTrips() -> [Trip] {
         
-        var request = NSFetchRequest(entityName: "Trip")
-        request.returnsObjectsAsFaults = false
-        
-        var results:NSArray = context.executeFetchRequest(request, error: nil)! // error shouldn't be nil in long run
-        if results.count > 0 {
-            println("Count = \(results.count)")
-            for res in results {
-                println(res) 
-            }
-        } else {
-            println("No results for Trip")
-        }
+        return fetchTrips(limit: 20, skip: 0)
     }
     
-    func exampleFetch() {
+    func fetchTrips(#limit: Int, skip: Int) -> [Trip] {
         
-//        var t = Trip()
-//        t.distance = 32.0
-//        t.distanceUnit = LengthUnit.Mile
-//        t.logType = LogType.Manual
-//        t.mode = Mode.Bicycle
-//        t.startTimestamp = NSDate()
-//        t.addWaypoint(latitude: NSDecimalNumber(string: "32.8"), longitude: NSDecimalNumber(string: "32.0"), timestamp: NSDate(), name: "hello")
-//        saveTrip(t)
-//        
-//        t = Trip()
-//        t.distance = 90.0
-//        t.distanceUnit = LengthUnit.Mile
-//        t.logType = LogType.Manual
-//        t.mode = Mode.Walk
-//        t.startTimestamp = NSDate()
-//        t.addWaypoint(latitude: NSDecimalNumber(string: "90.0"), longitude: NSDecimalNumber(string: "90.0"), timestamp: NSDate(), name: "smhellow")
-//        saveTrip(t)
-//
-//        t = Trip()
-//        t.distance = 45.0
-//        t.distanceUnit = LengthUnit.Mile
-//        t.logType = LogType.Manual
-//        t.mode = Mode.Walk
-//        t.startTimestamp = NSDate()
-//        t.addWaypoint(latitude: NSDecimalNumber(string: "45.0"), longitude: NSDecimalNumber(string: "45.0"), timestamp: NSDate(), name: "llo")
-//        saveTrip(t)
+        //fetchRequest.predicate = NSPredicate(format: "waypoint.name contains[c] %@", "hello")
+        //fetchRequest.includesSubentities = false
 
-        
-        
         let fetchRequest = NSFetchRequest(entityName: "Trip")
-        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
-//        fetchRequest.predicate = NSPredicate(format: "waypoint.name contains[c] %@", "hello")
-        fetchRequest.fetchBatchSize = 50
+        let sortDescriptor = NSSortDescriptor(key: "startTimestamp", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
-        println(fetchRequest)
+        fetchRequest.fetchLimit = limit
+        fetchRequest.fetchOffset = skip
+        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
+        
+        var results:[Trip]? = context.executeFetchRequest(fetchRequest, error: nil) as? [Trip]
+        
+        if results == nil {
+            return [Trip]()
+        }
+        
+        return results!
         
     }
 }
