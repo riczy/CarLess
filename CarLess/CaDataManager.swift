@@ -53,16 +53,14 @@ class CaDataManager {
     
     func fetchTrips() -> [Trip] {
         
-        return fetchTrips(limit: 20, skip: 0)
+        return fetchTrips(limit: 100, skip: 0)
     }
     
     func fetchTrips(#limit: Int, skip: Int) -> [Trip] {
         
-        //fetchRequest.predicate = NSPredicate(format: "waypoint.name contains[c] %@", "hello")
-        //fetchRequest.includesSubentities = false
-
         let fetchRequest = NSFetchRequest(entityName: "Trip")
         let sortDescriptor = NSSortDescriptor(key: "startTimestamp", ascending: false)
+        fetchRequest.includesPendingChanges = false
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchLimit = limit
         fetchRequest.fetchOffset = skip
