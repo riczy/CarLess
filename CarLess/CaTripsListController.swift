@@ -16,6 +16,8 @@ class CaTripsListController: UITableViewController {
         
         super.viewDidLoad()
         
+        applyStyle()
+        
         keyDateFormatter = NSDateFormatter()
         keyDateFormatter.dateFormat = "yyyy-MM-dd"
         
@@ -34,6 +36,11 @@ class CaTripsListController: UITableViewController {
         
         fetchData()
         tableView.reloadData()
+    }
+    
+    private func applyStyle() {
+    
+        view.backgroundColor = CaTripListStyle.ViewBgColor
     }
     
     private func fetchData() {
@@ -79,6 +86,8 @@ class CaTripsListController: UITableViewController {
         let tripArray : [Trip] = tripsMap[(tripsMapOrderedKeys[indexPath.section])]!
         let trip = tripArray[indexPath.row]
         
+        applyStyleForCell(cell)
+        
         cell.startTimeLabel?.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
         cell.distanceLabel?.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit)!)!
         cell.distanceUnitLabel?.text = distanceUnit.abbreviation
@@ -91,6 +100,18 @@ class CaTripsListController: UITableViewController {
         
         let date = keyDateFormatter.dateFromString(tripsMapOrderedKeys[section])!
         return "\(headerWeekDayFormatter.stringFromDate(date))  \(headerDateFormatter.stringFromDate(date))"
+    }
+    
+    private func applyStyleForCell(cell: CaTripTableViewCell) {
+        
+        let font = UIFont(name: "Arial Rounded MT Bold", size: 16)
+        cell.backgroundColor = CaTripListStyle.CellBgColor
+        cell.startTimeLabel.font = font
+        cell.distanceLabel.font = font
+        cell.distanceUnitLabel.font = font
+        cell.startTimeLabel.textColor = CaTripListStyle.CellTimeColor
+        cell.distanceUnitLabel.textColor = CaTripListStyle.CellDistanceColor
+        cell.distanceLabel.textColor = CaTripListStyle.CellDistanceColor
     }
     
 }

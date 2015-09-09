@@ -11,7 +11,7 @@ struct CaSegue {
 
 struct CaConstants {
     
-    static let SaveActivityDelay = 3.0 * Double(NSEC_PER_SEC)
+    static let SaveActivityDelay = 2.0 * Double(NSEC_PER_SEC)
     static let SaveDisplayAlpha: CGFloat = 0.5
 }
 
@@ -25,6 +25,9 @@ struct CaColor {
 
     // Hex F5EACD
     static let Ivory = UIColor(red: 245.0/255.0, green: 234.0/255.0, blue: 205.0/255.0, alpha: 1.0)
+    
+    // Hex FBF6EA
+    static let PaleIvory = UIColor(red: 251.0/255.0, green: 246.0/255.0, blue: 234.0/255.0, alpha: 1.0)
    
     // Hex EE4B3E
     static let RedOrange = UIColor(red: 238.0/255.0, green: 75.0/255.0, blue: 62.0/255.0, alpha: 1.0)
@@ -35,6 +38,18 @@ struct CaColor {
     // Hex 1F784F
     static let HunterGreen = UIColor(red: 31.0/255.0, green: 120.0/255.0, blue: 79.0/255.0, alpha: 1.0)
 
+    
+    // Hex BFE0E8
+    static let PalePowderBlue = UIColor(red: 191.0/255.0, green: 224.0/255.0, blue: 232.0/255.0, alpha: 1.0)
+    
+    // Hex 29D3FF
+    static let PowerBlue = UIColor(red: 41.0/255.0, green: 211.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    
+    // Hex BFE8C0
+    static let PaleSeaGreen = UIColor(red: 191.0/255.0, green: 232.0/255.0, blue: 192.0/255.0, alpha: 1.0)
+    
+    // Hex 387863
+    static let SeaGreen = UIColor(red: 56.0/255.0, green: 120.0/255.0, blue: 99.0/255.0, alpha: 1.0)
 }
 
 struct CaStyle {
@@ -68,6 +83,14 @@ struct CaLogStyle {
     static let MapRouteLineColor =  CaColor.LightBlue
     static let MapRouteLineWidth: CGFloat = 4
    
+}
+
+struct CaTripListStyle {
+    
+    static let ViewBgColor = CaColor.Ivory
+    static let CellBgColor = CaColor.PaleIvory
+    static let CellTimeColor = CaColor.FadedSlateGray
+    static let CellDistanceColor = CaColor.FadedSlateGray
 }
 
 class CaComponent {

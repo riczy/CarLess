@@ -77,14 +77,7 @@ class CaTrackedSummaryController: UIViewController {
     
     private func renderDiscardButton() {
         
-        discardButton = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        discardButton.setTranslatesAutoresizingMaskIntoConstraints(false)
-        discardButton.setTitle("Discard", forState: UIControlState.Normal)
-        discardButton.setTitleColor(CaLogStyle.DiscardButtonColor, forState: UIControlState.Normal)
-        discardButton.layer.backgroundColor = CaLogStyle.DiscardButtonBgColor.CGColor
-        discardButton.layer.borderColor = CaLogStyle.DiscardButtonBorderColor.CGColor
-        discardButton.layer.cornerRadius = CaStyle.ButtonHeight/2.0
-        discardButton.layer.borderWidth = CaStyle.ButtonBorderWidth
+        discardButton = CaComponent.createButton(title: "Discard", color: CaLogStyle.DiscardButtonColor, bgColor: CaLogStyle.DiscardButtonBgColor, borderColor: CaLogStyle.DiscardButtonBorderColor)
         self.view.addSubview(discardButton)
         
         

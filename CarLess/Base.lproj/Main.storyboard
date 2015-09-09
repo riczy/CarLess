@@ -94,11 +94,12 @@
                             <outlet property="delegate" destination="gwj-FL-mWc" id="cNp-6B-9es"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Trips" image="tab-activity" id="U1L-SX-Job"/>
                     <navigationItem key="navigationItem" title="Trips" id="Uke-mw-GQf"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P62-Bn-8k5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1996" y="-1393"/>
+            <point key="canvasLocation" x="-2594" y="-1674"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="wg7-f3-ORb">
@@ -138,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2116" y="-638"/>
+            <point key="canvasLocation" x="-2594" y="-846"/>
         </scene>
         <!--Log Controller-->
         <scene sceneID="lcQ-Cc-GEx">
@@ -216,14 +217,14 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="XJC-ON-N5L" kind="relationship" relationship="viewControllers" id="nfD-ua-zbS"/>
+                        <segue destination="gwj-FL-mWc" kind="relationship" relationship="viewControllers" id="jVH-cC-WcS"/>
                         <segue destination="65X-Eh-tEJ" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3543" y="-638"/>
+            <point key="canvasLocation" x="-3543" y="-846"/>
         </scene>
         <!--Tracked Log Entry-->
         <scene sceneID="Y3b-0k-Bbk">
@@ -552,25 +553,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Em5-de-J1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2815" y="-3.5"/>
-        </scene>
-        <!--Trips-->
-        <scene sceneID="yMj-Cs-Bup">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XJC-ON-N5L" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trips" image="tab-activity" id="Zsu-1c-0Co"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JbX-SR-O95">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gwj-FL-mWc" kind="relationship" relationship="rootViewController" id="bUO-s1-8GN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yHn-YW-GKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2773" y="-1393"/>
         </scene>
     </scenes>
     <resources>
