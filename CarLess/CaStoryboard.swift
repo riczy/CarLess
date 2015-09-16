@@ -93,6 +93,11 @@ struct CaTripListStyle {
     static let CellDistanceColor = CaColor.FadedSlateGray
 }
 
+struct CaSettingsStyle {
+    
+    static let ViewBgColor = CaColor.Ivory
+}
+
 class CaComponent {
     
     static func createButton(#title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {

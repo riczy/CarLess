@@ -9,6 +9,15 @@
         <attribute name="startTimestamp" attributeType="Date" syncable="YES"/>
         <relationship name="waypoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Waypoint" inverseName="trip" inverseEntity="Waypoint" syncable="YES"/>
     </entity>
+    <entity name="Vehicle" representedClassName="PRODUCT_MODULE_NAME.Vehicle" syncable="YES">
+        <attribute name="avgMpg" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="epaVehicleId" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="make" attributeType="String" syncable="YES"/>
+        <attribute name="model" attributeType="String" syncable="YES"/>
+        <attribute name="trim" attributeType="String" syncable="YES"/>
+        <attribute name="year" attributeType="Integer 16" syncable="YES"/>
+    </entity>
     <entity name="Waypoint" representedClassName="Waypoint" syncable="YES">
         <attribute name="altitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="course" attributeType="Double" minValueString="0" maxValueString="359.9" defaultValueString="0.0" syncable="YES"/>
@@ -22,6 +31,7 @@
     </entity>
     <elements>
         <element name="Trip" positionX="-396" positionY="54" width="128" height="148"/>
-        <element name="Waypoint" positionX="-101" positionY="189" width="128" height="178"/>
+        <element name="Waypoint" positionX="-135" positionY="65" width="128" height="178"/>
+        <element name="Vehicle" positionX="-396" positionY="252" width="128" height="148"/>
     </elements>
 </model>

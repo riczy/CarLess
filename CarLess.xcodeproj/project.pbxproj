@@ -11,12 +11,16 @@
 		84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */; };
 		84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */; };
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
+		8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */; };
+		8433AC9D1BA20579004CA5CF /* CaVehicleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */; };
+		8433AC9F1BA87383004CA5CF /* EpaVehicleYearParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9E1BA87383004CA5CF /* EpaVehicleYearParser.swift */; };
+		8433ACA11BA89868004CA5CF /* EpaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA01BA89868004CA5CF /* EpaTypes.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* CaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* CaTypes.swift */; };
 		847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */; };
 		848929131B3C486B0045C39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929121B3C486B0045C39E /* AppDelegate.swift */; };
-		848929171B3C486B0045C39E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* SettingsController.swift */; };
+		848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* CaSettingsController.swift */; };
 		8489291A1B3C486B0045C39E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848929181B3C486B0045C39E /* Main.storyboard */; };
 		8489291C1B3C486B0045C39E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8489291B1B3C486B0045C39E /* Images.xcassets */; };
 		8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8489291D1B3C486B0045C39E /* LaunchScreen.xib */; };
@@ -47,6 +51,10 @@
 		84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaStoryboard.swift; sourceTree = "<group>"; };
 		84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedProgressController.swift; sourceTree = "<group>"; };
 		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
+		8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaVehicleController.swift; sourceTree = "<group>"; };
+		8433AC9E1BA87383004CA5CF /* EpaVehicleYearParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleYearParser.swift; sourceTree = "<group>"; };
+		8433ACA01BA89868004CA5CF /* EpaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaTypes.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
@@ -54,7 +62,7 @@
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929111B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929121B3C486B0045C39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		848929161B3C486B0045C39E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		848929161B3C486B0045C39E /* CaSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaSettingsController.swift; sourceTree = "<group>"; };
 		848929191B3C486B0045C39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8489291B1B3C486B0045C39E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8489291E1B3C486B0045C39E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -114,10 +122,22 @@
 		84760EC61B680DBF00355E52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */,
 				84E61A301B98AB5000D927B8 /* Trip.swift */,
 				84E61A321B98AB5000D927B8 /* Waypoint.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		8479F6B41BA0C165004B6C08 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
+				848929161B3C486B0045C39E /* CaSettingsController.swift */,
+				8433AC9E1BA87383004CA5CF /* EpaVehicleYearParser.swift */,
+				8433ACA01BA89868004CA5CF /* EpaTypes.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		848929041B3C486B0045C39E = {
@@ -142,6 +162,7 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
+				8479F6B41BA0C165004B6C08 /* Settings */,
 				84E61A341B9A911500D927B8 /* Trips */,
 				84278FF01B7C16F500F20BA7 /* Log */,
 				84760EC61B680DBF00355E52 /* Models */,
@@ -152,7 +173,6 @@
 				8410EDF51B90D0880044E714 /* CaDataManager.swift */,
 				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
 				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
-				848929161B3C486B0045C39E /* SettingsController.swift */,
 				848929101B3C486B0045C39E /* Supporting Files */,
 			);
 			path = CarLess;
@@ -307,14 +327,18 @@
 				847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */,
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,
+				8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */,
 				84E6953E1B86B56D000185BE /* CaTrackedSummaryController.swift in Sources */,
+				8433AC9F1BA87383004CA5CF /* EpaVehicleYearParser.swift in Sources */,
+				8433ACA11BA89868004CA5CF /* EpaTypes.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */,
 				84E61A311B98AB5000D927B8 /* Trip.swift in Sources */,
-				848929171B3C486B0045C39E /* SettingsController.swift in Sources */,
+				848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
+				8433AC9D1BA20579004CA5CF /* CaVehicleController.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogController.swift in Sources */,
 				84E61A361B9B3A3700D927B8 /* CaTripsListController.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
