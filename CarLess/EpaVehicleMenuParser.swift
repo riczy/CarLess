@@ -1,6 +1,23 @@
 import Foundation
 
-class EpaVehicleYearParser : EpaParser {
+///
+/// The parser delegate for the EPA's Fuel Economy web service's vehicle menu
+/// selectors.
+/// The parser supports the vehicle year, vehicle make, vehicle model, and
+/// vehicle options menus. Each of those are composed of a text and a value
+/// element inside of a menuItem elemnt.
+///
+/// See http://www.fueleconomy.gov/feg/ws/index.shtml
+///
+class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
+    
+    enum Status {
+        
+        case NotStarted
+        case InProgress
+        case Failed
+        case Completed
+    }
     
     enum Element: String {
         
@@ -9,21 +26,28 @@ class EpaVehicleYearParser : EpaParser {
         case MenuItem = "menuItem"
     }
     
-    var years: [EpaVehicleYear] = []
+    
+    var status = Status.NotStarted
+    var values: [String : String] = [:]
     
     private var text: NSMutableString = ""
     private var value: NSMutableString = ""
     private var currentElement: Element?
-    private let formatter = NSNumberFormatter()
-    
-    override init() {
+
+    func parserDidStartDocument(parser: NSXMLParser) {
         
-        super.init()
-        self.formatter.maximumFractionDigits = 0
-        self.formatter.minimum = 0
-        self.formatter.groupingSeparator = nil
+        status = Status.InProgress
     }
     
+    func parserDidEndDocument(parser: NSXMLParser) {
+        
+        status = Status.Completed
+    }
+    
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+        
+        status = Status.Failed
+    }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         
@@ -43,9 +67,7 @@ class EpaVehicleYearParser : EpaParser {
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == Element.MenuItem.rawValue {
-            let valueNumber = formatter.numberFromString(self.value as String)!
-            let year = EpaVehicleYear(text: self.text as String, value: valueNumber)
-            years.append(year)
+            values.updateValue(value as String, forKey: text as String)
         }
         self.currentElement = nil
     }

@@ -5,8 +5,8 @@ class CaVehicleController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getYears()
-        getMakes(forYear: "2012")
+        getVehicleYears()
+        getVehicleMakes(forYear: "2012")
 
         // Do any additional setup after loading the view.
     }
@@ -17,7 +17,7 @@ class CaVehicleController: UIViewController {
     }
     
 
-    private func getYears() {
+    private func getVehicleYears() {
         
         let baseUrl = NSURL(string: "http://www.fueleconomy.gov")
         let url = NSURL(string: "ws/rest/vehicle/menu/year", relativeToURL: baseUrl)
@@ -26,19 +26,16 @@ class CaVehicleController: UIViewController {
         let queue = NSOperationQueue.currentQueue() // ??????
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
-            println("data = \(data)")
-            println("error = \(error)")
-            println("response = \(response)")
             
-            var parserDelegate = EpaVehicleYearParser()
+            var parserDelegate = EpaVehicleMenuParser()
             var parser = NSXMLParser(data: data)
             parser.delegate = parserDelegate
             parser.parse()
-            println("parsed array = \(parserDelegate.years)")
+            println("parsed array = \(parserDelegate.values)")
         }
     }
     
-    private func getMakes(forYear year: String) {
+    private func getVehicleMakes(forYear year: String) {
         
         let baseUrl = NSURL(string: "http://www.fueleconomy.gov")
         let url = NSURL(string: "ws/rest/vehicle/menu/make?year=\(year)", relativeToURL: baseUrl)
@@ -47,15 +44,12 @@ class CaVehicleController: UIViewController {
         let queue = NSOperationQueue.currentQueue() // ??????
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
-            println("data = \(data)")
-            println("error = \(error)")
-            println("response = \(response)")
             
-            var parserDelegate = EpaVehicleMakeParser()
+            var parserDelegate = EpaVehicleMenuParser()
             var parser = NSXMLParser(data: data)
             parser.delegate = parserDelegate
             parser.parse()
-            println("parsed array = \(parserDelegate.makes)")
+            println("parsed array = \(parserDelegate.values)")
         }
    }
     
