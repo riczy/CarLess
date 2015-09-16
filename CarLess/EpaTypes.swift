@@ -3,9 +3,9 @@ import Foundation
 struct EpaVehicleYear {
     
     var text: String
-    var value: UInt
+    var value: NSNumber
     
-    init(text: String, value: UInt) {
+    init(text: String, value: NSNumber) {
         
         self.text = text
         self.value = value

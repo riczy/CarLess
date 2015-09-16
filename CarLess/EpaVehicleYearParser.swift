@@ -18,11 +18,20 @@ class EpaVehicleYearParser : NSObject, NSXMLParserDelegate {
     }
     
     var status = Status.NotStarted
+    var years: [EpaVehicleYear] = []
     
     private var text: NSMutableString = ""
     private var value: NSMutableString = ""
     private var currentElement: Element?
+    private let formatter = NSNumberFormatter()
     
+    override init() {
+        
+        super.init()
+        self.formatter.maximumFractionDigits = 0
+        self.formatter.minimum = 0
+        self.formatter.groupingSeparator = nil
+    }
     
     func parserDidStartDocument(parser: NSXMLParser) {
         
@@ -41,8 +50,6 @@ class EpaVehicleYearParser : NSObject, NSXMLParserDelegate {
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         
-//        println("elementName = \(elementName), namespaceURI = \(namespaceURI), qName = \(qName)")
-//        
         if elementName == Element.Text.rawValue {
             currentElement = Element.Text
         } else if elementName == Element.Value.rawValue {
@@ -59,8 +66,9 @@ class EpaVehicleYearParser : NSObject, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == Element.MenuItem.rawValue {
-            //EpaVehicleYear(text: self.text, value: self.value)
-            println("text = \(text), value = \(value)")
+            let valueNumber = formatter.numberFromString(self.value as String)!
+            let year = EpaVehicleYear(text: self.text as String, value: valueNumber)
+            years.append(year)
         }
         self.currentElement = nil
     }
