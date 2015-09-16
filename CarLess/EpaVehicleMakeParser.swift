@@ -1,6 +1,6 @@
 import Foundation
 
-class EpaVehicleYearParser : EpaParser {
+class EpaVehicleMakeParser : EpaParser {
     
     enum Element: String {
         
@@ -9,21 +9,11 @@ class EpaVehicleYearParser : EpaParser {
         case MenuItem = "menuItem"
     }
     
-    var years: [EpaVehicleYear] = []
+    var makes: [EpaVehicleMake] = []
     
     private var text: NSMutableString = ""
     private var value: NSMutableString = ""
     private var currentElement: Element?
-    private let formatter = NSNumberFormatter()
-    
-    override init() {
-        
-        super.init()
-        self.formatter.maximumFractionDigits = 0
-        self.formatter.minimum = 0
-        self.formatter.groupingSeparator = nil
-    }
-    
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         
@@ -43,9 +33,8 @@ class EpaVehicleYearParser : EpaParser {
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == Element.MenuItem.rawValue {
-            let valueNumber = formatter.numberFromString(self.value as String)!
-            let year = EpaVehicleYear(text: self.text as String, value: valueNumber)
-            years.append(year)
+            let make = EpaVehicleMake(text: text as String, value: value as String)
+            makes.append(make)
         }
         self.currentElement = nil
     }
@@ -60,4 +49,5 @@ class EpaVehicleYearParser : EpaParser {
             }
         }
     }
+
 }
