@@ -1,5 +1,16 @@
 import Foundation
 
+struct EpaVehicleMenuItem : Printable {
+    
+    var text: String
+    var value: String
+    var description: String {
+        get {
+            return "{ \(text), \(value)"
+        }
+    }
+}
+
 ///
 /// The parser delegate for the EPA's Fuel Economy web service's vehicle menu
 /// selectors.
@@ -11,14 +22,6 @@ import Foundation
 ///
 class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
     
-    enum Status {
-        
-        case NotStarted
-        case InProgress
-        case Failed
-        case Completed
-    }
-    
     enum Element: String {
         
         case Text = "text"
@@ -26,29 +29,12 @@ class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
         case MenuItem = "menuItem"
     }
     
-    
-    var status = Status.NotStarted
-    var values: [String : String] = [:]
+    var values = [EpaVehicleMenuItem]()
     
     private var text: NSMutableString = ""
     private var value: NSMutableString = ""
     private var currentElement: Element?
 
-    func parserDidStartDocument(parser: NSXMLParser) {
-        
-        status = Status.InProgress
-    }
-    
-    func parserDidEndDocument(parser: NSXMLParser) {
-        
-        status = Status.Completed
-    }
-    
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
-        
-        status = Status.Failed
-    }
-    
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         
         if elementName == Element.Text.rawValue {
@@ -67,7 +53,7 @@ class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
         if elementName == Element.MenuItem.rawValue {
-            values.updateValue(value as String, forKey: text as String)
+            values.append(EpaVehicleMenuItem(text: text as String, value: value as String))
         }
         self.currentElement = nil
     }

@@ -239,7 +239,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
-    // MARK: - UIPicker Delegate Methods
+    // MARK: - Mode UIPicker DataSource Methods
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         
@@ -250,6 +250,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         
         return Mode.allValues.count;
     }
+    
+    // MARK: - Mode UIPicker Delegate Methods
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         

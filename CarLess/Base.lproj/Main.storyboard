@@ -253,14 +253,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qti-VK-SGn">
-                                <rect key="frame" x="16" y="28" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qti-VK-SGn">
+                                <rect key="frame" x="32" y="28" width="536" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Make" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="unk-zZ-nhR">
+                                <rect key="frame" x="32" y="74" width="536" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-1b-ybm">
+                                <rect key="frame" x="32" y="120" width="536" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Options" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aZ4-1c-e9w">
+                                <rect key="frame" x="32" y="166" width="536" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="8" id="5aD-6Q-26c"/>
+                            <constraint firstItem="LjY-1b-ybm" firstAttribute="top" secondItem="unk-zZ-nhR" secondAttribute="bottom" constant="16" id="BYZ-ck-BPk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LjY-1b-ybm" secondAttribute="trailing" constant="16" id="Bib-Fp-yZn"/>
+                            <constraint firstItem="qti-VK-SGn" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Bj1-HI-33Y"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aZ4-1c-e9w" secondAttribute="trailing" constant="16" id="M7v-3m-spR"/>
+                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Rjg-Cc-xhy"/>
+                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="top" secondItem="LjY-1b-ybm" secondAttribute="bottom" constant="16" id="bVn-0N-PzY"/>
+                            <constraint firstItem="LjY-1b-ybm" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="biP-Vz-UeH"/>
+                            <constraint firstItem="unk-zZ-nhR" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="d4Q-t9-fbe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qti-VK-SGn" secondAttribute="trailing" constant="16" id="s9z-8g-eV7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="unk-zZ-nhR" secondAttribute="trailing" constant="16" id="ug5-KG-P3K"/>
+                            <constraint firstItem="unk-zZ-nhR" firstAttribute="top" secondItem="qti-VK-SGn" secondAttribute="bottom" constant="16" id="vet-Ex-kN9"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="makeTextField" destination="unk-zZ-nhR" id="pFA-z3-gwF"/>
+                        <outlet property="modelTextField" destination="LjY-1b-ybm" id="Pqz-rB-4LZ"/>
+                        <outlet property="optionsTextField" destination="aZ4-1c-e9w" id="Shn-Aw-B1K"/>
+                        <outlet property="yearTextField" destination="qti-VK-SGn" id="yt7-6g-uw7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twh-n0-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
