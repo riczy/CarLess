@@ -136,7 +136,9 @@ class CaVehicleController: UIViewController {
 }
 
 ///
-///
+/// Manages a vehicle menu item text field's picker by implementing data source
+/// and picker view delegate functionality. The individual text field managers
+/// for year, make, model and options will inherit from this class.
 ///
 class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -290,7 +292,8 @@ class VehicleMakePickerDelegate: VehiclePickerDelegate {
         
         if year != nil {
             
-            let url = NSURL(string: "ws/rest/vehicle/menu/make?year=\(year!)", relativeToURL: baseUrl)
+            let urlString = "ws/rest/vehicle/menu/make?year=\(year!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
             let queue = NSOperationQueue.currentQueue()
             setDataFromRequest(urlRequest, queue: queue!)
@@ -327,7 +330,8 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
         
         if make != nil && year != nil {
 
-            let url = NSURL(string: "ws/rest/vehicle/menu/model?year=\(year!)&make=\(make!)", relativeToURL: baseUrl)
+            let urlString = "ws/rest/vehicle/menu/model?year=\(year!)&make=\(make!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
             let queue = NSOperationQueue.currentQueue()
             setDataFromRequest(urlRequest, queue: queue!)
@@ -368,7 +372,8 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
     
         if model != nil && make != nil && year != nil {
     
-            let url = NSURL(string: "ws/rest/vehicle/menu/options?year=\(year!)&make=\(make!)&model=\(model!)", relativeToURL: baseUrl)
+            let urlString = "ws/rest/vehicle/menu/options?year=\(year!)&make=\(make!)&model=\(model!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
             let queue = NSOperationQueue.currentQueue()
             setDataFromRequest(urlRequest, queue: queue!)
