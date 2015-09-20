@@ -2,9 +2,17 @@ import UIKit
 
 class CaSettingsController: UITableViewController {
 
+    @IBOutlet weak var vehiclesCell: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CaSettingsStyle.ViewBgColor
+        
+    }
+    
+    @IBAction
+    func returnToSettingsMain(segue: UIStoryboardSegue) {
+        // do nothing
     }
     
     // MARK: - Table view data source

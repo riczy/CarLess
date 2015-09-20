@@ -15,6 +15,7 @@
 		8433AC9D1BA20579004CA5CF /* CaVehicleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */; };
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
+		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* CaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* CaTypes.swift */; };
 		847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */; };
@@ -54,6 +55,7 @@
 		8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaVehicleController.swift; sourceTree = "<group>"; };
 		8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleMenuParser.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleParser.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
 		847810EC1B8CB8DA00B5AC53 /* CaManualEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaManualEntryController.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
 				848929161B3C486B0045C39E /* CaSettingsController.swift */,
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
+				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */,
 				847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */,
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,

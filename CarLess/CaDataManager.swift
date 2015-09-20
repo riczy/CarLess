@@ -20,6 +20,8 @@ class CaDataManager {
         return LengthUnit.Mile
     }
     
+    // MARK: - Entity Instance
+    
     func initTrip() -> Trip {
         
         let entityDescription = NSEntityDescription.entityForName("Trip", inManagedObjectContext: context)
@@ -45,11 +47,30 @@ class CaDataManager {
         return waypoint
     }
     
+    func initVehicle() -> Vehicle {
+        
+        let entityDescription = NSEntityDescription.entityForName("Vehicle", inManagedObjectContext: context)
+        var vehicle = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Vehicle
+        vehicle.id = NSUUID().UUIDString
+        
+        return vehicle
+    }
+    
+    // MARK: - Save
+    
     func save(#trip: Trip) {
         
         trip.managedObjectContext!.save(nil)
         println(trip)
     }
+    
+    func save(#vehicle: Vehicle) {
+        
+        vehicle.managedObjectContext!.save(nil)
+        println(vehicle)
+    }
+    
+    // MARK: - Fetch
     
     func fetchTrips() -> [Trip] {
         
@@ -74,5 +95,17 @@ class CaDataManager {
         
         return results!
         
+    }
+    
+    func fetchVehicle() -> Vehicle? {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Vehicle")
+        fetchRequest.includesPendingChanges = false
+        fetchRequest.fetchLimit = 1
+        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectIDResultType
+        
+        let results: [Vehicle]? = context.executeFetchRequest(fetchRequest, error: nil) as? [Vehicle]
+        
+        return results == nil || results?.count == 0 ? nil : results![0]
     }
 }

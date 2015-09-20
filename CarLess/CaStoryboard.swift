@@ -7,6 +7,9 @@ struct CaSegue {
     static let TrackedHomeToProgress = "TrackedHomeToProgressSegue"
     static let TrackedProgressToSummary = "TrackedProgressToSummarySegue"
     static let TrackedSummaryToHome = "TrackedSummaryToHomeSegue"
+    
+    static let SettingsToVehicle = "SettingsToVehicleSegue"
+    static let VehicleToSettingsHome = "VehicleToSettingsHomeSegue"
 }
 
 struct CaConstants {

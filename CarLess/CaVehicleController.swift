@@ -2,21 +2,33 @@ import UIKit
 
 class CaVehicleController: UIViewController {
     
+    private var _vehicle: Vehicle?
+    
+    var vehicle: Vehicle? {
+        get {
+            return _vehicle
+        }
+        set {
+            _vehicle = newValue
+            println("Setting vehicle")
+        }
+    }
+    
+    @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var cancelBarButton: UIBarButtonItem!
     @IBOutlet weak var yearTextField: UITextField!
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
     @IBOutlet weak var optionsTextField: UITextField!
     
     private var yearPickerView: UIPickerView!
-    private var yearPickerDelegate: VehicleYearPickerDelegate!
-    
     private var makePickerView: UIPickerView!
-    private var makePickerDelegate: VehicleMakePickerDelegate!
-    
     private var modelPickerView: UIPickerView!
-    private var modelPickerDelegate: VehicleModelPickerDelegate!
-
     private var optionsPickerView: UIPickerView!
+    
+    private var yearPickerDelegate: VehicleYearPickerDelegate!
+    private var makePickerDelegate: VehicleMakePickerDelegate!
+    private var modelPickerDelegate: VehicleModelPickerDelegate!
     private var optionsPickerDelegate: VehicleOptionsPickerDelegate!
 
     override func viewDidLoad() {
@@ -27,6 +39,15 @@ class CaVehicleController: UIViewController {
         initializeModelPicker()
         initializeOptionsPicker()
         establishPickerDependencies()
+        getVehicle()
+    }
+    
+    private func getVehicle() {
+        
+        vehicle = CaDataManager.instance.fetchVehicle()
+        if vehicle != nil {
+            // reset everything
+        }
     }
     
     // MARK: - Picker Initializations
@@ -132,6 +153,35 @@ class CaVehicleController: UIViewController {
         optionsTextField.inputAccessoryView = toolbar
     }
 
+    @IBAction func save(sender: UIBarButtonItem) {
+        
+        // TODO: put in some warning if validation fails or vehicle is nil
+        
+        let epaVehicle = self.optionsPickerDelegate.vehicle
+        if validate() && epaVehicle != nil {
+            var newVehicle = CaDataManager.instance.initVehicle()
+            newVehicle.epaVehicleId = epaVehicle!.id
+            newVehicle.year = epaVehicle!.year
+            newVehicle.make = epaVehicle!.make
+            newVehicle.model = epaVehicle!.model
+            CaDataManager.instance.save(vehicle: newVehicle)
+            performSegueWithIdentifier(CaSegue.VehicleToSettingsHome, sender: self)
+        }
+    }
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        
+        yearPickerDelegate.reset()
+        performSegueWithIdentifier(CaSegue.VehicleToSettingsHome, sender: self)
+    }
+    
+    ///
+    /// Returns true if the form is properly filled out and may be saved.
+    /// Returns false if not.
+    ///
+    private func validate() -> Bool {
+        return optionsPickerDelegate.selectedItem != nil
+    }
     
 }
 
@@ -184,17 +234,25 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
         
         NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
             
-            var parserDelegate = EpaVehicleMenuParser()
-            var parser = NSXMLParser(data: data)
-            parser.delegate = parserDelegate
-            parser.parse()
-            self.data = parserDelegate.values
-            self.pickerView.reloadAllComponents()
-            println("Response URL= \(response.URL), Data count= \(self.data.count)")
-            if data.length > 0 {
-                self.pickerView.selectRow(0, inComponent: 0, animated: false)
+            if error == nil {
+                var parserDelegate = EpaVehicleMenuParser()
+                var parser = NSXMLParser(data: data)
+                parser.delegate = parserDelegate
+                parser.parse()
+                self.data = parserDelegate.values
+                self.pickerView.reloadAllComponents()
+                println("Response URL= \(response.URL), Data count= \(self.data.count)")
+                if data.length > 0 {
+                    self.pickerView.selectRow(0, inComponent: 0, animated: false)
+                }
+            } else {
+                println("An error occurred for response url = \(response.URL). Error = \(error)")
             }
         }
+    }
+    
+    func set() {
+        
     }
     
     // MARK: - Picker Actions
@@ -248,7 +306,6 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     
     func load() {
         // subclasses should override
-        println("load: subclass did not override")
     }
    
 }
@@ -346,9 +403,7 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
 ///
 class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
     
-    // TODO:  add the ID value1!!
-    
-    var vehicleId : String?
+    var vehicle : EpaVehicle?
     
     private var _parentComponent: VehicleModelPickerDelegate?
     
@@ -379,6 +434,39 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
             setDataFromRequest(urlRequest, queue: queue!)
         } else {
             println("Could not load the models because of missing request parameters: year = \(year), make = \(make), model=\(model)")
+        }
+    }
+    
+    override func reset() {
+        
+        super.reset()
+        
+        vehicle = nil
+    }
+    
+    override func done() {
+        
+        super.done()
+        
+        if let id = self.selectedItem?.value {
+            
+            let url = NSURL(string: "ws/rest/vehicle/\(id)", relativeToURL: baseUrl)
+            let urlRequest = NSURLRequest(URL: url!)
+            let queue = NSOperationQueue.currentQueue()
+            
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
+                
+                if error == nil {
+                    var parserDelegate = EpaVehicleParser()
+                    var parser = NSXMLParser(data: data)
+                    parser.delegate = parserDelegate
+                    parser.parse()
+                    self.vehicle = parserDelegate.value
+                    println("Response URL= \(response.URL), Value = \(self.vehicle)")
+                } else {
+                    println("An error occurred for response url = \(response.URL). Error = \(error)")
+                }
+            }
         }
     }
 }
