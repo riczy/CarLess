@@ -62,7 +62,7 @@ class CaTripsListController: UITableViewController {
             tripsMap.updateValue(tripArrayValue!, forKey: dateKey)
         }
         
-        tripsMapOrderedKeys = tripsMap.keys.array.sorted {
+        tripsMapOrderedKeys = tripsMap.keys.sort() {
             $0.compare($1) == NSComparisonResult.OrderedDescending
         }
     }

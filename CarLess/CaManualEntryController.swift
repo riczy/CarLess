@@ -1,4 +1,4 @@
- import UIKit
+import UIKit
 import CoreData
 
 class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -91,9 +91,9 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("datePickerDone"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("datePickerCancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("datePickerDone"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("datePickerCancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -108,8 +108,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("decimalPadDone"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("decimalPadDone"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
 
         toolbar.setItems([spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -127,9 +127,9 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerDone"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerCancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerDone"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerCancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -213,7 +213,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     func decimalPadDone() {
         
-        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text) {
+        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
             trip.setDistance(tempDistance, hasUnitType: distanceDisplayUnit)
         } else {
             trip.setDistance(0.0, hasUnitType: distanceDisplayUnit)
@@ -253,7 +253,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     // MARK: - Mode UIPicker Delegate Methods
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return Mode.allValues[row].description
     }

@@ -101,42 +101,41 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     // MARK: - Map View Delegation
     
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
 
         let span = MKCoordinateSpanMake(0.009, 0.009)
         let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
     
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
         
-        if overlay is MKPolyline {
-            var polylineRenderer = MKPolylineRenderer(overlay: overlay)
-            polylineRenderer.strokeColor = CaLogStyle.MapRouteLineColor
-            polylineRenderer.lineWidth = CaLogStyle.MapRouteLineWidth
-            return polylineRenderer
-        }
-        return nil
+        // There is only one overlay on this map therefore no checking of
+        // overlay done.
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = CaLogStyle.MapRouteLineColor
+        polylineRenderer.lineWidth = CaLogStyle.MapRouteLineWidth
+        return polylineRenderer
     }
     
     // MARK: - Location Manager Delegation
    
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if lastLocation == nil {
             
-            lastLocation = locations.first as! CLLocation
+            lastLocation = locations.first!
             addTripWaypoint(lastLocation)
         } else {
             
-            let newestLocation = locations.first as! CLLocation
+            let newestLocation = locations.first!
             let newestDistanceTraveled = lastLocation.distanceFromLocation(newestLocation)
             if newestDistanceTraveled > 0 {
                 distanceTraveled += newestDistanceTraveled
                 nextToLastLocation = lastLocation
                 lastLocation = newestLocation
                 addTripWaypoint(newestLocation)
-                println("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
+                print("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
             }
             
             if lastLocation != nil && nextToLastLocation != nil {
@@ -145,6 +144,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             }
         }
     }
+    
     
     // MARK: - Scene Actions
 

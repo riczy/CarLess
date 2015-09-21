@@ -10,7 +10,7 @@ class CaVehicleController: UIViewController {
         }
         set {
             _vehicle = newValue
-            println("Setting vehicle")
+            print("Setting vehicle")
         }
     }
     
@@ -71,9 +71,9 @@ class CaVehicleController: UIViewController {
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: yearPickerDelegate, action: Selector("done"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: yearPickerDelegate, action: Selector("cancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: yearPickerDelegate, action: Selector("done"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: yearPickerDelegate, action: Selector("cancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -96,9 +96,9 @@ class CaVehicleController: UIViewController {
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: makePickerDelegate, action: Selector("done"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: makePickerDelegate, action: Selector("cancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: makePickerDelegate, action: Selector("done"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: makePickerDelegate, action: Selector("cancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -119,9 +119,9 @@ class CaVehicleController: UIViewController {
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: modelPickerDelegate, action: Selector("done"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: modelPickerDelegate, action: Selector("cancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: modelPickerDelegate, action: Selector("done"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: modelPickerDelegate, action: Selector("cancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -142,9 +142,9 @@ class CaVehicleController: UIViewController {
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: optionsPickerDelegate, action: Selector("done"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: optionsPickerDelegate, action: Selector("cancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: optionsPickerDelegate, action: Selector("done"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: optionsPickerDelegate, action: Selector("cancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -159,7 +159,7 @@ class CaVehicleController: UIViewController {
         
         let epaVehicle = self.optionsPickerDelegate.vehicle
         if validate() && epaVehicle != nil {
-            var newVehicle = CaDataManager.instance.initVehicle()
+            let newVehicle = CaDataManager.instance.initVehicle()
             newVehicle.epaVehicleId = epaVehicle!.id
             newVehicle.year = epaVehicle!.year
             newVehicle.make = epaVehicle!.make
@@ -224,35 +224,31 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     
     // MARK: - UIPickerViewDelegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return data[row].text
     }
     
     // MARK: - Web Service Request
     
-    func setDataFromRequest(urlRequest: NSURLRequest, queue: NSOperationQueue) {
+    func setDataFromRequest(urlRequest: NSURLRequest) {
         
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
+        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             
-            if error == nil {
-                var parserDelegate = EpaVehicleMenuParser()
-                var parser = NSXMLParser(data: data)
+            if error == nil && data != nil {
+                let parserDelegate = EpaVehicleMenuParser()
+                let parser = NSXMLParser(data: data!)
                 parser.delegate = parserDelegate
                 parser.parse()
                 self.data = parserDelegate.values
                 self.pickerView.reloadAllComponents()
-                println("Response URL= \(response.URL), Data count= \(self.data.count)")
-                if data.length > 0 {
+                print("Response URL= \(response?.URL), Data count= \(self.data.count)")
+                if data!.length > 0 {
                     self.pickerView.selectRow(0, inComponent: 0, animated: false)
                 }
             } else {
-                println("An error occurred for response url = \(response.URL). Error = \(error)")
+                print("Response url = \(response?.URL). Error = \(error). Data = \(data)")
             }
         }
-    }
-    
-    func set() {
-        
     }
     
     // MARK: - Picker Actions
@@ -319,8 +315,7 @@ class VehicleYearPickerDelegate: VehiclePickerDelegate {
         
         let url = NSURL(string: "ws/rest/vehicle/menu/year", relativeToURL: baseUrl)
         let urlRequest = NSURLRequest(URL: url!)
-        let queue = NSOperationQueue.currentQueue()
-        setDataFromRequest(urlRequest, queue: queue!)
+        setDataFromRequest(urlRequest)
     }
 }
 
@@ -349,13 +344,12 @@ class VehicleMakePickerDelegate: VehiclePickerDelegate {
         
         if year != nil {
             
-            let urlString = "ws/rest/vehicle/menu/make?year=\(year!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
+            let queryString = "year=\(year!)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            let url = NSURL(string: "ws/rest/vehicle/menu/make?\(queryString!)", relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
-            let queue = NSOperationQueue.currentQueue()
-            setDataFromRequest(urlRequest, queue: queue!)
+            setDataFromRequest(urlRequest)
         } else {
-            println("Could not load the models because of missing request parameters: year = \(year)")
+            print("Could not load the models because of missing request parameters: year = \(year)")
         }
         
     }
@@ -387,13 +381,12 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
         
         if make != nil && year != nil {
 
-            let urlString = "ws/rest/vehicle/menu/model?year=\(year!)&make=\(make!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
+            let queryString = "year=\(year!)&make=\(make!)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            let url = NSURL(string: "ws/rest/vehicle/menu/make?\(queryString!)", relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
-            let queue = NSOperationQueue.currentQueue()
-            setDataFromRequest(urlRequest, queue: queue!)
+            setDataFromRequest(urlRequest)
         } else {
-            println("Could not load the models because of missing request parameters: year = \(year), make = \(make)")
+            print("Could not load the models because of missing request parameters: year = \(year), make = \(make)")
         }
     }
 }
@@ -427,13 +420,12 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
     
         if model != nil && make != nil && year != nil {
     
-            let urlString = "ws/rest/vehicle/menu/options?year=\(year!)&make=\(make!)&model=\(model!)".stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-            let url = NSURL(string: urlString!, relativeToURL: baseUrl)
+            let queryString = "year=\(year!)&make=\(make!)&model=\(model!)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            let url = NSURL(string: "ws/rest/vehicle/menu/options?\(queryString!)", relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
-            let queue = NSOperationQueue.currentQueue()
-            setDataFromRequest(urlRequest, queue: queue!)
+            setDataFromRequest(urlRequest)
         } else {
-            println("Could not load the models because of missing request parameters: year = \(year), make = \(make), model=\(model)")
+            print("Could not load the models because of missing request parameters: year = \(year), make = \(make), model=\(model)")
         }
     }
     
@@ -452,19 +444,18 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
             
             let url = NSURL(string: "ws/rest/vehicle/\(id)", relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
-            let queue = NSOperationQueue.currentQueue()
             
-            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: queue) { (response, data, error) -> Void in
+            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
                 
-                if error == nil {
-                    var parserDelegate = EpaVehicleParser()
-                    var parser = NSXMLParser(data: data)
+                if error == nil && data != nil {
+                    let parserDelegate = EpaVehicleParser()
+                    let parser = NSXMLParser(data: data!)
                     parser.delegate = parserDelegate
                     parser.parse()
                     self.vehicle = parserDelegate.value
-                    println("Response URL= \(response.URL), Value = \(self.vehicle)")
+                    print("Response URL= \(response?.URL), Value = \(self.vehicle)")
                 } else {
-                    println("An error occurred for response url = \(response.URL). Error = \(error)")
+                    print("Response url = \(response?.URL). Error = \(error). Data = \(data)")
                 }
             }
         }

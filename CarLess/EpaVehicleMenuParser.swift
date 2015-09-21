@@ -1,6 +1,6 @@
 import Foundation
 
-struct EpaVehicleMenuItem : Printable {
+struct EpaVehicleMenuItem : CustomStringConvertible {
     
     var text: String
     var value: String
@@ -35,7 +35,7 @@ class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
     private var value: NSMutableString = ""
     private var currentElement: Element?
 
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
         if elementName == Element.Text.rawValue {
             currentElement = Element.Text
@@ -58,14 +58,12 @@ class EpaVehicleMenuParser : NSObject, NSXMLParserDelegate {
         self.currentElement = nil
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
         
-        if string != nil {
-            if currentElement == Element.Text {
-                text.appendString(string!)
-            } else if currentElement == Element.Value {
-                value.appendString(string!)
-            }
+        if currentElement == Element.Text {
+            text.appendString(string)
+        } else if currentElement == Element.Value {
+            value.appendString(string)
         }
     }
 }

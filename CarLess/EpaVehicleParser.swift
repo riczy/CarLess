@@ -1,6 +1,6 @@
 import Foundation
 
-struct EpaVehicle : Printable {
+struct EpaVehicle : CustomStringConvertible {
     
     var id: String
     var year: String
@@ -59,7 +59,7 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
     private var currentElement: Element?
     private var currentElementValue: NSMutableString = ""
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         
         switch elementName {
         case Element.Id.rawValue:
@@ -108,11 +108,9 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
         
-        if string != nil {
-            currentElementValue.appendString(string!)
-        }
+        currentElementValue.appendString(string)
     }
     
     func parserDidEndDocument(parser: NSXMLParser) {

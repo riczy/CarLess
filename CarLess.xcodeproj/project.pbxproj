@@ -260,6 +260,7 @@
 		848929051B3C486B0045C39E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Galloway Mobile";
 				TargetAttributes = {

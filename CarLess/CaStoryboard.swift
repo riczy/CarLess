@@ -103,10 +103,10 @@ struct CaSettingsStyle {
 
 class CaComponent {
     
-    static func createButton(#title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {
+    static func createButton(title title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {
     
-        var button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        let button = UIButton(type: UIButtonType.System)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle(title, forState: UIControlState.Normal)
         button.setTitleColor(color, forState: UIControlState.Normal)
         button.layer.backgroundColor = bgColor.CGColor

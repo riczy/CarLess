@@ -27,7 +27,7 @@ class Waypoint: NSManagedObject {
     /*
      *
      */
-    func set(#latitude: NSNumber, longitude: NSNumber, altitude: NSNumber, horizontalAccuracy: NSNumber, verticalAccuracy: NSNumber, course: NSNumber, speed: NSNumber, timestamp: NSDate) {
+    func set(latitude latitude: NSNumber, longitude: NSNumber, altitude: NSNumber, horizontalAccuracy: NSNumber, verticalAccuracy: NSNumber, course: NSNumber, speed: NSNumber, timestamp: NSDate) {
         
         self.latitude = latitude
         self.longitude = longitude

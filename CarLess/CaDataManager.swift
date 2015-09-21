@@ -26,7 +26,7 @@ class CaDataManager {
         
         let entityDescription = NSEntityDescription.entityForName("Trip", inManagedObjectContext: context)
         
-        var trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
+        let trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
         trip.id = NSUUID().UUIDString
         trip.distance = 0.0
         
@@ -41,7 +41,7 @@ class CaDataManager {
     
     func initWaypointWithLocation(location: CLLocation, trip: Trip) -> Waypoint {
         
-        var waypoint = initWaypoint()
+        let waypoint = initWaypoint()
         waypoint.trip = trip
         waypoint.setUsingLocation(location)
         return waypoint
@@ -50,7 +50,7 @@ class CaDataManager {
     func initVehicle() -> Vehicle {
         
         let entityDescription = NSEntityDescription.entityForName("Vehicle", inManagedObjectContext: context)
-        var vehicle = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Vehicle
+        let vehicle = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Vehicle
         vehicle.id = NSUUID().UUIDString
         
         return vehicle
@@ -58,16 +58,28 @@ class CaDataManager {
     
     // MARK: - Save
     
-    func save(#trip: Trip) {
+    func save(trip trip: Trip) {
         
-        trip.managedObjectContext!.save(nil)
-        println(trip)
+        if trip.managedObjectContext!.hasChanges {
+            do {
+                try trip.managedObjectContext!.save()
+                print(trip)
+            } catch let error as NSError {
+                print("Error when saving trip: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func save(#vehicle: Vehicle) {
+    func save(vehicle vehicle: Vehicle) {
         
-        vehicle.managedObjectContext!.save(nil)
-        println(vehicle)
+        if vehicle.managedObjectContext!.hasChanges {
+            do {
+                try vehicle.managedObjectContext!.save()
+                print(vehicle)
+            } catch let error as NSError {
+                print("Error when saving vehicle: \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: - Fetch
@@ -77,7 +89,7 @@ class CaDataManager {
         return fetchTrips(limit: 100, skip: 0)
     }
     
-    func fetchTrips(#limit: Int, skip: Int) -> [Trip] {
+    func fetchTrips(limit limit: Int, skip: Int) -> [Trip] {
         
         let fetchRequest = NSFetchRequest(entityName: "Trip")
         let sortDescriptor = NSSortDescriptor(key: "startTimestamp", ascending: false)
@@ -87,7 +99,13 @@ class CaDataManager {
         fetchRequest.fetchOffset = skip
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
-        var results:[Trip]? = context.executeFetchRequest(fetchRequest, error: nil) as? [Trip]
+        var results: [Trip]?
+        
+        do {
+            results = try context.executeFetchRequest(fetchRequest) as? [Trip]
+        } catch let error as NSError {
+            print("Error when fetching trips: \(error.localizedDescription)")
+        }
         
         if results == nil {
             return [Trip]()
@@ -104,7 +122,13 @@ class CaDataManager {
         fetchRequest.fetchLimit = 1
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectIDResultType
         
-        let results: [Vehicle]? = context.executeFetchRequest(fetchRequest, error: nil) as? [Vehicle]
+        var results: [Vehicle]?
+        
+        do {
+            results = try context.executeFetchRequest(fetchRequest) as? [Vehicle]
+        } catch let error as NSError {
+            print("Error when fetching vehicles: \(error.localizedDescription)")
+        }
         
         return results == nil || results?.count == 0 ? nil : results![0]
     }

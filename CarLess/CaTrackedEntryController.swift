@@ -105,9 +105,9 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         toolbar.barStyle = UIBarStyle.Default
         toolbar.sizeToFit()
         
-        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerDone"))
-        var spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        var cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerCancel"))
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerDone"))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerCancel"))
         
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
@@ -168,7 +168,7 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         return Mode.allValues.count;
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return Mode.allValues[row].description
     }
