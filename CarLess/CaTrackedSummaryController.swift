@@ -96,6 +96,9 @@ class CaTrackedSummaryController: UIViewController {
         
         if validate() {
             preSave()
+            // bogus
+            trip?.waypoints.removeAllObjects()
+            // bogus
             CaDataManager.instance.save(trip: trip!)
             postSave()
             exit()
