@@ -261,9 +261,10 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     // MARK: - UITextField Delegate Methods
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-
+ 
         if textField.tag == Tag.DistanceField {
-            return CaFormatter.distance.numberFromString("\(textField.text)\(string)") != nil
+            let textFieldText = textField.text == nil ? "" : textField.text!
+            return CaFormatter.distance.numberFromString("\(textFieldText)\(string)") != nil
         }
         return true
     }

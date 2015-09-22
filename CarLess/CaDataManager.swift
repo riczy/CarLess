@@ -62,8 +62,8 @@ class CaDataManager {
         
         if trip.managedObjectContext!.hasChanges {
             do {
-                try trip.managedObjectContext!.save()
                 print(trip)
+                try trip.managedObjectContext!.save()
             } catch let error as NSError {
                 print("Error when saving trip: \(error.localizedDescription)")
             }
