@@ -7,8 +7,6 @@ class LogController: UIViewController {
     @IBOutlet weak var manualLogEntryView: UIView!
     @IBOutlet weak var trackedLogEntryView: UIView!
     
-    private var trip = Trip()
-    
     struct LogModeControl {
         static let TrackSegment = 0
         static let ManualSegment = 1
