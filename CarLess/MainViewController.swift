@@ -10,12 +10,4 @@ class MainViewController: UITabBarController {
         selectedIndex = defaultIndex
     }
 
-    /*
-     * This override is needed to get the unwind segues to properly work.
-     * See http://stackoverflow.com/questions/25654941/unwind-segue-not-working-in-ios-8
-     */
-    override func viewControllerForUnwindSegueAction(action: Selector, fromViewController: UIViewController, withSender sender: AnyObject?) -> UIViewController? {
-        
-        return self.selectedViewController?.viewControllerForUnwindSegueAction(action, fromViewController: fromViewController, withSender: sender)
-    }
 }
