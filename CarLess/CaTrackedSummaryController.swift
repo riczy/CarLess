@@ -15,7 +15,7 @@ class CaTrackedSummaryController: UIViewController {
     
     // MARK: - Properties
     
-    var trip: Trip!
+    var trip: Trip?
     
     // MARK: - View Lifecycle Methods
     
@@ -35,9 +35,9 @@ class CaTrackedSummaryController: UIViewController {
         
         if trip != nil {
             let distanceUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
-            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
-            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp)
-            modeLabel.text = trip.modeType.description
+            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
+            startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
+            modeLabel.text = trip!.modeType.description
         }
     }
     
@@ -96,14 +96,15 @@ class CaTrackedSummaryController: UIViewController {
         
         if validate() {
             preSave()
-            CaDataManager.instance.save(trip: trip)
+            CaDataManager.instance.save(trip: trip!)
             postSave()
+            exit()
         }
     }
     
     private func validate() -> Bool {
         
-        return true
+        return trip !== nil
     }
     
     private func preSave() {
@@ -122,7 +123,6 @@ class CaTrackedSummaryController: UIViewController {
             self.saveButton.enabled = true
             self.discardButton.enabled = true
             self.view.alpha = 1.0
-            self.performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
         }
     }
     
@@ -130,12 +130,18 @@ class CaTrackedSummaryController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "Are you sure you want to discard this trip?", preferredStyle: UIAlertControllerStyle.Alert)
         let discardAction = UIAlertAction(title: "Yes, discard", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-            self.performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
+            self.exit()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }
         alert.addAction(discardAction)
         alert.addAction(cancelAction)
         presentViewController(alert, animated: true) { () -> Void in }
+    }
+    
+    private func exit() {
+    
+        trip = nil
+        performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
     }
 
 }
