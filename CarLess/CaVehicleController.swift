@@ -10,7 +10,6 @@ class CaVehicleController: UIViewController {
         }
         set {
             _vehicle = newValue
-            print("Setting vehicle")
         }
     }
     
@@ -349,7 +348,7 @@ class VehicleMakePickerDelegate: VehiclePickerDelegate {
             let urlRequest = NSURLRequest(URL: url!)
             setDataFromRequest(urlRequest)
         } else {
-            print("Could not load the models because of missing request parameters: year = \(year)")
+            print("Could not load the makes because of missing request parameters: year = \(year)")
         }
         
     }
@@ -382,7 +381,7 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
         if make != nil && year != nil {
 
             let queryString = "year=\(year!)&make=\(make!)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            let url = NSURL(string: "ws/rest/vehicle/menu/make?\(queryString!)", relativeToURL: baseUrl)
+            let url = NSURL(string: "ws/rest/vehicle/menu/model?\(queryString!)", relativeToURL: baseUrl)
             let urlRequest = NSURLRequest(URL: url!)
             setDataFromRequest(urlRequest)
         } else {
@@ -425,7 +424,7 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
             let urlRequest = NSURLRequest(URL: url!)
             setDataFromRequest(urlRequest)
         } else {
-            print("Could not load the models because of missing request parameters: year = \(year), make = \(make), model=\(model)")
+            print("Could not load the options because of missing request parameters: year = \(year), make = \(make), model=\(model)")
         }
     }
     
