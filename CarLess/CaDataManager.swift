@@ -137,7 +137,7 @@ class CaDataManager {
         let fetchRequest = NSFetchRequest(entityName: "Vehicle")
         fetchRequest.includesPendingChanges = false
         fetchRequest.fetchLimit = 1
-        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectIDResultType
+        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
         var results: [Vehicle]?
         
