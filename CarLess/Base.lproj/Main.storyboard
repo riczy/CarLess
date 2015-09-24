@@ -155,16 +155,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vehicle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Jc-nr-ujU">
-                                                    <rect key="frame" x="8" y="11" width="125" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="85" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="125" id="mN2-I8-CXy"/>
+                                                        <constraint firstAttribute="width" constant="85" id="mN2-I8-CXy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbm-PL-Zc7">
-                                                    <rect key="frame" x="133" y="22" width="426" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Vehicle Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Wbm-PL-Zc7">
+                                                    <rect key="frame" x="93" y="11" width="466" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -202,7 +202,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5c-Ve-iLj">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5c-Ve-iLj">
                                                     <rect key="frame" x="133" y="11" width="459" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -251,6 +251,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="SFP-Yi-n4R"/>
                     <connections>
+                        <outlet property="vehicleLabel" destination="Wbm-PL-Zc7" id="Xad-Ek-g2v"/>
                         <outlet property="vehiclesCell" destination="S3R-fY-e97" id="UrT-mC-2HD"/>
                     </connections>
                 </tableViewController>
@@ -326,7 +327,7 @@
                         <outlet property="modelTextField" destination="LjY-1b-ybm" id="Pqz-rB-4LZ"/>
                         <outlet property="optionsTextField" destination="aZ4-1c-e9w" id="Shn-Aw-B1K"/>
                         <outlet property="yearTextField" destination="qti-VK-SGn" id="yt7-6g-uw7"/>
-                        <segue destination="hRI-2m-u8j" kind="unwind" identifier="VehicleToSettingsHomeSegue" unwindAction="returnToSettingsMain:" id="Qd7-Wf-ptR"/>
+                        <segue destination="hRI-2m-u8j" kind="unwind" identifier="VehicleToSettingsSegue" unwindAction="returnToSettingsMain:" id="Qd7-Wf-ptR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twh-n0-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>

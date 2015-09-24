@@ -10,5 +10,11 @@ class Vehicle: NSManagedObject {
     @NSManaged var model: String
     @NSManaged var epaVehicleId: String
     @NSManaged var id: String
+    
+    var displayDescription : String {
+        get {
+            return "\(year) \(make) \(model)"
+        }
+    }
 
 }

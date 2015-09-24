@@ -9,7 +9,7 @@ struct CaSegue {
     static let TrackedSummaryToHome = "TrackedSummaryToHomeSegue"
     
     static let SettingsToVehicle = "SettingsToVehicleSegue"
-    static let VehicleToSettingsHome = "VehicleToSettingsHomeSegue"
+    static let VehicleToSettings = "VehicleToSettingsSegue"
 }
 
 struct CaConstants {

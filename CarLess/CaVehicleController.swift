@@ -166,15 +166,15 @@ class CaVehicleController: UIViewController {
         let defaultVehicleReferenceCount = CaDataManager.instance.countTripsUsedByVehicle(vehicle)
         if vehicle == nil || defaultVehicleReferenceCount > 0 {
             // If the default vehicle does not already exist then create it with
-            // the cene's settings. Or, if the default vehicle does exist and it
+            // the scene's settings. Or, if the default vehicle does exist and it
             // is being referenced by trips then create a new vehicle instance
             // and set this new instance as the default vehicle.
-            let vehicle = CaDataManager.instance.initVehicle()
-            vehicle.epaVehicleId = epaVehicle!.id
-            vehicle.year = epaVehicle!.year
-            vehicle.make = epaVehicle!.make
-            vehicle.model = epaVehicle!.model
-            CaDataManager.instance.save(vehicle: vehicle)
+            vehicle = CaDataManager.instance.initVehicle()
+            vehicle!.epaVehicleId = epaVehicle!.id
+            vehicle!.year = epaVehicle!.year
+            vehicle!.make = epaVehicle!.make
+            vehicle!.model = epaVehicle!.model
+            CaDataManager.instance.save(vehicle: vehicle!)
             CaDataManager.instance.saveDefaultSetting(vehicle: vehicle)
         } else {
             // Update the current default vehicle with the new values. We can do
@@ -195,7 +195,7 @@ class CaVehicleController: UIViewController {
     }
     
     private func exit() {
-        performSegueWithIdentifier(CaSegue.VehicleToSettingsHome, sender: self)
+        performSegueWithIdentifier(CaSegue.VehicleToSettings, sender: self)
     }
     
     ///

@@ -3,16 +3,34 @@ import UIKit
 class CaSettingsController: UITableViewController {
 
     @IBOutlet weak var vehiclesCell: UITableViewCell!
+    @IBOutlet weak var vehicleLabel: UILabel!
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         view.backgroundColor = CaSettingsStyle.ViewBgColor
+        initializeSettingsDisplay()
         
     }
     
+    // MARK: - Initialization
+    
+    private func initializeSettingsDisplay() {
+        
+        let settings = CaDataManager.instance.fetchSettings()
+        vehicleLabel.text = settings?.vehicle?.displayDescription
+        
+    }
+    
+    // MARK: - Navigation
+    
     @IBAction
     func returnToSettingsMain(segue: UIStoryboardSegue) {
-        // do nothing
+        
+        if segue.identifier == CaSegue.VehicleToSettings {
+            let svc = segue.sourceViewController as! CaVehicleController
+            vehicleLabel.text = svc.vehicle?.displayDescription
+        }
     }
     
     // MARK: - Table view data source
