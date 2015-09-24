@@ -11,6 +11,7 @@ class Trip: NSManagedObject {
     @NSManaged private var logTypeCode: String
     @NSManaged private var modeTypeCode: String
     @NSManaged var startTimestamp: NSDate
+    @NSManaged var vehicle: Vehicle?
     @NSManaged var waypoints: NSMutableSet
     
     var logType: LogType {

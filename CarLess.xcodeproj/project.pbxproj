@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410EDF51B90D0880044E714 /* CaDataManager.swift */; };
 		841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */; settings = {ASSET_TAGS = (); }; };
+		841C63021BB3054C002FF0BD /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C63011BB3054C002FF0BD /* Setting.swift */; settings = {ASSET_TAGS = (); }; };
 		84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */; };
 		84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */; };
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		8410EDF51B90D0880044E714 /* CaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDataManager.swift; sourceTree = "<group>"; };
 		841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaVehiclePickerController.swift; sourceTree = "<group>"; };
+		841C63011BB3054C002FF0BD /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaStoryboard.swift; sourceTree = "<group>"; };
 		84278FF31B83848B00F20BA7 /* CaTrackedProgressController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedProgressController.swift; sourceTree = "<group>"; };
 		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */,
 				84E61A301B98AB5000D927B8 /* Trip.swift */,
 				84E61A321B98AB5000D927B8 /* Waypoint.swift */,
+				841C63011BB3054C002FF0BD /* Setting.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
 				841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */,
+				841C63021BB3054C002FF0BD /* Setting.swift in Sources */,
 				8433AC9D1BA20579004CA5CF /* CaVehicleController.swift in Sources */,
 				8489293A1B3E41C80045C39E /* LogController.swift in Sources */,
 				84E61A361B9B3A3700D927B8 /* CaTripsListController.swift in Sources */,

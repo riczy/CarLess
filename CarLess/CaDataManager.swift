@@ -73,16 +73,29 @@ class CaDataManager {
         return vehicle
     }
     
+    private func initSetting() -> Setting {
+    
+        let entityDescription = NSEntityDescription.entityForName("Setting", inManagedObjectContext: context)
+        let settings = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Setting
+        settings.id = NSUUID().UUIDString
+        
+        return settings
+    }
+    
     // MARK: - Save
     
     func save(trip trip: Trip) {
+        
+        if trip.vehicle == nil {
+            trip.vehicle = getDefaultVehicle()
+        }
         
         if trip.managedObjectContext!.hasChanges {
             do {
                 print("\(trip), waypoints.count = \(trip.waypoints.count)")
                 try trip.managedObjectContext!.save()
             } catch let error as NSError {
-                print("Error when saving trip: \(error.localizedDescription)")
+                NSLog("Error when saving trip: \(error.localizedDescription)")
             }
         }
     }
@@ -94,9 +107,44 @@ class CaDataManager {
                 try vehicle.managedObjectContext!.save()
                 print(vehicle)
             } catch let error as NSError {
-                print("Error when saving vehicle: \(error.localizedDescription)")
+                NSLog("Error when saving vehicle: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func save(settings settings: Setting) {
+        
+        if settings.managedObjectContext!.hasChanges {
+            do {
+                try settings.managedObjectContext!.save()
+                print(settings)
+            } catch let error as NSError {
+                NSLog("Error when saving vehicle: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func saveDefaultSetting(vehicle vehicle: Vehicle?) {
+        
+        let settings = getSettings()
+        settings.vehicle = vehicle
+        save(settings: settings)
+    }
+    
+    func saveDefaultSetting(distanceUnit unit: LengthUnit?) {
+        
+        let settings = getSettings()
+        settings.distanceUnit = unit
+        save(settings: settings)
+    }
+    
+    private func getSettings() -> Setting {
+    
+        var settings = self.fetchSettings()
+        if settings == nil {
+            settings = initSetting()
+        }
+        return settings!
     }
     
     // MARK: - Fetch
@@ -132,11 +180,10 @@ class CaDataManager {
         
     }
     
-    func fetchVehicle() -> Vehicle? {
+    func fetchVehicles() -> [Vehicle] {
         
         let fetchRequest = NSFetchRequest(entityName: "Vehicle")
         fetchRequest.includesPendingChanges = false
-        fetchRequest.fetchLimit = 1
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
         var results: [Vehicle]?
@@ -147,6 +194,47 @@ class CaDataManager {
             print("Error when fetching vehicles: \(error.localizedDescription)")
         }
         
+        return results == nil ? [Vehicle]() : results!
+    }
+    
+    func fetchSettings() -> Setting? {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Setting")
+        fetchRequest.includesPendingChanges = true // <-- grabbing pending settings too!!
+        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
+        
+        var results: [Setting]?
+        
+        do {
+            results = try context.executeFetchRequest(fetchRequest) as? [Setting]
+        } catch let error as NSError {
+            print("Error when fetching settings: \(error.localizedDescription)")
+        }
+        
         return results == nil || results?.count == 0 ? nil : results![0]
+    }
+    
+    func getDefaultVehicle() -> Vehicle? {
+        
+        return fetchSettings()?.vehicle
+    }
+    
+    func countTripsUsedByVehicle(vehicle: Vehicle?) -> Int {
+        
+        if vehicle == nil {
+            return 0
+        }
+        
+        let fetchRequest = NSFetchRequest(entityName: "Trip")
+        fetchRequest.includesPendingChanges = true
+        fetchRequest.resultType = NSFetchRequestResultType.CountResultType
+        
+        let count = context.countForFetchRequest(fetchRequest, error: nil)
+        if count == NSNotFound {
+            NSLog("countTripsUsedByVehicles encountered an error.")
+            return 0
+        }
+        
+        return count
     }
 }

@@ -43,7 +43,7 @@ class CaVehicleController: UIViewController {
     
     private func getVehicle() {
         
-        vehicle = CaDataManager.instance.fetchVehicle()
+        vehicle = CaDataManager.instance.getDefaultVehicle()
         if vehicle != nil {
             yearPickerDelegate.load(selectYear: vehicle!.year)
             makePickerDelegate.load(year: vehicle!.year, selectMake: vehicle!.make)
@@ -157,23 +157,44 @@ class CaVehicleController: UIViewController {
 
     @IBAction func save(sender: UIBarButtonItem) {
         
-        // TODO: put in some warning if validation fails or vehicle is nil
-        
         let epaVehicle = self.optionsPickerDelegate.vehicle
-        if validate() && epaVehicle != nil {
-            let newVehicle = CaDataManager.instance.initVehicle()
-            newVehicle.epaVehicleId = epaVehicle!.id
-            newVehicle.year = epaVehicle!.year
-            newVehicle.make = epaVehicle!.make
-            newVehicle.model = epaVehicle!.model
-            CaDataManager.instance.save(vehicle: newVehicle)
-            performSegueWithIdentifier(CaSegue.VehicleToSettingsHome, sender: self)
+        if !validate() || epaVehicle == nil {
+            NSLog("The vehicle did not pass validation; cannot save it.")
+            return
         }
+
+        let defaultVehicleReferenceCount = CaDataManager.instance.countTripsUsedByVehicle(vehicle)
+        if vehicle == nil || defaultVehicleReferenceCount > 0 {
+            // If the default vehicle does not already exist then create it with
+            // the cene's settings. Or, if the default vehicle does exist and it
+            // is being referenced by trips then create a new vehicle instance
+            // and set this new instance as the default vehicle.
+            let vehicle = CaDataManager.instance.initVehicle()
+            vehicle.epaVehicleId = epaVehicle!.id
+            vehicle.year = epaVehicle!.year
+            vehicle.make = epaVehicle!.make
+            vehicle.model = epaVehicle!.model
+            CaDataManager.instance.save(vehicle: vehicle)
+            CaDataManager.instance.saveDefaultSetting(vehicle: vehicle)
+        } else {
+            // Update the current default vehicle with the new values. We can do
+            // this because it is not yet being referenced by any trips.
+            vehicle!.epaVehicleId = epaVehicle!.id
+            vehicle!.year = epaVehicle!.year
+            vehicle!.make = epaVehicle!.make
+            vehicle!.model = epaVehicle!.model
+            CaDataManager.instance.save(vehicle: vehicle!)
+        }
+        exit()
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         
         yearPickerDelegate.reset()
+        exit()
+    }
+    
+    private func exit() {
         performSegueWithIdentifier(CaSegue.VehicleToSettingsHome, sender: self)
     }
     
@@ -185,4 +206,16 @@ class CaVehicleController: UIViewController {
         return optionsPickerDelegate.selectedItem != nil
     }
     
+    private func foo() {
+        
+        // Is new vehicle different than old one? If no then don't save.
+        let defaultVehicle = CaDataManager.instance.getDefaultVehicle()
+        
+        // Is old vehicle referenced by any trips?
+        // If yes then create a new instance for vehicle and save.
+        // If no then update the current instance and save.
+        if defaultVehicle != nil {
+            
+        }
+    }
 }

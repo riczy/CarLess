@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
+    <entity name="Setting" representedClassName="Setting" syncable="YES">
+        <attribute name="distanceUnitCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="setting" inverseEntity="Vehicle" syncable="YES"/>
+    </entity>
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="distance" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="endTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
@@ -7,6 +12,7 @@
         <attribute name="logTypeCode" attributeType="String" syncable="YES"/>
         <attribute name="modeTypeCode" attributeType="String" syncable="YES"/>
         <attribute name="startTimestamp" attributeType="Date" syncable="YES"/>
+        <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="trips" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="waypoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Waypoint" inverseName="trip" inverseEntity="Waypoint" syncable="YES"/>
     </entity>
     <entity name="Vehicle" representedClassName="Vehicle" syncable="YES">
@@ -15,6 +21,8 @@
         <attribute name="make" attributeType="String" syncable="YES"/>
         <attribute name="model" attributeType="String" syncable="YES"/>
         <attribute name="year" attributeType="String" syncable="YES"/>
+        <relationship name="setting" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Setting" inverseName="vehicle" inverseEntity="Setting" syncable="YES"/>
+        <relationship name="trips" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Trip" inverseName="vehicle" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <entity name="Waypoint" representedClassName="Waypoint" syncable="YES">
         <attribute name="altitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -28,8 +36,9 @@
         <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="waypoints" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Trip" positionX="-396" positionY="54" width="128" height="148"/>
-        <element name="Vehicle" positionX="-396" positionY="252" width="128" height="120"/>
-        <element name="Waypoint" positionX="-135" positionY="65" width="128" height="180"/>
+        <element name="Setting" positionX="-164" positionY="297" width="128" height="88"/>
+        <element name="Trip" positionX="-351" positionY="-28" width="128" height="163"/>
+        <element name="Vehicle" positionX="-396" positionY="252" width="128" height="28"/>
+        <element name="Waypoint" positionX="-137" positionY="54" width="128" height="180"/>
     </elements>
 </model>
