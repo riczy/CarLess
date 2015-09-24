@@ -170,19 +170,13 @@ class CaVehicleController: UIViewController {
             // is being referenced by trips then create a new vehicle instance
             // and set this new instance as the default vehicle.
             vehicle = CaDataManager.instance.initVehicle()
-            vehicle!.epaVehicleId = epaVehicle!.id
-            vehicle!.year = epaVehicle!.year
-            vehicle!.make = epaVehicle!.make
-            vehicle!.model = epaVehicle!.model
+            epaVehicle!.setPropertiesForVehicle(vehicle!)
             CaDataManager.instance.save(vehicle: vehicle!)
             CaDataManager.instance.saveDefaultSetting(vehicle: vehicle)
         } else {
             // Update the current default vehicle with the new values. We can do
             // this because it is not yet being referenced by any trips.
-            vehicle!.epaVehicleId = epaVehicle!.id
-            vehicle!.year = epaVehicle!.year
-            vehicle!.make = epaVehicle!.make
-            vehicle!.model = epaVehicle!.model
+            epaVehicle!.setPropertiesForVehicle(vehicle!)
             CaDataManager.instance.save(vehicle: vehicle!)
         }
         exit()

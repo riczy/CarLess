@@ -14,7 +14,7 @@ struct EpaVehicle : CustomStringConvertible {
     
     var description: String {
         
-        return "\(id), \(year), \(make), \(model)"
+        return "\(id), \(year) \(make) \(model), comb08 = \(comb08), comb08U = \(comb08U), combA08 = \(combA08), combA08U = \(combA08U)"
     }
     
     init(id: String, year: String, make: String, model: String) {
@@ -23,6 +23,21 @@ struct EpaVehicle : CustomStringConvertible {
         self.year = year
         self.make = make
         self.model = model
+    }
+    
+    /// Sets the properties of the given Vehicle parameter with the values from
+    /// this instance.
+    ///
+    func setPropertiesForVehicle(vehicle: Vehicle) {
+        
+        vehicle.year = year
+        vehicle.make = make
+        vehicle.model = model
+        vehicle.epaVehicleId = id
+        vehicle.comb08 = comb08 == nil ? nil : NSNumber(long: comb08!)
+        vehicle.comb08U = comb08U == nil ? nil : NSNumber(double: comb08U!)
+        vehicle.combA08 = combA08 == nil ? nil : NSNumber(long: combA08!)
+        vehicle.combA08U = combA08U == nil ? nil : NSNumber(double: combA08U!)
     }
 }
 
@@ -85,23 +100,25 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
     
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         
+        let value = currentElementValue as String
+        
         switch elementName {
         case Element.Id.rawValue:
-            workingValue.id = currentElementValue as String
+            workingValue.id = value
         case Element.Year.rawValue:
-            workingValue.year = currentElementValue as String
+            workingValue.year = value
         case Element.Make.rawValue:
-            workingValue.make = currentElementValue as String
+            workingValue.make = value
         case Element.Model.rawValue:
-            workingValue.model = currentElementValue as String
+            workingValue.model = value
         case Element.CombinedMpgFuelType1.rawValue:
-            workingValue.comb08 = 0
+            workingValue.comb08 = Int(value)
         case Element.CombinedMpgFuelType1Unrounded.rawValue:
-            workingValue.comb08U = 0.0
+            workingValue.comb08U = Double(value)
         case Element.CombinedMpgFuelType2.rawValue:
-            workingValue.combA08 = 0
+            workingValue.combA08 = Int(value)
         case Element.CombinedMpgFueltype2Unrounded.rawValue:
-            workingValue.combA08U = 0.0
+            workingValue.combA08U = Double(value)
         default:
             currentElementValue = ""
             currentElement = nil

@@ -10,6 +10,10 @@ class Vehicle: NSManagedObject {
     @NSManaged var model: String
     @NSManaged var epaVehicleId: String
     @NSManaged var id: String
+    @NSManaged var comb08: NSNumber?
+    @NSManaged var comb08U: NSNumber?
+    @NSManaged var combA08: NSNumber?
+    @NSManaged var combA08U: NSNumber?
     
     var displayDescription : String {
         get {
