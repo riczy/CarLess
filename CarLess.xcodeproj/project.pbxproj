@@ -34,7 +34,6 @@
 		84E61A311B98AB5000D927B8 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A301B98AB5000D927B8 /* Trip.swift */; };
 		84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A321B98AB5000D927B8 /* Waypoint.swift */; };
 		84E61A361B9B3A3700D927B8 /* CaTripsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A351B9B3A3700D927B8 /* CaTripsListController.swift */; };
-		84E61A381B9B55A700D927B8 /* CaTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A371B9B55A700D927B8 /* CaTripTableViewCell.swift */; };
 		84E6953E1B86B56D000185BE /* CaTrackedSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,7 +79,6 @@
 		84E61A301B98AB5000D927B8 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		84E61A321B98AB5000D927B8 /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		84E61A351B9B3A3700D927B8 /* CaTripsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripsListController.swift; sourceTree = "<group>"; };
-		84E61A371B9B55A700D927B8 /* CaTripTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripTableViewCell.swift; sourceTree = "<group>"; };
 		84E6953D1B86B56D000185BE /* CaTrackedSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedSummaryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,8 +135,8 @@
 		8479F6B41BA0C165004B6C08 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
 				848929161B3C486B0045C39E /* CaSettingsController.swift */,
+				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
 				841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */,
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
@@ -217,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				84E61A351B9B3A3700D927B8 /* CaTripsListController.swift */,
-				84E61A371B9B55A700D927B8 /* CaTripTableViewCell.swift */,
 			);
 			name = Trips;
 			sourceTree = "<group>";
@@ -351,7 +348,6 @@
 				84E61A361B9B3A3700D927B8 /* CaTripsListController.swift in Sources */,
 				8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
-				84E61A381B9B55A700D927B8 /* CaTripTableViewCell.swift in Sources */,
 				84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
 				84E4F0E71B7A75D30006C069 /* CaTrackedEntryController.swift in Sources */,
