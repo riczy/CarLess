@@ -139,9 +139,9 @@
 			children = (
 				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
 				848929161B3C486B0045C39E /* CaSettingsController.swift */,
+				841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */,
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
-				841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";

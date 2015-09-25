@@ -98,7 +98,12 @@ struct CaTripListStyle {
 
 struct CaSettingsStyle {
     
+    static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
+    static let FontMinimumScaleFactor: CGFloat = 0.6
     static let ViewBgColor = CaColor.Ivory
+    static let CellBgColor = CaColor.PaleIvory
+    static let CellTitleColor = CaColor.FadedSlateGray
+    static let CellDetailColor = CaColor.FadedSlateGray
 }
 
 class CaComponent {
