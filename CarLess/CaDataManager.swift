@@ -31,11 +31,6 @@ class CaDataManager {
         }
     }
     
-    func getDistanceUnitDisplaySetting() -> LengthUnit {
-        
-        return LengthUnit.Mile
-    }
-    
     // MARK: - Entity Instance
     
     func initTrip() -> Trip {
@@ -212,6 +207,12 @@ class CaDataManager {
         }
         
         return results == nil || results?.count == 0 ? nil : results![0]
+    }
+    
+    func getDefaultDistanceUnit() -> LengthUnit {
+        
+        let unit = fetchSettings()?.distanceUnit
+        return unit == nil ? LengthUnit.Mile : unit!
     }
     
     func getDefaultVehicle() -> Vehicle? {

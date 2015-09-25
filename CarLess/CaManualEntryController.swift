@@ -47,7 +47,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         distanceTextField.keyboardType = UIKeyboardType.DecimalPad
         distanceTextField.delegate = self
         distanceTextField.placeholder = "0.00"
-        distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
+        distanceDisplayUnit = CaDataManager.instance.getDefaultDistanceUnit()
         
     }
     

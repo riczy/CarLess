@@ -58,7 +58,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         mapView.pitchEnabled = false
         mapView.delegate = self
         
-        distanceDisplayUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
+        distanceDisplayUnit = CaDataManager.instance.getDefaultDistanceUnit()
         
         startTracking()
     }

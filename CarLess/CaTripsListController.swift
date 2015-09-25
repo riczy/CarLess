@@ -45,7 +45,7 @@ class CaTripsListController: UITableViewController {
     
     private func fetchData() {
         
-        distanceUnit  = CaDataManager.instance.getDistanceUnitDisplaySetting()
+        distanceUnit  = CaDataManager.instance.getDefaultDistanceUnit()
         
         let tripsArray = CaDataManager.instance.fetchTrips()
         tripsMap = [String : [Trip]]()

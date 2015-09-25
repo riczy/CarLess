@@ -34,7 +34,7 @@ class CaTrackedSummaryController: UIViewController {
     private func setDisplayText() {
         
         if trip != nil {
-            let distanceUnit = CaDataManager.instance.getDistanceUnitDisplaySetting()
+            let distanceUnit = CaDataManager.instance.getDefaultDistanceUnit()
             distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
             startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
             modeLabel.text = trip!.modeType.description
