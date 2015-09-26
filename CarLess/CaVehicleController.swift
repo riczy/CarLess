@@ -76,10 +76,17 @@ class CaVehicleController: UIViewController {
     private func initializeStyle() {
         
         view.backgroundColor = CaVehicleStyle.ViewBgColor
-        yearTextField.textColor? = CaVehicleStyle.ViewFieldColor
-        makeTextField.textColor? = CaVehicleStyle.ViewFieldColor
-        modelTextField.textColor? = CaVehicleStyle.ViewFieldColor
-        optionsTextField.textColor? = CaVehicleStyle.ViewFieldColor
+        
+        yearTextField.textColor = CaVehicleStyle.ViewFieldColor
+        makeTextField.textColor = CaVehicleStyle.ViewFieldColor
+        modelTextField.textColor = CaVehicleStyle.ViewFieldColor
+        optionsTextField.textColor = CaVehicleStyle.ViewFieldColor
+        
+        yearTextField.backgroundColor = CaVehicleStyle.ViewFieldBgColor
+        makeTextField.backgroundColor = CaVehicleStyle.ViewFieldBgColor
+        modelTextField.backgroundColor = CaVehicleStyle.ViewFieldBgColor
+        optionsTextField.backgroundColor = CaVehicleStyle.ViewFieldBgColor
+        
         instructionsLabel.textColor = CaVehicleStyle.ViewTitleColor
         combMpgValueLabel.textColor = CaVehicleStyle.MpgValueColor
         combMpgLabel.textColor = CaVehicleStyle.MpgTitleColor

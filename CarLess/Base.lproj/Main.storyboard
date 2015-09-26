@@ -23,14 +23,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mqp-aM-45b">
-                                            <rect key="frame" x="8" y="12" width="20" height="20"/>
+                                            <rect key="frame" x="12" y="12" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="LHc-5J-jzY"/>
                                                 <constraint firstAttribute="width" constant="20" id="nkh-qU-TGN"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mER-1w-RcI">
-                                            <rect key="frame" x="32" y="13" width="90" height="18"/>
+                                            <rect key="frame" x="36" y="13" width="90" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="90" id="3fl-X3-oCJ"/>
                                             </constraints>
@@ -39,16 +39,16 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNG-iM-yay">
-                                            <rect key="frame" x="542" y="13" width="50" height="18"/>
+                                            <rect key="frame" x="560" y="13" width="32" height="18"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="lMi-zV-nul"/>
+                                                <constraint firstAttribute="width" constant="32" id="lMi-zV-nul"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAi-f1-PGH">
-                                            <rect key="frame" x="458" y="13" width="80" height="18"/>
+                                            <rect key="frame" x="476" y="13" width="80" height="18"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="UQQ-iO-9P6"/>
                                             </constraints>
@@ -60,7 +60,7 @@
                                     <constraints>
                                         <constraint firstItem="wAi-f1-PGH" firstAttribute="leading" secondItem="mER-1w-RcI" secondAttribute="trailing" constant="6" id="17b-NH-jkb"/>
                                         <constraint firstItem="hNG-iM-yay" firstAttribute="leading" secondItem="wAi-f1-PGH" secondAttribute="trailing" constant="4" id="2xY-6I-BJc"/>
-                                        <constraint firstItem="Mqp-aM-45b" firstAttribute="leading" secondItem="Ie2-PX-ykx" secondAttribute="leadingMargin" id="3dz-g7-rFD"/>
+                                        <constraint firstItem="Mqp-aM-45b" firstAttribute="leading" secondItem="Ie2-PX-ykx" secondAttribute="leadingMargin" constant="4" id="3dz-g7-rFD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="mER-1w-RcI" secondAttribute="trailing" constant="321" id="7oK-oV-xF6"/>
                                         <constraint firstAttribute="centerY" secondItem="hNG-iM-yay" secondAttribute="centerY" id="AcP-4L-Flr"/>
                                         <constraint firstAttribute="centerY" secondItem="mER-1w-RcI" secondAttribute="centerY" id="EXG-wp-dMb"/>

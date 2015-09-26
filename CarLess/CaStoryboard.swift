@@ -111,6 +111,7 @@ struct CaVehicleStyle {
     static let ViewBgColor = CaColor.Ivory
     static let ViewTitleColor = CaColor.FadedSlateGray
     static let ViewFieldColor = CaColor.FadedSlateGray
+    static let ViewFieldBgColor = CaColor.PaleIvory
     static let MpgValueColor = CaColor.RedOrange
     static let MpgTitleColor = CaColor.RedOrange
 }
