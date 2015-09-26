@@ -1,6 +1,6 @@
 import Foundation
 
-struct EpaVehicle : CustomStringConvertible {
+struct EpaVehicle : CustomStringConvertible, Mpg {
     
     var id: String
     var year: String
@@ -17,6 +17,15 @@ struct EpaVehicle : CustomStringConvertible {
         return "\(id), \(year) \(make) \(model), comb08 = \(comb08), comb08U = \(comb08U), combA08 = \(combA08), combA08U = \(combA08U)"
     }
     
+    var combinedMpg : Double? {
+        get {
+            if comb08 != nil {
+                return Double(comb08!)
+            }
+            return nil
+        }
+    }
+
     init(id: String, year: String, make: String, model: String) {
         
         self.id = id

@@ -138,41 +138,78 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qti-VK-SGn">
-                                <rect key="frame" x="36" y="84" width="528" height="30"/>
+                                <rect key="frame" x="36" y="147" width="528" height="30"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Make" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="unk-zZ-nhR">
-                                <rect key="frame" x="36" y="130" width="528" height="30"/>
+                                <rect key="frame" x="36" y="189" width="528" height="30"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-1b-ybm">
-                                <rect key="frame" x="36" y="176" width="528" height="30"/>
+                                <rect key="frame" x="36" y="231" width="528" height="30"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Option" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="aZ4-1c-e9w">
-                                <rect key="frame" x="36" y="222" width="528" height="30"/>
+                                <rect key="frame" x="36" y="273" width="528" height="30"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mpg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9M1-Az-VTa">
+                                <rect key="frame" x="36" y="325" width="528" height="42"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="combined mpg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7d-Ft-1Cg">
+                                <rect key="frame" x="36" y="369" width="528" height="20"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a default vehicle. This will be the vehicle that your carless trip is replacing." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-4D-jfh">
+                                <rect key="frame" x="46" y="84" width="508" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="20" id="5aD-6Q-26c"/>
-                            <constraint firstItem="LjY-1b-ybm" firstAttribute="top" secondItem="unk-zZ-nhR" secondAttribute="bottom" constant="16" id="BYZ-ck-BPk"/>
+                            <constraint firstItem="o7d-Ft-1Cg" firstAttribute="top" secondItem="9M1-Az-VTa" secondAttribute="bottom" constant="2" id="BKT-g1-Ou6"/>
+                            <constraint firstItem="LjY-1b-ybm" firstAttribute="top" secondItem="unk-zZ-nhR" secondAttribute="bottom" constant="12" id="BYZ-ck-BPk"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LjY-1b-ybm" secondAttribute="trailing" constant="16" id="Bib-Fp-yZn"/>
                             <constraint firstItem="qti-VK-SGn" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Bj1-HI-33Y"/>
+                            <constraint firstItem="9M1-Az-VTa" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Dy7-1b-kQx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aZ4-1c-e9w" secondAttribute="trailing" constant="16" id="M7v-3m-spR"/>
+                            <constraint firstItem="o7d-Ft-1Cg" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Pd0-FL-sxS"/>
+                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="90" id="QA0-vK-dJ4"/>
+                            <constraint firstItem="MsP-4D-jfh" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="26" id="QCr-zh-j0k"/>
                             <constraint firstItem="aZ4-1c-e9w" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Rjg-Cc-xhy"/>
-                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="top" secondItem="LjY-1b-ybm" secondAttribute="bottom" constant="16" id="bVn-0N-PzY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9M1-Az-VTa" secondAttribute="trailing" constant="16" id="XN0-MG-NMO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MsP-4D-jfh" secondAttribute="trailing" constant="26" id="agM-5l-Rgw"/>
+                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="top" secondItem="LjY-1b-ybm" secondAttribute="bottom" constant="12" id="bVn-0N-PzY"/>
                             <constraint firstItem="LjY-1b-ybm" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="biP-Vz-UeH"/>
+                            <constraint firstItem="9M1-Az-VTa" firstAttribute="top" secondItem="aZ4-1c-e9w" secondAttribute="bottom" constant="22" id="bwF-Ju-Fkd"/>
                             <constraint firstItem="unk-zZ-nhR" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="d4Q-t9-fbe"/>
+                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="MsP-4D-jfh" secondAttribute="bottom" constant="22" id="mMW-s8-WcY"/>
+                            <constraint firstItem="MsP-4D-jfh" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="142" id="nHb-Hj-ycX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o7d-Ft-1Cg" secondAttribute="trailing" constant="16" id="qTd-up-bCR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qti-VK-SGn" secondAttribute="trailing" constant="16" id="s9z-8g-eV7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="unk-zZ-nhR" secondAttribute="trailing" constant="16" id="ug5-KG-P3K"/>
-                            <constraint firstItem="unk-zZ-nhR" firstAttribute="top" secondItem="qti-VK-SGn" secondAttribute="bottom" constant="16" id="vet-Ex-kN9"/>
+                            <constraint firstItem="unk-zZ-nhR" firstAttribute="top" secondItem="qti-VK-SGn" secondAttribute="bottom" constant="12" id="vet-Ex-kN9"/>
+                            <constraint firstItem="MsP-4D-jfh" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="20" id="xtE-wg-nl0"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="nHb-Hj-ycX"/>
+                                <exclude reference="5aD-6Q-26c"/>
+                                <exclude reference="QA0-vK-dJ4"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Vehicle" id="1FP-1v-aeP">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="irI-nl-IDq">
@@ -188,7 +225,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cancelBarButton" destination="irI-nl-IDq" id="Xtv-gs-BHQ"/>
+                        <outlet property="combMpgLabel" destination="o7d-Ft-1Cg" id="9bM-DQ-J2f"/>
+                        <outlet property="combMpgValueLabel" destination="9M1-Az-VTa" id="5Zj-jY-PDC"/>
                         <outlet property="doneBarButton" destination="98w-yi-NfV" id="eVT-4k-kgX"/>
+                        <outlet property="instructionsLabel" destination="MsP-4D-jfh" id="J1U-k4-bLo"/>
                         <outlet property="makeTextField" destination="unk-zZ-nhR" id="pFA-z3-gwF"/>
                         <outlet property="modelTextField" destination="LjY-1b-ybm" id="Pqz-rB-4LZ"/>
                         <outlet property="optionsTextField" destination="aZ4-1c-e9w" id="Shn-Aw-B1K"/>

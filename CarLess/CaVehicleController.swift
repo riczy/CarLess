@@ -2,6 +2,8 @@ import UIKit
 
 class CaVehicleController: UIViewController {
     
+    // MARK: - Properties 
+    
     private var _vehicle: Vehicle?
     
     var vehicle: Vehicle? {
@@ -19,6 +21,9 @@ class CaVehicleController: UIViewController {
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
     @IBOutlet weak var optionsTextField: UITextField!
+    @IBOutlet weak var instructionsLabel: UILabel!
+    @IBOutlet weak var combMpgValueLabel: UILabel!
+    @IBOutlet weak var combMpgLabel: UILabel!
     
     private var yearPickerView: UIPickerView!
     private var makePickerView: UIPickerView!
@@ -30,15 +35,19 @@ class CaVehicleController: UIViewController {
     private var modelPickerDelegate: VehicleModelPickerDelegate!
     private var optionsPickerDelegate: VehicleOptionsPickerDelegate!
 
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        initializeStyle()
         initializeYearPicker()
         initializeMakePicker()
         initializeModelPicker()
         initializeOptionsPicker()
         establishPickerDependencies()
         getVehicle()
+        setMpgDisplayForVehicle(vehicle)
     }
     
     private func getVehicle() {
@@ -50,6 +59,30 @@ class CaVehicleController: UIViewController {
             modelPickerDelegate.load(year: vehicle!.year, make: vehicle!.make, selectModel: vehicle!.model)
             optionsPickerDelegate.load(year: vehicle!.year, make: vehicle!.make, model: vehicle!.model, selectOption: vehicle!.epaVehicleId)
         }
+    }
+    
+    func setMpgDisplayForVehicle(vehicle: Mpg?) {
+        
+        if vehicle?.combinedMpg == nil {
+            combMpgLabel.hidden = true
+            combMpgValueLabel.hidden = true
+        } else {
+            combMpgLabel.hidden = false
+            combMpgValueLabel.hidden = false
+            combMpgValueLabel.text = "\(vehicle!.combinedMpg!)"
+        }
+    }
+    
+    private func initializeStyle() {
+        
+        view.backgroundColor = CaVehicleStyle.ViewBgColor
+        yearTextField.textColor? = CaVehicleStyle.ViewFieldColor
+        makeTextField.textColor? = CaVehicleStyle.ViewFieldColor
+        modelTextField.textColor? = CaVehicleStyle.ViewFieldColor
+        optionsTextField.textColor? = CaVehicleStyle.ViewFieldColor
+        instructionsLabel.textColor = CaVehicleStyle.ViewTitleColor
+        combMpgValueLabel.textColor = CaVehicleStyle.MpgValueColor
+        combMpgLabel.textColor = CaVehicleStyle.MpgTitleColor
     }
     
     // MARK: - Picker Initializations
@@ -135,7 +168,7 @@ class CaVehicleController: UIViewController {
     private func initializeOptionsPicker() {
         
         optionsPickerView = UIPickerView()
-        optionsPickerDelegate = VehicleOptionsPickerDelegate(pickerView: optionsPickerView, textField: optionsTextField)
+        optionsPickerDelegate = VehicleOptionsPickerDelegate(pickerView: optionsPickerView, textField: optionsTextField, viewController: self)
         
         optionsPickerView.dataSource = optionsPickerDelegate
         optionsPickerView.delegate = optionsPickerDelegate
@@ -155,6 +188,8 @@ class CaVehicleController: UIViewController {
         optionsTextField.inputAccessoryView = toolbar
     }
 
+    // MARK: - Actions
+    
     @IBAction func save(sender: UIBarButtonItem) {
         
         let epaVehicle = self.optionsPickerDelegate.vehicle
@@ -200,16 +235,4 @@ class CaVehicleController: UIViewController {
         return optionsPickerDelegate.selectedItem != nil
     }
     
-    private func foo() {
-        
-        // Is new vehicle different than old one? If no then don't save.
-        let defaultVehicle = CaDataManager.instance.getDefaultVehicle()
-        
-        // Is old vehicle referenced by any trips?
-        // If yes then create a new instance for vehicle and save.
-        // If no then update the current instance and save.
-        if defaultVehicle != nil {
-            
-        }
-    }
 }

@@ -258,7 +258,18 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
 ///
 class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
     
-    var vehicle : EpaVehicle?
+    private var _vehicle : EpaVehicle?
+    var vehicle : EpaVehicle? {
+        get {
+            return _vehicle
+        }
+        set {
+            _vehicle = newValue
+            viewController.setMpgDisplayForVehicle(_vehicle)
+        }
+    }
+    
+    private var viewController : CaVehicleController!
     
     private var _parentComponent: VehicleModelPickerDelegate?
     
@@ -273,6 +284,13 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
             }
         }
     }
+
+    init(pickerView: UIPickerView, textField: UITextField, viewController: CaVehicleController) {
+        
+        super.init(pickerView: pickerView, textField: textField)
+        self.viewController = viewController
+    }
+    
     
     override func load() {
         

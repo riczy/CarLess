@@ -2,8 +2,13 @@ import Foundation
 import CoreData
 import CoreLocation
 
+protocol Mpg {
+    
+    var combinedMpg : Double? { get }
+}
+
 @objc(Vehicle)
-class Vehicle: NSManagedObject {
+class Vehicle: NSManagedObject, Mpg {
 
     @NSManaged var year: String
     @NSManaged var make: String
@@ -18,6 +23,15 @@ class Vehicle: NSManagedObject {
     var displayDescription : String {
         get {
             return "\(year) \(make) \(model)"
+        }
+    }
+    
+    var combinedMpg : Double? {
+        get {
+            if comb08 != nil {
+                return comb08!.doubleValue
+            }
+            return nil
         }
     }
 
