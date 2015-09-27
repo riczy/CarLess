@@ -64,6 +64,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
                 self.pickerView.reloadAllComponents()
                 print("Response URL= \(response?.URL), Data count= \(self.data.count)")
                 if data!.length > 0 {
+                    self.textField.enabled = true
                     self.pickerView.selectRow(0, inComponent: 0, animated: false)
                 }
                 onSuccess?()
@@ -78,16 +79,18 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     func done() {
         
         let selectedIndex = pickerView.selectedRowInComponent(0)
-        selectedItem = data[selectedIndex]
-        textField.text = selectedItem!.text
-        textField.resignFirstResponder()
-        if selectedIndex != lastSelectedIndex {
-            childComponent?.reset()
-            if selectedIndex > -1 {
-                childComponent?.load()
+        if selectedIndex >= 0 && selectedIndex < data.count {
+            selectedItem = data[selectedIndex]
+            textField.text = selectedItem!.text
+            if selectedIndex != lastSelectedIndex {
+                childComponent?.reset()
+                if selectedIndex > -1 {
+                    childComponent?.load()
+                }
             }
+            lastSelectedIndex = selectedIndex
         }
-        lastSelectedIndex = selectedIndex
+        textField.resignFirstResponder()
     }
     
     func cancel() {
@@ -103,6 +106,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     func reset() {
         
         textField.text = nil
+        textField.enabled = false
         lastSelectedIndex = -1
         selectedItem = nil
         data.removeAll(keepCapacity: false)
