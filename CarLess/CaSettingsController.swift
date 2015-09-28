@@ -1,5 +1,6 @@
 import UIKit
 
+
 class CaSettingsTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -16,7 +17,13 @@ class CaSettingsController: UITableViewController {
     
     // MARK: - Properties
     
+    private var distanceUnit: LengthUnit?
+    
+    // MARK: - UI Properties
+    
     private var vehicleLabel: UILabel!
+    private var distanceUnitLabel: UILabel!
+    private var distanceUnitPicker: UIPickerView!
     
     // MARK: - Lifecycle
     
@@ -24,7 +31,7 @@ class CaSettingsController: UITableViewController {
         
         super.viewDidLoad()
         view.backgroundColor = CaSettingsStyle.ViewBgColor
-        self.tableView.registerClass(CaSettingsTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.registerClass(CaSettingsTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
     // MARK: - Navigation
@@ -35,6 +42,10 @@ class CaSettingsController: UITableViewController {
         if segue.identifier == CaSegue.VehicleToSettings {
             let svc = segue.sourceViewController as! CaVehicleController
             vehicleLabel.text = svc.vehicle?.displayDescription
+        } else if segue.identifier == CaSegue.DistanceUnitToSettings {
+            let svc = segue.sourceViewController as! CaDistanceUnitListController
+            distanceUnit = svc.unit
+            distanceUnitLabel.text = svc.unit?.description
         }
     }
 
@@ -71,7 +82,7 @@ class CaSettingsController: UITableViewController {
             } else if row == 1 {
                 return buildVehiclePreferenceCell(indexPath)
             }
-            // About
+        // About
         } else if section == 1 {
             if row == 0 {
                 return buildVersionCell(indexPath)
@@ -99,21 +110,41 @@ class CaSettingsController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
 
-        // Vehicle
-        if section == 0 && row == 1 {
-            performSegueWithIdentifier(CaSegue.SettingsToVehicle, sender: self)
+        if section == 0 {
+            // Distance Unit
+            if row == 0 {
+                performSegueWithIdentifier(CaSegue.SettingsToDistanceUnit, sender: self)
+            // Vehicle
+            } else if row == 1 {
+                performSegueWithIdentifier(CaSegue.SettingsToVehicle, sender: self)
+            }
         }
     }
     
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == CaSegue.SettingsToDistanceUnit {
+            let nvc = segue.destinationViewController as! UINavigationController
+            let vc = nvc.topViewController as! CaDistanceUnitListController
+            vc.unit = distanceUnit
+        }
+    }
     // MARK: - Table Cell Construction
     
     private func buildDistanceUnitPreferenceCell(indexPath: NSIndexPath) -> UITableViewCell {
         
-        let unit = CaDataManager.instance.getDefaultDistanceUnit()
+        distanceUnit = CaDataManager.instance.getDefaultDistanceUnit()
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Distance Unit"
-        cell.detailTextLabel?.text = unit.rawValue
+        cell.detailTextLabel?.text = distanceUnit!.rawValue
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         applyStyleForCell(cell)
+        
+        distanceUnitLabel = cell.detailTextLabel!
+        
         return cell
     }
     
@@ -159,6 +190,7 @@ class CaSettingsController: UITableViewController {
         cell.textLabel?.textColor = CaSettingsStyle.CellTitleColor
         cell.detailTextLabel?.textColor = CaSettingsStyle.CellDetailColor
     }
+
 }
 
 

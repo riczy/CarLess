@@ -97,6 +97,8 @@ enum LengthUnit : String {
     }
     
     static let allValues = [ Mile, Meter, Kilometer ]
+    
+    static let userValues = [ Mile, Kilometer ]
 }
 
 /*

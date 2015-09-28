@@ -119,11 +119,39 @@
                     <navigationItem key="navigationItem" title="Settings" id="SFP-Yi-n4R"/>
                     <connections>
                         <segue destination="xAI-R1-Nae" kind="show" identifier="SettingsToVehicleSegue" id="Gh8-0Q-Cb0"/>
+                        <segue destination="fsq-2A-brS" kind="show" identifier="SettingsToDistanceUnitSegue" id="r1x-JC-63o"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20S-26-BxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1875" y="-837"/>
+            <point key="canvasLocation" x="-2012" y="-846"/>
+        </scene>
+        <!--Distance Unit-->
+        <scene sceneID="WiG-gT-Q6h">
+            <objects>
+                <tableViewController id="YzV-zL-SKa" customClass="CaDistanceUnitListController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="YhV-tn-Fau">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="YzV-zL-SKa" id="jd6-YL-Myw"/>
+                            <outlet property="delegate" destination="YzV-zL-SKa" id="wQP-lx-gWH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Distance Unit" id="pCP-Is-RBT">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="8Ep-gD-bD8"/>
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="5oc-7P-BQg">
+                            <connections>
+                                <segue destination="dL9-BW-NYD" kind="unwind" identifier="DistanceUnitToSettingsSegue" unwindAction="returnToSettingsMain:" id="0bF-lM-1Rn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m2b-Yf-Rgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="dL9-BW-NYD" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-307" y="-1599"/>
         </scene>
         <!--Vehicle-->
         <scene sceneID="EJh-bm-XqR">
@@ -239,7 +267,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twh-n0-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hRI-2m-u8j" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-346" y="-1303"/>
+            <point key="canvasLocation" x="-307" y="-935"/>
         </scene>
         <!--Log Controller-->
         <scene sceneID="lcQ-Cc-GEx">
@@ -689,7 +717,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2y-kr-6Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1060" y="-1303"/>
+            <point key="canvasLocation" x="-1010" y="-935"/>
         </scene>
         <!--Trips-->
         <scene sceneID="K8j-KE-GRV">
@@ -709,6 +737,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Xs-XA-tM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2736" y="-1516"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pmz-Cq-6YA">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fsq-2A-brS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2QW-hN-B5P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YzV-zL-SKa" kind="relationship" relationship="rootViewController" id="1cZ-fU-UNg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bHg-WM-TdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1010" y="-1599"/>
         </scene>
     </scenes>
     <resources>

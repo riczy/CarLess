@@ -28,6 +28,7 @@
 		8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8489291D1B3C486B0045C39E /* LaunchScreen.xib */; };
 		8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489292A1B3C486B0045C39E /* CarLessTests.swift */; };
 		8489293A1B3E41C80045C39E /* LogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* LogController.swift */; };
+		84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */; settings = {ASSET_TAGS = (); }; };
 		84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */; };
 		84E4F0E51B78D9170006C069 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4F0E41B78D9170006C069 /* MapKit.framework */; };
 		84E4F0E71B7A75D30006C069 /* CaTrackedEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E61B7A75D30006C069 /* CaTrackedEntryController.swift */; };
@@ -73,6 +74,7 @@
 		848929291B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8489292A1B3C486B0045C39E /* CarLessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLessTests.swift; sourceTree = "<group>"; };
 		848929391B3E41C80045C39E /* LogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogController.swift; sourceTree = "<group>"; };
+		84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDistanceUnitListController.swift; sourceTree = "<group>"; };
 		84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarLess.xcdatamodel; sourceTree = "<group>"; };
 		84E4F0E41B78D9170006C069 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		84E4F0E61B7A75D30006C069 /* CaTrackedEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTrackedEntryController.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				848929161B3C486B0045C39E /* CaSettingsController.swift */,
 				8433AC9C1BA20579004CA5CF /* CaVehicleController.swift */,
 				841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */,
+				84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */,
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
 			);
@@ -332,6 +335,7 @@
 				847810ED1B8CB8DA00B5AC53 /* CaManualEntryController.swift in Sources */,
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,
+				84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */,
 				8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */,
 				84E6953E1B86B56D000185BE /* CaTrackedSummaryController.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaTrackedProgressController.swift in Sources */,
