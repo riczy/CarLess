@@ -7,6 +7,20 @@ class CaDataManager {
     static let instance = CaDataManager()
     
     var context: NSManagedObjectContext
+    private var _defaultDistanceUnit: LengthUnit?
+    var defaultDistanceUnit: LengthUnit {
+        get {
+            if _defaultDistanceUnit == nil {
+                if let unit = fetchSettings()?.distanceUnit {
+                    _defaultDistanceUnit = unit
+                } else {
+                    _defaultDistanceUnit = LengthUnit.Mile
+                    saveDefaultSetting(distanceUnit: _defaultDistanceUnit)
+                }
+            }
+            return _defaultDistanceUnit!
+        }
+    }
     
     private init() {
         
@@ -112,6 +126,7 @@ class CaDataManager {
         if settings.managedObjectContext!.hasChanges {
             do {
                 try settings.managedObjectContext!.save()
+                _defaultDistanceUnit = settings.distanceUnit
                 print(settings)
             } catch let error as NSError {
                 NSLog("Error when saving vehicle: \(error.localizedDescription)")
@@ -207,12 +222,6 @@ class CaDataManager {
         }
         
         return results == nil || results?.count == 0 ? nil : results![0]
-    }
-    
-    func getDefaultDistanceUnit() -> LengthUnit {
-        
-        let unit = fetchSettings()?.distanceUnit
-        return unit == nil ? LengthUnit.Mile : unit!
     }
     
     func getDefaultVehicle() -> Vehicle? {

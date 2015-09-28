@@ -34,7 +34,7 @@ class CaTrackedSummaryController: UIViewController {
     private func setDisplayText() {
         
         if trip != nil {
-            let distanceUnit = CaDataManager.instance.getDefaultDistanceUnit()
+            let distanceUnit = CaDataManager.instance.defaultDistanceUnit
             distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
             startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
             modeLabel.text = trip!.modeType.description
@@ -96,9 +96,6 @@ class CaTrackedSummaryController: UIViewController {
         
         if validate() {
             preSave()
-            // bogus
-            trip?.waypoints.removeAllObjects()
-            // bogus
             CaDataManager.instance.save(trip: trip!)
             postSave()
             exit()

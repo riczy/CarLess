@@ -18,7 +18,6 @@ class CaDistanceUnitListController: UITableViewController {
     
     // MARK: - Properties
     
-    var unit: LengthUnit?
     private var selectedRow: Int?
 
     // MARK: - Lifecycle
@@ -33,11 +32,10 @@ class CaDistanceUnitListController: UITableViewController {
     private func reset() {
         
         selectedRow = nil
-        if unit != nil {
-            for index in 0...(LengthUnit.userValues.count - 1) {
-                if LengthUnit.userValues[index] == unit! {
-                    selectedRow = index
-                }
+        let unit = CaDataManager.instance.defaultDistanceUnit
+        for index in 0...(LengthUnit.userValues.count - 1) {
+            if LengthUnit.userValues[index] == unit {
+                selectedRow = index
             }
         }
     }
@@ -90,7 +88,7 @@ class CaDistanceUnitListController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if selectedRow != nil {
-            unit = LengthUnit.userValues[selectedRow!]
+            let unit = LengthUnit.userValues[selectedRow!]
             CaDataManager.instance.saveDefaultSetting(distanceUnit: unit)
         }
     }

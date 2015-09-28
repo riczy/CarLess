@@ -16,10 +16,11 @@ class CaTripsListController: UITableViewController {
     private var headerDateFormatter : NSDateFormatter!
     private var headerWeekDayFormatter : NSDateFormatter!
     private var cellTimeFormatter : NSDateFormatter!
-    private var distanceUnit : LengthUnit!
     private var tripsMap : [String : [Trip]]!
     private var tripsMapOrderedKeys : [String]!
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -53,8 +54,6 @@ class CaTripsListController: UITableViewController {
     
     private func fetchData() {
         
-        distanceUnit  = CaDataManager.instance.getDefaultDistanceUnit()
-        
         let tripsArray = CaDataManager.instance.fetchTrips()
         tripsMap = [String : [Trip]]()
         
@@ -75,7 +74,7 @@ class CaTripsListController: UITableViewController {
         }
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table Data Source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
@@ -93,6 +92,7 @@ class CaTripsListController: UITableViewController {
 
         let tripArray : [Trip] = tripsMap[(tripsMapOrderedKeys[indexPath.section])]!
         let trip = tripArray[indexPath.row]
+        let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
         applyStyleForCell(cell)
         

@@ -12,7 +12,6 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     @IBOutlet weak var modeTitleLabel: UILabel!
     @IBOutlet weak var modeImageView: UIImageView!
     private var stopButton: UIButton!
-    private var distanceDisplayUnit: LengthUnit!
     
     // MARK: - Properties
     
@@ -25,7 +24,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         }
         set {
             trip.distance = newValue
-            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceDisplayUnit)!)
+            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit)!)
         }
     }
     
@@ -57,8 +56,6 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         mapView.rotateEnabled = true
         mapView.pitchEnabled = false
         mapView.delegate = self
-        
-        distanceDisplayUnit = CaDataManager.instance.getDefaultDistanceUnit()
         
         startTracking()
     }

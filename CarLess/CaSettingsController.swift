@@ -15,10 +15,6 @@ class CaSettingsTableViewCell: UITableViewCell {
 
 class CaSettingsController: UITableViewController {
     
-    // MARK: - Properties
-    
-    private var distanceUnit: LengthUnit?
-    
     // MARK: - UI Properties
     
     private var vehicleLabel: UILabel!
@@ -43,9 +39,7 @@ class CaSettingsController: UITableViewController {
             let svc = segue.sourceViewController as! CaVehicleController
             vehicleLabel.text = svc.vehicle?.displayDescription
         } else if segue.identifier == CaSegue.DistanceUnitToSettings {
-            let svc = segue.sourceViewController as! CaDistanceUnitListController
-            distanceUnit = svc.unit
-            distanceUnitLabel.text = svc.unit?.description
+            distanceUnitLabel.text = CaDataManager.instance.defaultDistanceUnit.description
         }
     }
 
@@ -120,26 +114,14 @@ class CaSettingsController: UITableViewController {
             }
         }
     }
-    
-    // MARK: - Navigation
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == CaSegue.SettingsToDistanceUnit {
-            let nvc = segue.destinationViewController as! UINavigationController
-            let vc = nvc.topViewController as! CaDistanceUnitListController
-            vc.unit = distanceUnit
-        }
-    }
     // MARK: - Table Cell Construction
     
     private func buildDistanceUnitPreferenceCell(indexPath: NSIndexPath) -> UITableViewCell {
         
-        distanceUnit = CaDataManager.instance.getDefaultDistanceUnit()
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Distance Unit"
-        cell.detailTextLabel?.text = distanceUnit!.rawValue
+        cell.detailTextLabel?.text = CaDataManager.instance.defaultDistanceUnit.rawValue
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         applyStyleForCell(cell)
         
