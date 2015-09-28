@@ -19,7 +19,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
  
     // MARK: - Properties
     
-    private var trip: Trip!
     private var lastSelectedModeIndex = 0
     
     private struct Tag {
@@ -39,13 +38,16 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         initializeSpinner()
         renderSaveButton()
         initializeStyle()
-        reset()
         
         distanceTextField.tag = Tag.DistanceField
         distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
         distanceTextField.keyboardType = UIKeyboardType.DecimalPad
         distanceTextField.delegate = self
         distanceTextField.placeholder = "0.00"
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        reset()
     }
     
     // MARK: - View Initializations
@@ -147,14 +149,16 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     func save() {
 
-        if validate() {
+        let trip = createTrip()
+        if validate(trip) {
             preSave()
             CaDataManager.instance.save(trip: trip)
             postSave()
+            reset()
         }
     }
     
-    private func validate() -> Bool {
+    private func validate(trip: Trip) -> Bool {
         
         return trip.distance.doubleValue > 0.0
     }
@@ -173,32 +177,40 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
             self.spinnerView.stopAnimating()
             self.saveButton.enabled = true
             self.view.alpha = 1.0
-            self.reset()
         }
     }
     
-    private func reset() {
+    private func createTrip() -> Trip {
+    
+        let trip = CaDataManager.instance.initTrip()
         
-        lastSelectedModeIndex = 0
-        
-        trip = CaDataManager.instance.initTrip()
-        trip.distance = 0.0
+        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
+            trip.setDistance(tempDistance, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
+        } else {
+            trip.setDistance(0.0, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
+        }
         trip.logType = LogType.Manual
         trip.modeType = Mode.allValues[lastSelectedModeIndex]
-        trip.startTimestamp = NSDate()
+        trip.startTimestamp = datePicker.date
         trip.endTimestamp = nil
         
-        timestampTextField.text = CaFormatter.timestamp.stringFromDate(trip.startTimestamp)
-        distanceTextField.text = ""
-        modeTextField.text = trip.modeType.description
+        return trip
+    }
+    
+    func reset() {
         
-        datePicker.date = trip.startTimestamp
+        datePicker.date = NSDate()
+        timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
+        
+        distanceTextField.text = ""
+        
+        lastSelectedModeIndex = 0
+        modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
     func datePickerDone() {
         
-        trip.startTimestamp = datePicker.date
         timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         timestampTextField.resignFirstResponder()
     }
@@ -210,11 +222,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     func decimalPadDone() {
         
-        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
-            trip.setDistance(tempDistance, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
-        } else {
-            trip.setDistance(0.0, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
-        }
         distanceTextField.resignFirstResponder()
     }
     
@@ -224,7 +231,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         if selectedModeIndex > -1 {
             let selectedMode = Mode.allValues[selectedModeIndex]
             modeTextField.text = selectedMode.description
-            trip.modeType = selectedMode
             lastSelectedModeIndex = selectedModeIndex
         }
         modeTextField.resignFirstResponder()

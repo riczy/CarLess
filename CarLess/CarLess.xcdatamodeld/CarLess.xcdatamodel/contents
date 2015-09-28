@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
     <entity name="Setting" representedClassName="Setting" syncable="YES">
-        <attribute name="distanceUnitCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="distanceUnitCode" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="setting" inverseEntity="Vehicle" syncable="YES"/>
     </entity>
@@ -40,7 +40,7 @@
         <relationship name="trip" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="waypoints" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Setting" positionX="-164" positionY="297" width="128" height="88"/>
+        <element name="Setting" positionX="-164" positionY="297" width="128" height="90"/>
         <element name="Trip" positionX="-351" positionY="-28" width="128" height="163"/>
         <element name="Vehicle" positionX="-396" positionY="252" width="128" height="178"/>
         <element name="Waypoint" positionX="-137" positionY="54" width="128" height="180"/>

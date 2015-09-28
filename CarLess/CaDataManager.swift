@@ -7,6 +7,7 @@ class CaDataManager {
     static let instance = CaDataManager()
     
     var context: NSManagedObjectContext
+    
     private var _defaultDistanceUnit: LengthUnit?
     var defaultDistanceUnit: LengthUnit {
         get {
@@ -15,7 +16,7 @@ class CaDataManager {
                     _defaultDistanceUnit = unit
                 } else {
                     _defaultDistanceUnit = LengthUnit.Mile
-                    saveDefaultSetting(distanceUnit: _defaultDistanceUnit)
+                    saveDefaultSetting(distanceUnit: _defaultDistanceUnit!)
                 }
             }
             return _defaultDistanceUnit!
@@ -44,6 +45,7 @@ class CaDataManager {
             }
         }
     }
+    
     
     // MARK: - Entity Instance
     
@@ -141,7 +143,7 @@ class CaDataManager {
         save(settings: settings)
     }
     
-    func saveDefaultSetting(distanceUnit unit: LengthUnit?) {
+    func saveDefaultSetting(distanceUnit unit: LengthUnit) {
         
         let settings = getSettings()
         settings.distanceUnit = unit
