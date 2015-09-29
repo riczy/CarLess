@@ -1,6 +1,6 @@
 import UIKit
 
-class LogController: UIViewController {
+class CaLogController: UIViewController {
     
     
     @IBOutlet weak var logModeSegmentedControl: UISegmentedControl!
@@ -17,12 +17,14 @@ class LogController: UIViewController {
         super.viewDidLoad()
         initializeStyle()
         initializeLogModeSegmentControl()
-        logModeControlPressed()        
+        logModeControlPressed()
     }
     
     private func initializeStyle() {
         
-        view.backgroundColor = CaLogStyle.SegmentBarBgColor
+        let navController = self.navigationController
+        navController?.navigationBar.barTintColor = CaLogStyle.SegmentBarBgColor
+        view.backgroundColor = CaLogStyle.ViewBgColor
     }
     
     private func initializeLogModeSegmentControl() {

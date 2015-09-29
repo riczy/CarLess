@@ -272,7 +272,7 @@
         <!--Log Controller-->
         <scene sceneID="lcQ-Cc-GEx">
             <objects>
-                <viewController title="Log Controller" id="65X-Eh-tEJ" customClass="LogController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Controller" id="65X-Eh-tEJ" customClass="CaLogController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Ec-1u-SEJ"/>
                         <viewControllerLayoutGuide type="bottom" id="4Bs-x3-0tR"/>
@@ -281,24 +281,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="H2T-zq-Q0d">
-                                <rect key="frame" x="185" y="28" width="230" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="3nZ-vo-fTI"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Map"/>
-                                    <segment title="Manual"/>
-                                </segments>
-                            </segmentedControl>
                             <containerView opaque="NO" tag="22" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-BV-gZk">
-                                <rect key="frame" x="4" y="64" width="592" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <connections>
                                     <segue destination="dOr-TZ-hmL" kind="embed" id="EKH-gu-4Fb"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" tag="32" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gPc-lg-XAc">
-                                <rect key="frame" x="4" y="64" width="592" height="487"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                                 <connections>
                                     <segue destination="Bpz-id-yht" kind="embed" id="xju-cl-AXT"/>
                                 </connections>
@@ -306,19 +296,30 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="H2T-zq-Q0d" secondAttribute="centerX" id="3ZI-ca-7Cw"/>
-                            <constraint firstItem="ld5-BV-gZk" firstAttribute="top" secondItem="H2T-zq-Q0d" secondAttribute="bottom" constant="8" id="C71-ez-2Z2"/>
+                            <constraint firstItem="ld5-BV-gZk" firstAttribute="top" secondItem="0Ec-1u-SEJ" secondAttribute="bottom" id="DTn-sS-So2"/>
                             <constraint firstItem="4Bs-x3-0tR" firstAttribute="top" secondItem="gPc-lg-XAc" secondAttribute="bottom" id="MYs-hu-Kcs"/>
-                            <constraint firstItem="ld5-BV-gZk" firstAttribute="leading" secondItem="fv9-eB-Hab" secondAttribute="leadingMargin" constant="-16" id="N08-W2-jHp"/>
-                            <constraint firstItem="gPc-lg-XAc" firstAttribute="top" secondItem="H2T-zq-Q0d" secondAttribute="bottom" constant="8" id="XZX-Ij-84Z"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gPc-lg-XAc" secondAttribute="trailing" constant="-16" id="cEi-z0-q5K"/>
-                            <constraint firstItem="H2T-zq-Q0d" firstAttribute="top" secondItem="0Ec-1u-SEJ" secondAttribute="bottom" constant="8" id="dEs-HG-Fck"/>
-                            <constraint firstItem="gPc-lg-XAc" firstAttribute="leading" secondItem="fv9-eB-Hab" secondAttribute="leadingMargin" constant="-16" id="r8k-Gf-RVh"/>
-                            <constraint firstItem="ld5-BV-gZk" firstAttribute="trailing" secondItem="fv9-eB-Hab" secondAttribute="trailingMargin" constant="16" id="wF9-2D-gfn"/>
+                            <constraint firstItem="ld5-BV-gZk" firstAttribute="leading" secondItem="fv9-eB-Hab" secondAttribute="leadingMargin" constant="-20" id="N08-W2-jHp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gPc-lg-XAc" secondAttribute="trailing" constant="-20" id="cEi-z0-q5K"/>
+                            <constraint firstItem="gPc-lg-XAc" firstAttribute="top" secondItem="0Ec-1u-SEJ" secondAttribute="bottom" id="n79-BJ-c2Y"/>
+                            <constraint firstItem="gPc-lg-XAc" firstAttribute="leading" secondItem="fv9-eB-Hab" secondAttribute="leadingMargin" constant="-20" id="r8k-Gf-RVh"/>
+                            <constraint firstItem="ld5-BV-gZk" firstAttribute="trailing" secondItem="fv9-eB-Hab" secondAttribute="trailingMargin" constant="20" id="wF9-2D-gfn"/>
                             <constraint firstItem="4Bs-x3-0tR" firstAttribute="top" secondItem="ld5-BV-gZk" secondAttribute="bottom" id="xPp-6k-4lX"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Log" image="tab-log" id="pvB-i5-6uy"/>
+                    <navigationItem key="navigationItem" id="Vyy-0Q-u2Q">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="H2T-zq-Q0d">
+                            <rect key="frame" x="185" y="8" width="230" height="29"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="230" id="3nZ-vo-fTI"/>
+                            </constraints>
+                            <segments>
+                                <segment title="Map"/>
+                                <segment title="Manual"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="logModeSegmentedControl" destination="H2T-zq-Q0d" id="O5a-Kb-xKC"/>
                         <outlet property="manualLogEntryView" destination="ld5-BV-gZk" id="91K-uK-Rkx"/>
@@ -327,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kq2-Gb-Kbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3543" y="182"/>
+            <point key="canvasLocation" x="-2731" y="182"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -346,7 +347,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="1dO-iU-xxO" kind="relationship" relationship="viewControllers" id="jVH-cC-WcS"/>
-                        <segue destination="65X-Eh-tEJ" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
+                        <segue destination="bFK-3u-FNi" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
                         <segue destination="H6X-lS-6Zo" kind="relationship" relationship="viewControllers" id="xlp-8t-G2I"/>
                     </connections>
                 </tabBarController>
@@ -363,11 +364,11 @@
                         <viewControllerLayoutGuide type="bottom" id="FZt-rG-tii"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sfn-tI-Azz">
-                        <rect key="frame" x="0.0" y="0.0" width="592" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your mode of transportation and press Start to begin tracking your route." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc3-Bd-3Wu">
-                                <rect key="frame" x="40" y="166" width="512" height="36"/>
+                                <rect key="frame" x="40" y="166" width="520" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="LnS-pC-lCm"/>
                                 </constraints>
@@ -380,7 +381,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq7-Zd-Dhf">
-                                <rect key="frame" x="20" y="210" width="552" height="8"/>
+                                <rect key="frame" x="20" y="210" width="560" height="8"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="8" id="dQe-oA-Fzl"/>
                                 </constraints>
@@ -389,7 +390,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mode Goes Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hHN-FF-s9d">
-                                <rect key="frame" x="20" y="218" width="552" height="31"/>
+                                <rect key="frame" x="20" y="218" width="560" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -424,7 +425,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMf-Q4-ShZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2815" y="609.5"/>
+            <point key="canvasLocation" x="-2003" y="609.5"/>
         </scene>
         <!--Tracked Log Progress-->
         <scene sceneID="buC-La-5sD">
@@ -435,11 +436,11 @@
                         <viewControllerLayoutGuide type="bottom" id="gox-R1-pXZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hsE-2q-AgY">
-                        <rect key="frame" x="0.0" y="0.0" width="592" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7Y-om-Goc">
-                                <rect key="frame" x="292" y="8" width="8" height="65"/>
+                                <rect key="frame" x="296" y="8" width="8" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="3tg-1a-Khp"/>
                                     <constraint firstAttribute="width" constant="8" id="690-49-NkA"/>
@@ -448,7 +449,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o8e-u5-LiM">
-                                <rect key="frame" x="4" y="81" width="584" height="406"/>
+                                <rect key="frame" x="4" y="81" width="592" height="406"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="vlh-mm-Gn9"/>
                                 </constraints>
@@ -459,25 +460,25 @@
                                 </variation>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC6-RS-dkT">
-                                <rect key="frame" x="20" y="8" width="268" height="18"/>
+                                <rect key="frame" x="20" y="8" width="272" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gt3-5B-DtX">
-                                <rect key="frame" x="304" y="8" width="268" height="18"/>
+                                <rect key="frame" x="308" y="8" width="272" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTb-NG-cJ0">
-                                <rect key="frame" x="304" y="30" width="268" height="38"/>
+                                <rect key="frame" x="308" y="30" width="272" height="38"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orK-BA-zFE">
-                                <rect key="frame" x="138" y="32" width="33" height="33"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="orK-BA-zFE">
+                                <rect key="frame" x="128" y="32" width="33" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="CUM-5t-5BK"/>
                                     <constraint firstAttribute="width" constant="33" id="MBW-rg-1bI"/>
@@ -516,7 +517,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yda-hS-thl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2116" y="609.5"/>
+            <point key="canvasLocation" x="-1304" y="609.5"/>
         </scene>
         <!--Tracked Log Summary-->
         <scene sceneID="Ycj-V5-V7r">
@@ -527,27 +528,27 @@
                         <viewControllerLayoutGuide type="bottom" id="M65-XW-8xB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3XA-nR-NJj">
-                        <rect key="frame" x="0.0" y="0.0" width="592" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Summary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG4-ge-ElS">
-                                <rect key="frame" x="20" y="45" width="552" height="18"/>
+                                <rect key="frame" x="20" y="45" width="560" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-l8-wWQ">
-                                <rect key="frame" x="20" y="90" width="552" height="26"/>
+                                <rect key="frame" x="20" y="90" width="560" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-PI-h1Q">
-                                <rect key="frame" x="20" y="124" width="552" height="38"/>
+                                <rect key="frame" x="20" y="124" width="560" height="38"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6o6-dH-8O5">
-                                <rect key="frame" x="20" y="170" width="552" height="26"/>
+                                <rect key="frame" x="20" y="170" width="560" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -586,7 +587,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cVO-pp-O8B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1413" y="609.5"/>
+            <point key="canvasLocation" x="-601" y="609.5"/>
         </scene>
         <!--Manual Log Entry-->
         <scene sceneID="Z9P-b5-hUF">
@@ -597,39 +598,39 @@
                         <viewControllerLayoutGuide type="bottom" id="MUE-MJ-XTW"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Cgg-qi-ZOy">
-                        <rect key="frame" x="0.0" y="0.0" width="592" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1O-1b-e2A">
-                                <rect key="frame" x="30" y="117" width="532" height="18"/>
+                                <rect key="frame" x="30" y="117" width="540" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kh-1l-rfR">
-                                <rect key="frame" x="30" y="45" width="532" height="18"/>
+                                <rect key="frame" x="30" y="45" width="540" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKv-W2-i8c">
-                                <rect key="frame" x="30" y="189" width="532" height="18"/>
+                                <rect key="frame" x="30" y="189" width="540" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-YM-djJ">
-                                <rect key="frame" x="30" y="138" width="532" height="31"/>
+                                <rect key="frame" x="30" y="138" width="540" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start Date &amp; Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Frr-vi-cLD">
-                                <rect key="frame" x="30" y="66" width="532" height="31"/>
+                                <rect key="frame" x="30" y="66" width="540" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Transportation Mode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N0i-f8-pvE">
-                                <rect key="frame" x="30" y="210" width="532" height="31"/>
+                                <rect key="frame" x="30" y="210" width="540" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -680,7 +681,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Em5-de-J1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2815" y="-3.5"/>
+            <point key="canvasLocation" x="-2003" y="-3.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jsJ-mR-RD9">
@@ -755,6 +756,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHg-WM-TdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1010" y="-1599"/>
+        </scene>
+        <!--Log-->
+        <scene sceneID="78T-SJ-Orw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bFK-3u-FNi" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Log" image="tab-log" id="pvB-i5-6uy"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GUP-5n-QME">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="65X-Eh-tEJ" kind="relationship" relationship="rootViewController" id="Q2r-jj-gJg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JB8-gc-rzd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3543" y="182"/>
         </scene>
     </scenes>
     <resources>
