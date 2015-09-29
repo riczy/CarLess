@@ -531,23 +531,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip Summary" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CG4-ge-ElS">
-                                <rect key="frame" x="20" y="49" width="552" height="18"/>
+                                <rect key="frame" x="20" y="45" width="552" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date and Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eb-l8-wWQ">
-                                <rect key="frame" x="20" y="94" width="552" height="26"/>
+                                <rect key="frame" x="20" y="90" width="552" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0V0-PI-h1Q">
-                                <rect key="frame" x="20" y="128" width="552" height="38"/>
+                                <rect key="frame" x="20" y="124" width="552" height="38"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6o6-dH-8O5">
-                                <rect key="frame" x="20" y="174" width="552" height="26"/>
+                                <rect key="frame" x="20" y="170" width="552" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -565,7 +565,7 @@
                             <constraint firstItem="CG4-ge-ElS" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="aoW-yZ-oO9"/>
                             <constraint firstItem="6o6-dH-8O5" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="bDu-IG-Zsj"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="top" secondItem="0eb-l8-wWQ" secondAttribute="bottom" constant="8" id="ibO-qz-kmp"/>
-                            <constraint firstItem="CG4-ge-ElS" firstAttribute="top" secondItem="wGD-Qo-DGo" secondAttribute="bottom" constant="49" id="qcj-uv-rAE"/>
+                            <constraint firstItem="CG4-ge-ElS" firstAttribute="top" secondItem="wGD-Qo-DGo" secondAttribute="bottom" constant="45" id="qcj-uv-rAE"/>
                             <constraint firstItem="6o6-dH-8O5" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="yle-N7-xHF"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="ymb-br-w7U"/>
                         </constraints>
@@ -601,42 +601,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1O-1b-e2A">
-                                <rect key="frame" x="30" y="172" width="532" height="18"/>
+                                <rect key="frame" x="30" y="117" width="532" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kh-1l-rfR">
-                                <rect key="frame" x="30" y="100" width="532" height="18"/>
+                                <rect key="frame" x="30" y="45" width="532" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKv-W2-i8c">
-                                <rect key="frame" x="30" y="244" width="532" height="18"/>
+                                <rect key="frame" x="30" y="189" width="532" height="18"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-YM-djJ">
-                                <rect key="frame" x="30" y="193" width="532" height="31"/>
+                                <rect key="frame" x="30" y="138" width="532" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start Date &amp; Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Frr-vi-cLD">
-                                <rect key="frame" x="30" y="121" width="532" height="31"/>
+                                <rect key="frame" x="30" y="66" width="532" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Transportation Mode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N0i-f8-pvE">
-                                <rect key="frame" x="30" y="265" width="532" height="31"/>
+                                <rect key="frame" x="30" y="210" width="532" height="31"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5kh-1l-rfR" firstAttribute="top" secondItem="u8g-2X-jIN" secondAttribute="bottom" constant="100" id="1on-9s-7CD"/>
+                            <constraint firstItem="5kh-1l-rfR" firstAttribute="top" secondItem="u8g-2X-jIN" secondAttribute="bottom" constant="45" id="1on-9s-7CD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eKv-W2-i8c" secondAttribute="trailing" constant="10" id="4Km-tE-xSl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="N0i-f8-pvE" secondAttribute="trailing" constant="10" id="F3O-Zu-2AA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="e1O-1b-e2A" secondAttribute="trailing" constant="10" id="Jbe-Dr-7Kl"/>

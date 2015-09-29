@@ -154,7 +154,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
             preSave()
             CaDataManager.instance.save(trip: trip)
             postSave()
-            reset()
         }
     }
     
@@ -177,6 +176,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
             self.spinnerView.stopAnimating()
             self.saveButton.enabled = true
             self.view.alpha = 1.0
+            self.reset()
         }
     }
     
