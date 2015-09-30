@@ -212,7 +212,7 @@ class CaDataManager {
     func fetchSettings() -> Setting? {
         
         let fetchRequest = NSFetchRequest(entityName: "Setting")
-        fetchRequest.includesPendingChanges = true // <-- grabbing pending settings too!!
+        fetchRequest.includesPendingChanges = false
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
         var results: [Setting]?
@@ -238,7 +238,7 @@ class CaDataManager {
         }
         
         let fetchRequest = NSFetchRequest(entityName: "Trip")
-        fetchRequest.includesPendingChanges = true
+        fetchRequest.includesPendingChanges = false
         fetchRequest.resultType = NSFetchRequestResultType.CountResultType
         
         let count = context.countForFetchRequest(fetchRequest, error: nil)
