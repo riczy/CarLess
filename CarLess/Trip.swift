@@ -7,6 +7,9 @@ class Trip: NSManagedObject {
 
     @NSManaged var distance: NSNumber
     @NSManaged var endTimestamp: NSDate?
+    @NSManaged var fuelPrice: NSNumber?
+    @NSManaged var fuelPriceDate: NSDate?
+    @NSManaged var fuelPriceSeriesId: String?
     @NSManaged var id: String
     @NSManaged private var logTypeCode: String
     @NSManaged private var modeTypeCode: String

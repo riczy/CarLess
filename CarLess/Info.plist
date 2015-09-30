@@ -15,6 +15,15 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
+            <key>api.eia.gov</key>
+            <dict>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.1</string>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
 		</dict>
 	</dict>
 	<key>CFBundleDevelopmentRegion</key>

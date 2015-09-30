@@ -8,6 +8,9 @@
     <entity name="Trip" representedClassName="Trip" syncable="YES">
         <attribute name="distance" attributeType="Double" minValueString="0" defaultValueString="0.0" syncable="YES"/>
         <attribute name="endTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fuelPrice" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fuelPriceDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="fuelPriceSeriesId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="logTypeCode" attributeType="String" syncable="YES"/>
         <attribute name="modeTypeCode" attributeType="String" syncable="YES"/>
@@ -41,7 +44,7 @@
     </entity>
     <elements>
         <element name="Setting" positionX="-164" positionY="297" width="128" height="90"/>
-        <element name="Trip" positionX="-351" positionY="-28" width="128" height="163"/>
+        <element name="Trip" positionX="-351" positionY="-28" width="128" height="210"/>
         <element name="Vehicle" positionX="-396" positionY="252" width="128" height="178"/>
         <element name="Waypoint" positionX="-137" positionY="54" width="128" height="180"/>
     </elements>
