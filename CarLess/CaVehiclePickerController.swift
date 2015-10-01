@@ -123,14 +123,16 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     /// Returns true if a match was found and false if not.
     private func set(fromValue value: String) -> Bool {
         
-        for index in 0...data.count-1 {
-            let item = data[index]
-            if item.value == value {
-                textField.text = item.text
-                selectedItem = item
-                lastSelectedIndex = index
-                pickerView.selectRow(index, inComponent: 0, animated: false)
-                return true
+        if !data.isEmpty {
+            for index in 0...data.count-1 {
+                let item = data[index]
+                if item.value == value {
+                    textField.text = item.text
+                    selectedItem = item
+                    lastSelectedIndex = index
+                    pickerView.selectRow(index, inComponent: 0, animated: false)
+                    return true
+                }
             }
         }
         return false

@@ -32,10 +32,12 @@ class CaDistanceUnitListController: UITableViewController {
     private func reset() {
         
         selectedRow = nil
-        let unit = CaDataManager.instance.defaultDistanceUnit
-        for index in 0...(LengthUnit.userValues.count - 1) {
-            if LengthUnit.userValues[index] == unit {
-                selectedRow = index
+        if !LengthUnit.userValues.isEmpty {
+            let unit = CaDataManager.instance.defaultDistanceUnit
+            for index in 0...(LengthUnit.userValues.count - 1) {
+                if LengthUnit.userValues[index] == unit {
+                    selectedRow = index
+                }
             }
         }
     }
