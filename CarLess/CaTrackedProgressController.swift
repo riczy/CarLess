@@ -44,11 +44,11 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        reset()
+
         initializeStyle()
         renderStopButton()
         
-        modeImageView?.image = UIImage(named: trip.modeType.imageFilename)
+        modeImageView?.image = UIImage(named: mode.imageFilename)
 
         mapView.mapType = MKMapType.Standard
         mapView.zoomEnabled = true
@@ -148,12 +148,34 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     private func startTracking() {
         
         if CaLocationManager.isLocationServiceAvailable() {
+            
             mapView.showsUserLocation = true
+            
+            trip = CaDataManager.instance.initTrip()
+            trip.distance = 0.0
+            trip.endTimestamp = nil
+            trip.logType = LogType.Tracked
+            trip.modeType = mode
+            trip.startTimestamp = NSDate()
+            
+            lastLocation = nil
+            nextToLastLocation = nil
+            
             let locationSettings = getActivityTypeAndAccuracyForMode()
             locationManager.activityType = locationSettings.activityType
             locationManager.desiredAccuracy = locationSettings.accuracy
             locationManager.startUpdatingLocation()
-            trip.startTimestamp = NSDate()
+
+            // Grab the fuel price for today upon starting. Maybe this should wait until it is certain they will save the entry. TBD.
+            let onSuccess = {(fuelPrice: EiaWeeklyFuelPrice) -> Void in
+                self.trip.fuelPrice = fuelPrice.price
+                self.trip.fuelPriceDate = fuelPrice.startDate
+                self.trip.fuelPriceSeriesId = fuelPrice.seriesId
+            }
+            let onError = {() -> Void in
+                
+            }
+            CaFuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onSuccess, onError: onError)
         } else {
             locationManager.requestAlwaysAuthorization()
         }
@@ -180,18 +202,6 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     }
     
     // MARK: - Miscellaneous
-    
-    private func reset() {
-        
-        lastLocation = nil
-        nextToLastLocation = nil
-        
-        trip = CaDataManager.instance.initTrip()
-        trip.distance = 0.0
-        trip.endTimestamp = nil
-        trip.logType = LogType.Tracked
-        trip.modeType = mode
-    }
     
     private func addTripWaypoint(location: CLLocation) {
         

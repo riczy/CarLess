@@ -152,14 +152,18 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         let trip = createTrip()
         if validate(trip) {
             preSave()
-            let onSuccess = {(fuelPrice: EiaWeeklyFuelPrice) -> Void in
+            let onFuelPriceFindSuccess = {(fuelPrice: EiaWeeklyFuelPrice) -> Void in
                 trip.fuelPrice = fuelPrice.price
                 trip.fuelPriceDate = fuelPrice.startDate
                 trip.fuelPriceSeriesId = fuelPrice.seriesId
                 CaDataManager.instance.save(trip: trip)
                 self.postSave()
             }
-            CaFuelPriceFinder().fuelPrice(forDate: trip.startTimestamp, onSuccess: onSuccess)
+            let onFuelPriceFindError = {() -> Void in
+                CaDataManager.instance.save(trip: trip)
+                self.postSave()
+            }
+            CaFuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onFuelPriceFindSuccess, onError: onFuelPriceFindError)
        }
     }
     

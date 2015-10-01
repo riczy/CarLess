@@ -12,6 +12,11 @@ struct EiaWeeklyFuelPrice: CustomStringConvertible {
             return "\(price), \(startDate) - \(endDate), \(seriesId)"
         }
     }
+    
+    func isDateWithinRange(date: NSDate) -> Bool {
+        
+        return date.isOnOrAfter(startDate) && date.isOnOrBefore(endDate)
+    }
 }
 
 class EiaWeeklyFuelPriceParser: NSObject {
@@ -42,11 +47,9 @@ class EiaWeeklyFuelPriceParser: NSObject {
                         
                         if let startDate = dateFormatter.dateFromString(startDateString!) {
                             
-                            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-                            let endDate = calendar?.dateByAddingUnit(NSCalendarUnit.Day, value: 6, toDate: startDate, options: NSCalendarOptions(rawValue: 0))
-                            
-                            if date.isOnOrAfter(startDate) && date.isOnOrBefore(endDate!) {
-                                return EiaWeeklyFuelPrice(startDate: startDate, endDate: endDate!, price: amount!, seriesId: self.seriesId)
+                            let endDate = createEndDateFromStartDate(startDate)
+                            if date.isOnOrAfter(startDate) && date.isOnOrBefore(endDate) {
+                                return EiaWeeklyFuelPrice(startDate: startDate, endDate: endDate, price: amount!, seriesId: self.seriesId)
                             }
                         }
                     }
@@ -76,6 +79,14 @@ class EiaWeeklyFuelPriceParser: NSObject {
         }
         
         return nil
+    }
+    
+    private func createEndDateFromStartDate(startDate: NSDate) -> NSDate {
+        
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        var endDate = calendar?.dateByAddingUnit(NSCalendarUnit.Day, value: 6, toDate: startDate, options: NSCalendarOptions(rawValue: 0))
+        endDate = calendar?.dateBySettingHour(23, minute: 59, second: 59, ofDate: endDate!, options: NSCalendarOptions(rawValue: 0))
+        return endDate!
     }
     
 }
