@@ -132,7 +132,7 @@ class CaSettingsController: UITableViewController {
     
     private func buildVehiclePreferenceCell(indexPath: NSIndexPath) -> UITableViewCell {
         
-        let vehicle = CaDataManager.instance.getDefaultVehicle()
+        let vehicle = CaDataManager.instance.defaultVehicle
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Vehicle"
         cell.detailTextLabel?.text = vehicle?.displayDescription

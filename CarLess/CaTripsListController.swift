@@ -97,7 +97,7 @@ class CaTripsListController: UITableViewController {
         applyStyleForCell(cell)
         
         cell.startTimeLabel?.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
-        cell.distanceLabel?.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit)!)!
+        cell.distanceLabel?.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!
         cell.distanceUnitLabel?.text = distanceUnit.abbreviation
         cell.modeImageView?.image = UIImage(named: trip.modeType.imageFilename)
         

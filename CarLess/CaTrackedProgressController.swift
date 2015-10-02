@@ -24,7 +24,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         }
         set {
             trip.distance = newValue
-            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit)!)
+            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit))
         }
     }
     
@@ -157,6 +157,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
             trip.logType = LogType.Tracked
             trip.modeType = mode
             trip.startTimestamp = NSDate()
+            trip.vehicle = CaDataManager.instance.defaultVehicle
             
             lastLocation = nil
             nextToLastLocation = nil

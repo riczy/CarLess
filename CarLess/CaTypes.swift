@@ -141,5 +141,17 @@ struct CaFormatter {
         }
     }
     
+    private static var _money: NSNumberFormatter?
+    static var money: NSNumberFormatter {
+        get {
+            if _money == nil {
+                _money = NSNumberFormatter()
+                _money!.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+                _money!.roundingMode = NSNumberFormatterRoundingMode.RoundHalfUp
+            }
+            return _money!
+        }
+    }
+    
 }
 

@@ -8,20 +8,6 @@ class CaDataManager {
     
     var context: NSManagedObjectContext
     
-    private var _defaultDistanceUnit: LengthUnit?
-    var defaultDistanceUnit: LengthUnit {
-        get {
-            if _defaultDistanceUnit == nil {
-                if let unit = fetchSettings()?.distanceUnit {
-                    _defaultDistanceUnit = unit
-                } else {
-                    _defaultDistanceUnit = LengthUnit.Mile
-                    saveDefaultSetting(distanceUnit: _defaultDistanceUnit!)
-                }
-            }
-            return _defaultDistanceUnit!
-        }
-    }
     
     private init() {
         
@@ -47,18 +33,8 @@ class CaDataManager {
     }
     
     
-    // MARK: - Entity Instance
+    // MARK: - Waypoints
     
-    func initTrip() -> Trip {
-        
-        let entityDescription = NSEntityDescription.entityForName("Trip", inManagedObjectContext: context)
-        
-        let trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
-        trip.id = NSUUID().UUIDString
-        trip.distance = 0.0
-        
-        return trip
-    }
     
     func initWaypoint() -> Waypoint {
         
@@ -75,30 +51,23 @@ class CaDataManager {
         return waypoint
     }
     
-    func initVehicle() -> Vehicle {
+    // MARK: - Trips
+    
+    func initTrip() -> Trip {
         
-        let entityDescription = NSEntityDescription.entityForName("Vehicle", inManagedObjectContext: context)
-        let vehicle = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Vehicle
-        vehicle.id = NSUUID().UUIDString
+        let entityDescription = NSEntityDescription.entityForName("Trip", inManagedObjectContext: context)
         
-        return vehicle
+        let trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
+        trip.id = NSUUID().UUIDString
+        trip.distance = 0.0
+        
+        return trip
     }
-    
-    private func initSetting() -> Setting {
-    
-        let entityDescription = NSEntityDescription.entityForName("Setting", inManagedObjectContext: context)
-        let settings = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Setting
-        settings.id = NSUUID().UUIDString
-        
-        return settings
-    }
-    
-    // MARK: - Save
     
     func save(trip trip: Trip) {
         
         if trip.vehicle == nil {
-            trip.vehicle = getDefaultVehicle()
+            trip.vehicle = defaultVehicle
         }
         
         if trip.managedObjectContext!.hasChanges {
@@ -111,55 +80,6 @@ class CaDataManager {
         }
     }
     
-    func save(vehicle vehicle: Vehicle) {
-        
-        if vehicle.managedObjectContext!.hasChanges {
-            do {
-                try vehicle.managedObjectContext!.save()
-                print(vehicle)
-            } catch let error as NSError {
-                NSLog("Error when saving vehicle: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func save(settings settings: Setting) {
-        
-        if settings.managedObjectContext!.hasChanges {
-            do {
-                try settings.managedObjectContext!.save()
-                _defaultDistanceUnit = settings.distanceUnit
-                print(settings)
-            } catch let error as NSError {
-                NSLog("Error when saving vehicle: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func saveDefaultSetting(vehicle vehicle: Vehicle?) {
-        
-        let settings = getSettings()
-        settings.vehicle = vehicle
-        save(settings: settings)
-    }
-    
-    func saveDefaultSetting(distanceUnit unit: LengthUnit) {
-        
-        let settings = getSettings()
-        settings.distanceUnit = unit
-        save(settings: settings)
-    }
-    
-    private func getSettings() -> Setting {
-    
-        var settings = self.fetchSettings()
-        if settings == nil {
-            settings = initSetting()
-        }
-        return settings!
-    }
-    
-    // MARK: - Fetch
     
     func fetchTrips() -> [Trip] {
         
@@ -192,6 +112,29 @@ class CaDataManager {
         
     }
     
+    // MARK: - Vehicles
+    
+    func initVehicle() -> Vehicle {
+        
+        let entityDescription = NSEntityDescription.entityForName("Vehicle", inManagedObjectContext: context)
+        let vehicle = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Vehicle
+        vehicle.id = NSUUID().UUIDString
+        
+        return vehicle
+    }
+    
+    func save(vehicle vehicle: Vehicle) {
+        
+        if vehicle.managedObjectContext!.hasChanges {
+            do {
+                try vehicle.managedObjectContext!.save()
+                print(vehicle)
+            } catch let error as NSError {
+                NSLog("Error when saving vehicle: \(error.localizedDescription)")
+            }
+        }
+    }
+   
     func fetchVehicles() -> [Vehicle] {
         
         let fetchRequest = NSFetchRequest(entityName: "Vehicle")
@@ -209,10 +152,86 @@ class CaDataManager {
         return results == nil ? [Vehicle]() : results!
     }
     
+    // MARK: - Settings
+    
+    private var _defaultDistanceUnit: LengthUnit?
+    var defaultDistanceUnit: LengthUnit {
+        get {
+            if _defaultDistanceUnit == nil {
+                if let unit = fetchSettings()?.distanceUnit {
+                    _defaultDistanceUnit = unit
+                } else {
+                    _defaultDistanceUnit = LengthUnit.Mile
+                    saveDefaultSetting(distanceUnit: _defaultDistanceUnit!)
+                }
+            }
+            return _defaultDistanceUnit!
+        }
+    }
+    
+    private var _defaultVehicle: Vehicle?
+    var defaultVehicle: Vehicle? {
+        get {
+            if _defaultVehicle == nil {
+                if let vehicle = fetchSettings()?.vehicle {
+                    _defaultVehicle = vehicle
+                }
+            }
+            return _defaultVehicle
+        }
+    }
+    
+    private func initSetting() -> Setting {
+        
+        let entityDescription = NSEntityDescription.entityForName("Setting", inManagedObjectContext: context)
+        let settings = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Setting
+        settings.id = NSUUID().UUIDString
+        
+        return settings
+    }
+    
+    func save(settings settings: Setting) {
+        
+        if settings.managedObjectContext!.hasChanges {
+            do {
+                try settings.managedObjectContext!.save()
+                _defaultDistanceUnit = settings.distanceUnit
+                _defaultVehicle = settings.vehicle
+                print(settings)
+            } catch let error as NSError {
+                NSLog("Error when saving vehicle: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func saveDefaultSetting(vehicle vehicle: Vehicle?) {
+        
+        let settings = getSettings()
+        settings.vehicle = vehicle
+        save(settings: settings)
+    }
+    
+    func saveDefaultSetting(distanceUnit unit: LengthUnit) {
+        
+        let settings = getSettings()
+        settings.distanceUnit = unit
+        save(settings: settings)
+    }
+    
+    private func getSettings() -> Setting {
+        
+        var settings = self.fetchSettings()
+        if settings == nil {
+            settings = initSetting()
+        }
+        return settings!
+    }
+    
     func fetchSettings() -> Setting? {
         
         let fetchRequest = NSFetchRequest(entityName: "Setting")
         fetchRequest.includesPendingChanges = false
+        fetchRequest.fetchLimit = 1
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
         var results: [Setting]?
@@ -224,11 +243,6 @@ class CaDataManager {
         }
         
         return results == nil || results?.count == 0 ? nil : results![0]
-    }
-    
-    func getDefaultVehicle() -> Vehicle? {
-        
-        return fetchSettings()?.vehicle
     }
     
     func countTripsUsedByVehicle(vehicle: Vehicle?) -> Int {
@@ -249,4 +263,6 @@ class CaDataManager {
         
         return count
     }
+    
+
 }

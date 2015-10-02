@@ -52,7 +52,7 @@ class CaVehicleController: UIViewController {
     
     private func getVehicle() {
         
-        vehicle = CaDataManager.instance.getDefaultVehicle()
+        vehicle = CaDataManager.instance.defaultVehicle
         if vehicle != nil {
             yearPickerDelegate.load(selectYear: vehicle!.year)
             makePickerDelegate.load(year: vehicle!.year, selectMake: vehicle!.make)

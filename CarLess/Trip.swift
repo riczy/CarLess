@@ -35,7 +35,7 @@ class Trip: NSManagedObject {
         }
     }
     
-    func getDistanceInUnit(unit: LengthUnit) -> Double? {
+    func getDistanceInUnit(unit: LengthUnit) -> Double {
         
         return distance.doubleValue * unit.conversionFactor
     }
@@ -44,5 +44,24 @@ class Trip: NSManagedObject {
         
         // Convert distance to meters
         self.distance = distance.doubleValue / unit.conversionFactor
+    }
+    
+    func moneySaved() -> Double? {
+        
+        let price = fuelPrice?.doubleValue
+        let mpg = vehicle?.combinedMpg
+        
+        if price != nil && mpg != nil {
+            return price! * getDistanceInUnit(LengthUnit.Mile) / mpg!
+        }
+        return nil
+    }
+    
+    func fuelSaved() -> NSNumber? {
+        
+        if let mpg = vehicle?.combinedMpg {
+            return getDistanceInUnit(LengthUnit.Mile) / mpg
+        }
+        return nil
     }
 }

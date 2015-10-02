@@ -552,34 +552,56 @@
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XfN-eb-pev">
+                                <rect key="frame" x="20" y="276" width="560" height="42"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aI-0q-jlI">
+                                <rect key="frame" x="20" y="226" width="560" height="42"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6o6-dH-8O5" firstAttribute="top" secondItem="0V0-PI-h1Q" secondAttribute="bottom" constant="8" id="0R0-Ef-18i"/>
                             <constraint firstItem="0eb-l8-wWQ" firstAttribute="top" secondItem="wGD-Qo-DGo" secondAttribute="bottom" constant="94" id="2ME-d0-S3g"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XfN-eb-pev" secondAttribute="trailing" id="90R-XO-rDz"/>
                             <constraint firstItem="CG4-ge-ElS" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="Deo-Wv-SYg"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="Fk1-k7-Zqr"/>
                             <constraint firstItem="0eb-l8-wWQ" firstAttribute="top" secondItem="CG4-ge-ElS" secondAttribute="bottom" constant="27" id="GVd-Rs-OzQ"/>
                             <constraint firstItem="0eb-l8-wWQ" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="OKU-dS-jqZ"/>
                             <constraint firstItem="0eb-l8-wWQ" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="RUu-7K-MiS"/>
+                            <constraint firstItem="XfN-eb-pev" firstAttribute="top" secondItem="7aI-0q-jlI" secondAttribute="bottom" constant="8" id="Sig-FP-ngg"/>
+                            <constraint firstItem="7aI-0q-jlI" firstAttribute="centerY" secondItem="3XA-nR-NJj" secondAttribute="centerY" id="Wu8-5i-sLg"/>
+                            <constraint firstItem="XfN-eb-pev" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="WxO-fV-eLd"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="ZVC-Ih-lUW"/>
                             <constraint firstItem="CG4-ge-ElS" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="aoW-yZ-oO9"/>
                             <constraint firstItem="6o6-dH-8O5" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="bDu-IG-Zsj"/>
+                            <constraint firstItem="7aI-0q-jlI" firstAttribute="top" secondItem="6o6-dH-8O5" secondAttribute="bottom" constant="30" id="cgC-Vl-2Tk"/>
+                            <constraint firstItem="7aI-0q-jlI" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="gW4-VD-ooY"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="top" secondItem="0eb-l8-wWQ" secondAttribute="bottom" constant="8" id="ibO-qz-kmp"/>
                             <constraint firstItem="CG4-ge-ElS" firstAttribute="top" secondItem="wGD-Qo-DGo" secondAttribute="bottom" constant="45" id="qcj-uv-rAE"/>
                             <constraint firstItem="6o6-dH-8O5" firstAttribute="leading" secondItem="3XA-nR-NJj" secondAttribute="leadingMargin" id="yle-N7-xHF"/>
                             <constraint firstItem="0V0-PI-h1Q" firstAttribute="trailing" secondItem="3XA-nR-NJj" secondAttribute="trailingMargin" id="ymb-br-w7U"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7aI-0q-jlI" secondAttribute="trailing" id="z8w-UK-L41"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="2ME-d0-S3g"/>
+                                <exclude reference="Wu8-5i-sLg"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="activityHeadingLabel" destination="CG4-ge-ElS" id="eMH-ad-7IF"/>
                         <outlet property="distanceLabel" destination="0V0-PI-h1Q" id="vBV-1U-2IC"/>
+                        <outlet property="fuelSavedLabel" destination="XfN-eb-pev" id="A8h-Mx-b2j"/>
                         <outlet property="modeLabel" destination="6o6-dH-8O5" id="yk8-bc-8N1"/>
+                        <outlet property="moneySavedLabel" destination="7aI-0q-jlI" id="JxI-CT-gC5"/>
                         <outlet property="startTimestampLabel" destination="0eb-l8-wWQ" id="hYm-fD-NYS"/>
                         <segue destination="cVO-pp-O8B" kind="unwind" identifier="TrackedSummaryToHomeSegue" unwindAction="returnToTrackingLogEntryHome:" id="MIY-ng-MVJ"/>
                     </connections>
@@ -587,7 +609,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cVO-pp-O8B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-601" y="609.5"/>
+            <point key="canvasLocation" x="-601" y="609"/>
         </scene>
         <!--Manual Log Entry-->
         <scene sceneID="Z9P-b5-hUF">

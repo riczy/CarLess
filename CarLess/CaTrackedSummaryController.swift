@@ -9,6 +9,8 @@ class CaTrackedSummaryController: UIViewController {
     @IBOutlet weak var startTimestampLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
+    @IBOutlet weak var moneySavedLabel: UILabel!
+    @IBOutlet weak var fuelSavedLabel: UILabel!
     private var spinnerView: UIActivityIndicatorView!
     private var saveButton: UIButton!
     private var discardButton: UIButton!
@@ -33,11 +35,24 @@ class CaTrackedSummaryController: UIViewController {
     
     private func setDisplayText() {
         
-        if trip != nil {
+        if trip == nil {
+            distanceLabel.text = nil
+            startTimestampLabel.text = nil
+        } else {
             let distanceUnit = CaDataManager.instance.defaultDistanceUnit
-            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit)!)!) \(distanceUnit.abbreviation)"
+            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
             startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
-            modeLabel.text = trip!.modeType.description
+        }
+        modeLabel.text = trip?.modeType.description
+        if let moneySaved = trip?.moneySaved() {
+            moneySavedLabel.text = CaFormatter.money.stringFromNumber(moneySaved)
+        } else {
+            moneySavedLabel.text = nil
+        }
+        if let fuelSaved = trip?.fuelSaved() {
+            fuelSavedLabel.text = "\(CaFormatter.distance.stringFromNumber(fuelSaved)!) gal"
+        } else {
+            fuelSavedLabel.text = nil
         }
     }
     
