@@ -77,6 +77,7 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         
         lastSelectedModeIndex = 0
         mode = Mode.allValues[lastSelectedModeIndex]
+        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
     
@@ -114,8 +115,6 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
         
         modeTextField.inputView = modePicker
         modeTextField.inputAccessoryView = toolbar
-        
-        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
     private func renderStartButton() {
