@@ -5,19 +5,19 @@ class CaTrackedSummaryController: UIViewController {
     
     // MARK: - UI Properties
     
-    @IBOutlet weak var activityHeadingLabel: UILabel!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var startTimestampLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
     @IBOutlet weak var moneySavedLabel: UILabel!
     @IBOutlet weak var fuelSavedLabel: UILabel!
     private var spinnerView: UIActivityIndicatorView!
-    private var saveButton: UIButton!
-    private var discardButton: UIButton!
     
     // MARK: - Properties
     
     var trip: Trip?
+    var isSaveableSummary = false
+    var exitSegue: String?
     
     // MARK: - View Lifecycle Methods
     
@@ -25,8 +25,7 @@ class CaTrackedSummaryController: UIViewController {
         
         super.viewDidLoad()
         initializeSpinner()
-        renderSaveButton()
-        renderDiscardButton()
+        renderNavigationButtonItems()
         initializeStyle()
         setDisplayText()
     }
@@ -59,7 +58,6 @@ class CaTrackedSummaryController: UIViewController {
     private func initializeStyle() {
         
         view.backgroundColor = CaLogStyle.ViewBgColor
-        activityHeadingLabel.textColor = CaLogStyle.ViewLabelColor
         startTimestampLabel.textColor = CaLogStyle.ViewFieldColor
         distanceLabel.textColor = CaLogStyle.ViewFieldColor
         modeLabel.textColor = CaLogStyle.ViewFieldColor
@@ -75,35 +73,19 @@ class CaTrackedSummaryController: UIViewController {
         view.addSubview(spinnerView)
     }
     
-    private func renderSaveButton() {
-        
-        saveButton = CaComponent.createButton(title: "Save", color: CaLogStyle.SaveButtonColor, bgColor: CaLogStyle.SaveButtonBgColor, borderColor: CaLogStyle.SaveButtonBorderColor)
-        self.view.addSubview(saveButton)
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: -5.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
-        
-        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
+    private func renderNavigationButtonItems() {
+    
+        if isSaveableSummary {
+            let trashButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: "discard")
+            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save")
+            navigationBar.leftBarButtonItem = trashButtonItem
+            navigationBar.rightBarButtonItem = saveButtonItem
+        } else {
+            let doneButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "exit")
+            navigationBar.leftBarButtonItem = doneButtonItem
+        }
     }
     
-    
-    private func renderDiscardButton() {
-        
-        discardButton = CaComponent.createButton(title: "Discard", color: CaLogStyle.DiscardButtonColor, bgColor: CaLogStyle.DiscardButtonBgColor, borderColor: CaLogStyle.DiscardButtonBorderColor)
-        self.view.addSubview(discardButton)
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 5.0))
-        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
-        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: discardButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
-        
-        discardButton.addTarget(self, action: "discard", forControlEvents: UIControlEvents.TouchUpInside)
-    }
-
   
     // MARK: - Scene Actions
     
@@ -125,8 +107,6 @@ class CaTrackedSummaryController: UIViewController {
     private func preSave() {
         
         view.alpha = CaConstants.SaveDisplayAlpha
-        saveButton.enabled = false
-        discardButton.enabled = false
         spinnerView.startAnimating()
     }
     
@@ -135,8 +115,6 @@ class CaTrackedSummaryController: UIViewController {
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(CaConstants.SaveActivityDelay))
         dispatch_after(time, dispatch_get_main_queue()) {
             self.spinnerView.stopAnimating()
-            self.saveButton.enabled = true
-            self.discardButton.enabled = true
             self.view.alpha = 1.0
         }
     }
@@ -153,10 +131,10 @@ class CaTrackedSummaryController: UIViewController {
         presentViewController(alert, animated: true) { () -> Void in }
     }
     
-    private func exit() {
+    func exit() {
     
         trip = nil
-        performSegueWithIdentifier(CaSegue.TrackedSummaryToHome, sender: self)
+        performSegueWithIdentifier(self.exitSegue!, sender: self)
     }
 
 }

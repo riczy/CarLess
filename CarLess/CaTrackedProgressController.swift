@@ -93,6 +93,8 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         if segue.identifier == CaSegue.TrackedProgressToSummary {
             let vc = segue.destinationViewController as! CaTrackedSummaryController
             vc.trip = trip
+            vc.isSaveableSummary = true
+            vc.exitSegue = CaSegue.TrackedSummaryToHome
         }
     }
     

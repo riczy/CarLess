@@ -18,7 +18,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
  
     // MARK: - Properties
-    
+    private var trip: Trip?
     private var lastSelectedModeIndex = 0
     
     private struct Tag {
@@ -30,7 +30,6 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         
         initializeDatePicker()
         initializeModePicker()
@@ -157,10 +156,12 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
                 trip.fuelPriceDate = fuelPrice.startDate
                 trip.fuelPriceSeriesId = fuelPrice.seriesId
                 CaDataManager.instance.save(trip: trip)
+                self.trip = trip
                 self.postSave()
             }
             let onFuelPriceFindError = {() -> Void in
                 CaDataManager.instance.save(trip: trip)
+                self.trip = trip
                 self.postSave()
             }
             CaFuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onFuelPriceFindSuccess, onError: onFuelPriceFindError)
@@ -186,7 +187,17 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
             self.spinnerView.stopAnimating()
             self.saveButton.enabled = true
             self.view.alpha = 1.0
-            self.reset()
+            self.performSegueWithIdentifier(CaSegue.LogManualTripHomeToSummary, sender: self)
+       }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == CaSegue.LogManualTripHomeToSummary {
+            let vc = segue.destinationViewController as! CaTrackedSummaryController
+            vc.trip = self.trip
+            vc.isSaveableSummary = false
+            vc.exitSegue = CaSegue.LogManualTripSummaryToHome
         }
     }
     
@@ -209,6 +220,8 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     
     func reset() {
         
+        trip = nil
+        
         datePicker.date = NSDate()
         timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         
@@ -217,6 +230,12 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         lastSelectedModeIndex = 0
         modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
+    }
+    
+    @IBAction
+    func returnToManualLogEntryHome(segue: UIStoryboardSegue) {
+        
+        reset()
     }
     
     func datePickerDone() {
@@ -251,6 +270,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
         modeTextField.resignFirstResponder()
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
+    
     
     // MARK: - Mode UIPicker DataSource Methods
     
