@@ -4,9 +4,9 @@ import UIKit
 
 struct CaSegue {
     
-    static let TrackedHomeToProgress = "TrackedHomeToProgressSegue" //LogTrackedTripHomeToInProgressSegue
-    static let TrackedProgressToSummary = "TrackedProgressToSummarySegue" //LogTrackedTripProgressToSummarySegue
-    static let TrackedSummaryToHome = "TrackedSummaryToHomeSegue" //LogTrackedTripSummaryToHomeSegue
+    static let LogTrackedTripHomeToProgress = "LogTrackedTripHomeToProgressSegue"
+    static let LogTrackedTripProgressToSummary = "LogTrackedTripProgressToSummarySegue"
+    static let LogTrackedTripSummaryToHome = "LogTrackedTripSummaryToHomeSegue"
     static let LogManualTripHomeToSummary = "LogManualTripHomeToSummarySegue"
     static let LogManualTripSummaryToHome = "LogManualTripSummaryToHomeSegue"
     

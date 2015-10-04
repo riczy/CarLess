@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class CaTrackedSummaryController: UIViewController {
+class CaLogTripSummaryController: UIViewController {
     
     // MARK: - UI Properties
     

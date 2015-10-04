@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     // MARK: - UI Properties
     
@@ -194,7 +194,7 @@ class CaManualEntryController: UIViewController, UITextFieldDelegate, UIPickerVi
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.LogManualTripHomeToSummary {
-            let vc = segue.destinationViewController as! CaTrackedSummaryController
+            let vc = segue.destinationViewController as! CaLogTripSummaryController
             vc.trip = self.trip
             vc.isSaveableSummary = false
             vc.exitSegue = CaSegue.LogManualTripSummaryToHome

@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     // MARK: - UI Properties
 
@@ -90,11 +90,11 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == CaSegue.TrackedProgressToSummary {
-            let vc = segue.destinationViewController as! CaTrackedSummaryController
+        if segue.identifier == CaSegue.LogTrackedTripProgressToSummary {
+            let vc = segue.destinationViewController as! CaLogTripSummaryController
             vc.trip = trip
             vc.isSaveableSummary = true
-            vc.exitSegue = CaSegue.TrackedSummaryToHome
+            vc.exitSegue = CaSegue.LogTrackedTripSummaryToHome
         }
     }
     
@@ -201,7 +201,7 @@ class CaTrackedProgressController: UIViewController, CLLocationManagerDelegate, 
         locationManager.stopUpdatingLocation()
         mapView.showsUserLocation = false
         trip.endTimestamp = NSDate()
-        performSegueWithIdentifier(CaSegue.TrackedProgressToSummary, sender: self)
+        performSegueWithIdentifier(CaSegue.LogTrackedTripProgressToSummary, sender: self)
     }
     
     // MARK: - Miscellaneous

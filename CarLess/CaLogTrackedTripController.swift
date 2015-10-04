@@ -1,7 +1,7 @@
 import UIKit
 import MapKit
 
-class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
     // MARK: - UI Properties
     
@@ -44,7 +44,7 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
 
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
-        if identifier == CaSegue.TrackedHomeToProgress {
+        if identifier == CaSegue.LogTrackedTripHomeToProgress {
             if CaLocationManager.isLocationServiceAvailable() {
                 return true
             } else {
@@ -58,8 +58,8 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == CaSegue.TrackedHomeToProgress {
-            let vc = segue.destinationViewController as! CaTrackedProgressController
+        if segue.identifier == CaSegue.LogTrackedTripHomeToProgress {
+            let vc = segue.destinationViewController as! CaLogTrackedTripProgressController
             vc.mode = mode
         }
     }
@@ -68,8 +68,8 @@ class CaTrackedEntryController: UIViewController, UIPickerViewDataSource, UIPick
     
     func startTracking() {
         
-        if shouldPerformSegueWithIdentifier(CaSegue.TrackedHomeToProgress, sender: self) {
-            performSegueWithIdentifier(CaSegue.TrackedHomeToProgress, sender: self)
+        if shouldPerformSegueWithIdentifier(CaSegue.LogTrackedTripHomeToProgress, sender: self) {
+            performSegueWithIdentifier(CaSegue.LogTrackedTripHomeToProgress, sender: self)
         }
     }
     

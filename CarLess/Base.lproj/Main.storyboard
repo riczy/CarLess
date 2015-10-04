@@ -355,10 +355,10 @@
             </objects>
             <point key="canvasLocation" x="-3543" y="-846"/>
         </scene>
-        <!--Tracked Log Entry-->
+        <!--Log Tracked Trip-->
         <scene sceneID="Y3b-0k-Bbk">
             <objects>
-                <viewController title="Tracked Log Entry" id="Bpz-id-yht" customClass="CaTrackedEntryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Tracked Trip" id="Bpz-id-yht" customClass="CaLogTrackedTripController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ajr-Ta-Pfp"/>
                         <viewControllerLayoutGuide type="bottom" id="FZt-rG-tii"/>
@@ -420,17 +420,17 @@
                     <connections>
                         <outlet property="headingLabel" destination="Yc3-Bd-3Wu" id="eVq-ah-hyY"/>
                         <outlet property="modeTextField" destination="hHN-FF-s9d" id="OxE-Yj-iEm"/>
-                        <segue destination="1fr-d2-bnx" kind="presentation" identifier="TrackedHomeToProgressSegue" id="DRK-4u-mPb"/>
+                        <segue destination="1fr-d2-bnx" kind="presentation" identifier="LogTrackedTripHomeToProgressSegue" id="DRK-4u-mPb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMf-Q4-ShZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2003" y="609.5"/>
         </scene>
-        <!--Tracked Log Progress-->
+        <!--Log Tracked Trip Progress-->
         <scene sceneID="buC-La-5sD">
             <objects>
-                <viewController title="Tracked Log Progress" modalTransitionStyle="flipHorizontal" id="1fr-d2-bnx" customClass="CaTrackedProgressController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Tracked Trip Progress" modalTransitionStyle="flipHorizontal" id="1fr-d2-bnx" customClass="CaLogTrackedTripProgressController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GeQ-zb-ofB"/>
                         <viewControllerLayoutGuide type="bottom" id="gox-R1-pXZ"/>
@@ -512,17 +512,17 @@
                         <outlet property="mapView" destination="o8e-u5-LiM" id="iw3-9Y-byb"/>
                         <outlet property="modeImageView" destination="orK-BA-zFE" id="G6R-nY-QQI"/>
                         <outlet property="modeTitleLabel" destination="dC6-RS-dkT" id="Rc0-jo-9Br"/>
-                        <segue destination="Ou4-FC-MJj" kind="presentation" identifier="TrackedProgressToSummarySegue" id="IaS-6K-ilb"/>
+                        <segue destination="Ou4-FC-MJj" kind="presentation" identifier="LogTrackedTripProgressToSummarySegue" id="IaS-6K-ilb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yda-hS-thl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1305" y="666"/>
         </scene>
-        <!--Tracked Log Summary-->
+        <!--Log Trip Summary-->
         <scene sceneID="Ycj-V5-V7r">
             <objects>
-                <viewController title="Tracked Log Summary" modalTransitionStyle="flipHorizontal" id="Ou4-FC-MJj" customClass="CaTrackedSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Trip Summary" modalTransitionStyle="flipHorizontal" id="Ou4-FC-MJj" customClass="CaLogTripSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wGD-Qo-DGo"/>
                         <viewControllerLayoutGuide type="bottom" id="M65-XW-8xB"/>
@@ -607,7 +607,7 @@
                         <outlet property="moneySavedLabel" destination="7aI-0q-jlI" id="JxI-CT-gC5"/>
                         <outlet property="navigationBar" destination="wjc-F5-ekR" id="scc-Jk-0uN"/>
                         <outlet property="startTimestampLabel" destination="0eb-l8-wWQ" id="hYm-fD-NYS"/>
-                        <segue destination="cVO-pp-O8B" kind="unwind" identifier="TrackedSummaryToHomeSegue" unwindAction="returnToTrackingLogEntryHome:" id="MIY-ng-MVJ"/>
+                        <segue destination="cVO-pp-O8B" kind="unwind" identifier="LogTrackedTripSummaryToHomeSegue" unwindAction="returnToTrackingLogEntryHome:" id="MIY-ng-MVJ"/>
                         <segue destination="cVO-pp-O8B" kind="unwind" identifier="LogManualTripSummaryToHomeSegue" unwindAction="returnToManualLogEntryHome:" id="3OY-QV-wep"/>
                     </connections>
                 </viewController>
@@ -616,10 +616,10 @@
             </objects>
             <point key="canvasLocation" x="-629" y="666"/>
         </scene>
-        <!--Manual Log Entry-->
+        <!--Log Manual Trip-->
         <scene sceneID="Z9P-b5-hUF">
             <objects>
-                <viewController title="Manual Log Entry" automaticallyAdjustsScrollViewInsets="NO" id="dOr-TZ-hmL" customClass="CaManualEntryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Manual Trip" automaticallyAdjustsScrollViewInsets="NO" id="dOr-TZ-hmL" customClass="CaLogManualTripController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="u8g-2X-jIN"/>
                         <viewControllerLayoutGuide type="bottom" id="MUE-MJ-XTW"/>
