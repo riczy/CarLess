@@ -123,6 +123,7 @@ class CaLogTripSummaryController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: "Are you sure you want to discard this trip?", preferredStyle: UIAlertControllerStyle.Alert)
         let discardAction = UIAlertAction(title: "Yes, discard", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            CaDataManager.instance.rollback(self.trip!)
             self.exit()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }

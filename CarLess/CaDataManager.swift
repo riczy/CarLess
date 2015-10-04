@@ -32,6 +32,14 @@ class CaDataManager {
         }
     }
     
+    // MARK: - Generic
+    
+    func rollback(managedObject: NSManagedObject) {
+        
+        if managedObject.hasChanges {
+            managedObject.managedObjectContext!.rollback()
+        }
+    }
     
     // MARK: - Waypoints
     
