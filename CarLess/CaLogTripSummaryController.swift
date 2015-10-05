@@ -5,7 +5,6 @@ class CaLogTripSummaryController: UIViewController {
     
     // MARK: - UI Properties
     
-    @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var startTimestampLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var modeLabel: UILabel!
@@ -78,11 +77,11 @@ class CaLogTripSummaryController: UIViewController {
         if isSaveableSummary {
             let trashButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: "discard")
             let saveButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save")
-            navigationBar.leftBarButtonItem = trashButtonItem
-            navigationBar.rightBarButtonItem = saveButtonItem
+            navigationItem.leftBarButtonItem = trashButtonItem
+            navigationItem.rightBarButtonItem = saveButtonItem
         } else {
             let doneButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: "exit")
-            navigationBar.leftBarButtonItem = doneButtonItem
+            navigationItem.leftBarButtonItem = doneButtonItem
         }
     }
     

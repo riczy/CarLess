@@ -91,7 +91,8 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.LogTrackedTripProgressToSummary {
-            let vc = segue.destinationViewController as! CaLogTripSummaryController
+            let nvc = segue.destinationViewController as! UINavigationController
+            let vc = nvc.topViewController as! CaLogTripSummaryController
             vc.trip = trip
             vc.isSaveableSummary = true
             vc.exitSegue = CaSegue.LogTrackedTripSummaryToHome
