@@ -116,42 +116,34 @@ enum LogType: String {
  */
 struct CaFormatter {
     
-    private static var _distance: NSNumberFormatter?
-    static var distance: NSNumberFormatter {
-        get {
-            if _distance == nil {
-                _distance = NSNumberFormatter()
-                _distance!.numberStyle = NSNumberFormatterStyle.DecimalStyle
-                _distance!.minimum = 0
-                _distance!.maximumFractionDigits = 2
-            }
-            return _distance!
-        }
-    }
+    static var distance: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        formatter.minimum = 0
+        formatter.maximumFractionDigits = 2
+        return formatter
+    }()
     
-    private static var _timestamp: NSDateFormatter?
-    static var timestamp: NSDateFormatter {
-        get {
-            if _timestamp == nil {
-                _timestamp = NSDateFormatter()
-                _timestamp!.dateStyle = NSDateFormatterStyle.ShortStyle
-                _timestamp!.timeStyle = NSDateFormatterStyle.ShortStyle
-            }
-            return _timestamp!
-        }
-    }
+    static var timestamp: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        return formatter
+    }()
     
-    private static var _money: NSNumberFormatter?
-    static var money: NSNumberFormatter {
-        get {
-            if _money == nil {
-                _money = NSNumberFormatter()
-                _money!.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-                _money!.roundingMode = NSNumberFormatterRoundingMode.RoundHalfUp
-            }
-            return _money!
-        }
-    }
+    static var date: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+        formatter.timeStyle = NSDateFormatterStyle.NoStyle
+        return formatter
+    }()
+    
+    static var money: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.roundingMode = NSNumberFormatterRoundingMode.RoundHalfUp
+        return formatter
+    }()
     
 }
 
