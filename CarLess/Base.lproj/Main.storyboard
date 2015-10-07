@@ -735,7 +735,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2y-kr-6Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="-935"/>
+            <point key="canvasLocation" x="-994" y="-846"/>
+        </scene>
+        <!--Trips Summary-->
+        <scene sceneID="O2b-7X-GF7">
+            <objects>
+                <tableViewController title="Trips Summary" id="A4I-fg-XrG" customClass="CaTripsPeriodicSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="1ul-hw-o37">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="A4I-fg-XrG" id="K9u-s2-RKB"/>
+                            <outlet property="delegate" destination="A4I-fg-XrG" id="QHs-8F-lxl"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2027" y="-2210"/>
         </scene>
         <!--Trips-->
         <scene sceneID="K8j-KE-GRV">

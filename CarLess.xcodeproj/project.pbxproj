@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */; settings = {ASSET_TAGS = (); }; };
+		840717A01BC2EB1E00C65BB9 /* CaTripsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */; settings = {ASSET_TAGS = (); }; };
 		8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410EDF51B90D0880044E714 /* CaDataManager.swift */; };
 		841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */; settings = {ASSET_TAGS = (); }; };
 		841C63021BB3054C002FF0BD /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C63011BB3054C002FF0BD /* Setting.swift */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripsPeriodicSummaryController.swift; sourceTree = "<group>"; };
+		8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripsSummary.swift; sourceTree = "<group>"; };
 		8410EDF51B90D0880044E714 /* CaDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDataManager.swift; sourceTree = "<group>"; };
 		841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaVehiclePickerController.swift; sourceTree = "<group>"; };
 		841C63011BB3054C002FF0BD /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -232,6 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				84E61A351B9B3A3700D927B8 /* CaTripsListController.swift */,
+				8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */,
+				8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */,
 			);
 			name = Trips;
 			sourceTree = "<group>";
@@ -352,12 +358,14 @@
 				84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */,
 				84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */,
 				8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */,
+				840717A01BC2EB1E00C65BB9 /* CaTripsSummary.swift in Sources */,
 				84E6953E1B86B56D000185BE /* CaLogTripSummaryController.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift in Sources */,
 				84E61A311B98AB5000D927B8 /* Trip.swift in Sources */,
 				848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
+				8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
 				841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */,
