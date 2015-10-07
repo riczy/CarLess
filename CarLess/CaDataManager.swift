@@ -91,17 +91,21 @@ class CaDataManager {
     
     func fetchTrips() -> [Trip] {
         
-        return fetchTrips(limit: 100, skip: 0)
+        return fetchTrips(limit: nil, skip: nil)
     }
     
-    func fetchTrips(limit limit: Int, skip: Int) -> [Trip] {
+    func fetchTrips(limit limit: Int?, skip: Int?) -> [Trip] {
         
         let fetchRequest = NSFetchRequest(entityName: "Trip")
         let sortDescriptor = NSSortDescriptor(key: "startTimestamp", ascending: false)
         fetchRequest.includesPendingChanges = false
         fetchRequest.sortDescriptors = [sortDescriptor]
-        fetchRequest.fetchLimit = limit
-        fetchRequest.fetchOffset = skip
+        if limit != nil {
+            fetchRequest.fetchLimit = limit!
+        }
+        if skip != nil {
+            fetchRequest.fetchOffset = skip!
+        }
         fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
         
         var results: [Trip]?
