@@ -57,7 +57,7 @@ class Trip: NSManagedObject {
         return nil
     }
     
-    func fuelSaved() -> NSNumber? {
+    func fuelSaved() -> Double? {
         
         if let mpg = vehicle?.combinedMpg {
             return getDistanceInUnit(LengthUnit.Mile) / mpg
