@@ -30,6 +30,7 @@
 		8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8489291D1B3C486B0045C39E /* LaunchScreen.xib */; };
 		8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489292A1B3C486B0045C39E /* CarLessTests.swift */; };
 		8489293A1B3E41C80045C39E /* CaLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* CaLogController.swift */; };
+		84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */; settings = {ASSET_TAGS = (); }; };
 		84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */; settings = {ASSET_TAGS = (); }; };
 		84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */; settings = {ASSET_TAGS = (); }; };
 		84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */; settings = {ASSET_TAGS = (); }; };
@@ -80,6 +81,7 @@
 		848929291B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8489292A1B3C486B0045C39E /* CarLessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLessTests.swift; sourceTree = "<group>"; };
 		848929391B3E41C80045C39E /* CaLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogController.swift; sourceTree = "<group>"; };
+		84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripsController.swift; sourceTree = "<group>"; };
 		84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDistanceUnitListController.swift; sourceTree = "<group>"; };
 		84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaFuelPriceFinder.swift; sourceTree = "<group>"; };
 		84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EiaWeeklyFuelPriceParser.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				84E61A351B9B3A3700D927B8 /* CaTripsListController.swift */,
 				8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */,
 				8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */,
+				84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */,
 			);
 			name = Trips;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				84E61A361B9B3A3700D927B8 /* CaTripsListController.swift in Sources */,
 				8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
+				84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */,
 				84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */,
 				844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */,
 				84E4F0E71B7A75D30006C069 /* CaLogTrackedTripController.swift in Sources */,

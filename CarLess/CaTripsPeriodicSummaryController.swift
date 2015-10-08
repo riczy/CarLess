@@ -61,15 +61,17 @@ class CaTripsPeriodicSummaryCell: UITableViewCell {
 class CaTripsPeriodicSummaryController: UITableViewController {
     
     var data: [CaTripsSummary]!
+    var period: SummaryPeriod!
 
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        
         let trips = CaDataManager.instance.fetchTrips()
-        var collator = CaTripsSummaryCollator(data: trips, period: .Weekly)
+        var collator = CaTripsSummaryCollator(data: trips, period: period)
         data = collator.collate()
         tableView.registerClass(CaTripsPeriodicSummaryCell.self, forCellReuseIdentifier: "Cell")
-        tableView.reloadData()
+        navigationItem.title = period == SummaryPeriod.Monthly ? "Monthly Summary" : "Weekly Summary"
    }
 
     // MARK: - Table View Data Source

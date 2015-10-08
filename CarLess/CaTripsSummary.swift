@@ -51,18 +51,19 @@ class CaTripsSummary: NSObject {
     
 }
 
-struct CaTripsSummaryCollator {
+enum SummaryPeriod {
     
-    enum CollatorPeriod {
-        case Weekly
-        case Monthly
-    }
+    case Weekly
+    case Monthly
+}
+
+struct CaTripsSummaryCollator {
 
     var data: [Trip]!
-    var period: CollatorPeriod!
+    var period: SummaryPeriod!
     private var summaryDataMap = [NSDate : CaTripsSummary]()
     
-    init(data: [Trip], period: CollatorPeriod) {
+    init(data: [Trip], period: SummaryPeriod) {
         
         self.data = data
         self.period = period
@@ -71,7 +72,7 @@ struct CaTripsSummaryCollator {
     mutating func collate() -> [CaTripsSummary] {
         
         for trip in data {
-            let dateRange: (startDate: NSDate, endDate: NSDate) = period == CollatorPeriod.Weekly ? trip.startTimestamp.weekRange() : trip.startTimestamp.monthRange()
+            let dateRange: (startDate: NSDate, endDate: NSDate) = period == SummaryPeriod.Weekly ? trip.startTimestamp.weekRange() : trip.startTimestamp.monthRange()
             if let value = summaryDataMap[dateRange.startDate] {
                 value.add(trip)
             } else {

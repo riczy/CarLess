@@ -97,11 +97,18 @@
                             <outlet property="delegate" destination="gwj-FL-mWc" id="cNp-6B-9es"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Trips" id="Uke-mw-GQf"/>
+                    <navigationItem key="navigationItem" title="Trips" id="Uke-mw-GQf">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="Qx6-tz-qI9">
+                            <connections>
+                                <segue destination="g9Z-5I-N8X" kind="unwind" unwindAction="returnToTripsHome:" id="JfN-cF-xK1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P62-Bn-8k5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="g9Z-5I-N8X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2012" y="-1516"/>
+            <point key="canvasLocation" x="-936" y="-1588"/>
         </scene>
         <!--Settings-->
         <scene sceneID="Bcu-fV-5Z6">
@@ -124,7 +131,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20S-26-BxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2012" y="-846"/>
+            <point key="canvasLocation" x="-2312" y="-846"/>
         </scene>
         <!--Distance Unit-->
         <scene sceneID="WiG-gT-Q6h">
@@ -151,7 +158,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2b-Yf-Rgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dL9-BW-NYD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-307" y="-1599"/>
+            <point key="canvasLocation" x="1037" y="-1367"/>
         </scene>
         <!--Vehicle-->
         <scene sceneID="EJh-bm-XqR">
@@ -267,7 +274,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twh-n0-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hRI-2m-u8j" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-307" y="-935"/>
+            <point key="canvasLocation" x="-415" y="-634"/>
         </scene>
         <!--Log Controller-->
         <scene sceneID="lcQ-Cc-GEx">
@@ -346,14 +353,14 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="1dO-iU-xxO" kind="relationship" relationship="viewControllers" id="jVH-cC-WcS"/>
+                        <segue destination="5dm-4C-6sw" kind="relationship" relationship="viewControllers" id="NYm-hv-Bdl"/>
                         <segue destination="bFK-3u-FNi" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
                         <segue destination="H6X-lS-6Zo" kind="relationship" relationship="viewControllers" id="xlp-8t-G2I"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3543" y="-846"/>
+            <point key="canvasLocation" x="-4039" y="-858"/>
         </scene>
         <!--Log Tracked Trip-->
         <scene sceneID="Y3b-0k-Bbk">
@@ -425,7 +432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yMf-Q4-ShZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2003" y="609.5"/>
+            <point key="canvasLocation" x="-2731" y="957.5"/>
         </scene>
         <!--Log Tracked Trip Progress-->
         <scene sceneID="buC-La-5sD">
@@ -517,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yda-hS-thl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1305" y="666"/>
+            <point key="canvasLocation" x="-1913" y="958"/>
         </scene>
         <!--Log Trip Summary-->
         <scene sceneID="Ycj-V5-V7r">
@@ -603,7 +610,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cVO-pp-O8B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-605" y="717"/>
+            <point key="canvasLocation" x="-137" y="553"/>
         </scene>
         <!--Log Manual Trip-->
         <scene sceneID="Z9P-b5-hUF">
@@ -698,7 +705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Em5-de-J1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2003" y="-3.5"/>
+            <point key="canvasLocation" x="-1931" y="188.5"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jsJ-mR-RD9">
@@ -717,7 +724,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TzH-KF-Qgg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2736" y="-846"/>
+            <point key="canvasLocation" x="-3216" y="-858"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="E1F-dx-EWX">
@@ -735,25 +742,57 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W2y-kr-6Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-994" y="-846"/>
+            <point key="canvasLocation" x="-1174" y="-634"/>
+        </scene>
+        <!--Trips-->
+        <scene sceneID="mOR-nN-kl1">
+            <objects>
+                <tableViewController id="ly6-bj-qhB" customClass="CaTripsController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sRf-ix-HwN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="ly6-bj-qhB" id="Obg-PV-wGm"/>
+                            <outlet property="delegate" destination="ly6-bj-qhB" id="lTx-gP-bt2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Trips" id="3l7-Bl-85b"/>
+                    <connections>
+                        <segue destination="L4r-ah-Oz0" kind="show" identifier="TripsHomeToTripPeriodicSummarySegue" id="glK-2w-2IG"/>
+                        <segue destination="1dO-iU-xxO" kind="show" identifier="TripsHomeToTripListSegue" id="MZ5-E1-GEe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ep-hK-V9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2423" y="-1847"/>
         </scene>
         <!--Trips Summary-->
         <scene sceneID="O2b-7X-GF7">
             <objects>
                 <tableViewController title="Trips Summary" id="A4I-fg-XrG" customClass="CaTripsPeriodicSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="1ul-hw-o37">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="1ul-hw-o37">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="dataSource" destination="A4I-fg-XrG" id="K9u-s2-RKB"/>
                             <outlet property="delegate" destination="A4I-fg-XrG" id="QHs-8F-lxl"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Monthly Summary" id="OTd-7j-GP4">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="S4g-xb-LWz">
+                            <connections>
+                                <segue destination="woA-BH-hR5" kind="unwind" unwindAction="returnToTripsHome:" id="kZj-Bo-K7b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="woA-BH-hR5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2027" y="-2210"/>
+            <point key="canvasLocation" x="-936" y="-2301"/>
         </scene>
         <!--Trips-->
         <scene sceneID="K8j-KE-GRV">
@@ -772,7 +811,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Xs-XA-tM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2736" y="-1516"/>
+            <point key="canvasLocation" x="-1664" y="-1588"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pmz-Cq-6YA">
@@ -790,7 +829,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHg-WM-TdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1010" y="-1599"/>
+            <point key="canvasLocation" x="298" y="-1367"/>
         </scene>
         <!--Log-->
         <scene sceneID="78T-SJ-Orw">
@@ -827,7 +866,44 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9r-Fh-GxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-605" y="-3"/>
+            <point key="canvasLocation" x="-909" y="553"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="S6e-bw-VHq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L4r-ah-Oz0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QdE-ub-dja">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="A4I-fg-XrG" kind="relationship" relationship="rootViewController" id="ft4-oI-ETn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Psn-lv-UgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1659" y="-2301"/>
+        </scene>
+        <!--Trips-->
+        <scene sceneID="qWP-1v-CGn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5dm-4C-6sw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Trips" image="tab-activity" id="bky-Ll-aSE"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="byD-Rr-DTa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ly6-bj-qhB" kind="relationship" relationship="rootViewController" id="5rI-cL-gil"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KB3-wG-q3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3235" y="-1847"/>
         </scene>
     </scenes>
     <resources>

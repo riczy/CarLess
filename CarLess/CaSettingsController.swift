@@ -166,7 +166,7 @@ class CaSettingsController: UITableViewController {
     
     private func applyStyleForCell(cell: UITableViewCell) {
         
-        cell.backgroundColor = CaTripListStyle.CellBgColor
+        cell.backgroundColor = CaSettingsStyle.CellBgColor
         cell.textLabel?.font = CaSettingsStyle.FontDefault
         cell.detailTextLabel?.font = CaSettingsStyle.FontDefault
         cell.textLabel?.textColor = CaSettingsStyle.CellTitleColor

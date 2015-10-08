@@ -12,9 +12,11 @@ struct CaSegue {
     
     static let SettingsToVehicle = "SettingsToVehicleSegue"
     static let VehicleToSettings = "VehicleToSettingsSegue"
-    
     static let SettingsToDistanceUnit = "SettingsToDistanceUnitSegue"
     static let DistanceUnitToSettings = "DistanceUnitToSettingsSegue"
+    
+    static let TripsHomeToTripList = "TripsHomeToTripListSegue"
+    static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
 }
 
 struct CaConstants {
@@ -66,6 +68,7 @@ struct CaStyle {
     static let ButtonHeight: CGFloat = 36.0
     static let ButtonBorderWidth: CGFloat = 0.0
     static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
+    static let DefaultFontName = "Arial Rounded MT Bold"
 }
 
 struct CaLogStyle {
@@ -92,6 +95,17 @@ struct CaLogStyle {
     static let MapRouteLineColor =  CaColor.LightBlue
     static let MapRouteLineWidth: CGFloat = 4
    
+}
+
+struct CaTripStyle {
+
+    static let ViewBgColor = CaColor.Ivory
+    static let CellBgColor = CaColor.PaleIvory
+    static let CellTitleColor = CaColor.FadedSlateGray
+    static let CellTitleFont = CaStyle.FontDefault
+    
+}
+struct CaTripSummaryStyle {
 }
 
 struct CaTripListStyle {
