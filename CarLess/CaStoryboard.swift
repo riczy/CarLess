@@ -15,7 +15,6 @@ struct CaSegue {
     static let SettingsToDistanceUnit = "SettingsToDistanceUnitSegue"
     static let DistanceUnitToSettings = "DistanceUnitToSettingsSegue"
     
-    static let TripsHomeToTripList = "TripsHomeToTripListSegue"
     static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
 }
 
@@ -103,14 +102,28 @@ struct CaTripStyle {
     static let CellBgColor = CaColor.PaleIvory
     static let CellTitleColor = CaColor.FadedSlateGray
     static let CellTitleFont = CaStyle.FontDefault
+    static let SummaryCellBgColor = CaColor.LightBlue
+    static let SummaryCellColor = UIColor.whiteColor()
+    static let SummaryCellFont = CaStyle.FontDefault
     
 }
+
 struct CaTripSummaryStyle {
+    
+    static let ViewBgColor = CaColor.Ivory
+    static let HeaderCellFont = CaStyle.FontDefault
+    static let HeaderCellBgColor = CaColor.LightBlue
+    static let HeaderCellColor = UIColor.whiteColor()
+    static let CellFont = CaStyle.FontDefault
+    static let CellBgColor = CaColor.PaleIvory
+    static let CellColor = CaColor.FadedSlateGray
+    
 }
 
 struct CaTripListStyle {
     
     static let ViewBgColor = CaColor.Ivory
+    static let CellFont = CaStyle.FontDefault
     static let CellBgColor = CaColor.PaleIvory
     static let CellTimeColor = CaColor.FadedSlateGray
     static let CellDistanceColor = CaColor.FadedSlateGray

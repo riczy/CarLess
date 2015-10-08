@@ -6,110 +6,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Trips-->
-        <scene sceneID="dOa-SZ-IlL">
-            <objects>
-                <tableViewController id="gwj-FL-mWc" customClass="CaTripsListController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="s0A-Py-czc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripTableViewCell" id="ZUY-IA-tMn" customClass="CaTripTableViewCell" customModule="CarLess" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZUY-IA-tMn" id="Ie2-PX-ykx">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mqp-aM-45b">
-                                            <rect key="frame" x="12" y="12" width="20" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="LHc-5J-jzY"/>
-                                                <constraint firstAttribute="width" constant="20" id="nkh-qU-TGN"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mER-1w-RcI">
-                                            <rect key="frame" x="36" y="13" width="90" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="90" id="3fl-X3-oCJ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNG-iM-yay">
-                                            <rect key="frame" x="560" y="13" width="32" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="lMi-zV-nul"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAi-f1-PGH">
-                                            <rect key="frame" x="476" y="13" width="80" height="18"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="80" id="UQQ-iO-9P6"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="wAi-f1-PGH" firstAttribute="leading" secondItem="mER-1w-RcI" secondAttribute="trailing" constant="6" id="17b-NH-jkb"/>
-                                        <constraint firstItem="hNG-iM-yay" firstAttribute="leading" secondItem="wAi-f1-PGH" secondAttribute="trailing" constant="4" id="2xY-6I-BJc"/>
-                                        <constraint firstItem="Mqp-aM-45b" firstAttribute="leading" secondItem="Ie2-PX-ykx" secondAttribute="leadingMargin" constant="4" id="3dz-g7-rFD"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="mER-1w-RcI" secondAttribute="trailing" constant="321" id="7oK-oV-xF6"/>
-                                        <constraint firstAttribute="centerY" secondItem="hNG-iM-yay" secondAttribute="centerY" id="AcP-4L-Flr"/>
-                                        <constraint firstAttribute="centerY" secondItem="mER-1w-RcI" secondAttribute="centerY" id="EXG-wp-dMb"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="mER-1w-RcI" secondAttribute="trailing" id="Mh8-x5-IeV"/>
-                                        <constraint firstItem="mER-1w-RcI" firstAttribute="leading" secondItem="Mqp-aM-45b" secondAttribute="trailing" constant="4" id="QAm-e0-zE0"/>
-                                        <constraint firstAttribute="centerY" secondItem="wAi-f1-PGH" secondAttribute="centerY" id="Vz0-he-NHo"/>
-                                        <constraint firstAttribute="centerY" secondItem="Mqp-aM-45b" secondAttribute="centerY" id="ZPS-DV-7We"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="hNG-iM-yay" secondAttribute="trailing" id="ZqY-u2-oSW"/>
-                                        <constraint firstItem="mER-1w-RcI" firstAttribute="leading" secondItem="Ie2-PX-ykx" secondAttribute="leadingMargin" id="lYD-uH-xHV"/>
-                                        <constraint firstAttribute="centerY" secondItem="mER-1w-RcI" secondAttribute="centerY" id="v5L-Fd-Tuo"/>
-                                        <constraint firstAttribute="centerX" secondItem="mER-1w-RcI" secondAttribute="centerX" constant="160.5" id="vBp-gx-7CC"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="7oK-oV-xF6"/>
-                                            <exclude reference="Mh8-x5-IeV"/>
-                                            <exclude reference="lYD-uH-xHV"/>
-                                            <exclude reference="v5L-Fd-Tuo"/>
-                                            <exclude reference="vBp-gx-7CC"/>
-                                            <exclude reference="17b-NH-jkb"/>
-                                        </mask>
-                                    </variation>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="distanceLabel" destination="wAi-f1-PGH" id="r1O-q7-BUq"/>
-                                    <outlet property="distanceUnitLabel" destination="hNG-iM-yay" id="2XZ-eW-8s2"/>
-                                    <outlet property="modeImageView" destination="Mqp-aM-45b" id="Mny-ij-dq5"/>
-                                    <outlet property="startTimeLabel" destination="mER-1w-RcI" id="jEn-Ko-I4v"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="gwj-FL-mWc" id="0gC-jk-LTh"/>
-                            <outlet property="delegate" destination="gwj-FL-mWc" id="cNp-6B-9es"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Trips" id="Uke-mw-GQf">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="Qx6-tz-qI9">
-                            <connections>
-                                <segue destination="g9Z-5I-N8X" kind="unwind" unwindAction="returnToTripsHome:" id="JfN-cF-xK1"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P62-Bn-8k5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="g9Z-5I-N8X" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="-936" y="-1588"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="Bcu-fV-5Z6">
             <objects>
@@ -761,12 +657,11 @@
                     <navigationItem key="navigationItem" title="Trips" id="3l7-Bl-85b"/>
                     <connections>
                         <segue destination="L4r-ah-Oz0" kind="show" identifier="TripsHomeToTripPeriodicSummarySegue" id="glK-2w-2IG"/>
-                        <segue destination="1dO-iU-xxO" kind="show" identifier="TripsHomeToTripListSegue" id="MZ5-E1-GEe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ep-hK-V9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2423" y="-1847"/>
+            <point key="canvasLocation" x="-2505" y="-1847"/>
         </scene>
         <!--Trips Summary-->
         <scene sceneID="O2b-7X-GF7">
@@ -792,26 +687,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="woA-BH-hR5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-936" y="-2301"/>
-        </scene>
-        <!--Trips-->
-        <scene sceneID="K8j-KE-GRV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1dO-iU-xxO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trips" image="tab-activity" id="U1L-SX-Job"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="97T-ky-lon">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="gwj-FL-mWc" kind="relationship" relationship="rootViewController" id="3ec-Zz-oRa"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Xs-XA-tM1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1664" y="-1588"/>
+            <point key="canvasLocation" x="-1050" y="-1847"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pmz-Cq-6YA">
@@ -884,7 +760,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Psn-lv-UgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1659" y="-2301"/>
+            <point key="canvasLocation" x="-1773" y="-1847"/>
         </scene>
         <!--Trips-->
         <scene sceneID="qWP-1v-CGn">
