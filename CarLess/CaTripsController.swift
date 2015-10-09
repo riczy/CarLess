@@ -169,6 +169,40 @@ class CaTripsController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        
+        return indexPath.section != 0
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            let section = indexPath.section - 1 // Account for summary reports @ section 0
+            let row = indexPath.row
+            
+            let tripsMapKey = tripsMapOrderedKeys[section]
+            var tripsMapValue = tripsMap[tripsMapKey]
+            let trip = tripsMapValue?[row]
+            do {
+                try CaDataManager.instance.delete(trip: trip)
+                tripsMapValue?.removeAtIndex(row)
+                if tripsMapValue?.count == 0 {
+                    tripsMap.removeValueForKey(tripsMapKey)
+                    tripsMapOrderedKeys.removeAtIndex(section)
+                    tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+                } else {
+                    tripsMap[tripsMapKey] = tripsMapValue
+                    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                }
+            } catch {
+                NSLog("Error when deleting indexPath = \(indexPath), trip = \(trip)")
+            }
+        } else {
+            NSLog("Unhandled editing style \(editingStyle)")
+        }
+    }
+    
     private func tableViewSummaryCell(indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("SummaryCell", forIndexPath: indexPath)

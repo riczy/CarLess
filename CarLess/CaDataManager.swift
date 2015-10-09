@@ -88,6 +88,14 @@ class CaDataManager {
         }
     }
     
+    func delete(trip trip: Trip?) throws {
+        
+        if trip != nil {
+            trip!.managedObjectContext?.deleteObject(trip!)
+            try trip!.managedObjectContext!.save()
+        }
+    }
+    
     
     func fetchTrips() -> [Trip] {
         
