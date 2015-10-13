@@ -24,7 +24,7 @@ class CaDistanceUnitListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = CaDistanceUnitStyle.ViewBgColor
+        styleView()
         tableView.registerClass(CaDistanceUnitTableViewCell.self, forCellReuseIdentifier: "Cell")
         reset()
     }
@@ -58,11 +58,10 @@ class CaDistanceUnitListController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = LengthUnit.userValues[indexPath.row].description
-        cell.backgroundColor = CaDistanceUnitStyle.CellBgColor
-        cell.textLabel?.font = CaDistanceUnitStyle.CellFont
         if selectedRow == indexPath.row {
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
         }
+        applyStyleForCell(cell)
         
         return cell
     }
@@ -93,5 +92,19 @@ class CaDistanceUnitListController: UITableViewController {
             let unit = LengthUnit.userValues[selectedRow!]
             CaDataManager.instance.saveDefaultSetting(distanceUnit: unit)
         }
+    }
+    
+    // MARK: - Style
+    
+    private func styleView() {
+        
+        navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        view.backgroundColor = CaStyle.ViewBgColor
+    }
+    
+    private func applyStyleForCell(cell: UITableViewCell) {
+        
+        cell.backgroundColor = CaStyle.CellBgColor
+        cell.textLabel?.font = CaStyle.CellValueFont
     }
 }

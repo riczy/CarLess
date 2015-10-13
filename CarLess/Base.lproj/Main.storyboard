@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -21,8 +20,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="SFP-Yi-n4R"/>
                     <connections>
-                        <segue destination="xAI-R1-Nae" kind="show" identifier="SettingsToVehicleSegue" id="Gh8-0Q-Cb0"/>
                         <segue destination="fsq-2A-brS" kind="show" identifier="SettingsToDistanceUnitSegue" id="r1x-JC-63o"/>
+                        <segue destination="ccT-9N-m2n" kind="show" identifier="SettingsToVehicleSegue" id="hHo-Zu-wLt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20S-26-BxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -54,123 +53,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2b-Yf-Rgd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dL9-BW-NYD" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1037" y="-1367"/>
-        </scene>
-        <!--Vehicle-->
-        <scene sceneID="EJh-bm-XqR">
-            <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="tMo-VQ-6Tb" customClass="CaVehicleController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="gMK-0K-dsY"/>
-                        <viewControllerLayoutGuide type="bottom" id="MT1-Ub-XsM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Z8N-e4-aiC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="qti-VK-SGn">
-                                <rect key="frame" x="36" y="147" width="528" height="30"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Make" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="unk-zZ-nhR">
-                                <rect key="frame" x="36" y="189" width="528" height="30"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="LjY-1b-ybm">
-                                <rect key="frame" x="36" y="231" width="528" height="30"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Option" textAlignment="center" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="aZ4-1c-e9w">
-                                <rect key="frame" x="36" y="273" width="528" height="30"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mpg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9M1-Az-VTa">
-                                <rect key="frame" x="36" y="325" width="528" height="42"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="combined mpg" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7d-Ft-1Cg">
-                                <rect key="frame" x="36" y="369" width="528" height="20"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a default vehicle. This will be the vehicle that your carless trip is replacing." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-4D-jfh">
-                                <rect key="frame" x="46" y="84" width="508" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="20" id="5aD-6Q-26c"/>
-                            <constraint firstItem="o7d-Ft-1Cg" firstAttribute="top" secondItem="9M1-Az-VTa" secondAttribute="bottom" constant="2" id="BKT-g1-Ou6"/>
-                            <constraint firstItem="LjY-1b-ybm" firstAttribute="top" secondItem="unk-zZ-nhR" secondAttribute="bottom" constant="12" id="BYZ-ck-BPk"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="LjY-1b-ybm" secondAttribute="trailing" constant="16" id="Bib-Fp-yZn"/>
-                            <constraint firstItem="qti-VK-SGn" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Bj1-HI-33Y"/>
-                            <constraint firstItem="9M1-Az-VTa" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Dy7-1b-kQx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aZ4-1c-e9w" secondAttribute="trailing" constant="16" id="M7v-3m-spR"/>
-                            <constraint firstItem="o7d-Ft-1Cg" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Pd0-FL-sxS"/>
-                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="90" id="QA0-vK-dJ4"/>
-                            <constraint firstItem="MsP-4D-jfh" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="26" id="QCr-zh-j0k"/>
-                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="Rjg-Cc-xhy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9M1-Az-VTa" secondAttribute="trailing" constant="16" id="XN0-MG-NMO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MsP-4D-jfh" secondAttribute="trailing" constant="26" id="agM-5l-Rgw"/>
-                            <constraint firstItem="aZ4-1c-e9w" firstAttribute="top" secondItem="LjY-1b-ybm" secondAttribute="bottom" constant="12" id="bVn-0N-PzY"/>
-                            <constraint firstItem="LjY-1b-ybm" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="biP-Vz-UeH"/>
-                            <constraint firstItem="9M1-Az-VTa" firstAttribute="top" secondItem="aZ4-1c-e9w" secondAttribute="bottom" constant="22" id="bwF-Ju-Fkd"/>
-                            <constraint firstItem="unk-zZ-nhR" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="16" id="d4Q-t9-fbe"/>
-                            <constraint firstItem="qti-VK-SGn" firstAttribute="top" secondItem="MsP-4D-jfh" secondAttribute="bottom" constant="22" id="mMW-s8-WcY"/>
-                            <constraint firstItem="MsP-4D-jfh" firstAttribute="leading" secondItem="Z8N-e4-aiC" secondAttribute="leadingMargin" constant="142" id="nHb-Hj-ycX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="o7d-Ft-1Cg" secondAttribute="trailing" constant="16" id="qTd-up-bCR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qti-VK-SGn" secondAttribute="trailing" constant="16" id="s9z-8g-eV7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="unk-zZ-nhR" secondAttribute="trailing" constant="16" id="ug5-KG-P3K"/>
-                            <constraint firstItem="unk-zZ-nhR" firstAttribute="top" secondItem="qti-VK-SGn" secondAttribute="bottom" constant="12" id="vet-Ex-kN9"/>
-                            <constraint firstItem="MsP-4D-jfh" firstAttribute="top" secondItem="gMK-0K-dsY" secondAttribute="bottom" constant="20" id="xtE-wg-nl0"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="nHb-Hj-ycX"/>
-                                <exclude reference="5aD-6Q-26c"/>
-                                <exclude reference="QA0-vK-dJ4"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <navigationItem key="navigationItem" title="Vehicle" id="1FP-1v-aeP">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="irI-nl-IDq">
-                            <connections>
-                                <action selector="cancel:" destination="tMo-VQ-6Tb" id="8M3-rc-Y4J"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="98w-yi-NfV">
-                            <connections>
-                                <action selector="save:" destination="tMo-VQ-6Tb" id="Fk2-10-pkQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="cancelBarButton" destination="irI-nl-IDq" id="Xtv-gs-BHQ"/>
-                        <outlet property="combMpgLabel" destination="o7d-Ft-1Cg" id="9bM-DQ-J2f"/>
-                        <outlet property="combMpgValueLabel" destination="9M1-Az-VTa" id="5Zj-jY-PDC"/>
-                        <outlet property="doneBarButton" destination="98w-yi-NfV" id="eVT-4k-kgX"/>
-                        <outlet property="instructionsLabel" destination="MsP-4D-jfh" id="J1U-k4-bLo"/>
-                        <outlet property="makeTextField" destination="unk-zZ-nhR" id="pFA-z3-gwF"/>
-                        <outlet property="modelTextField" destination="LjY-1b-ybm" id="Pqz-rB-4LZ"/>
-                        <outlet property="optionsTextField" destination="aZ4-1c-e9w" id="Shn-Aw-B1K"/>
-                        <outlet property="yearTextField" destination="qti-VK-SGn" id="yt7-6g-uw7"/>
-                        <segue destination="hRI-2m-u8j" kind="unwind" identifier="VehicleToSettingsSegue" unwindAction="returnToSettingsMain:" id="Qd7-Wf-ptR"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="twh-n0-84c" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="hRI-2m-u8j" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="-415" y="-634"/>
+            <point key="canvasLocation" x="833" y="-1269"/>
         </scene>
         <!--Log Controller-->
         <scene sceneID="lcQ-Cc-GEx">
@@ -232,6 +115,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kq2-Gb-Kbo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2731" y="182"/>
+        </scene>
+        <!--Ca Vehicle Controller-->
+        <scene sceneID="oxu-up-9ia">
+            <objects>
+                <viewController id="fXF-Rg-7i3" customClass="CaVehicleController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6T8-OH-DlS"/>
+                        <viewControllerLayoutGuide type="bottom" id="zVX-BN-pwy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fAO-6c-Ec8">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Psp-5i-35T"/>
+                    <connections>
+                        <segue destination="nel-nC-966" kind="unwind" identifier="VehicleToSettingsSegue" unwindAction="returnToSettingsMain:" id="hsS-rx-Xdm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsn-l1-Ex9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="nel-nC-966" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-570" y="-530"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -622,24 +528,6 @@
             </objects>
             <point key="canvasLocation" x="-3216" y="-858"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="E1F-dx-EWX">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xAI-R1-Nae" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4O6-b5-wQg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="tMo-VQ-6Tb" kind="relationship" relationship="rootViewController" id="TyI-eR-5Nr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="W2y-kr-6Rk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1174" y="-634"/>
-        </scene>
         <!--Trips-->
         <scene sceneID="mOR-nN-kl1">
             <objects>
@@ -647,7 +535,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sRf-ix-HwN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="ly6-bj-qhB" id="Obg-PV-wGm"/>
@@ -661,7 +549,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ep-hK-V9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2505" y="-1847"/>
+            <point key="canvasLocation" x="-2473" y="-1567"/>
         </scene>
         <!--Trips Summary-->
         <scene sceneID="O2b-7X-GF7">
@@ -687,7 +575,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="woA-BH-hR5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1050" y="-1847"/>
+            <point key="canvasLocation" x="-994" y="-1567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pmz-Cq-6YA">
@@ -705,7 +593,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHg-WM-TdR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="298" y="-1367"/>
+            <point key="canvasLocation" x="110" y="-1269"/>
         </scene>
         <!--Log-->
         <scene sceneID="78T-SJ-Orw">
@@ -760,7 +648,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Psn-lv-UgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1773" y="-1847"/>
+            <point key="canvasLocation" x="-1745" y="-1567"/>
         </scene>
         <!--Trips-->
         <scene sceneID="qWP-1v-CGn">
@@ -779,7 +667,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KB3-wG-q3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3235" y="-1847"/>
+            <point key="canvasLocation" x="-3216" y="-1567"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gwv-kb-eXo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ccT-9N-m2n" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1op-tr-Hzz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fXF-Rg-7i3" kind="relationship" relationship="rootViewController" id="Pof-ua-ULv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="izt-Uk-MMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1267" y="-530"/>
         </scene>
     </scenes>
     <resources>

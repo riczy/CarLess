@@ -59,6 +59,14 @@ struct CaColor {
     
     // Hex 387863
     static let SeaGreen = UIColor(red: 56.0/255.0, green: 120.0/255.0, blue: 99.0/255.0, alpha: 1.0)
+    
+    // ----
+    static let LimeA200 = UIColor(red: 238.0/255.0, green: 255.0/255.0, blue: 65.0/255.0, alpha: 1.0) // EEFF41
+    static let Lime200 = UIColor(red: 240.0/255.0, green: 244.0/255.0, blue: 195.0/255.0, alpha: 1.0) // D4E157
+    static let Lime400 = UIColor(red: 212.0/255.0, green: 225.0/255.0, blue: 87.0/255.0, alpha: 1.0) // D4E157
+    static let Lime500 = UIColor(red: 205.0/255.0, green: 220.0/255.0, blue: 57.0/255.0, alpha: 1.0) // CDDC39
+    static let Lime700 = UIColor(red: 175.0/255.0, green: 180.0/255.0, blue: 43.0/255.0, alpha: 1.0) // AFB42B
+    static let Lime900 = UIColor(red: 130.0/255.0, green: 119.0/255.0, blue: 23.0/255.0, alpha: 1.0) // 827717
 }
 
 struct CaStyle {
@@ -68,6 +76,70 @@ struct CaStyle {
     static let ButtonBorderWidth: CGFloat = 0.0
     static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
     static let DefaultFontName = "Arial Rounded MT Bold"
+    
+    static let ViewBgColor = UIColor.whiteColor()
+    static let TabBarBgTintColor = UIColor.blackColor()
+    static let TabBarTintColor = CaColor.Lime400
+    static let NavBarBgTintColor = CaColor.Lime700
+    static let NavBarTintColor = UIColor.blackColor()
+
+    static var InstructionHeadlineFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        }
+    }
+    static let InstructionHeadlineColor = CaColor.FadedSlateGray
+    
+    // MARK: - Default Form Style Settings
+    
+    static var InputLabelFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
+    static var InputFieldFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        }
+    }
+    static let InputLabelColor = CaColor.Lime900
+    static let InputFieldColor = CaColor.FadedSlateGray
+    static let InputFieldHrColor = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 0.3) //CaColor.Lime200
+    static let InputFieldHrFocusColor = CaColor.Lime200
+    static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
+    
+    // MARK: - Default Table Style Settings
+    
+    static var CellLabelFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
+    static var CellValueFont: UIFont {
+        get {
+            let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
+            return UIFont(descriptor: fontDescriptor, size: 0)
+        }
+    }
+    static let CellBgColor = UIColor.whiteColor()
+    static let CellLabelColor = CaColor.Lime900
+    static let CellValueColor = CaColor.FadedSlateGray
+    static let CellValueFontMinimumScaleFactor: CGFloat = 0.6
+    
+    // MARK: - Vehicle Specific
+    static var MpgLabelFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
+    static var MpgValueFont: UIFont {
+        get {
+            let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
+            return UIFont(descriptor: fontDescriptor, size: 0)
+        }
+    }
+    static let MpgLabelColor = CaColor.FadedSlateGray
+    static let MpgValueColor = CaColor.RedOrange
 }
 
 struct CaLogStyle {
@@ -129,16 +201,6 @@ struct CaTripListStyle {
     static let CellDistanceColor = CaColor.FadedSlateGray
 }
 
-struct CaSettingsStyle {
-    
-    static let FontDefault = CaStyle.FontDefault
-    static let FontMinimumScaleFactor: CGFloat = 0.6
-    static let ViewBgColor = CaColor.Ivory
-    static let CellBgColor = CaColor.PaleIvory
-    static let CellTitleColor = CaColor.FadedSlateGray
-    static let CellDetailColor = CaColor.FadedSlateGray
-}
-
 struct CaVehicleStyle {
     
     static let ViewBgColor = CaColor.Ivory
@@ -147,14 +209,6 @@ struct CaVehicleStyle {
     static let ViewFieldBgColor = CaColor.PaleIvory
     static let MpgValueColor = CaColor.RedOrange
     static let MpgTitleColor = CaColor.RedOrange
-}
-
-struct CaDistanceUnitStyle {
-    
-    static let ViewBgColor = CaColor.Ivory
-    static let CellTitleColor = CaColor.FadedSlateGray
-    static let CellBgColor = CaColor.Ivory
-    static let CellFont = CaStyle.FontDefault
 }
 
 class CaComponent {

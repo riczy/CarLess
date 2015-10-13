@@ -8,6 +8,9 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedIndex = defaultIndex
+        
+        tabBar.barTintColor = CaStyle.TabBarBgTintColor
+        tabBar.tintColor = CaStyle.TabBarTintColor
     }
 
 }

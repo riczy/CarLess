@@ -11,6 +11,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     var data = [EpaVehicleMenuItem]()
     var pickerView : UIPickerView
     var textField : UITextField
+    var label: UILabel
     var selectedItem : EpaVehicleMenuItem?
     var lastSelectedIndex : Int = -1
     
@@ -27,10 +28,11 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
         }
     }
     
-    init(pickerView: UIPickerView, textField: UITextField) {
+    init(pickerView: UIPickerView, textField: UITextField, label: UILabel) {
         
         self.pickerView = pickerView
         self.textField = textField
+        self.label = label
     }
     
     // MARK: - UIPickerViewDataSource
@@ -82,6 +84,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
         if selectedIndex >= 0 && selectedIndex < data.count {
             selectedItem = data[selectedIndex]
             textField.text = selectedItem!.text
+            label.hidden = false
             if selectedIndex != lastSelectedIndex {
                 childComponent?.reset()
                 if selectedIndex > -1 {
@@ -105,6 +108,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     
     func reset() {
         
+        label.hidden = true
         textField.text = nil
         textField.enabled = false
         lastSelectedIndex = -1
@@ -127,6 +131,7 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
             for index in 0...data.count-1 {
                 let item = data[index]
                 if item.value == value {
+                    label.hidden = false
                     textField.text = item.text
                     selectedItem = item
                     lastSelectedIndex = index
@@ -291,9 +296,9 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
         }
     }
 
-    init(pickerView: UIPickerView, textField: UITextField, viewController: CaVehicleController) {
+    init(pickerView: UIPickerView, textField: UITextField, label: UILabel, viewController: CaVehicleController) {
         
-        super.init(pickerView: pickerView, textField: textField)
+        super.init(pickerView: pickerView, textField: textField, label: label)
         self.viewController = viewController
     }
     

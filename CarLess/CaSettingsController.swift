@@ -26,7 +26,7 @@ class CaSettingsController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        view.backgroundColor = CaSettingsStyle.ViewBgColor
+        styleView()
         tableView.registerClass(CaSettingsTableViewCell.self, forCellReuseIdentifier: "Cell")
     }
     
@@ -136,8 +136,6 @@ class CaSettingsController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Vehicle"
         cell.detailTextLabel?.text = vehicle?.displayDescription
-        cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
-        cell.detailTextLabel?.minimumScaleFactor = CaSettingsStyle.FontMinimumScaleFactor
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         applyStyleForCell(cell)
         
@@ -150,7 +148,7 @@ class CaSettingsController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Version"
-        cell.detailTextLabel?.text = "0.4"
+        cell.detailTextLabel?.text = "0.7"
         applyStyleForCell(cell)
         return cell
     }
@@ -164,13 +162,25 @@ class CaSettingsController: UITableViewController {
         return cell
     }
     
+    // MARK: - Style
+    
+    private func styleView() {
+        
+        navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        view.backgroundColor = CaStyle.ViewBgColor
+    }
+    
     private func applyStyleForCell(cell: UITableViewCell) {
         
-        cell.backgroundColor = CaSettingsStyle.CellBgColor
-        cell.textLabel?.font = CaSettingsStyle.FontDefault
-        cell.detailTextLabel?.font = CaSettingsStyle.FontDefault
-        cell.textLabel?.textColor = CaSettingsStyle.CellTitleColor
-        cell.detailTextLabel?.textColor = CaSettingsStyle.CellDetailColor
+        cell.backgroundColor = CaStyle.CellBgColor
+        
+        cell.textLabel?.font = CaStyle.CellLabelFont
+        cell.textLabel?.textColor = CaStyle.CellLabelColor
+        
+        cell.detailTextLabel?.font = CaStyle.CellValueFont
+        cell.detailTextLabel?.textColor = CaStyle.CellValueColor
+        cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
+        cell.detailTextLabel?.minimumScaleFactor = CaStyle.CellValueFontMinimumScaleFactor
     }
 
 }
