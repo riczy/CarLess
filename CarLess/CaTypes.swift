@@ -131,13 +131,6 @@ struct CaFormatter {
         return formatter
     }()
     
-    static var date: NSDateFormatter = {
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.ShortStyle
-        formatter.timeStyle = NSDateFormatterStyle.NoStyle
-        return formatter
-    }()
-    
     static var money: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle

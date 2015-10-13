@@ -60,13 +60,13 @@ struct CaColor {
     // Hex 387863
     static let SeaGreen = UIColor(red: 56.0/255.0, green: 120.0/255.0, blue: 99.0/255.0, alpha: 1.0)
     
-    // ----
-    static let LimeA200 = UIColor(red: 238.0/255.0, green: 255.0/255.0, blue: 65.0/255.0, alpha: 1.0) // EEFF41
+    // Google Design Spec Lime
     static let Lime200 = UIColor(red: 240.0/255.0, green: 244.0/255.0, blue: 195.0/255.0, alpha: 1.0) // D4E157
     static let Lime400 = UIColor(red: 212.0/255.0, green: 225.0/255.0, blue: 87.0/255.0, alpha: 1.0) // D4E157
     static let Lime500 = UIColor(red: 205.0/255.0, green: 220.0/255.0, blue: 57.0/255.0, alpha: 1.0) // CDDC39
     static let Lime700 = UIColor(red: 175.0/255.0, green: 180.0/255.0, blue: 43.0/255.0, alpha: 1.0) // AFB42B
     static let Lime900 = UIColor(red: 130.0/255.0, green: 119.0/255.0, blue: 23.0/255.0, alpha: 1.0) // 827717
+    
 }
 
 struct CaStyle {
@@ -108,7 +108,7 @@ struct CaStyle {
     static let InputFieldHrFocusColor = CaColor.Lime200
     static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
     
-    // MARK: - Default Table Style Settings
+    // MARK: - Default Table Fonts
     
     static var CellLabelFont: UIFont {
         get {
@@ -121,9 +121,29 @@ struct CaStyle {
             return UIFont(descriptor: fontDescriptor, size: 0)
         }
     }
+    static var CellHeaderFont: UIFont {
+        get {
+            let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
+            return UIFont(descriptor: fontDescriptor, size: 0)
+        }
+    }
+    static var CellRowFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        }
+    }
+    
+    // MARK: - Default Table Colors
+    
     static let CellBgColor = UIColor.whiteColor()
     static let CellLabelColor = CaColor.Lime900
     static let CellValueColor = CaColor.FadedSlateGray
+    
+    static let CellHeaderColor = UIColor.whiteColor()
+    static let CellHeaderBgColor = CaColor.FadedSlateGray
+    static let CellRowColor = CaColor.FadedSlateGray
+    static let CellRowBgColor = UIColor.whiteColor()
+    
     static let CellValueFontMinimumScaleFactor: CGFloat = 0.6
     
     // MARK: - Vehicle Specific
