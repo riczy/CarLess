@@ -22,16 +22,15 @@ class CaLogController: UIViewController {
     
     private func initializeStyle() {
         
-        let navController = self.navigationController
-        navController?.navigationBar.barTintColor = CaLogStyle.SegmentBarBgColor
-        view.backgroundColor = CaLogStyle.ViewBgColor
+        navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        view.backgroundColor = CaStyle.ViewBgColor
     }
     
     private func initializeLogModeSegmentControl() {
         
         logModeSegmentedControl.setTitle("Track", forSegmentAtIndex: LogModeControl.TrackSegment)
         logModeSegmentedControl.setTitle("Manual", forSegmentAtIndex: LogModeControl.ManualSegment)
-        logModeSegmentedControl.tintColor = CaLogStyle.SegmentControlColor
+        logModeSegmentedControl.tintColor = CaStyle.LogSegmentControlColor
         
         logModeSegmentedControl.addTarget(self, action: "logModeControlPressed", forControlEvents: UIControlEvents.ValueChanged)
 

@@ -60,7 +60,7 @@ class CaLogTripSummaryController: UIViewController {
         startTimestampLabel.textColor = CaLogStyle.ViewFieldColor
         distanceLabel.textColor = CaLogStyle.ViewFieldColor
         modeLabel.textColor = CaLogStyle.ViewFieldColor
-        spinnerView.color = CaLogStyle.ActivitySpinnerColor
+        spinnerView.color = CaStyle.ActivitySpinnerColor
     }
     
     private func initializeSpinner() {

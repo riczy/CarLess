@@ -258,7 +258,6 @@ class CaVehicleController: UIViewController {
         instructionsLabel.numberOfLines = 0
         view.addSubview(instructionsLabel)
         
-        // Year
         yearLabel = UILabel()
         yearLabel.font = CaStyle.InputLabelFont
         yearLabel.hidden = true
@@ -277,12 +276,11 @@ class CaVehicleController: UIViewController {
         yearTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(yearTextField)
         
-        yearHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 1))
+        yearHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
         yearHrView.backgroundColor = CaStyle.InputFieldHrColor
         yearHrView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(yearHrView)
         
-        // Make
         makeLabel = UILabel()
         makeLabel.font = CaStyle.InputLabelFont
         makeLabel.hidden = true
@@ -301,12 +299,11 @@ class CaVehicleController: UIViewController {
         makeTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(makeTextField)
         
-        makeHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 1))
+        makeHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
         makeHrView.backgroundColor = CaStyle.InputFieldHrColor
         makeHrView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(makeHrView)
         
-        // Model
         modelLabel = UILabel()
         modelLabel.font = CaStyle.InputLabelFont
         modelLabel.hidden = true
@@ -325,12 +322,11 @@ class CaVehicleController: UIViewController {
         modelTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(modelTextField)
         
-        modelHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 1))
+        modelHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
         modelHrView.backgroundColor = CaStyle.InputFieldHrColor
         modelHrView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(modelHrView)
         
-        // Options
         optionsLabel = UILabel()
         optionsLabel.font = CaStyle.InputLabelFont
         optionsLabel.hidden = true
@@ -349,7 +345,7 @@ class CaVehicleController: UIViewController {
         optionsTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(optionsTextField)
         
-        optionsHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 1))
+        optionsHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
         optionsHrView.backgroundColor = CaStyle.InputFieldHrColor
         optionsHrView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(optionsHrView)
@@ -371,12 +367,10 @@ class CaVehicleController: UIViewController {
     
     private func setConstraints() {
         
-        let hrWidth: CGFloat = 1.0
-        
         view.addConstraint(NSLayoutConstraint(item: instructionsLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: instructionsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: instructionsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
+
         
         view.addConstraint(NSLayoutConstraint(item: yearLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: instructionsLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: yearLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
@@ -387,7 +381,7 @@ class CaVehicleController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: yearTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
         view.addConstraint(NSLayoutConstraint(item: yearHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: yearTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
-        view.addConstraint(NSLayoutConstraint(item: yearHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: hrWidth))
+        view.addConstraint(NSLayoutConstraint(item: yearHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
         view.addConstraint(NSLayoutConstraint(item: yearHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: yearHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -401,7 +395,7 @@ class CaVehicleController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: makeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
         view.addConstraint(NSLayoutConstraint(item: makeHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: makeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
-        view.addConstraint(NSLayoutConstraint(item: makeHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: hrWidth))
+        view.addConstraint(NSLayoutConstraint(item: makeHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
         view.addConstraint(NSLayoutConstraint(item: makeHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: makeHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -415,7 +409,7 @@ class CaVehicleController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: modelTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
         view.addConstraint(NSLayoutConstraint(item: modelHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modelTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
-        view.addConstraint(NSLayoutConstraint(item: modelHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: hrWidth))
+        view.addConstraint(NSLayoutConstraint(item: modelHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
         view.addConstraint(NSLayoutConstraint(item: modelHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: modelHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -429,7 +423,7 @@ class CaVehicleController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: optionsTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
         view.addConstraint(NSLayoutConstraint(item: optionsHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: optionsTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
-        view.addConstraint(NSLayoutConstraint(item: optionsHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: hrWidth))
+        view.addConstraint(NSLayoutConstraint(item: optionsHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
         view.addConstraint(NSLayoutConstraint(item: optionsHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: optionsHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         

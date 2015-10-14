@@ -116,10 +116,10 @@
             </objects>
             <point key="canvasLocation" x="-2731" y="182"/>
         </scene>
-        <!--Ca Vehicle Controller-->
+        <!--Vehicle-->
         <scene sceneID="oxu-up-9ia">
             <objects>
-                <viewController id="fXF-Rg-7i3" customClass="CaVehicleController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Vehicle" id="fXF-Rg-7i3" customClass="CaVehicleController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6T8-OH-DlS"/>
                         <viewControllerLayoutGuide type="bottom" id="zVX-BN-pwy"/>
@@ -425,83 +425,10 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Cgg-qi-ZOy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1O-1b-e2A">
-                                <rect key="frame" x="30" y="117" width="540" height="18"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date &amp; Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kh-1l-rfR">
-                                <rect key="frame" x="30" y="45" width="540" height="18"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKv-W2-i8c">
-                                <rect key="frame" x="30" y="189" width="540" height="18"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w1U-YM-djJ">
-                                <rect key="frame" x="30" y="138" width="540" height="31"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start Date &amp; Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Frr-vi-cLD">
-                                <rect key="frame" x="30" y="66" width="540" height="31"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Transportation Mode" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N0i-f8-pvE">
-                                <rect key="frame" x="30" y="210" width="540" height="31"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="5kh-1l-rfR" firstAttribute="top" secondItem="u8g-2X-jIN" secondAttribute="bottom" constant="45" id="1on-9s-7CD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eKv-W2-i8c" secondAttribute="trailing" constant="10" id="4Km-tE-xSl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="N0i-f8-pvE" secondAttribute="trailing" constant="10" id="F3O-Zu-2AA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="e1O-1b-e2A" secondAttribute="trailing" constant="10" id="Jbe-Dr-7Kl"/>
-                            <constraint firstItem="5kh-1l-rfR" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="LYQ-92-0Ez"/>
-                            <constraint firstItem="e1O-1b-e2A" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="NN0-pk-KFb"/>
-                            <constraint firstItem="Frr-vi-cLD" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="Q74-Zl-IHh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5kh-1l-rfR" secondAttribute="trailing" constant="10" id="QHl-Ux-HQk"/>
-                            <constraint firstItem="e1O-1b-e2A" firstAttribute="top" secondItem="u8g-2X-jIN" secondAttribute="bottom" constant="10" id="QkU-hO-v7b"/>
-                            <constraint firstItem="eKv-W2-i8c" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="Rcu-Yb-DuP"/>
-                            <constraint firstItem="5kh-1l-rfR" firstAttribute="top" secondItem="e1O-1b-e2A" secondAttribute="bottom" constant="63" id="WhA-Ow-vHR"/>
-                            <constraint firstItem="e1O-1b-e2A" firstAttribute="top" secondItem="Frr-vi-cLD" secondAttribute="bottom" constant="20" id="cv3-hC-qBw"/>
-                            <constraint firstItem="N0i-f8-pvE" firstAttribute="leading" secondItem="eKv-W2-i8c" secondAttribute="trailing" constant="-516" id="eRc-iA-aIA"/>
-                            <constraint firstItem="eKv-W2-i8c" firstAttribute="top" secondItem="w1U-YM-djJ" secondAttribute="bottom" constant="20" id="feg-Cy-ZeI"/>
-                            <constraint firstItem="Frr-vi-cLD" firstAttribute="top" secondItem="5kh-1l-rfR" secondAttribute="bottom" constant="3" id="gAj-Yt-Pc7"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="w1U-YM-djJ" secondAttribute="trailing" constant="10" id="lz5-Uy-7RV"/>
-                            <constraint firstItem="N0i-f8-pvE" firstAttribute="top" secondItem="eKv-W2-i8c" secondAttribute="bottom" constant="3" id="mwh-Ea-1rN"/>
-                            <constraint firstItem="w1U-YM-djJ" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="nC8-E3-esK"/>
-                            <constraint firstItem="N0i-f8-pvE" firstAttribute="leading" secondItem="Cgg-qi-ZOy" secondAttribute="leadingMargin" constant="10" id="tY6-Jg-etb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Frr-vi-cLD" secondAttribute="trailing" constant="10" id="vQ8-CZ-8zB"/>
-                            <constraint firstItem="w1U-YM-djJ" firstAttribute="top" secondItem="e1O-1b-e2A" secondAttribute="bottom" constant="3" id="vkz-OH-Paj"/>
-                            <constraint firstItem="eKv-W2-i8c" firstAttribute="top" secondItem="5kh-1l-rfR" secondAttribute="bottom" constant="63" id="x7P-B8-wHB"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="WhA-Ow-vHR"/>
-                                <exclude reference="QkU-hO-v7b"/>
-                                <exclude reference="x7P-B8-wHB"/>
-                                <exclude reference="eRc-iA-aIA"/>
-                            </mask>
-                        </variation>
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <outlet property="distanceLabel" destination="e1O-1b-e2A" id="y5L-Tt-2LW"/>
-                        <outlet property="distanceTextField" destination="w1U-YM-djJ" id="dby-m7-Mcm"/>
-                        <outlet property="modeLabel" destination="eKv-W2-i8c" id="49Y-WI-EFG"/>
-                        <outlet property="modeTextField" destination="N0i-f8-pvE" id="frn-OD-MBy"/>
-                        <outlet property="timestampLabel" destination="5kh-1l-rfR" id="izW-nD-YwK"/>
-                        <outlet property="timestampTextField" destination="Frr-vi-cLD" id="eJZ-k4-6xf"/>
                         <segue destination="gb2-bJ-BMw" kind="presentation" identifier="LogManualTripHomeToSummarySegue" id="Nee-jB-Zvy"/>
                     </connections>
                 </viewController>

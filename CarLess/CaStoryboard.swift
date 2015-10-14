@@ -22,7 +22,7 @@ struct CaSegue {
 struct CaConstants {
     
     static let SaveActivityDelay = 2.0 * Double(NSEC_PER_SEC)
-    static let SaveDisplayAlpha: CGFloat = 0.5
+    static let SaveDisplayAlpha: CGFloat = 0.3
 }
 
 struct CaColor {
@@ -68,6 +68,12 @@ struct CaColor {
     static let Lime700 = UIColor(red: 175.0/255.0, green: 180.0/255.0, blue: 43.0/255.0, alpha: 1.0) // AFB42B
     static let Lime900 = UIColor(red: 130.0/255.0, green: 119.0/255.0, blue: 23.0/255.0, alpha: 1.0) // 827717
     
+    // Google Design Spec Blue
+    static let Blue500 = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0) // 2196F3
+    static let Blue700 = UIColor(red: 25.0/255.0, green: 118.0/255.0, blue: 210.0/255.0, alpha: 1.0) // 1976D2
+    
+    // Google Design Spec Light Blue
+    static let LightBlue900 = UIColor(red: 1.0/255.0, green: 87.0/255.0, blue: 155.0/255.0, alpha: 1.0) // 01579B
 }
 
 struct CaStyle {
@@ -110,6 +116,7 @@ struct CaStyle {
     static let InputFieldColor = CaColor.FadedSlateGray
     static let InputFieldHrColor = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 0.3) //CaColor.Lime200
     static let InputFieldHrFocusColor = CaColor.Lime200
+    static let InputFieldHrThickness: CGFloat = 1.0
     static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
     
     // MARK: - Default Table Fonts
@@ -164,27 +171,27 @@ struct CaStyle {
     }
     static let MpgLabelColor = CaColor.FadedSlateGray
     static let MpgValueColor = CaColor.RedOrange
-    
+ 
+    // MARK: - Log Specific
+    static let LogSegmentControlColor = UIColor.blackColor()
+    static let LogSaveButtonColor = UIColor.whiteColor()
+    static let LogSaveButtonBgColor = CaColor.LightBlue900
+    static let LogSaveButtonBorderColor = CaColor.LightBlue900
+    static let ActivitySpinnerColor = CaColor.RedOrange
 }
 
 struct CaLogStyle {
     
     
-    static let SegmentBarBgColor = CaColor.Mustard
-    static let SegmentControlColor = CaColor.FadedSlateGray
     static let ViewBgColor = CaColor.Ivory
     static let ViewLabelColor = CaColor.FadedSlateGray
     static let ViewFieldColor = UIColor.blackColor()
-    static let ActivitySpinnerColor = CaColor.RedOrange
     static let StartButtonColor = UIColor.whiteColor()
     static let StartButtonBgColor = CaColor.HunterGreen
     static let StartButtonBorderColor = CaColor.FadedSlateGray
     static let StopButtonColor = UIColor.whiteColor()
     static let StopButtonBgColor = CaColor.RedOrange
     static let StopButtonBorderColor = CaColor.FadedSlateGray
-    static let SaveButtonColor = UIColor.whiteColor()
-    static let SaveButtonBgColor = CaColor.LightBlue
-    static let SaveButtonBorderColor = CaColor.LightBlue
     static let DiscardButtonColor = UIColor.whiteColor()
     static let DiscardButtonBgColor = CaColor.FadedSlateGray
     static let DiscardButtonBorderColor = CaColor.FadedSlateGray

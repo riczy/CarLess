@@ -5,12 +5,15 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
 
     // MARK: - UI Properties
     
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var distanceTextField: UITextField!
-    @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var timestampTextField: UITextField!
-    @IBOutlet weak var modeLabel: UILabel!
-    @IBOutlet weak var modeTextField: UITextField!
+    private var distanceLabel: UILabel!
+    private var distanceTextField: UITextField!
+    private var distanceHrView: UIView!
+    private var timestampLabel: UILabel!
+    private var timestampTextField: UITextField!
+    private var timestampHrView: UIView!
+    private var modeLabel: UILabel!
+    private var modeTextField: UITextField!
+    private var modeHrView: UIView!
     private var saveButton: UIButton!
     private var datePicker: UIDatePicker!
     private var modePicker: UIPickerView!
@@ -30,19 +33,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        initializeDatePicker()
-        initializeModePicker()
-        initializeDecimalPad()
-        initializeSpinner()
-        renderSaveButton()
-        initializeStyle()
-        
-        distanceTextField.tag = Tag.DistanceField
-        distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
-        distanceTextField.keyboardType = UIKeyboardType.DecimalPad
-        distanceTextField.delegate = self
-        distanceTextField.placeholder = "0.00"
+        setComponents()
+        setConstraints()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -51,29 +43,14 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     // MARK: - View Initializations
     
-    private func initializeStyle() {
-        
-        view.backgroundColor = CaLogStyle.ViewBgColor
-        
-        distanceLabel.textColor = CaLogStyle.ViewLabelColor
-        timestampLabel.textColor = CaLogStyle.ViewLabelColor
-        modeLabel.textColor = CaLogStyle.ViewLabelColor
-        
-        distanceTextField.textColor = CaLogStyle.ViewFieldColor
-        timestampTextField.textColor = CaLogStyle.ViewFieldColor
-        modeTextField.textColor = CaLogStyle.ViewFieldColor
-        
-        spinnerView.color = CaLogStyle.ActivitySpinnerColor
-    }
-    
     private func renderSaveButton() {
         
-        saveButton = CaComponent.createButton(title: "Save", color: CaLogStyle.SaveButtonColor, bgColor: CaLogStyle.SaveButtonBgColor, borderColor: CaLogStyle.SaveButtonBorderColor)
+        saveButton = CaComponent.createButton(title: "Save trip", color: CaStyle.LogSaveButtonColor, bgColor: CaStyle.LogSaveButtonBgColor, borderColor: CaStyle.LogSaveButtonBorderColor)
         self.view.addSubview(saveButton)
         
         
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
         
@@ -140,6 +117,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         
         spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         spinnerView.center = view.center
+        spinnerView.color = CaStyle.ActivitySpinnerColor
         spinnerView.hidesWhenStopped = true
         view.addSubview(spinnerView)
     }
@@ -301,6 +279,141 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
             return CaFormatter.distance.numberFromString("\(textFieldText)\(string)") != nil
         }
         return true
+    }
+    
+    // MARK: - View Construction
+    
+    private func setComponents() {
+        
+        let alignment = NSTextAlignment.Left
+        view.backgroundColor = CaStyle.ViewBgColor
+        
+        timestampLabel = UILabel()
+        timestampLabel.font = CaStyle.InputLabelFont
+        timestampLabel.text = "Start date and time"
+        timestampLabel.textAlignment = alignment
+        timestampLabel.textColor = CaStyle.InputLabelColor
+        timestampLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timestampLabel)
+        
+        timestampTextField = UITextField()
+        timestampTextField.adjustsFontSizeToFitWidth = true
+        timestampTextField.borderStyle = UITextBorderStyle.None
+        timestampTextField.font = CaStyle.InputFieldFont
+        timestampTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
+        timestampTextField.placeholder = "Start date and time"
+        timestampTextField.textAlignment = alignment
+        timestampTextField.textColor = CaStyle.InputFieldColor
+        timestampTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timestampTextField)
+        
+        timestampHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
+        timestampHrView.backgroundColor = CaStyle.InputFieldHrColor
+        timestampHrView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timestampHrView)
+        
+        modeLabel = UILabel()
+        modeLabel.font = CaStyle.InputLabelFont
+        modeLabel.text = "Mode"
+        modeLabel.textAlignment = alignment
+        modeLabel.textColor = CaStyle.InputLabelColor
+        modeLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modeLabel)
+
+        modeTextField = UITextField()
+        modeTextField.adjustsFontSizeToFitWidth = true
+        modeTextField.borderStyle = UITextBorderStyle.None
+        modeTextField.font = CaStyle.InputFieldFont
+        modeTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
+        modeTextField.placeholder = "Mode"
+        modeTextField.textAlignment = alignment
+        modeTextField.textColor = CaStyle.InputFieldColor
+        modeTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modeTextField)
+        
+        modeHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
+        modeHrView.backgroundColor = CaStyle.InputFieldHrColor
+        modeHrView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modeHrView)
+
+        distanceLabel = UILabel()
+        distanceLabel.font = CaStyle.InputLabelFont
+        distanceLabel.text = "Distance"
+        distanceLabel.textAlignment = alignment
+        distanceLabel.textColor = CaStyle.InputLabelColor
+        distanceLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(distanceLabel)
+        
+        distanceTextField = UITextField()
+        distanceTextField.adjustsFontSizeToFitWidth = true
+        distanceTextField.borderStyle = UITextBorderStyle.None
+        distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
+        distanceTextField.delegate = self
+        distanceTextField.font = CaStyle.InputFieldFont
+        distanceTextField.keyboardType = UIKeyboardType.DecimalPad
+        distanceTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
+        distanceTextField.placeholder = "0.0 miles"
+        distanceTextField.tag = Tag.DistanceField
+        distanceTextField.textAlignment = alignment
+        distanceTextField.textColor = CaStyle.InputFieldColor
+        distanceTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(distanceTextField)
+        
+        distanceHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
+        distanceHrView.backgroundColor = CaStyle.InputFieldHrColor
+        distanceHrView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(distanceHrView)
+        
+        renderSaveButton()
+        initializeDatePicker()
+        initializeModePicker()
+        initializeDecimalPad()
+        initializeSpinner()
+    }
+    
+    private func setConstraints() {
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 30.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 5.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
+        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampHrView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 5.0))
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeHrView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 5.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
+        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
     }
 
 }
