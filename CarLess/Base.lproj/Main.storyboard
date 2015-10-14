@@ -175,60 +175,10 @@
                     <view key="view" contentMode="scaleToFill" id="Sfn-tI-Azz">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your mode of transportation and press Start to begin tracking your route." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc3-Bd-3Wu">
-                                <rect key="frame" x="40" y="166" width="520" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="LnS-pC-lCm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="LnS-pC-lCm"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq7-Zd-Dhf">
-                                <rect key="frame" x="20" y="210" width="560" height="8"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="8" id="dQe-oA-Fzl"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mode Goes Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hHN-FF-s9d">
-                                <rect key="frame" x="20" y="218" width="560" height="31"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="26"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="wq7-Zd-Dhf" secondAttribute="centerX" id="7gH-lG-2Kg"/>
-                            <constraint firstItem="Yc3-Bd-3Wu" firstAttribute="trailing" secondItem="hHN-FF-s9d" secondAttribute="trailing" id="ALG-1r-0QZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hHN-FF-s9d" secondAttribute="trailing" id="BNT-y5-ZKC"/>
-                            <constraint firstItem="Yc3-Bd-3Wu" firstAttribute="leading" secondItem="Sfn-tI-Azz" secondAttribute="leadingMargin" constant="20" id="Edc-Nv-ql4"/>
-                            <constraint firstAttribute="centerX" secondItem="Yc3-Bd-3Wu" secondAttribute="centerX" id="NGr-Q4-Ecg"/>
-                            <constraint firstItem="hHN-FF-s9d" firstAttribute="top" secondItem="wq7-Zd-Dhf" secondAttribute="bottom" id="Sec-Np-1OS"/>
-                            <constraint firstAttribute="centerY" secondItem="wq7-Zd-Dhf" secondAttribute="centerY" constant="30" id="VKd-NK-l4D"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wq7-Zd-Dhf" secondAttribute="trailing" id="VQw-rB-PZe"/>
-                            <constraint firstItem="hHN-FF-s9d" firstAttribute="leading" secondItem="Sfn-tI-Azz" secondAttribute="leadingMargin" id="VhV-ov-BAd"/>
-                            <constraint firstItem="wq7-Zd-Dhf" firstAttribute="top" secondItem="Yc3-Bd-3Wu" secondAttribute="bottom" constant="8" id="awT-Jh-yWO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Yc3-Bd-3Wu" secondAttribute="trailing" constant="20" id="j1D-1a-i83"/>
-                            <constraint firstItem="wq7-Zd-Dhf" firstAttribute="leading" secondItem="Sfn-tI-Azz" secondAttribute="leadingMargin" id="jbk-uX-5j1"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ALG-1r-0QZ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Log" image="tab-log" id="9NV-8Z-lfo"/>
                     <connections>
-                        <outlet property="headingLabel" destination="Yc3-Bd-3Wu" id="eVq-ah-hyY"/>
-                        <outlet property="modeTextField" destination="hHN-FF-s9d" id="OxE-Yj-iEm"/>
                         <segue destination="1fr-d2-bnx" kind="presentation" identifier="LogTrackedTripHomeToProgressSegue" id="DRK-4u-mPb"/>
                     </connections>
                 </viewController>

@@ -74,6 +74,9 @@ struct CaColor {
     
     // Google Design Spec Light Blue
     static let LightBlue900 = UIColor(red: 1.0/255.0, green: 87.0/255.0, blue: 155.0/255.0, alpha: 1.0) // 01579B
+    
+    // Google Design Spec
+    static let LightGreen900 = UIColor(red: 51.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0) // 33691E
 }
 
 struct CaStyle {
@@ -81,8 +84,8 @@ struct CaStyle {
     static let LeftViewPadding: CGFloat = 15.0
     static let RightViewPadding: CGFloat = 15.0
     
-    static let ButtonWidth: CGFloat = 110.0
-    static let ButtonHeight: CGFloat = 36.0
+    static let ButtonWidth: CGFloat = 132.0
+    static let ButtonHeight: CGFloat = 44.0
     static let ButtonBorderWidth: CGFloat = 0.0
     static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
     static let DefaultFontName = "Arial Rounded MT Bold"
@@ -177,6 +180,10 @@ struct CaStyle {
     static let LogSaveButtonColor = UIColor.whiteColor()
     static let LogSaveButtonBgColor = CaColor.LightBlue900
     static let LogSaveButtonBorderColor = CaColor.LightBlue900
+    static let LogStartButtonColor = UIColor.whiteColor()
+    static let LogStartButtonBgColor = CaColor.LightGreen900
+    static let LogStartButtonBorderColor = CaColor.LightGreen900
+    
     static let ActivitySpinnerColor = CaColor.RedOrange
 }
 
@@ -186,9 +193,6 @@ struct CaLogStyle {
     static let ViewBgColor = CaColor.Ivory
     static let ViewLabelColor = CaColor.FadedSlateGray
     static let ViewFieldColor = UIColor.blackColor()
-    static let StartButtonColor = UIColor.whiteColor()
-    static let StartButtonBgColor = CaColor.HunterGreen
-    static let StartButtonBorderColor = CaColor.FadedSlateGray
     static let StopButtonColor = UIColor.whiteColor()
     static let StopButtonBgColor = CaColor.RedOrange
     static let StopButtonBorderColor = CaColor.FadedSlateGray

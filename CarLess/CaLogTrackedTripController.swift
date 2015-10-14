@@ -5,8 +5,9 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
 
     // MARK: - UI Properties
     
-    @IBOutlet weak var headingLabel: UILabel!
-    @IBOutlet weak var modeTextField: UITextField!
+    private var headingLabel: UILabel!
+    private var modeTextField: UITextField!
+    private var modeHrView: UIView!
     private var modePicker: UIPickerView!
     private var startButton: UIButton!
     
@@ -34,9 +35,8 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        initializeStyle()
-        initializeModePicker()
-        renderStartButton()
+        setComponents()
+        setConstraints()
         reset()
     }
     
@@ -89,13 +89,6 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     
     // MARK: - View Initializations
     
-    private func initializeStyle() {
-        
-        view.backgroundColor = CaLogStyle.ViewBgColor
-        headingLabel.textColor = CaLogStyle.ViewLabelColor
-        modeTextField.textColor = CaLogStyle.ViewFieldColor
-    }
-    
     private func initializeModePicker() {
         
         modePicker = UIPickerView()
@@ -119,12 +112,12 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     
     private func renderStartButton() {
         
-        startButton = CaComponent.createButton(title: "Start", color: CaLogStyle.StartButtonColor, bgColor: CaLogStyle.StartButtonBgColor, borderColor: CaLogStyle.StartButtonBorderColor)
+        startButton = CaComponent.createButton(title: "Start mapping", color: CaStyle.LogStartButtonColor, bgColor: CaStyle.LogStartButtonBgColor, borderColor: CaStyle.LogStartButtonBorderColor)
         self.view.addSubview(startButton)
-        
+    
         
         view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
         view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
         view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
         
@@ -134,7 +127,6 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     private func updateDisplayForMode(mode: Mode) {
         
         modeTextField.text = mode.description
-        //modeImage?.image = UIImage(named: mode.imageFilename)
     }
     
     // MARK: - Scene Actions
@@ -172,4 +164,56 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         return Mode.allValues[row].description
     }
     
+    // MARK: - View Construction
+    
+    private func setComponents() {
+
+        view.backgroundColor = CaStyle.ViewBgColor
+        
+        headingLabel = UILabel()
+        headingLabel.font = CaStyle.InstructionHeadlineFont
+        headingLabel.numberOfLines = 0
+        headingLabel.text = "Begin mapping your trip by choosing the transportation mode"
+        headingLabel.textAlignment = NSTextAlignment.Center
+        headingLabel.textColor = CaStyle.InstructionHeadlineColor
+        headingLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headingLabel)
+        
+        modeTextField = UITextField()
+        modeTextField.adjustsFontSizeToFitWidth = true
+        modeTextField.borderStyle = UITextBorderStyle.None
+        modeTextField.font = CaStyle.InputFieldFont
+        modeTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
+        modeTextField.placeholder = "Mode"
+        modeTextField.textAlignment = NSTextAlignment.Center
+        modeTextField.textColor = CaStyle.InputFieldColor
+        modeTextField.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modeTextField)
+        
+        modeHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
+        modeHrView.backgroundColor = CaStyle.InputFieldHrColor
+        modeHrView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modeHrView)
+        
+        initializeModePicker()
+        renderStartButton()
+    }
+
+    private func setConstraints() {
+        
+        view.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 30.0))
+        view.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: headingLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+    }
 }
