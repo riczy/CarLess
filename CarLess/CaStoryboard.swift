@@ -72,6 +72,9 @@ struct CaColor {
 
 struct CaStyle {
     
+    static let LeftViewPadding: CGFloat = 15.0
+    static let RightViewPadding: CGFloat = 15.0
+    
     static let ButtonWidth: CGFloat = 110.0
     static let ButtonHeight: CGFloat = 36.0
     static let ButtonBorderWidth: CGFloat = 0.0
@@ -161,6 +164,7 @@ struct CaStyle {
     }
     static let MpgLabelColor = CaColor.FadedSlateGray
     static let MpgValueColor = CaColor.RedOrange
+    
 }
 
 struct CaLogStyle {
@@ -188,50 +192,6 @@ struct CaLogStyle {
     static let MapRouteLineWidth: CGFloat = 4
    
 }
-
-struct CaTripStyle {
-
-    static let ViewBgColor = CaColor.Ivory
-    static let CellBgColor = CaColor.PaleIvory
-    static let CellTitleColor = CaColor.FadedSlateGray
-    static let CellTitleFont = CaStyle.FontDefault
-    static let SummaryCellBgColor = CaColor.LightBlue
-    static let SummaryCellColor = UIColor.whiteColor()
-    static let SummaryCellFont = CaStyle.FontDefault
-    
-}
-
-struct CaTripSummaryStyle {
-    
-    static let ViewBgColor = CaColor.Ivory
-    static let HeaderCellFont = CaStyle.FontDefault
-    static let HeaderCellBgColor = CaColor.LightBlue
-    static let HeaderCellColor = UIColor.whiteColor()
-    static let CellFont = CaStyle.FontDefault
-    static let CellBgColor = CaColor.PaleIvory
-    static let CellColor = CaColor.FadedSlateGray
-    
-}
-
-struct CaTripListStyle {
-    
-    static let ViewBgColor = CaColor.Ivory
-    static let CellFont = CaStyle.FontDefault
-    static let CellBgColor = CaColor.PaleIvory
-    static let CellTimeColor = CaColor.FadedSlateGray
-    static let CellDistanceColor = CaColor.FadedSlateGray
-}
-
-struct CaVehicleStyle {
-    
-    static let ViewBgColor = CaColor.Ivory
-    static let ViewTitleColor = CaColor.FadedSlateGray
-    static let ViewFieldColor = CaColor.FadedSlateGray
-    static let ViewFieldBgColor = CaColor.PaleIvory
-    static let MpgValueColor = CaColor.RedOrange
-    static let MpgTitleColor = CaColor.RedOrange
-}
-
 class CaComponent {
     
     static func createButton(title title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {

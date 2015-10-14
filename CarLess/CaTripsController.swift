@@ -2,42 +2,36 @@ import UIKit
 
 class CaTripTableViewCell: UITableViewCell {
     
-    var modeImageView: UIImageView!
-    var startTimeLabel: UILabel!
-    var distanceLabel: UILabel!
-    var distanceUnitLabel: UILabel!
+    var modeImageView = UIImageView()
+    var startTimeLabel = UILabel()
+    var distanceLabel = UILabel()
+    var distanceUnitLabel = UILabel()
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override func layoutSubviews() {
         
-        modeImageView = UIImageView()
+        super.layoutSubviews()
+        
         modeImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(modeImageView)
         
-        startTimeLabel = UILabel()
         startTimeLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(startTimeLabel)
         
-        distanceLabel = UILabel()
         distanceLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(distanceLabel)
         
-        contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1.0, constant: 0.0))
-        contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterYWithinMargins, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: CaStyle.LeftViewPadding))
+        contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 20.0))
         contentView.addConstraint(NSLayoutConstraint(item: modeImageView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 20.0))
 
         contentView.addConstraint(NSLayoutConstraint(item: startTimeLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: modeImageView, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 4.0))
-        contentView.addConstraint(NSLayoutConstraint(item: startTimeLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterYWithinMargins, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: startTimeLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: startTimeLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 90.0))
         
         contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: startTimeLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 4.0))
-        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.RightMargin, multiplier: 1.0, constant: 0.0))
-        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterYWithinMargins, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: (CaStyle.RightViewPadding * -1.0)))
+        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         
     }
 }
@@ -59,7 +53,8 @@ class CaTripsController: UITableViewController {
         
         super.viewDidLoad()
         
-        view.backgroundColor = CaTripStyle.ViewBgColor
+        navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        view.backgroundColor = CaStyle.ViewBgColor
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SummaryCell")
         tableView.registerClass(CaTripTableViewCell.self, forCellReuseIdentifier: "TripCell")
@@ -205,11 +200,10 @@ class CaTripsController: UITableViewController {
     private func tableViewSummaryCell(indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("SummaryCell", forIndexPath: indexPath)
-        cell.textLabel?.text = indexPath.row == 0 ? "Weekly Summary" : "Monthly Summary"
+        cell.textLabel?.text = indexPath.row == 0 ? "Weekly summary" : "Monthly summary"
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        cell.backgroundColor = CaTripStyle.SummaryCellBgColor
-        cell.textLabel?.textColor = CaTripStyle.SummaryCellColor
-        cell.textLabel?.font = CaTripStyle.SummaryCellFont
+        cell.textLabel?.textColor = CaStyle.CellLabelColor
+        cell.textLabel?.font = CaStyle.CellLabelFont
         return cell
     }
     
@@ -224,17 +218,18 @@ class CaTripsController: UITableViewController {
         let trip = tripArray[row]
         let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
-        cell.startTimeLabel?.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
-        cell.distanceLabel?.text = "\(CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
-        cell.modeImageView?.image = UIImage(named: trip.modeType.imageFilename)
+        cell.startTimeLabel.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
+        cell.distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+        cell.modeImageView.image = UIImage(named: trip.modeType.imageFilename)
 
-        cell.startTimeLabel.font = CaTripListStyle.CellFont
-        cell.startTimeLabel.textColor = CaTripListStyle.CellTimeColor
+        cell.startTimeLabel.font = CaStyle.CellRowFont
+        cell.startTimeLabel.textColor = CaStyle.CellRowColor
         cell.startTimeLabel.textAlignment = NSTextAlignment.Right
-        cell.distanceLabel.font = CaTripListStyle.CellFont
-        cell.distanceLabel.textColor = CaTripListStyle.CellDistanceColor
+        cell.distanceLabel.font = CaStyle.CellRowFont
+        cell.distanceLabel.textColor = CaStyle.CellRowColor
         cell.distanceLabel.textAlignment = NSTextAlignment.Right
-        cell.backgroundColor = CaTripListStyle.CellBgColor
+        cell.backgroundColor = CaStyle.CellRowBgColor
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
 
         return cell
     }

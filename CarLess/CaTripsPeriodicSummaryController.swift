@@ -11,9 +11,7 @@ class CaTripsPeriodicSummaryCell: UITableViewCell {
         
         super.layoutSubviews()
         
-        let leftPadding: CGFloat = 15.0
-        let rightPadding: CGFloat = 15.0
-        let frameWidth = contentView.frame.size.width - leftPadding - rightPadding
+        let frameWidth = contentView.frame.size.width - CaStyle.LeftViewPadding - CaStyle.RightViewPadding
         let dateWidth = frameWidth * 0.25
         let tripsWidth = frameWidth * 0.15
         let moneyWidth = frameWidth * 0.3
@@ -31,7 +29,7 @@ class CaTripsPeriodicSummaryCell: UITableViewCell {
         moneySavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(moneySavedTotalLabel)
         
-        contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem:  contentView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: leftPadding))
+        contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem:  contentView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: CaStyle.LeftViewPadding))
         contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: dateWidth))
         
@@ -120,7 +118,6 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         
         navigationItem.title = period == SummaryPeriod.Monthly ? "Monthly Summary" : "Weekly Summary"
         view.backgroundColor = CaStyle.ViewBgColor
-        navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
     }
     
     private func applyHeaderCellStyle(cell: CaTripsPeriodicSummaryCell) {
