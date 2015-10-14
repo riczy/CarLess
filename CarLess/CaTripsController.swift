@@ -116,8 +116,7 @@ class CaTripsController: UITableViewController {
         
         if segue.identifier == CaSegue.TripsHomeToTripPeriodicSummary {
             
-            let nvc = segue.destinationViewController as! UINavigationController
-            let dvc = nvc.topViewController as! CaTripsPeriodicSummaryController
+            let dvc = segue.destinationViewController as! CaTripsPeriodicSummaryController
             dvc.period = selectedSummaryPeriod == nil ? SummaryPeriod.Monthly : selectedSummaryPeriod
             selectedSummaryPeriod = nil
         }

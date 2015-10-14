@@ -544,7 +544,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Trips" id="3l7-Bl-85b"/>
                     <connections>
-                        <segue destination="L4r-ah-Oz0" kind="show" identifier="TripsHomeToTripPeriodicSummarySegue" id="glK-2w-2IG"/>
+                        <segue destination="A4I-fg-XrG" kind="show" identifier="TripsHomeToTripPeriodicSummarySegue" id="LYQ-Sq-G6y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ep-hK-V9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -564,18 +564,15 @@
                             <outlet property="delegate" destination="A4I-fg-XrG" id="QHs-8F-lxl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Monthly Summary" id="OTd-7j-GP4">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="S4g-xb-LWz">
-                            <connections>
-                                <segue destination="woA-BH-hR5" kind="unwind" unwindAction="returnToTripsHome:" id="kZj-Bo-K7b"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Monthly Summary" id="OTd-7j-GP4"/>
+                    <connections>
+                        <segue destination="woA-BH-hR5" kind="unwind" identifier="TripPeriodicSummaryToTripsHomeSegue" unwindAction="returnToTripsHome:" id="DQe-H4-Hxl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="woA-BH-hR5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-994" y="-1567"/>
+            <point key="canvasLocation" x="-1788" y="-1567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pmz-Cq-6YA">
@@ -631,24 +628,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9r-Fh-GxP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-909" y="553"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="S6e-bw-VHq">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L4r-ah-Oz0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QdE-ub-dja">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="A4I-fg-XrG" kind="relationship" relationship="rootViewController" id="ft4-oI-ETn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Psn-lv-UgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1745" y="-1567"/>
         </scene>
         <!--Trips-->
         <scene sceneID="qWP-1v-CGn">

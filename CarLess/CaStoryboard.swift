@@ -16,6 +16,7 @@ struct CaSegue {
     static let DistanceUnitToSettings = "DistanceUnitToSettingsSegue"
     
     static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
+    static let TripPeriodicSummaryToTripsHome = "TripPeriodicSummaryToTripsHomeSegue"
 }
 
 struct CaConstants {

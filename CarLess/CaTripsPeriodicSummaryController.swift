@@ -53,6 +53,8 @@ class CaTripsPeriodicSummaryCell: UITableViewCell {
 
 class CaTripsPeriodicSummaryController: UITableViewController {
     
+    // MARK: - Properties
+    
     let dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = NSDateFormatterStyle.ShortStyle
@@ -63,6 +65,8 @@ class CaTripsPeriodicSummaryController: UITableViewController {
     var data: [CaTripsSummary]!
     var period: SummaryPeriod!
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
 
         super.viewDidLoad()
