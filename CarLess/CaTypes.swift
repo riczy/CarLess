@@ -123,6 +123,15 @@ struct CaFormatter {
         formatter.maximumFractionDigits = 2
         return formatter
     }()
+
+    static var decimalDisplay: NSNumberFormatter = {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        formatter.minimum = 0
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        return formatter
+    }()
     
     static var timestamp: NSDateFormatter = {
         let formatter = NSDateFormatter()

@@ -219,7 +219,7 @@ class CaTripsController: UITableViewController {
         let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
         cell.startTimeLabel.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
-        cell.distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+        cell.distanceLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
         cell.modeImageView.image = UIImage(named: trip.modeType.imageFilename)
 
         cell.startTimeLabel.font = CaStyle.CellRowFont

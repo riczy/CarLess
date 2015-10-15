@@ -6,11 +6,9 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     
     // MARK: - UI Properties
 
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var distanceTitleLabel: UILabel!
-    @IBOutlet weak var distanceValueLabel: UILabel!
-    @IBOutlet weak var modeTitleLabel: UILabel!
-    @IBOutlet weak var modeImageView: UIImageView!
+    private var mapView: MKMapView!
+    private var distanceTitleLabel: UILabel!
+    private var distanceValueLabel: UILabel!
     private var stopButton: UIButton!
     
     // MARK: - Properties
@@ -24,7 +22,7 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         }
         set {
             trip.distance = newValue
-            distanceValueLabel.text = CaFormatter.distance.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit))
+            distanceValueLabel.text = CaFormatter.decimalDisplay.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit))
         }
     }
     
@@ -44,47 +42,11 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
-        initializeStyle()
-        renderStopButton()
-        
-        modeImageView?.image = UIImage(named: mode.imageFilename)
-
-        mapView.mapType = MKMapType.Standard
-        mapView.zoomEnabled = true
-        mapView.scrollEnabled = true
-        mapView.rotateEnabled = true
-        mapView.pitchEnabled = false
-        mapView.delegate = self
-        
+        setComponents()
+        setConstraints()
         startTracking()
     }
     
-    
-    // MARK: - View Initializations
-    
-    private func initializeStyle() {
-        
-        view.backgroundColor = CaLogStyle.ViewBgColor
-        modeTitleLabel.textColor = CaLogStyle.ViewLabelColor
-        distanceTitleLabel.textColor = CaLogStyle.ViewLabelColor
-        distanceValueLabel.textColor = CaLogStyle.ViewFieldColor
-    }
-
-    
-    private func renderStopButton() {
-        
-        stopButton = CaComponent.createButton(title: "Stop", color: CaLogStyle.StopButtonColor, bgColor: CaLogStyle.StopButtonBgColor, borderColor: CaLogStyle.StopButtonBorderColor)
-        self.view.addSubview(stopButton)
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -20.0))
-        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
-        
-        stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
-    }
     
     // MARK: - Navigation
     
@@ -113,8 +75,8 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         // There is only one overlay on this map therefore no checking of
         // overlay done.
         let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = CaLogStyle.MapRouteLineColor
-        polylineRenderer.lineWidth = CaLogStyle.MapRouteLineWidth
+        polylineRenderer.strokeColor = CaStyle.MapRouteLineColor
+        polylineRenderer.lineWidth = CaStyle.MapRouteLineWidth
         return polylineRenderer
     }
     
@@ -135,7 +97,7 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
                 nextToLastLocation = lastLocation
                 lastLocation = newestLocation
                 addTripWaypoint(newestLocation)
-                print("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
+                NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
             }
             
             if lastLocation != nil && nextToLastLocation != nil {
@@ -187,11 +149,11 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     
     func signalStopTracking() {
         
-        let alert = UIAlertController(title: nil, message: "Are you sure you want to stop this trip's mapping?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: nil, message: "Stop this trip's mapping?", preferredStyle: UIAlertControllerStyle.Alert)
         let stopAction = UIAlertAction(title: "Yes, I'm finished", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
                 self.stopTracking()
         }
-        let continueAction = UIAlertAction(title: "No, Continue", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }
+        let continueAction = UIAlertAction(title: "No, continue", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }
         alert.addAction(stopAction)
         alert.addAction(continueAction)
         presentViewController(alert, animated: true) { () -> Void in }
@@ -223,4 +185,74 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         }
         return (CLActivityType.Other, kCLLocationAccuracyKilometer)
     }
+    
+    // MARK: - View Components
+    
+    private func setComponents() {
+        
+        view.backgroundColor = CaStyle.LogProgressViewBgColor
+
+        distanceTitleLabel = UILabel()
+        distanceTitleLabel.font = CaStyle.InputLabelFont
+        distanceTitleLabel.text = "Distance"
+        distanceTitleLabel.textAlignment = NSTextAlignment.Center
+        distanceTitleLabel.textColor = CaStyle.LogDistanceLabelColor
+        distanceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(distanceTitleLabel)
+        
+        distanceValueLabel = UILabel()
+        distanceValueLabel.font = CaStyle.LogDistanceDisplayFont
+        distanceValueLabel.text = "0.00"
+        distanceValueLabel.textAlignment = NSTextAlignment.Center
+        distanceValueLabel.textColor = CaStyle.LogDistanceDisplayColor
+        distanceValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(distanceValueLabel)
+
+        mapView = MKMapView()
+        mapView.delegate = self
+        mapView.mapType = MKMapType.Standard
+        mapView.pitchEnabled = false
+        mapView.rotateEnabled = true
+        mapView.scrollEnabled = true
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.zoomEnabled = true
+        view.addSubview(mapView)
+
+        stopButton = CaComponent.createButton(title: "Stop", color: CaStyle.LogStopButtonColor, bgColor: CaStyle.LogStopButtonBgColor, borderColor: CaStyle.LogStopButtonBorderColor)
+        stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(stopButton)
+    }
+    
+    private func setConstraints() {
+        
+        let hrView1 = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
+        hrView1.backgroundColor = CaStyle.LogProgressViewHrColor
+        hrView1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(hrView1)
+
+        
+        view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.TopMargin, multiplier: 1.0, constant: 25))
+        view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        
+        view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceTitleLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
+        view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+
+        view.addConstraint(NSLayoutConstraint(item: hrView1, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceValueLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 9))
+        view.addConstraint(NSLayoutConstraint(item: hrView1, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
+        view.addConstraint(NSLayoutConstraint(item: hrView1, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: hrView1, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+
+        view.addConstraint(NSLayoutConstraint(item: mapView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: hrView1, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: mapView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: mapView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: mapView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+    }
+    
 }

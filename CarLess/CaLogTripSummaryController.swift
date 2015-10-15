@@ -38,7 +38,7 @@ class CaLogTripSummaryController: UIViewController {
             startTimestampLabel.text = nil
         } else {
             let distanceUnit = CaDataManager.instance.defaultDistanceUnit
-            distanceLabel.text = "\(CaFormatter.distance.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+            distanceLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
             startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
         }
         modeLabel.text = trip?.modeType.description
@@ -48,7 +48,7 @@ class CaLogTripSummaryController: UIViewController {
             moneySavedLabel.text = nil
         }
         if let fuelSaved = trip?.fuelSaved() {
-            fuelSavedLabel.text = "\(CaFormatter.distance.stringFromNumber(fuelSaved)!) gal"
+            fuelSavedLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(fuelSaved)!) gal"
         } else {
             fuelSavedLabel.text = nil
         }

@@ -43,20 +43,6 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     // MARK: - View Initializations
     
-    private func renderSaveButton() {
-        
-        saveButton = CaComponent.createButton(title: "Save trip", color: CaStyle.LogSaveButtonColor, bgColor: CaStyle.LogSaveButtonBgColor, borderColor: CaStyle.LogSaveButtonBorderColor)
-        self.view.addSubview(saveButton)
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
-        
-        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
-    }
-    
     private func initializeDatePicker() {
         
         datePicker = UIDatePicker()
@@ -364,7 +350,10 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         distanceHrView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(distanceHrView)
         
-        renderSaveButton()
+        saveButton = CaComponent.createButton(title: "Save trip", color: CaStyle.LogSaveButtonColor, bgColor: CaStyle.LogSaveButtonBgColor, borderColor: CaStyle.LogSaveButtonBorderColor)
+        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(saveButton)
+
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
@@ -414,6 +403,13 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
         view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+
     }
 
 }

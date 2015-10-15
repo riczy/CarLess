@@ -197,80 +197,9 @@
                     <view key="view" contentMode="scaleToFill" id="hsE-2q-AgY">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7Y-om-Goc">
-                                <rect key="frame" x="296" y="8" width="8" height="65"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="3tg-1a-Khp"/>
-                                    <constraint firstAttribute="width" constant="8" id="690-49-NkA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="o8e-u5-LiM">
-                                <rect key="frame" x="4" y="81" width="592" height="519"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="vlh-mm-Gn9"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="vlh-mm-Gn9"/>
-                                    </mask>
-                                </variation>
-                            </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dC6-RS-dkT">
-                                <rect key="frame" x="20" y="8" width="272" height="18"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gt3-5B-DtX">
-                                <rect key="frame" x="308" y="8" width="272" height="18"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTb-NG-cJ0">
-                                <rect key="frame" x="308" y="30" width="272" height="38"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orK-BA-zFE">
-                                <rect key="frame" x="140" y="32" width="33" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="CUM-5t-5BK"/>
-                                    <constraint firstAttribute="width" constant="33" id="MBW-rg-1bI"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="dC6-RS-dkT" firstAttribute="top" secondItem="GeQ-zb-ofB" secondAttribute="bottom" constant="8" id="Hi2-UE-20z"/>
-                            <constraint firstItem="VTb-NG-cJ0" firstAttribute="trailing" secondItem="hsE-2q-AgY" secondAttribute="trailingMargin" id="JWq-8H-Mbw"/>
-                            <constraint firstItem="gt3-5B-DtX" firstAttribute="top" secondItem="GeQ-zb-ofB" secondAttribute="bottom" constant="8" id="KEg-s5-EKv"/>
-                            <constraint firstItem="orK-BA-zFE" firstAttribute="top" secondItem="dC6-RS-dkT" secondAttribute="bottom" constant="6" id="KjW-4d-i8G"/>
-                            <constraint firstItem="gt3-5B-DtX" firstAttribute="leading" secondItem="p7Y-om-Goc" secondAttribute="trailing" constant="4" id="SDU-Cn-jVO"/>
-                            <constraint firstItem="gt3-5B-DtX" firstAttribute="trailing" secondItem="hsE-2q-AgY" secondAttribute="trailingMargin" id="SG2-0z-Af2"/>
-                            <constraint firstItem="o8e-u5-LiM" firstAttribute="top" secondItem="p7Y-om-Goc" secondAttribute="bottom" constant="8" id="VVg-US-KOs"/>
-                            <constraint firstItem="p7Y-om-Goc" firstAttribute="top" secondItem="GeQ-zb-ofB" secondAttribute="bottom" constant="8" id="WED-bE-SwO"/>
-                            <constraint firstItem="gox-R1-pXZ" firstAttribute="top" secondItem="o8e-u5-LiM" secondAttribute="bottom" id="Y0n-K1-s0S"/>
-                            <constraint firstItem="dC6-RS-dkT" firstAttribute="centerX" secondItem="orK-BA-zFE" secondAttribute="centerX" id="aoc-FQ-xM6"/>
-                            <constraint firstItem="p7Y-om-Goc" firstAttribute="leading" secondItem="dC6-RS-dkT" secondAttribute="trailing" constant="4" id="cq4-ur-qzK"/>
-                            <constraint firstAttribute="centerX" secondItem="p7Y-om-Goc" secondAttribute="centerX" id="d51-IH-d1M"/>
-                            <constraint firstItem="o8e-u5-LiM" firstAttribute="leading" secondItem="hsE-2q-AgY" secondAttribute="leadingMargin" constant="-16" id="hJN-ag-ZdV"/>
-                            <constraint firstItem="o8e-u5-LiM" firstAttribute="trailing" secondItem="hsE-2q-AgY" secondAttribute="trailingMargin" constant="16" id="l8j-7S-JuS"/>
-                            <constraint firstItem="VTb-NG-cJ0" firstAttribute="top" secondItem="gt3-5B-DtX" secondAttribute="bottom" constant="4" id="sSX-5A-PW0"/>
-                            <constraint firstItem="dC6-RS-dkT" firstAttribute="leading" secondItem="hsE-2q-AgY" secondAttribute="leadingMargin" id="vPo-II-uAt"/>
-                            <constraint firstItem="VTb-NG-cJ0" firstAttribute="leading" secondItem="p7Y-om-Goc" secondAttribute="trailing" constant="4" id="zaa-7Z-DSD"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="distanceTitleLabel" destination="gt3-5B-DtX" id="yMI-0a-tto"/>
-                        <outlet property="distanceValueLabel" destination="VTb-NG-cJ0" id="Ci7-cB-ytN"/>
-                        <outlet property="mapView" destination="o8e-u5-LiM" id="iw3-9Y-byb"/>
-                        <outlet property="modeImageView" destination="orK-BA-zFE" id="G6R-nY-QQI"/>
-                        <outlet property="modeTitleLabel" destination="dC6-RS-dkT" id="Rc0-jo-9Br"/>
                         <segue destination="gb2-bJ-BMw" kind="presentation" identifier="LogTrackedTripProgressToSummarySegue" id="IaS-6K-ilb"/>
                     </connections>
                 </viewController>
@@ -514,6 +443,6 @@
         <image name="tab-settings" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Nee-jB-Zvy"/>
+        <segue reference="IaS-6K-ilb"/>
     </inferredMetricsTieBreakers>
 </document>

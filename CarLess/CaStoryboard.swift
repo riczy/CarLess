@@ -75,8 +75,13 @@ struct CaColor {
     // Google Design Spec Light Blue
     static let LightBlue900 = UIColor(red: 1.0/255.0, green: 87.0/255.0, blue: 155.0/255.0, alpha: 1.0) // 01579B
     
-    // Google Design Spec
+    // Google Design Spec Light Green
     static let LightGreen900 = UIColor(red: 51.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0) // 33691E
+    
+    // Google Design Spec Red
+    static let Red600 = UIColor(red: 229.0/255.0, green: 57.0/255.0, blue: 53.0/255.0, alpha: 1.0) // E53935
+    static let Red700 = UIColor(red: 211.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0) // D32F2F
+    static let Red900 = UIColor(red: 183.0/255.0, green: 28.0/255.0, blue: 28.0/255.0, alpha: 1.0) // B71C1C
 }
 
 struct CaStyle {
@@ -85,7 +90,7 @@ struct CaStyle {
     static let RightViewPadding: CGFloat = 15.0
     
     static let ButtonWidth: CGFloat = 132.0
-    static let ButtonHeight: CGFloat = 44.0
+    static let ButtonHeight: CGFloat = 42.0
     static let ButtonBorderWidth: CGFloat = 0.0
     static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
     static let DefaultFontName = "Arial Rounded MT Bold"
@@ -176,6 +181,21 @@ struct CaStyle {
     static let MpgValueColor = CaColor.RedOrange
  
     // MARK: - Log Specific
+    static var LogDistanceDisplayFont: UIFont {
+        get {
+            let font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+            let fontDescriptor = font.fontDescriptor()
+            var fontAttributes = [String : AnyObject]()
+            fontAttributes[UIFontDescriptorFeatureSettingsAttribute] = [
+                [
+                    UIFontFeatureTypeIdentifierKey : kNumberSpacingType,
+                    UIFontFeatureSelectorIdentifierKey : kMonospacedNumbersSelector
+                ]
+            ]
+            let propDescriptor = fontDescriptor.fontDescriptorByAddingAttributes(fontAttributes)
+            return UIFont(descriptor: propDescriptor, size: 0)
+        }
+    }
     static let LogSegmentControlColor = UIColor.blackColor()
     static let LogSaveButtonColor = UIColor.whiteColor()
     static let LogSaveButtonBgColor = CaColor.LightBlue900
@@ -183,8 +203,17 @@ struct CaStyle {
     static let LogStartButtonColor = UIColor.whiteColor()
     static let LogStartButtonBgColor = CaColor.LightGreen900
     static let LogStartButtonBorderColor = CaColor.LightGreen900
+    static let LogDistanceLabelColor = UIColor.whiteColor()
+    static let LogDistanceDisplayColor = UIColor.whiteColor()
+    static let LogProgressViewBgColor = CaColor.Red700
+    static let LogProgressViewHrColor = CaColor.Red900
+    static let LogStopButtonColor = UIColor.whiteColor()
+    static let LogStopButtonBgColor = CaColor.Red700
+    static let LogStopButtonBorderColor = CaColor.Red700
     
     static let ActivitySpinnerColor = CaColor.RedOrange
+    static let MapRouteLineColor =  CaColor.LightBlue
+    static let MapRouteLineWidth: CGFloat = 4
 }
 
 struct CaLogStyle {
@@ -193,14 +222,9 @@ struct CaLogStyle {
     static let ViewBgColor = CaColor.Ivory
     static let ViewLabelColor = CaColor.FadedSlateGray
     static let ViewFieldColor = UIColor.blackColor()
-    static let StopButtonColor = UIColor.whiteColor()
-    static let StopButtonBgColor = CaColor.RedOrange
-    static let StopButtonBorderColor = CaColor.FadedSlateGray
     static let DiscardButtonColor = UIColor.whiteColor()
     static let DiscardButtonBgColor = CaColor.FadedSlateGray
     static let DiscardButtonBorderColor = CaColor.FadedSlateGray
-    static let MapRouteLineColor =  CaColor.LightBlue
-    static let MapRouteLineWidth: CGFloat = 4
    
 }
 class CaComponent {

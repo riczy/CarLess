@@ -105,7 +105,7 @@ class CaTripsPeriodicSummaryController: UITableViewController {
             cell.dateLabel.text = dateFormatter.stringFromDate(summary.startDate)
             cell.tripsCountLabel.text = "\(summary.tripsCount)"
             cell.moneySavedTotalLabel.text = CaFormatter.money.stringFromNumber(summary.moneySavedTotal)
-            cell.fuelSavedTotalLabel.text = CaFormatter.distance.stringFromNumber(summary.fuelSavedTotal)
+            cell.fuelSavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(summary.fuelSavedTotal)
             applyCellStyle(cell)
         }
         
