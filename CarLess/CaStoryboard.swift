@@ -211,6 +211,7 @@ struct CaStyle {
     static let LogStopButtonBgColor = CaColor.Red700
     static let LogStopButtonBorderColor = CaColor.Red700
     
+    
     static let ActivitySpinnerColor = CaColor.RedOrange
     static let MapRouteLineColor =  CaColor.LightBlue
     static let MapRouteLineWidth: CGFloat = 4

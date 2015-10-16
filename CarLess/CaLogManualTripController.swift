@@ -99,15 +99,6 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         modeTextField.inputAccessoryView = toolbar
     }
     
-    private func initializeSpinner() {
-        
-        spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        spinnerView.center = view.center
-        spinnerView.color = CaStyle.ActivitySpinnerColor
-        spinnerView.hidesWhenStopped = true
-        view.addSubview(spinnerView)
-    }
-    
     // MARK: - View Actions
     
     func save() {
@@ -158,8 +149,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.LogManualTripHomeToSummary {
-            let nvc = segue.destinationViewController as! UINavigationController
-            let vc = nvc.topViewController as! CaLogTripSummaryController
+            let vc = segue.destinationViewController as! CaLogTripSummaryController
             vc.trip = self.trip
             vc.isSaveableSummary = false
             vc.exitSegue = CaSegue.LogManualTripSummaryToHome
@@ -271,7 +261,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     private func setComponents() {
         
-        let alignment = NSTextAlignment.Left
+        let alignment = NSTextAlignment.Center
         view.backgroundColor = CaStyle.ViewBgColor
         
         timestampLabel = UILabel()
@@ -354,10 +344,15 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(saveButton)
 
+        spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        spinnerView.center = view.center
+        spinnerView.color = CaStyle.ActivitySpinnerColor
+        spinnerView.hidesWhenStopped = true
+        view.addSubview(spinnerView)
+
         initializeDatePicker()
         initializeModePicker()
         initializeDecimalPad()
-        initializeSpinner()
     }
     
     private func setConstraints() {
