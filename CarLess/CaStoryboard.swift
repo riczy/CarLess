@@ -30,37 +30,9 @@ struct CaColor {
     // Hex 3B3833
     static let FadedSlateGray = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 1.0)
 
-    // Hex E9BC1B
-    static let Mustard = UIColor(red: 233.0/255.0, green: 188.0/255.0, blue: 27.0/255.0, alpha: 1.0)
-
-    // Hex F5EACD
-    static let Ivory = UIColor(red: 245.0/255.0, green: 234.0/255.0, blue: 205.0/255.0, alpha: 1.0)
-    
-    // Hex FBF6EA
-    static let PaleIvory = UIColor(red: 251.0/255.0, green: 246.0/255.0, blue: 234.0/255.0, alpha: 1.0)
-   
     // Hex EE4B3E
     static let RedOrange = UIColor(red: 238.0/255.0, green: 75.0/255.0, blue: 62.0/255.0, alpha: 1.0)
-    
-    // Hex 096EA0
-    static let LightBlue = UIColor(red: 9.0/255.0, green: 110.0/255.0, blue: 160.0/255.0, alpha: 1.0)
 
-    // Hex 1F784F
-    static let HunterGreen = UIColor(red: 31.0/255.0, green: 120.0/255.0, blue: 79.0/255.0, alpha: 1.0)
-
-    
-    // Hex BFE0E8
-    static let PalePowderBlue = UIColor(red: 191.0/255.0, green: 224.0/255.0, blue: 232.0/255.0, alpha: 1.0)
-    
-    // Hex 29D3FF
-    static let PowderBlue = UIColor(red: 41.0/255.0, green: 211.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-    
-    // Hex BFE8C0
-    static let PaleSeaGreen = UIColor(red: 191.0/255.0, green: 232.0/255.0, blue: 192.0/255.0, alpha: 1.0)
-    
-    // Hex 387863
-    static let SeaGreen = UIColor(red: 56.0/255.0, green: 120.0/255.0, blue: 99.0/255.0, alpha: 1.0)
-    
     // Google Design Spec Lime
     static let Lime200 = UIColor(red: 240.0/255.0, green: 244.0/255.0, blue: 195.0/255.0, alpha: 1.0) // D4E157
     static let Lime400 = UIColor(red: 212.0/255.0, green: 225.0/255.0, blue: 87.0/255.0, alpha: 1.0) // D4E157
@@ -82,6 +54,9 @@ struct CaColor {
     static let Red600 = UIColor(red: 229.0/255.0, green: 57.0/255.0, blue: 53.0/255.0, alpha: 1.0) // E53935
     static let Red700 = UIColor(red: 211.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0) // D32F2F
     static let Red900 = UIColor(red: 183.0/255.0, green: 28.0/255.0, blue: 28.0/255.0, alpha: 1.0) // B71C1C
+    
+    // Grey
+    static let Grey900 = UIColor(red: 33.0/255.0, green: 33.0/255.0, blue: 33.0/255.0, alpha: 1.0) // 212121
 }
 
 struct CaStyle {
@@ -92,8 +67,6 @@ struct CaStyle {
     static let ButtonWidth: CGFloat = 132.0
     static let ButtonHeight: CGFloat = 42.0
     static let ButtonBorderWidth: CGFloat = 0.0
-    static let FontDefault = UIFont(name: "Arial Rounded MT Bold", size: 16)
-    static let DefaultFontName = "Arial Rounded MT Bold"
     
     static let ViewBgColor = UIColor.whiteColor()
     static let TabBarBgTintColor = UIColor.blackColor()
@@ -213,21 +186,10 @@ struct CaStyle {
     
     
     static let ActivitySpinnerColor = CaColor.RedOrange
-    static let MapRouteLineColor =  CaColor.LightBlue
+    static let MapRouteLineColor = CaColor.Blue500.colorWithAlphaComponent(0.5)
     static let MapRouteLineWidth: CGFloat = 4
 }
 
-struct CaLogStyle {
-    
-    
-    static let ViewBgColor = CaColor.Ivory
-    static let ViewLabelColor = CaColor.FadedSlateGray
-    static let ViewFieldColor = UIColor.blackColor()
-    static let DiscardButtonColor = UIColor.whiteColor()
-    static let DiscardButtonBgColor = CaColor.FadedSlateGray
-    static let DiscardButtonBorderColor = CaColor.FadedSlateGray
-   
-}
 class CaComponent {
     
     static func createButton(title title: String, color: UIColor, bgColor: UIColor, borderColor: UIColor) -> UIButton {

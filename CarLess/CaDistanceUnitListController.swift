@@ -105,6 +105,7 @@ class CaDistanceUnitListController: UITableViewController {
     private func applyStyleForCell(cell: UITableViewCell) {
         
         cell.backgroundColor = CaStyle.CellBgColor
+        cell.textLabel?.textColor = CaStyle.CellValueColor
         cell.textLabel?.font = CaStyle.CellValueFont
     }
 }
