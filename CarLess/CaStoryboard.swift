@@ -98,6 +98,13 @@ struct CaStyle {
     static let InputFieldHrThickness: CGFloat = 1.0
     static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
     
+    /* The verticle (y) spacing between an input label and its value field. */
+    static let InputGroupLvVerticlePadding: CGFloat = 2.0
+    /* The verticle (y) spacing between the input field and the underlying HR. */
+    static let InputGroupHrVerticlePadding: CGFloat = 3.0
+    /* The verticle (y) spacing between two pairs of label and value. */
+    static let InputGroupVerticlePadding: CGFloat = 18.0
+    
     // MARK: - Default Table Fonts
     
     static var CellLabelFont: UIFont {
