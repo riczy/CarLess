@@ -200,7 +200,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         datePicker.date = NSDate()
         timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         
-        distanceTextField.text = ""
+        distanceTextField.text = nil
+        distanceTextField.placeholder = "0.0 \(CaDataManager.instance.defaultDistanceUnit.rawValue.lowercaseString)s"
         
         lastSelectedModeIndex = 0
         modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
@@ -348,7 +349,6 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         distanceTextField.font = CaStyle.InputFieldFont
         distanceTextField.keyboardType = UIKeyboardType.DecimalPad
         distanceTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        distanceTextField.placeholder = "0.0 miles"
         distanceTextField.tag = Tag.DistanceField
         distanceTextField.textAlignment = alignment
         distanceTextField.textColor = CaStyle.InputFieldColor
