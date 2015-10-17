@@ -28,29 +28,27 @@ struct CaConstants {
 struct CaColor {
 
     // Hex 3B3833
-    static let FadedSlateGray = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 1.0)
+    static let FadedSlateGray = UIColor(red: 59.0/255.0, green: 59.0/255.0, blue: 49.0/255.0, alpha: 1.0) // 3B3B31
 
-    // Hex EE4B3E
-    static let RedOrange = UIColor(red: 238.0/255.0, green: 75.0/255.0, blue: 62.0/255.0, alpha: 1.0)
-
-    // Google Design Spec Lime
+    // Lime
     static let Lime200 = UIColor(red: 240.0/255.0, green: 244.0/255.0, blue: 195.0/255.0, alpha: 1.0) // D4E157
     static let Lime400 = UIColor(red: 212.0/255.0, green: 225.0/255.0, blue: 87.0/255.0, alpha: 1.0) // D4E157
     static let Lime500 = UIColor(red: 205.0/255.0, green: 220.0/255.0, blue: 57.0/255.0, alpha: 1.0) // CDDC39
     static let Lime700 = UIColor(red: 175.0/255.0, green: 180.0/255.0, blue: 43.0/255.0, alpha: 1.0) // AFB42B
     static let Lime900 = UIColor(red: 130.0/255.0, green: 119.0/255.0, blue: 23.0/255.0, alpha: 1.0) // 827717
     
-    // Google Design Spec Blue
+    // Blue
     static let Blue500 = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0) // 2196F3
     static let Blue700 = UIColor(red: 25.0/255.0, green: 118.0/255.0, blue: 210.0/255.0, alpha: 1.0) // 1976D2
     
-    // Google Design Spec Light Blue
+    // Light Blue
     static let LightBlue900 = UIColor(red: 1.0/255.0, green: 87.0/255.0, blue: 155.0/255.0, alpha: 1.0) // 01579B
     
-    // Google Design Spec Light Green
+    // Light Green
     static let LightGreen900 = UIColor(red: 51.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0) // 33691E
     
-    // Google Design Spec Red
+    // Red
+    static let Red400 = UIColor(red: 239.0/255.0, green: 83.0/255.0, blue: 80.0/255.0, alpha: 1.0) // EF5350
     static let Red600 = UIColor(red: 229.0/255.0, green: 57.0/255.0, blue: 53.0/255.0, alpha: 1.0) // E53935
     static let Red700 = UIColor(red: 211.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0) // D32F2F
     static let Red900 = UIColor(red: 183.0/255.0, green: 28.0/255.0, blue: 28.0/255.0, alpha: 1.0) // B71C1C
@@ -151,7 +149,7 @@ struct CaStyle {
         }
     }
     static let MpgLabelColor = CaColor.FadedSlateGray
-    static let MpgValueColor = CaColor.RedOrange
+    static let MpgValueColor = CaColor.Red400
  
     // MARK: - Log Specific
     static var LogDistanceDisplayFont: UIFont {
@@ -185,7 +183,7 @@ struct CaStyle {
     static let LogStopButtonBorderColor = CaColor.Red700
     
     
-    static let ActivitySpinnerColor = CaColor.RedOrange
+    static let ActivitySpinnerColor = CaColor.Red400
     static let MapRouteLineColor = CaColor.Blue500.colorWithAlphaComponent(0.5)
     static let MapRouteLineWidth: CGFloat = 4
 }
