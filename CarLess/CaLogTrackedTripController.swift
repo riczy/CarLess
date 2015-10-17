@@ -109,20 +109,6 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         modeTextField.inputView = modePicker
         modeTextField.inputAccessoryView = toolbar
     }
-    
-    private func renderStartButton() {
-        
-        startButton = CaComponent.createButton(title: "Start mapping", color: CaStyle.LogStartButtonColor, bgColor: CaStyle.LogStartButtonBgColor, borderColor: CaStyle.LogStartButtonBorderColor)
-        self.view.addSubview(startButton)
-    
-        
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
-        
-        startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
-    }
    
     private func updateDisplayForMode(mode: Mode) {
         
@@ -173,7 +159,7 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         headingLabel = UILabel()
         headingLabel.font = CaStyle.InstructionHeadlineFont
         headingLabel.numberOfLines = 0
-        headingLabel.text = "Begin mapping your trip by choosing the transportation mode"
+        headingLabel.text = "Begin tracking your trip by choosing the transportation mode"
         headingLabel.textAlignment = NSTextAlignment.Center
         headingLabel.textColor = CaStyle.InstructionHeadlineColor
         headingLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -196,9 +182,12 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         view.addSubview(modeHrView)
         
         initializeModePicker()
-        renderStartButton()
+        
+        startButton = CaComponent.createButton(title: "Start tracking", color: CaStyle.LogStartButtonColor, bgColor: CaStyle.LogStartButtonBgColor, borderColor: CaStyle.LogStartButtonBorderColor)
+        startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(startButton)
     }
-
+    
     private func setConstraints() {
         
         view.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 30.0))
@@ -215,5 +204,10 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
+        
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
+        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
     }
 }

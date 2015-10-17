@@ -148,7 +148,7 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     
     func signalStopTracking() {
         
-        let alert = UIAlertController(title: nil, message: "Stop this trip's mapping?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: nil, message: "Stop tracking?", preferredStyle: UIAlertControllerStyle.Alert)
         let stopAction = UIAlertAction(title: "Yes, I'm finished", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
                 self.stopTracking()
         }
