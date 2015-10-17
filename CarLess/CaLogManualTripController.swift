@@ -19,6 +19,26 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     private var modePicker: UIPickerView!
     private var spinnerView: UIActivityIndicatorView!
     
+    private var distance: NSNumber? {
+        get {
+            if distanceTextField.text != nil {
+                if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
+                    return tempDistance
+                }
+            }
+            return nil
+        }
+    }
+    
+    private var mode: Mode? {
+        get {
+            if lastSelectedModeIndex >= 0 && lastSelectedModeIndex < Mode.allValues.count {
+                return Mode.allValues[lastSelectedModeIndex]
+            }
+            return nil
+        }
+    }
+    
  
     // MARK: - Properties
     private var trip: Trip?
@@ -103,8 +123,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     func save() {
 
-        let trip = createTrip()
-        if validate(trip) {
+        if validate() {
+            let trip = createTrip()
             preSave()
             let onFuelPriceFindSuccess = {(fuelPrice: EiaWeeklyFuelPrice) -> Void in
                 trip.fuelPrice = fuelPrice.price
@@ -123,9 +143,9 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
        }
     }
     
-    private func validate(trip: Trip) -> Bool {
-        
-        return trip.distance.doubleValue > 0.0
+    private func validate() -> Bool {
+
+        return distance?.doubleValue > 0.0 && mode != nil
     }
     
     private func preSave() {
