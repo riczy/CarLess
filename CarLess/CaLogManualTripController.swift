@@ -180,13 +180,13 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
         let trip = CaDataManager.instance.initTrip()
         
-        if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
+        if let tempDistance = distance {
             trip.setDistance(tempDistance, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
         } else {
             trip.setDistance(0.0, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
         }
         trip.logType = LogType.Manual
-        trip.modeType = Mode.allValues[lastSelectedModeIndex]
+        trip.modeType = mode!
         trip.startTimestamp = datePicker.date
         trip.endTimestamp = nil
         
