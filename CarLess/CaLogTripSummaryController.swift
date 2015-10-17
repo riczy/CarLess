@@ -54,7 +54,7 @@ class CaLogTripSummaryController: UIViewController {
         startTimestampLabel = UILabel()
         startTimestampLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         startTimestampLabel.textAlignment = NSTextAlignment.Center
-        startTimestampLabel.textColor = UIColor.blackColor()
+        startTimestampLabel.textColor = CaStyle.InstructionHeadlineColor
         startTimestampLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(startTimestampLabel)
         
@@ -65,42 +65,42 @@ class CaLogTripSummaryController: UIViewController {
         distanceLabel = UILabel()
         distanceLabel.font = valueFont
         distanceLabel.textAlignment = NSTextAlignment.Center
-        distanceLabel.textColor = UIColor.blackColor()
+        distanceLabel.textColor = CaStyle.InputFieldColor
         distanceLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(distanceLabel)
         
         distanceTitleLabel = UILabel()
         distanceTitleLabel.font = valueTitleFont
         distanceTitleLabel.textAlignment = NSTextAlignment.Center
-        distanceTitleLabel.textColor = UIColor.blackColor()
+        distanceTitleLabel.textColor = CaStyle.InputLabelColor
         distanceTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(distanceTitleLabel)
         
         fuelSavedLabel = UILabel()
         fuelSavedLabel.font = valueFont
         fuelSavedLabel.textAlignment = NSTextAlignment.Center
-        fuelSavedLabel.textColor = UIColor.blackColor()
+        fuelSavedLabel.textColor = CaStyle.InputFieldColor
         fuelSavedLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(fuelSavedLabel)
         
         fuelSavedTitleLabel = UILabel()
         fuelSavedTitleLabel.font = valueTitleFont
         fuelSavedTitleLabel.textAlignment = NSTextAlignment.Center
-        fuelSavedTitleLabel.textColor = UIColor.blackColor()
+        fuelSavedTitleLabel.textColor = CaStyle.InputLabelColor
         fuelSavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(fuelSavedTitleLabel)
         
         moneySavedLabel = UILabel()
         moneySavedLabel.font = valueFont
         moneySavedLabel.textAlignment = NSTextAlignment.Center
-        moneySavedLabel.textColor = UIColor.blackColor()
+        moneySavedLabel.textColor = CaStyle.InputFieldColor
         moneySavedLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(moneySavedLabel)
         
         moneySavedTitleLabel = UILabel()
         moneySavedTitleLabel.font = valueTitleFont
         moneySavedTitleLabel.textAlignment = NSTextAlignment.Center
-        moneySavedTitleLabel.textColor = UIColor.blackColor()
+        moneySavedTitleLabel.textColor = CaStyle.InputLabelColor
         moneySavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(moneySavedTitleLabel)
         
