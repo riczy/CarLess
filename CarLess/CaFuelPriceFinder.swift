@@ -23,27 +23,30 @@ class CaFuelPriceFinder: NSObject {
         }
         
         let url = NSURL(string: "http://api.eia.gov/series/?api_key=9F0C0802DE3E806D5F94A83679D6A002&series_id=PET.EMM_EPM0_PTE_NUS_DPG.W")
-        let urlRequest = NSURLRequest(URL: url!)
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+        let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
             
-            if error == nil && data != nil {
-                
-                do {
-                    let parser = EiaWeeklyFuelPriceParser(data: data!)
-                    let price = try parser.parsePriceForDate(date)
-                    if price != nil {
-                        self.cache.add(price!)
-                        onSuccess?(fuelPrice: price!)
-                        return
+            dispatch_async(dispatch_get_main_queue()) {
+            
+                if error == nil && data != nil {
+                    
+                    do {
+                        let parser = EiaWeeklyFuelPriceParser(data: data!)
+                        let price = try parser.parsePriceForDate(date)
+                        if price != nil {
+                            self.cache.add(price!)
+                            onSuccess?(fuelPrice: price!)
+                            return
+                        }
+                    } catch {
+                        NSLog("The EIA weekly fuel price data could not be parsed. Response url = \(response?.URL), Error = \(error), Data = \(data)")
                     }
-                } catch {
-                    NSLog("The EIA weekly fuel price data could not be parsed. Response url = \(response?.URL), Error = \(error), Data = \(data)")
+                } else {
+                    NSLog("An error occurred when fetching the EIA weekly fuel prices. Response url = \(response?.URL). Error = \(error). Data = \(data)")
                 }
-            } else {
-                NSLog("An error occurred when fetching the EIA weekly fuel prices. Response url = \(response?.URL). Error = \(error). Data = \(data)")
+                onError?()
             }
-            onError?()
         }
+        sessionTask.resume()
     }
 }
 

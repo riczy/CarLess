@@ -53,27 +53,30 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     
     // MARK: - Web Service Request
     
-    func setDataFromRequest(urlRequest: NSURLRequest, onSuccess: (() -> Void)?) {
+    func setDataFromUrl(url: NSURL, onSuccess: (() -> Void)?, onError: (() -> Void)?) {
         
-        NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+        let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) -> Void in
             
-            if error == nil && data != nil {
-                let parserDelegate = EpaVehicleMenuParser()
-                let parser = NSXMLParser(data: data!)
-                parser.delegate = parserDelegate
-                parser.parse()
-                self.data = parserDelegate.values
-                self.pickerView.reloadAllComponents()
-                print("Response URL= \(response?.URL), Data count= \(self.data.count)")
-                if data!.length > 0 {
-                    self.textField.enabled = true
-                    self.pickerView.selectRow(0, inComponent: 0, animated: false)
+            dispatch_async(dispatch_get_main_queue()) {
+                if error == nil && data != nil {
+                    let parserDelegate = EpaVehicleMenuParser()
+                    let parser = NSXMLParser(data: data!)
+                    parser.delegate = parserDelegate
+                    parser.parse()
+                    self.data = parserDelegate.values
+                    self.pickerView.reloadAllComponents()
+                    if data!.length > 0 {
+                        self.textField.enabled = true
+                        self.pickerView.selectRow(0, inComponent: 0, animated: false)
+                    }
+                    onSuccess?()
+                } else {
+                    onError?()
                 }
-                onSuccess?()
-            } else {
-                print("Response url = \(response?.URL). Error = \(error). Data = \(data)")
             }
+            
         }
+        sessionTask.resume()
     }
     
     // MARK: - Picker Actions
@@ -123,11 +126,17 @@ class VehiclePickerDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDeleg
     /// array is already fetched and loaded appropriately. In most cases, this
     /// method will be the success handler of the `setDataFromRequest:onSuccess:`
     /// method when loading data.
+    /// 
+    /// If the data array is empty (because an internet fetch could not be
+    /// accomplished) then textfield value is set to the value passed in.
     ///
     /// Returns true if a match was found and false if not.
     private func set(fromValue value: String) -> Bool {
         
-        if !data.isEmpty {
+        if data.isEmpty {
+            label.hidden = false
+            textField.text = value
+        } else {
             for index in 0...data.count-1 {
                 let item = data[index]
                 if item.value == value {
@@ -163,14 +172,13 @@ class VehicleYearPickerDelegate: VehiclePickerDelegate {
     func load(selectYear year: String?) {
         
         let url = NSURL(string: "ws/rest/vehicle/menu/year", relativeToURL: baseUrl)
-        let urlRequest = NSURLRequest(URL: url!)
         var onSuccess: (() -> Void)?
         if year != nil {
             onSuccess = {() -> Void in
                 self.set(fromValue: year!)
             }
         }
-        setDataFromRequest(urlRequest, onSuccess: onSuccess)
+        self.setDataFromUrl(url!, onSuccess: onSuccess, onError: onSuccess)
     }
 }
 
@@ -207,14 +215,13 @@ class VehicleMakePickerDelegate: VehiclePickerDelegate {
         
         let queryString = "year=\(year)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "ws/rest/vehicle/menu/make?\(queryString!)", relativeToURL: baseUrl)
-        let urlRequest = NSURLRequest(URL: url!)
         var onSuccess: (() -> Void)?
         if make != nil {
             onSuccess = {() -> Void in
                 self.set(fromValue: make!)
             }
         }
-        setDataFromRequest(urlRequest, onSuccess: onSuccess)
+        setDataFromUrl(url!, onSuccess: onSuccess, onError: onSuccess)
     }
 }
 
@@ -245,7 +252,7 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
         if make != nil && year != nil {
             self.load(year: year!, make: make!, selectModel: nil)
         } else {
-            print("Could not load the models because of missing request parameters: year = \(year), make = \(make)")
+            NSLog("Could not load the models because of missing request parameters: year = \(year), make = \(make)")
         }
     }
     
@@ -253,14 +260,13 @@ class VehicleModelPickerDelegate: VehiclePickerDelegate {
         
         let queryString = "year=\(year)&make=\(make)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "ws/rest/vehicle/menu/model?\(queryString!)", relativeToURL: baseUrl)
-        let urlRequest = NSURLRequest(URL: url!)
         var onSuccess: (() -> Void)?
         if model != nil {
             onSuccess = {() -> Void in
                 self.set(fromValue: model!)
             }
         }
-        setDataFromRequest(urlRequest, onSuccess: onSuccess)
+        setDataFromUrl(url!, onSuccess: onSuccess, onError: onSuccess)
     }
 }
 
@@ -312,7 +318,7 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
         if model != nil && make != nil && year != nil {
             load(year: year!, make: make!, model: model!, selectOption: nil)
         } else {
-            print("Could not load the options because of missing request parameters: year = \(year), make = \(make), model=\(model)")
+            NSLog("Could not load the options because of missing request parameters: year = \(year), make = \(make), model=\(model)")
         }
     }
     
@@ -320,14 +326,14 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
         
         let queryString = "year=\(year)&make=\(make)&model=\(model)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
         let url = NSURL(string: "ws/rest/vehicle/menu/options?\(queryString!)", relativeToURL: baseUrl)
-        let urlRequest = NSURLRequest(URL: url!)
         var onSuccess: (() -> Void)?
         if option != nil {
             onSuccess = {() -> Void in
                 self.set(fromValue: option!)
+                // Realize that vehicle is not being set upon load
             }
         }
-        setDataFromRequest(urlRequest, onSuccess: onSuccess)
+        setDataFromUrl(url!, onSuccess: onSuccess, onError: onSuccess)
     }
     
     override func reset() {
@@ -343,21 +349,21 @@ class VehicleOptionsPickerDelegate: VehiclePickerDelegate {
         if let id = self.selectedItem?.value {
             
             let url = NSURL(string: "ws/rest/vehicle/\(id)", relativeToURL: baseUrl)
-            let urlRequest = NSURLRequest(URL: url!)
-            
-            NSURLConnection.sendAsynchronousRequest(urlRequest, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
+            let sessionTask = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) -> Void in
                 
-                if error == nil && data != nil {
-                    let parserDelegate = EpaVehicleParser()
-                    let parser = NSXMLParser(data: data!)
-                    parser.delegate = parserDelegate
-                    parser.parse()
-                    self.vehicle = parserDelegate.value
-                    print("Response URL= \(response?.URL), Value = \(self.vehicle)")
-                } else {
-                    print("Response url = \(response?.URL). Error = \(error). Data = \(data)")
+                dispatch_async(dispatch_get_main_queue()) {
+                    if error == nil && data != nil {
+                        let parserDelegate = EpaVehicleParser()
+                        let parser = NSXMLParser(data: data!)
+                        parser.delegate = parserDelegate
+                        parser.parse()
+                        self.vehicle = parserDelegate.value
+                    } else {
+                        NSLog("Response url = \(response?.URL). Error = \(error). Data = \(data)")
+                    }
                 }
             }
+            sessionTask.resume()
         }
     }
 }
