@@ -19,6 +19,7 @@
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
+		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; settings = {ASSET_TAGS = (); }; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* CaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* CaTypes.swift */; };
 		847810ED1B8CB8DA00B5AC53 /* CaLogManualTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847810EC1B8CB8DA00B5AC53 /* CaLogManualTripController.swift */; };
@@ -65,6 +66,7 @@
 		8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleMenuParser.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleParser.swift; sourceTree = "<group>"; };
+		8470900B1BD424C600F9D236 /* CaNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaNetworkManager.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
 		847810EC1B8CB8DA00B5AC53 /* CaLogManualTripController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogManualTripController.swift; sourceTree = "<group>"; };
@@ -182,10 +184,11 @@
 				84760EC61B680DBF00355E52 /* Models */,
 				84760EC11B670EF900355E52 /* Extensions */,
 				848929181B3C486B0045C39E /* Main.storyboard */,
-				84760EC41B6808A700355E52 /* CaTypes.swift */,
-				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
 				8410EDF51B90D0880044E714 /* CaDataManager.swift */,
 				84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */,
+				8470900B1BD424C600F9D236 /* CaNetworkManager.swift */,
+				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
+				84760EC41B6808A700355E52 /* CaTypes.swift */,
 				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
 				848929101B3C486B0045C39E /* Supporting Files */,
 			);
@@ -292,6 +295,7 @@
 				TargetAttributes = {
 					8489290C1B3C486B0045C39E = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = F9D5ZVR94G;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -355,6 +359,7 @@
 				847810ED1B8CB8DA00B5AC53 /* CaLogManualTripController.swift in Sources */,
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,
+				8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */,
 				84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */,
 				84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */,
 				8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */,
@@ -507,9 +512,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CarLess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -518,9 +526,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CarLess/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

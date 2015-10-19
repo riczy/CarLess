@@ -16,23 +16,23 @@ class CaVehicleController: UIViewController {
         }
     }
     
-    var doneBarButton: UIBarButtonItem!
-    var cancelBarButton: UIBarButtonItem!
-    var instructionsLabel: UILabel!
-    var yearTextField: UITextField!
-    var makeTextField: UITextField!
-    var modelTextField: UITextField!
-    var optionsTextField: UITextField!
-    var combMpgValueLabel: UILabel!
-    var combMpgLabel: UILabel!
-    var yearHrView: UIView!
-    var makeHrView: UIView!
-    var modelHrView: UIView!
-    var optionsHrView: UIView!
-    var yearLabel: UILabel!
-    var makeLabel: UILabel!
-    var modelLabel: UILabel!
-    var optionsLabel: UILabel!
+    private var doneBarButton: UIBarButtonItem!
+    private var cancelBarButton: UIBarButtonItem!
+    private var instructionsLabel: UILabel!
+    private var yearTextField: UITextField!
+    private var makeTextField: UITextField!
+    private var modelTextField: UITextField!
+    private var optionsTextField: UITextField!
+    private var combMpgValueLabel: UILabel!
+    private var combMpgLabel: UILabel!
+    private var yearHrView: UIView!
+    private var makeHrView: UIView!
+    private var modelHrView: UIView!
+    private var optionsHrView: UIView!
+    private var yearLabel: UILabel!
+    private var makeLabel: UILabel!
+    private var modelLabel: UILabel!
+    private var optionsLabel: UILabel!
     
     private var yearPickerView: UIPickerView!
     private var makePickerView: UIPickerView!
@@ -44,7 +44,6 @@ class CaVehicleController: UIViewController {
     private var modelPickerDelegate: VehicleModelPickerDelegate!
     private var optionsPickerDelegate: VehicleOptionsPickerDelegate!
     
-
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -59,6 +58,19 @@ class CaVehicleController: UIViewController {
         establishPickerDependencies()
         getVehicle()
         setMpgDisplayForVehicle(vehicle)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+
+        if !CaNetworkManager.isNetworkConnected() {
+            doneBarButton.enabled = false
+            view.userInteractionEnabled = false
+            view.alpha = 0.65
+        } else {
+            doneBarButton.enabled = true
+            view.userInteractionEnabled = true
+            view.alpha = 1.0
+        }
     }
     
     private func getVehicle() {
@@ -191,9 +203,16 @@ class CaVehicleController: UIViewController {
     
     func save() {
         
+        let selectedOptions = optionsPickerDelegate.selectedItem
         let epaVehicle = self.optionsPickerDelegate.vehicle
-        if !validate() || epaVehicle == nil {
-            NSLog("Vehicle did not pass validation; cannot save it.")
+
+        // No changes made; don't save
+        if selectedOptions?.value == vehicle?.epaVehicleId {
+            exit()
+        }
+        
+        if selectedOptions == nil || epaVehicle == nil {
+            NSLog("Vehicle did not pass validation; cannot save it. selectedOptions = \(selectedOptions), epaVehicle = \(epaVehicle)")
             return
         }
         
@@ -224,14 +243,6 @@ class CaVehicleController: UIViewController {
     
     private func exit() {
         performSegueWithIdentifier(CaSegue.VehicleToSettings, sender: self)
-    }
-    
-    ///
-    /// Returns true if the form is properly filled out and may be saved.
-    /// Returns false if not.
-    ///
-    private func validate() -> Bool {
-        return optionsPickerDelegate.selectedItem != nil
     }
     
     // MARK: - View Construction
