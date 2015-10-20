@@ -198,6 +198,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         trip = nil
         
         datePicker.date = NSDate()
+        datePicker.maximumDate = datePicker.date.addDays(1)
         timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         
         distanceTextField.text = nil

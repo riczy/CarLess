@@ -24,6 +24,13 @@ extension NSDate {
         return result == .OrderedSame || result == .OrderedDescending
     }
     
+    public func addDays(numberOfDays: Int) -> NSDate {
+        
+        let components = NSDateComponents()
+        components.setValue(numberOfDays, forComponent: NSCalendarUnit.Day)
+        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: self, options: NSCalendarOptions.init(rawValue: 0))!
+    }
+    
     public func monthRange() -> (startDate: NSDate, endDate: NSDate) {
         
         let calendar = NSCalendar.currentCalendar()
