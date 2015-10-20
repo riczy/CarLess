@@ -162,7 +162,7 @@ struct CaStyle {
     static var LogDistanceDisplayFont: UIFont {
         get {
             let font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
-            let fontDescriptor = font.fontDescriptor()
+            var fontDescriptor = font.fontDescriptor()
             var fontAttributes = [String : AnyObject]()
             fontAttributes[UIFontDescriptorFeatureSettingsAttribute] = [
                 [
@@ -170,8 +170,9 @@ struct CaStyle {
                     UIFontFeatureSelectorIdentifierKey : kMonospacedNumbersSelector
                 ]
             ]
-            let propDescriptor = fontDescriptor.fontDescriptorByAddingAttributes(fontAttributes)
-            return UIFont(descriptor: propDescriptor, size: 0)
+            fontDescriptor = fontDescriptor.fontDescriptorWithSymbolicTraits(.TraitBold)
+            fontDescriptor = fontDescriptor.fontDescriptorByAddingAttributes(fontAttributes)
+            return UIFont(descriptor: fontDescriptor, size: 48)
         }
     }
     static let LogSegmentControlColor = UIColor.blackColor()
