@@ -114,8 +114,7 @@ struct CaStyle {
     }
     static var CellValueFont: UIFont {
         get {
-            let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
-            return UIFont(descriptor: fontDescriptor, size: 0)
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         }
     }
     static var CellHeaderFont: UIFont {
