@@ -143,6 +143,16 @@ struct CaStyle {
     
     static let CellValueFontMinimumScaleFactor: CGFloat = 0.6
     
+    // MARK: - Trips Specific
+    static var CellTripsTotalsRowFont: UIFont {
+        get {
+            let fontDescriptor = CaStyle.CellRowFont.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
+            return UIFont(descriptor: fontDescriptor, size: 0)
+        }
+    }
+    static let CellTripsTotalsRowColor = CaColor.FadedSlateGray
+    static let CellTripsTotalsRowBgColor = CaColor.Lime200
+    
     // MARK: - Vehicle Specific
     static var MpgLabelFont: UIFont {
         get {

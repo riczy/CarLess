@@ -60,6 +60,7 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         return formatter
         }()
     
+    var dataTotals: CaTripsSummary!
     var data: [CaTripsSummary]!
     var period: SummaryPeriod!
 
@@ -71,7 +72,9 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         
         let trips = CaDataManager.instance.fetchTrips()
         var collator = CaTripsSummaryCollator(data: trips, period: period)
-        data = collator.collate()
+        let collatorResults = collator.collate()
+        data = collatorResults.0
+        dataTotals = collatorResults.1
         tableView.registerClass(CaTripsPeriodicSummaryCell.self, forCellReuseIdentifier: "Cell")
         styleView()
    }
@@ -84,7 +87,8 @@ class CaTripsPeriodicSummaryController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return data.count + 1
+        // data + header + grand totals
+        return data.count + 2
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -93,15 +97,19 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
         if indexPath.row == 0 {
-            
             cell.dateLabel.text = period == SummaryPeriod.Monthly ? "Month" : "Week"
             cell.tripsCountLabel.text = "Trips"
             cell.moneySavedTotalLabel.text = "Money Saved"
             cell.fuelSavedTotalLabel.text = "Fuel Saved"
             applyHeaderCellStyle(cell)
+        } else if indexPath.row == 1 {
+            cell.dateLabel.text = ""
+            cell.tripsCountLabel.text = "\(dataTotals.tripsCount)"
+            cell.moneySavedTotalLabel.text = CaFormatter.money.stringFromNumber(dataTotals.moneySavedTotal)
+            cell.fuelSavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(dataTotals.fuelSavedTotal)
+            applyTotalsCellStyle(cell)
         } else {
-            
-            let summary = data[indexPath.row - 1]
+            let summary = data[indexPath.row - 2]
             cell.dateLabel.text = dateFormatter.stringFromDate(summary.startDate)
             cell.tripsCountLabel.text = "\(summary.tripsCount)"
             cell.moneySavedTotalLabel.text = CaFormatter.money.stringFromNumber(summary.moneySavedTotal)
@@ -142,6 +150,26 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         cell.backgroundColor = CaStyle.CellHeaderBgColor
     }
     
+    private func applyTotalsCellStyle(cell: CaTripsPeriodicSummaryCell) {
+        
+        cell.dateLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.dateLabel.font = CaStyle.CellTripsTotalsRowFont
+        
+        cell.tripsCountLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.tripsCountLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.tripsCountLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.fuelSavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.fuelSavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.fuelSavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.moneySavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.moneySavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.backgroundColor = CaStyle.CellTripsTotalsRowBgColor
+    }
+
     private func applyCellStyle(cell: CaTripsPeriodicSummaryCell) {
         
         cell.dateLabel.textColor = CaStyle.CellRowColor

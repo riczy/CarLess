@@ -1,12 +1,10 @@
 import Foundation
 
 
-/**
-
-The fuel prices are obtained from US EIS open data sets initiative. 
-The data obtained in this class are weekly retail fuel prices for the entire U.S., all grades and all formulations. Pricing units are expressed in dollars per gallon.
-
-*/
+/// The fuel prices are obtained from US EIS open data sets initiative.
+/// The data obtained in this class are weekly retail fuel prices for the entire U.S.,
+/// all grades and all formulations. Pricing units are expressed in dollars per gallon.
+///
 class CaFuelPriceFinder: NSObject {
     
     static let instance = CaFuelPriceFinder()

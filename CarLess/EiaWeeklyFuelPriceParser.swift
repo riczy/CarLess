@@ -1,35 +1,5 @@
 import Foundation
 
-struct EiaWeeklyFuelPrice: CustomStringConvertible, Comparable {
-    
-    var startDate: NSDate
-    var endDate: NSDate
-    var price: Double
-    var seriesId: String?
-    
-    var description: String {
-        get {
-            return "\(price), \(startDate) - \(endDate), \(seriesId)"
-        }
-    }
-    
-    func isDateWithinRange(date: NSDate) -> Bool {
-        
-        return date.isOnOrAfter(startDate) && date.isOnOrBefore(endDate)
-    }
-    
-}
-
-func ==(lhs: EiaWeeklyFuelPrice, rhs: EiaWeeklyFuelPrice) -> Bool {
-    
-    return lhs.startDate == rhs.startDate
-}
-
-func <(lhs: EiaWeeklyFuelPrice, rhs: EiaWeeklyFuelPrice) -> Bool {
-    
-    return lhs.startDate.isBefore(rhs.startDate)
-}
-
 class EiaWeeklyFuelPriceParser: NSObject {
     
     private var data: NSData
@@ -55,6 +25,7 @@ class EiaWeeklyFuelPriceParser: NSObject {
     
     func parsePriceForDate(date: NSDate) throws -> EiaWeeklyFuelPrice? {
         
+        let fuelPriceNumberBehavior = NSDecimalNumberHandler(roundingMode: NSRoundingMode.RoundPlain, scale: 3, raiseOnExactness: true, raiseOnOverflow: true, raiseOnUnderflow: true, raiseOnDivideByZero: true)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         
@@ -65,14 +36,16 @@ class EiaWeeklyFuelPriceParser: NSObject {
                 if let priceObjectArray = price as? NSArray {
                     
                     let startDateString = priceObjectArray[0] as? String
-                    let amount = priceObjectArray[1] as? Double
+                    let amountNumber = priceObjectArray[1] as? NSNumber
                     
-                    if startDateString != nil && amount != nil {
+                    if startDateString != nil && amountNumber != nil {
+                        
+                        let amount = NSDecimalNumber(double: amountNumber!.doubleValue).decimalNumberByRoundingAccordingToBehavior(fuelPriceNumberBehavior)
                         
                         if let startDate = dateFormatter.dateFromString(startDateString!) {
                             
                             let endDate = createEndDateFromStartDate(startDate)
-                            let fuelPrice = EiaWeeklyFuelPrice(startDate: startDate, endDate: endDate, price: amount!, seriesId: self.seriesId)
+                            let fuelPrice = EiaWeeklyFuelPrice(startDate: startDate, endDate: endDate, price: amount, seriesId: self.seriesId)
                             
                             if isAfterLatestFuelPrice(fuelPrice) {
                                latestFuelPrice = fuelPrice

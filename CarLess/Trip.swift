@@ -7,7 +7,7 @@ class Trip: NSManagedObject {
 
     @NSManaged var distance: NSNumber
     @NSManaged var endTimestamp: NSDate?
-    @NSManaged var fuelPrice: NSNumber?
+    @NSManaged var fuelPrice: NSDecimalNumber?
     @NSManaged var fuelPriceDate: NSDate?
     @NSManaged var fuelPriceSeriesId: String?
     @NSManaged var id: String
@@ -46,13 +46,17 @@ class Trip: NSManagedObject {
         self.distance = distance.doubleValue / unit.conversionFactor
     }
     
-    func moneySaved() -> Double? {
+    func moneySaved() -> NSDecimalNumber? {
         
-        let price = fuelPrice?.doubleValue
         let mpg = vehicle?.combinedMpg
-        
-        if price != nil && mpg != nil {
-            return price! * getDistanceInUnit(LengthUnit.Mile) / mpg!
+        let currencyBehavior = NSDecimalNumberHandler.defaultCurrencyNumberHandler()
+
+        if fuelPrice != nil && mpg != nil {
+            if !(fuelPrice!.isEqualToNumber(NSDecimalNumber.notANumber())) {
+                var value = fuelPrice!.decimalNumberByMultiplyingBy(NSDecimalNumber(double: getDistanceInUnit(LengthUnit.Mile)), withBehavior: currencyBehavior)
+                value = value.decimalNumberByDividingBy(NSDecimalNumber(double: mpg!), withBehavior: currencyBehavior)
+                return value
+            }
         }
         return nil
     }
