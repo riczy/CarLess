@@ -148,7 +148,7 @@ class CaSettingsController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Version"
-        cell.detailTextLabel?.text = "0.7"
+        cell.detailTextLabel?.text = "0.8"
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         applyStyleForCell(cell)
         return cell
