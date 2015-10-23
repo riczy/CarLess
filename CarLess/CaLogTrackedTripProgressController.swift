@@ -33,6 +33,7 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         manager.delegate = self
+        manager.distanceFilter = 10.0
         manager.requestAlwaysAuthorization()
         return manager
     }()
@@ -83,25 +84,27 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        if lastLocation == nil {
+        for location in locations {
             
-            lastLocation = locations.first!
-            addTripWaypoint(lastLocation)
-        } else {
-            
-            let newestLocation = locations.first!
-            let newestDistanceTraveled = lastLocation.distanceFromLocation(newestLocation)
-            if newestDistanceTraveled > 0 {
-                distanceTraveled += newestDistanceTraveled
-                nextToLastLocation = lastLocation
-                lastLocation = newestLocation
-                addTripWaypoint(newestLocation)
-                NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
-            }
-            
-            if lastLocation != nil && nextToLastLocation != nil {
-                var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
-                mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
+            if location.horizontalAccuracy < 10 {
+                
+                if lastLocation == nil {
+                    lastLocation = location
+                    addTripWaypoint(location)
+                } else {
+                    let newestDistanceTraveled = lastLocation.distanceFromLocation(location)
+                    if newestDistanceTraveled > 0 {
+                        distanceTraveled += newestDistanceTraveled
+                        nextToLastLocation = lastLocation
+                        lastLocation = location
+                        addTripWaypoint(location)
+                        
+                        var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
+                        mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
+                        
+                        NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
+                    }
+                }
             }
         }
     }
@@ -170,19 +173,19 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     
     private func addTripWaypoint(location: CLLocation) {
         
-        trip.waypoints.addObject(CaDataManager.instance.initWaypointWithLocation(lastLocation, trip: trip))
+        trip.waypoints.addObject(CaDataManager.instance.initWaypointWithLocation(location, trip: trip))
     }
 
     private func getActivityTypeAndAccuracyForMode() -> (activityType: CLActivityType, accuracy: CLLocationAccuracy) {
         
         if trip.modeType == Mode.Bicycle || trip.modeType == Mode.Walk {
-            return (CLActivityType.Fitness, kCLLocationAccuracyNearestTenMeters)
+            return (CLActivityType.Fitness, kCLLocationAccuracyBest)
         } else if trip.modeType == Mode.Bus || trip.modeType == Mode.Rideshare {
-            return (CLActivityType.AutomotiveNavigation, kCLLocationAccuracyNearestTenMeters)
+            return (CLActivityType.AutomotiveNavigation, kCLLocationAccuracyBest)
         } else if trip.modeType == Mode.Train {
-            return (CLActivityType.OtherNavigation, kCLLocationAccuracyHundredMeters)
+            return (CLActivityType.OtherNavigation, kCLLocationAccuracyBest)
         }
-        return (CLActivityType.Other, kCLLocationAccuracyKilometer)
+        return (CLActivityType.Other, kCLLocationAccuracyBest)
     }
     
     // MARK: - View Components
