@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CaLogTrackedTripProgressController: UIViewController {
     
     // MARK: - UI Properties
 
@@ -27,7 +27,6 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     }
     private var lastLocation: CLLocation!
     private var nextToLastLocation: CLLocation!
-    
     lazy private var locationManager: CLLocationManager! = {
         let manager = CLLocationManager()
         manager.delegate = self
@@ -36,6 +35,9 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         manager.requestAlwaysAuthorization()
         return manager
     }()
+    private var useDefaultMapViewSpan = true
+    private var centerUserCurrentLocation = true
+    
     
     // MARK: - View Lifecycle
     
@@ -57,59 +59,6 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
             vc.trip = trip
             vc.isSaveableSummary = true
             vc.exitSegue = CaSegue.LogTrackedTripSummaryToHome
-        }
-    }
-    
-    // MARK: - Map View Delegation
-    
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-
-        let span = MKCoordinateSpanMake(0.009, 0.009)
-        let region = MKCoordinateRegion(center: userLocation.coordinate, span: span)
-        mapView.setRegion(region, animated: true)
-    }
-    
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        // There is only one overlay on this map therefore no checking of
-        // overlay done.
-        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
-        polylineRenderer.strokeColor = CaStyle.MapRouteLineColor
-        polylineRenderer.lineWidth = CaStyle.MapRouteLineWidth
-        return polylineRenderer
-    }
-    
-    // MARK: - Location Manager Delegation
-   
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        for location in locations {
-            
-            let timeInterval = abs(location.timestamp.timeIntervalSinceNow)
-            
-            if location.horizontalAccuracy < 20 && timeInterval < 0.3 {
-                
-                if lastLocation == nil {
-                    lastLocation = location
-                    addTripWaypoint(location, discard: false)
-                } else {
-                    let newestDistanceTraveled = lastLocation.distanceFromLocation(location)
-                    if newestDistanceTraveled > 0 {
-                        distanceTraveled += newestDistanceTraveled
-                        nextToLastLocation = lastLocation
-                        lastLocation = location
-                        addTripWaypoint(location, discard: false)
-                        
-                        var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
-                        mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
-                        
-                        NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
-                    }
-                }
-            } else {
-//                addTripWaypoint(location, discard: true)
-//                NSLog("Discarded. Horizontal Accuracy = \(location.horizontalAccuracy), Time Interval Since Now = \(timeInterval). Location = \(location)")
-            }
         }
     }
     
@@ -178,17 +127,6 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
     
     // MARK: - Miscellaneous
     
-    private func addTripWaypoint(location: CLLocation, discard: Bool) {
-        
-        let waypoint = CaDataManager.instance.initWaypointWithLocation(location, trip: trip)
-        waypoint.discard = discard
-        waypoints.append(waypoint)
-        if waypoints.count == 100 {
-            CaDataManager.instance.save()
-            waypoints.removeAll(keepCapacity: true)
-        }
-    }
-
     private func setLocationFiltersByMode() {
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -275,6 +213,103 @@ class CaLogTrackedTripProgressController: UIViewController, CLLocationManagerDel
         view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
         view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
         view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+    }
+    
+}
+
+/*
+ * The extension handling for the Map View delegate.
+ *
+ */
+extension CaLogTrackedTripProgressController: MKMapViewDelegate {
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        
+        if centerUserCurrentLocation {
+            let region = MKCoordinateRegion(center: userLocation.coordinate, span: (useDefaultMapViewSpan ? MKCoordinateSpanMake(0.009, 0.009) : mapView.region.span))
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        // There is only one overlay on this map therefore no checking of
+        // overlay done.
+        let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+        polylineRenderer.strokeColor = CaStyle.MapRouteLineColor
+        polylineRenderer.lineWidth = CaStyle.MapRouteLineWidth
+        return polylineRenderer
+    }
+    
+    func mapView(mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        
+        if mapViewRegionDidChangeFromUserInteraction() {
+            centerUserCurrentLocation = false
+        }
+    }
+    
+    private func mapViewRegionDidChangeFromUserInteraction() -> Bool {
+        
+        let view = self.mapView.subviews[0]
+        if let gestureRecognizers = view.gestureRecognizers {
+            for recognizer in gestureRecognizers {
+                if recognizer.state == UIGestureRecognizerState.Began || recognizer.state == UIGestureRecognizerState.Ended {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+}
+
+/*
+ * The extension handling for the Location Manager delegate.
+ *
+ */
+extension CaLogTrackedTripProgressController: CLLocationManagerDelegate {
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        for location in locations {
+            
+            let timeInterval = abs(location.timestamp.timeIntervalSinceNow)
+            
+            if location.horizontalAccuracy < 20 && timeInterval < 0.3 {
+                
+                if lastLocation == nil {
+                    lastLocation = location
+                    addTripWaypoint(location, discard: false)
+                } else {
+                    let newestDistanceTraveled = lastLocation.distanceFromLocation(location)
+                    if newestDistanceTraveled > 0 {
+                        distanceTraveled += newestDistanceTraveled
+                        nextToLastLocation = lastLocation
+                        lastLocation = location
+                        addTripWaypoint(location, discard: false)
+                        
+                        var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
+                        mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
+                        
+//                        NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
+                    }
+                }
+            } else {
+                //                addTripWaypoint(location, discard: true)
+                //                NSLog("Discarded. Horizontal Accuracy = \(location.horizontalAccuracy), Time Interval Since Now = \(timeInterval). Location = \(location)")
+            }
+        }
+    }
+    
+    private func addTripWaypoint(location: CLLocation, discard: Bool) {
+        
+        let waypoint = CaDataManager.instance.initWaypointWithLocation(location, trip: trip)
+        waypoint.discard = discard
+        waypoints.append(waypoint)
+        if waypoints.count == 100 {
+            CaDataManager.instance.save()
+            waypoints.removeAll(keepCapacity: true)
+        }
     }
     
 }
