@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 4.3">
     <entity name="Setting" representedClassName="Setting" syncable="YES">
         <attribute name="distanceUnitCode" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
@@ -14,6 +14,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="logTypeCode" attributeType="String" syncable="YES"/>
         <attribute name="modeTypeCode" attributeType="String" syncable="YES"/>
+        <attribute name="pending" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="startTimestamp" attributeType="Date" syncable="YES"/>
         <relationship name="vehicle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="trips" inverseEntity="Vehicle" syncable="YES"/>
         <relationship name="waypoints" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Waypoint" inverseName="trip" inverseEntity="Waypoint" syncable="YES"/>
@@ -34,6 +35,7 @@
     <entity name="Waypoint" representedClassName="Waypoint" syncable="YES">
         <attribute name="altitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="course" attributeType="Double" maxValueString="359.9" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="discard" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="horizontalAccuracy" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" attributeType="Double" minValueString="-90" maxValueString="90" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" minValueString="-180" maxValueString="180" defaultValueString="0.0" syncable="YES"/>
@@ -44,8 +46,8 @@
     </entity>
     <elements>
         <element name="Setting" positionX="-164" positionY="297" width="128" height="90"/>
-        <element name="Trip" positionX="-351" positionY="-28" width="128" height="210"/>
+        <element name="Trip" positionX="-351" positionY="-28" width="128" height="225"/>
         <element name="Vehicle" positionX="-396" positionY="252" width="128" height="178"/>
-        <element name="Waypoint" positionX="-137" positionY="54" width="128" height="180"/>
+        <element name="Waypoint" positionX="-137" positionY="54" width="128" height="195"/>
     </elements>
 </model>

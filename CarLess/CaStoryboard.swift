@@ -17,6 +17,7 @@ struct CaSegue {
     
     static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
     static let TripPeriodicSummaryToTripsHome = "TripPeriodicSummaryToTripsHomeSegue"
+    static let TripsHomeToTripDetail = "TripsHomeToTripDetailSegue"
 }
 
 struct CaConstants {

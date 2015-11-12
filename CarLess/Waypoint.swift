@@ -14,6 +14,7 @@ class Waypoint: NSManagedObject {
     @NSManaged var timestamp: NSDate
     @NSManaged var trip: Trip
     @NSManaged var verticalAccuracy: NSNumber
+    @NSManaged var discard: Bool
     
     /*
      * Returns the coordinate of the location.

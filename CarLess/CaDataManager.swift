@@ -41,6 +41,17 @@ class CaDataManager {
         }
     }
     
+    func save() {
+
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                NSLog("Error when saving the managed context: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     // MARK: - Waypoints
     
     
@@ -55,8 +66,37 @@ class CaDataManager {
         let waypoint = initWaypoint()
         waypoint.trip = trip
         waypoint.setUsingLocation(location)
-        print("waypoint = \(waypoint)")
         return waypoint
+    }
+    
+    func fetchWaypointsForTrip(trip: Trip, limit: Int?, skip: Int?) -> [Waypoint] {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Waypoint")
+        let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
+        fetchRequest.includesPendingChanges = false
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        if limit != nil {
+            fetchRequest.fetchLimit = limit!
+        }
+        if skip != nil {
+            fetchRequest.fetchOffset = skip!
+        }
+        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectResultType
+        
+        var results: [Waypoint]?
+        
+        do {
+            results = try context.executeFetchRequest(fetchRequest) as? [Waypoint]
+        } catch let error as NSError {
+            print("Error when fetching waypoints: \(error.localizedDescription)")
+        }
+        
+        if results == nil {
+            return [Waypoint]()
+        }
+        
+        return results!
+        
     }
     
     // MARK: - Trips

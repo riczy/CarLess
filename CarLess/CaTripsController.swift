@@ -45,7 +45,7 @@ class CaTripsController: UITableViewController {
     private var cellTimeFormatter : NSDateFormatter!
     private var tripsMap : [String : [Trip]]!
     private var tripsMapOrderedKeys : [String]!
-    private var selectedSummaryPeriod: SummaryPeriod?
+    private var selectedIndexPath: NSIndexPath?
 
     // MARK: - Life Cycle
     
@@ -112,8 +112,15 @@ class CaTripsController: UITableViewController {
         if segue.identifier == CaSegue.TripsHomeToTripPeriodicSummary {
             
             let dvc = segue.destinationViewController as! CaTripsPeriodicSummaryController
-            dvc.period = selectedSummaryPeriod == nil ? SummaryPeriod.Monthly : selectedSummaryPeriod
-            selectedSummaryPeriod = nil
+            dvc.period = selectedIndexPath?.row == 0 ? SummaryPeriod.Weekly : SummaryPeriod.Monthly
+            
+        } else if segue.identifier == CaSegue.TripsHomeToTripDetail {
+            
+            if selectedIndexPath != nil {
+                let dvc = segue.destinationViewController as! CaTripDetailController
+                let trip = tripAtIndexPath(selectedIndexPath!)
+                dvc.trip = trip
+            }
         }
     }
     
@@ -157,9 +164,11 @@ class CaTripsController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        selectedIndexPath = indexPath
         if indexPath.section == 0 {
-            selectedSummaryPeriod = indexPath.row == 0 ? SummaryPeriod.Weekly : SummaryPeriod.Monthly
             performSegueWithIdentifier(CaSegue.TripsHomeToTripPeriodicSummary, sender: self)
+        } else {
+            performSegueWithIdentifier(CaSegue.TripsHomeToTripDetail, sender: self)
         }
     }
     
@@ -209,13 +218,9 @@ class CaTripsController: UITableViewController {
     
     private func tableViewTripCell(indexPath: NSIndexPath) -> UITableViewCell {
         
-        let section = indexPath.section - 1
-        let row = indexPath.row
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! CaTripTableViewCell
         
-        let tripArray : [Trip] = tripsMap[(tripsMapOrderedKeys[section])]!
-        let trip = tripArray[row]
+        let trip = tripAtIndexPath(indexPath)
         let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
         cell.startTimeLabel.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
@@ -229,8 +234,17 @@ class CaTripsController: UITableViewController {
         cell.distanceLabel.textColor = CaStyle.CellRowColor
         cell.distanceLabel.textAlignment = NSTextAlignment.Right
         cell.backgroundColor = CaStyle.CellRowBgColor
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        cell.selectionStyle = UITableViewCellSelectionStyle.Default
 
         return cell
+    }
+    
+    private func tripAtIndexPath(indexPath: NSIndexPath) -> Trip {
+        
+        let section = indexPath.section - 1
+        let row = indexPath.row
+        
+        let tripArray: [Trip] = tripsMap[(tripsMapOrderedKeys[section])]!
+        return tripArray[row]
     }
 }

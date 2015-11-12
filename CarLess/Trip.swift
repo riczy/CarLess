@@ -13,6 +13,7 @@ class Trip: NSManagedObject {
     @NSManaged var id: String
     @NSManaged private var logTypeCode: String
     @NSManaged private var modeTypeCode: String
+    @NSManaged var pending: Bool
     @NSManaged var startTimestamp: NSDate
     @NSManaged var vehicle: Vehicle?
     @NSManaged var waypoints: NSMutableSet

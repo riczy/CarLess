@@ -220,6 +220,7 @@ class CaLogTripSummaryController: UIViewController {
         
         if validate() {
             preSave()
+            trip?.pending = false
             CaDataManager.instance.save(trip: trip!)
             postSave()
         }

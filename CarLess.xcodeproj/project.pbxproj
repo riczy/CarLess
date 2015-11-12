@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */; settings = {ASSET_TAGS = (); }; };
-		840717A01BC2EB1E00C65BB9 /* CaTripsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */; settings = {ASSET_TAGS = (); }; };
+		8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */; };
+		840717A01BC2EB1E00C65BB9 /* CaTripsSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */; };
 		8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8410EDF51B90D0880044E714 /* CaDataManager.swift */; };
-		841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */; settings = {ASSET_TAGS = (); }; };
-		841C63021BB3054C002FF0BD /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C63011BB3054C002FF0BD /* Setting.swift */; settings = {ASSET_TAGS = (); }; };
+		841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */; };
+		841C63021BB3054C002FF0BD /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C63011BB3054C002FF0BD /* Setting.swift */; };
 		84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */; };
 		84278FF41B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF31B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift */; };
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
@@ -19,10 +19,11 @@
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
-		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; settings = {ASSET_TAGS = (); }; };
+		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* CaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* CaTypes.swift */; };
 		847810ED1B8CB8DA00B5AC53 /* CaLogManualTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847810EC1B8CB8DA00B5AC53 /* CaLogManualTripController.swift */; };
+		847BFC441BF26FCC001BF9D1 /* CaTripDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BFC431BF26FCC001BF9D1 /* CaTripDetailController.swift */; };
 		848929131B3C486B0045C39E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929121B3C486B0045C39E /* AppDelegate.swift */; };
 		848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929161B3C486B0045C39E /* CaSettingsController.swift */; };
 		8489291A1B3C486B0045C39E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848929181B3C486B0045C39E /* Main.storyboard */; };
@@ -30,19 +31,19 @@
 		8489291F1B3C486B0045C39E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8489291D1B3C486B0045C39E /* LaunchScreen.xib */; };
 		8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489292A1B3C486B0045C39E /* CarLessTests.swift */; };
 		8489293A1B3E41C80045C39E /* CaLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929391B3E41C80045C39E /* CaLogController.swift */; };
-		84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC80961BCB3330006570A2 /* CaVehicleController.swift */; settings = {ASSET_TAGS = (); }; };
-		84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */; settings = {ASSET_TAGS = (); }; };
-		84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */; settings = {ASSET_TAGS = (); }; };
-		84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */; settings = {ASSET_TAGS = (); }; };
-		84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */; settings = {ASSET_TAGS = (); }; };
+		84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC80961BCB3330006570A2 /* CaVehicleController.swift */; };
+		84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */; };
+		84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */; };
+		84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */; };
+		84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */; };
 		84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */; };
 		84E4F0E51B78D9170006C069 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4F0E41B78D9170006C069 /* MapKit.framework */; };
 		84E4F0E71B7A75D30006C069 /* CaLogTrackedTripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E61B7A75D30006C069 /* CaLogTrackedTripController.swift */; };
 		84E61A311B98AB5000D927B8 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A301B98AB5000D927B8 /* Trip.swift */; };
 		84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A321B98AB5000D927B8 /* Waypoint.swift */; };
 		84E6953E1B86B56D000185BE /* CaLogTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E6953D1B86B56D000185BE /* CaLogTripSummaryController.swift */; };
-		84F37D3E1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */; settings = {ASSET_TAGS = (); }; };
-		84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3F1BD717AC00FC1437 /* NSDecimalNumber.swift */; settings = {ASSET_TAGS = (); }; };
+		84F37D3E1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */; };
+		84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3F1BD717AC00FC1437 /* NSDecimalNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
 		847810EC1B8CB8DA00B5AC53 /* CaLogManualTripController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogManualTripController.swift; sourceTree = "<group>"; };
+		847BFC431BF26FCC001BF9D1 /* CaTripDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripDetailController.swift; sourceTree = "<group>"; };
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848929111B3C486B0045C39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929121B3C486B0045C39E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */,
 				8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */,
 				8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */,
+				847BFC431BF26FCC001BF9D1 /* CaTripDetailController.swift */,
 			);
 			name = Trips;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
+				847BFC441BF26FCC001BF9D1 /* CaTripDetailController.swift in Sources */,
 				8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
