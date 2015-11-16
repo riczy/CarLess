@@ -10,6 +10,7 @@ class CaLogTrackedTripProgressController: UIViewController {
     private var distanceTitleLabel: UILabel!
     private var distanceValueLabel: UILabel!
     private var stopButton: UIButton!
+    private var mapCenterButton: UIButton!
     
     // MARK: - Properties
     
@@ -174,6 +175,7 @@ class CaLogTrackedTripProgressController: UIViewController {
         mapView.pitchEnabled = false
         mapView.rotateEnabled = true
         mapView.scrollEnabled = true
+        mapView.showsCompass = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.zoomEnabled = true
         view.addSubview(mapView)
@@ -181,6 +183,18 @@ class CaLogTrackedTripProgressController: UIViewController {
         stopButton = CaComponent.createButton(title: "Stop", color: CaStyle.LogStopButtonColor, bgColor: CaStyle.LogStopButtonBgColor, borderColor: CaStyle.LogStopButtonBorderColor)
         stopButton.addTarget(self, action: "signalStopTracking", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(stopButton)
+        
+        // The mapCenterButton is added directly to the mapView. No autoconstraints
+        // are used and, instead, the frame dictates its location. Remember to set
+        // mapCenterButton.translatesAutoresizingMaskIntoConstraints = false if you
+        // use auto constraints.
+        mapCenterButton = UIButton(type: .Custom)
+        mapCenterButton.backgroundColor = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 0.75)
+        mapCenterButton.setImage(UIImage(named: "map-center"), forState: .Normal)
+        mapCenterButton.frame = CGRect(x: 4, y: 6, width: 36, height: 36)
+        mapCenterButton.layer.cornerRadius = 18
+        mapCenterButton.addTarget(self, action: "centerUserLocationOnMap", forControlEvents: .TouchUpInside)
+        self.mapView.addSubview(mapCenterButton)
     }
     
     private func setConstraints() {
@@ -194,7 +208,7 @@ class CaLogTrackedTripProgressController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.TopMargin, multiplier: 1.0, constant: 25))
         view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        
+
         view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceTitleLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 3.0))
         view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: distanceValueLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
@@ -222,6 +236,11 @@ class CaLogTrackedTripProgressController: UIViewController {
  *
  */
 extension CaLogTrackedTripProgressController: MKMapViewDelegate {
+    
+    func centerUserLocationOnMap() {
+        centerUserCurrentLocation = true
+        mapView(mapView, didUpdateUserLocation:  mapView.userLocation)
+    }
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         
