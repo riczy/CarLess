@@ -34,11 +34,12 @@
     </entity>
     <entity name="Waypoint" representedClassName="Waypoint" syncable="YES">
         <attribute name="altitude" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="course" attributeType="Double" maxValueString="359.9" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="course" attributeType="Double" maxValueString="360" defaultValueString="0.0" syncable="YES"/>
         <attribute name="discard" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="horizontalAccuracy" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="latitude" attributeType="Double" minValueString="-90" maxValueString="90" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" attributeType="Double" minValueString="-180" maxValueString="180" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="receivedTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="speed" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" attributeType="Date" syncable="YES"/>
         <attribute name="verticalAccuracy" attributeType="Double" defaultValueString="0" syncable="YES"/>
@@ -48,6 +49,6 @@
         <element name="Setting" positionX="-164" positionY="297" width="128" height="90"/>
         <element name="Trip" positionX="-351" positionY="-28" width="128" height="225"/>
         <element name="Vehicle" positionX="-396" positionY="252" width="128" height="178"/>
-        <element name="Waypoint" positionX="-137" positionY="54" width="128" height="195"/>
+        <element name="Waypoint" positionX="-137" positionY="54" width="128" height="210"/>
     </elements>
 </model>

@@ -228,7 +228,7 @@ class CaLogTrackedTripProgressController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
         view.addConstraint(NSLayoutConstraint(item: stopButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
     }
-    
+ 
 }
 
 /*
@@ -279,7 +279,6 @@ extension CaLogTrackedTripProgressController: MKMapViewDelegate {
         }
         return false
     }
-
 }
 
 /*
@@ -288,42 +287,43 @@ extension CaLogTrackedTripProgressController: MKMapViewDelegate {
  */
 extension CaLogTrackedTripProgressController: CLLocationManagerDelegate {
     
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        let now = NSDate()
+        
         for location in locations {
-            
-            let timeInterval = abs(location.timestamp.timeIntervalSinceNow)
-            
-            if location.horizontalAccuracy < 20 && timeInterval < 0.3 {
+            let timeInterval = abs(location.timestamp.timeIntervalSinceDate(now))
+            if location.horizontalAccuracy < 20 && timeInterval < 15 {
                 
                 if lastLocation == nil {
                     lastLocation = location
-                    addTripWaypoint(location, discard: false)
+                    addTripWaypoint(location, discard: false, receivedTimestamp: now)
                 } else {
                     let newestDistanceTraveled = lastLocation.distanceFromLocation(location)
                     if newestDistanceTraveled > 0 {
                         distanceTraveled += newestDistanceTraveled
                         nextToLastLocation = lastLocation
                         lastLocation = location
-                        addTripWaypoint(location, discard: false)
+                        addTripWaypoint(location, discard: false, receivedTimestamp: now)
                         
                         var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
                         mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
-                        
-//                        NSLog("long=\(lastLocation.coordinate.longitude), lat=\(lastLocation.coordinate.latitude), step dist = \(newestDistanceTraveled), total dist = \(distanceTraveled)")
                     }
                 }
             } else {
-                //                addTripWaypoint(location, discard: true)
-                //                NSLog("Discarded. Horizontal Accuracy = \(location.horizontalAccuracy), Time Interval Since Now = \(timeInterval). Location = \(location)")
+                addTripWaypoint(location, discard: true, receivedTimestamp: now)
             }
+            //NSLog("Location = \(dateFormatter.stringFromDate(location.timestamp)), Now = \(dateFormatter.stringFromDate(now)), Horiz = \(location.horizontalAccuracy), Interval = \(timeInterval), Discard = \(discard)")
+
         }
     }
     
-    private func addTripWaypoint(location: CLLocation, discard: Bool) {
+    private func addTripWaypoint(location: CLLocation, discard: Bool, receivedTimestamp: NSDate) {
         
         let waypoint = CaDataManager.instance.initWaypointWithLocation(location, trip: trip)
         waypoint.discard = discard
+        waypoint.receivedTimestamp = receivedTimestamp
         waypoints.append(waypoint)
         if waypoints.count == 100 {
             CaDataManager.instance.save()
