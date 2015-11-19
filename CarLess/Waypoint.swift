@@ -10,13 +10,11 @@ class Waypoint: NSManagedObject {
     @NSManaged var horizontalAccuracy: NSNumber
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
+    @NSManaged var receivedTimestamp: NSDate?
     @NSManaged var speed: NSNumber
     @NSManaged var timestamp: NSDate
     @NSManaged var trip: Trip
     @NSManaged var verticalAccuracy: NSNumber
-    
-    @NSManaged var discard: Bool
-    @NSManaged var receivedTimestamp: NSDate?
     
     /*
      * Returns the coordinate of the location.
@@ -40,9 +38,7 @@ class Waypoint: NSManagedObject {
         self.course = course
         self.speed = speed
         self.timestamp = timestamp
-        
-        self.discard = false
-    }
+   }
     
     /*
      *

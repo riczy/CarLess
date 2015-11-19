@@ -174,10 +174,10 @@ class CaLogTripSummaryController: UIViewController {
             tripMapView!.rotateEnabled = true
             tripMapView!.scrollEnabled = true
             tripMapView!.showsCompass = true
-            tripMapView!.region = tripRouteMapRegion()!
-            tripMapView!.addOverlay(tripRoutePolyline())
             tripMapView!.translatesAutoresizingMaskIntoConstraints = false
             tripMapView!.zoomEnabled = true
+            tripMapView!.region = tripRouteMapRegion()!
+            tripMapView!.addOverlay(tripRoutePolyline())
             view.addSubview(tripMapView!)
         }
         
@@ -310,13 +310,13 @@ class CaLogTripSummaryController: UIViewController {
         
         for index in 1...(waypoints!.count - 1) {
             minLat = min(minLat, waypoints![index].latitude.doubleValue)
-            maxLat = min(maxLat, waypoints![index].latitude.doubleValue)
+            maxLat = max(maxLat, waypoints![index].latitude.doubleValue)
             minLong = min(minLong, waypoints![index].longitude.doubleValue)
-            maxLong = min(maxLong, waypoints![index].longitude.doubleValue)
+            maxLong = max(maxLong, waypoints![index].longitude.doubleValue)
         }
         
         let center = CLLocationCoordinate2D(latitude: (minLat + maxLat)/2, longitude: (minLong + maxLong)/2)
-        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat)*1.1, longitudeDelta: (maxLong - minLong)*1.1)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat)*1.5, longitudeDelta: (maxLong - minLong)*1.5)
         
         return MKCoordinateRegion(center: center, span: span)
     }
@@ -326,10 +326,11 @@ class CaLogTripSummaryController: UIViewController {
     private func tripRoutePolyline() -> MKPolyline {
         
         var coordinates = [CLLocationCoordinate2D]()
+        let sortOrder = NSSortDescriptor(key: "timestamp", ascending: true)
         
-        if  let waypoints = trip?.waypoints.allObjects as? [Waypoint] {
+        if  let waypoints = trip?.waypoints.sortedArrayUsingDescriptors([sortOrder]) as? [Waypoint] {
             for waypoint in waypoints {
-                coordinates.append(CLLocationCoordinate2D(latitude: waypoint.latitude.doubleValue, longitude: waypoint.longitude.doubleValue))
+                coordinates.append(waypoint.coordinate)
             }
         }
         return MKPolyline(coordinates: &coordinates, count: coordinates.count)

@@ -16,7 +16,7 @@ class CaLogTrackedTripProgressController: UIViewController {
     
     var mode: Mode!
     private var trip: Trip!
-    private var waypoints: [Waypoint]!
+    private var waypointCounter = 0
     private var distanceTraveled: Double {
         get {
             return trip.distance.doubleValue
@@ -71,8 +71,6 @@ class CaLogTrackedTripProgressController: UIViewController {
         if CaLocationManager.isLocationServiceAvailable() {
             
             mapView.showsUserLocation = true
-            
-            waypoints = [Waypoint]()
             
             trip = CaDataManager.instance.initTrip()
             trip.distance = 0.0
@@ -298,36 +296,32 @@ extension CaLogTrackedTripProgressController: CLLocationManagerDelegate {
                 
                 if lastLocation == nil {
                     lastLocation = location
-                    addTripWaypoint(location, discard: false, receivedTimestamp: now)
+                    addTripWaypoint(location, receivedTimestamp: now)
                 } else {
                     let newestDistanceTraveled = lastLocation.distanceFromLocation(location)
                     if newestDistanceTraveled > 0 {
                         distanceTraveled += newestDistanceTraveled
                         nextToLastLocation = lastLocation
                         lastLocation = location
-                        addTripWaypoint(location, discard: false, receivedTimestamp: now)
+                        addTripWaypoint(location, receivedTimestamp: now)
                         
                         var stepCoordinates = [lastLocation.coordinate, nextToLastLocation.coordinate]
                         mapView.addOverlay(MKPolyline(coordinates: &stepCoordinates, count: stepCoordinates.count))
                     }
                 }
-            } else {
-                addTripWaypoint(location, discard: true, receivedTimestamp: now)
             }
-            //NSLog("Location = \(dateFormatter.stringFromDate(location.timestamp)), Now = \(dateFormatter.stringFromDate(now)), Horiz = \(location.horizontalAccuracy), Interval = \(timeInterval), Discard = \(discard)")
-
         }
     }
     
-    private func addTripWaypoint(location: CLLocation, discard: Bool, receivedTimestamp: NSDate) {
+    private func addTripWaypoint(location: CLLocation, receivedTimestamp: NSDate) {
         
         let waypoint = CaDataManager.instance.initWaypointWithLocation(location, trip: trip)
-        waypoint.discard = discard
         waypoint.receivedTimestamp = receivedTimestamp
-        waypoints.append(waypoint)
-        if waypoints.count == 100 {
+        trip.waypoints.addObject(waypoint)
+        waypointCounter++
+        if waypointCounter >= 300 {
             CaDataManager.instance.save()
-            waypoints.removeAll(keepCapacity: true)
+            waypointCounter = 0
         }
     }
     
