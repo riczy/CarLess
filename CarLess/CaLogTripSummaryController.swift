@@ -1,4 +1,5 @@
 import Foundation
+import MapKit
 import UIKit
 
 class CaLogTripSummaryController: UIViewController {
@@ -6,15 +7,18 @@ class CaLogTripSummaryController: UIViewController {
     // MARK: - UI Properties
     
     private var navigationBar: UINavigationBar!
-    private var startTimestampLabel: UILabel!
-    private var distanceLabel: UILabel!
     private var modeImageView: UIImageView!
+    private var startTimestampLabel: UILabel!
+    private var co2SavedLabel: UILabel!
+    private var distanceLabel: UILabel!
     private var moneySavedLabel: UILabel!
     private var fuelSavedLabel: UILabel!
+    private var co2SavedTitleLabel: UILabel!
     private var distanceTitleLabel: UILabel!
     private var fuelSavedTitleLabel: UILabel!
     private var moneySavedTitleLabel: UILabel!
     private var spinnerView: UIActivityIndicatorView!
+    private var tripMapView: MKMapView?
     
     // MARK: - Properties
     
@@ -27,13 +31,66 @@ class CaLogTripSummaryController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        setComponents()
-        setConstraints()
+        loadComponents()
+        loadConstraints()
+    }
+  
+    // MARK: - Scene Actions
+    
+    func save() {
+        
+        if validate() {
+            preSave()
+            trip?.pending = false
+            CaDataManager.instance.save(trip: trip!)
+            postSave()
+        }
     }
     
-    // MARK: - View Initializations
+    private func validate() -> Bool {
+        
+        return trip !== nil
+    }
     
-    private func setComponents() {
+    private func preSave() {
+        
+        view.alpha = CaConstants.SaveDisplayAlpha
+        spinnerView.startAnimating()
+    }
+    
+    private func postSave() {
+        
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(CaConstants.SaveActivityDelay))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            self.spinnerView.stopAnimating()
+            self.view.alpha = 1.0
+            self.exit()
+        }
+    }
+    
+    func discard() {
+        
+        let alert = UIAlertController(title: nil, message: "Remove this trip?", preferredStyle: UIAlertControllerStyle.Alert)
+        let discardAction = UIAlertAction(title: "Yes, remove", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            CaDataManager.instance.rollback(self.trip!)
+            self.exit()
+        }
+        let cancelAction = UIAlertAction(title: "No, continue", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }
+        alert.addAction(discardAction)
+        alert.addAction(cancelAction)
+        presentViewController(alert, animated: true) { () -> Void in }
+    }
+    
+    func exit() {
+    
+        trip = nil
+        performSegueWithIdentifier(self.exitSegue!, sender: self)
+    }
+
+    
+    // MARK: - UI Construction
+    
+    private func loadComponents() {
         
         let valueFont: UIFont = {
             let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
@@ -110,11 +167,25 @@ class CaLogTripSummaryController: UIViewController {
         spinnerView.hidesWhenStopped = true
         view.addSubview(spinnerView)
         
+        if trip?.waypoints.count > 0 {
+            tripMapView = MKMapView()
+            tripMapView!.delegate = self
+            tripMapView!.mapType = MKMapType.Standard
+            tripMapView!.rotateEnabled = true
+            tripMapView!.scrollEnabled = true
+            tripMapView!.showsCompass = true
+            tripMapView!.region = tripRouteMapRegion()!
+            tripMapView!.addOverlay(tripRoutePolyline())
+            tripMapView!.translatesAutoresizingMaskIntoConstraints = false
+            tripMapView!.zoomEnabled = true
+            view.addSubview(tripMapView!)
+        }
+        
         setDisplayText()
         renderNavigationButtonItems()
     }
     
-    private func setConstraints() {
+    private func loadConstraints() {
         
         let valueWidth: CGFloat = view.frame.size.width / 3.0
         let valueTopMargin: CGFloat = 20
@@ -159,6 +230,13 @@ class CaLogTripSummaryController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTitleTopMargin))
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        
+        if tripMapView != nil {
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedTitleLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+        }
     }
     
     private func setDisplayText() {
@@ -200,7 +278,7 @@ class CaLogTripSummaryController: UIViewController {
         
         let navigationItem = UINavigationItem()
         navigationItem.title = "Trip Summary"
-    
+        
         if isSaveableSummary {
             let trashButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: "discard")
             let saveButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save")
@@ -213,57 +291,60 @@ class CaLogTripSummaryController: UIViewController {
         navigationBar.items = [ navigationItem ]
     }
     
-  
-    // MARK: - Scene Actions
+    // MARK: - Map Rendering
     
-    func save() {
+    // Return the region that encompasses the trip's route. If the trip does not
+    // have waypoints associated with it then no region is returned.
+    //
+    private func tripRouteMapRegion() -> MKCoordinateRegion? {
         
-        if validate() {
-            preSave()
-            trip?.pending = false
-            CaDataManager.instance.save(trip: trip!)
-            postSave()
+        let waypoints = trip?.waypoints.allObjects as? [Waypoint]
+        if waypoints == nil || waypoints?.count == 0 {
+            return nil
         }
-    }
-    
-    private func validate() -> Bool {
         
-        return trip !== nil
-    }
-    
-    private func preSave() {
+        var minLat = waypoints![0].latitude.doubleValue
+        var maxLat = waypoints![0].latitude.doubleValue
+        var minLong = waypoints![0].longitude.doubleValue
+        var maxLong = waypoints![0].longitude.doubleValue
         
-        view.alpha = CaConstants.SaveDisplayAlpha
-        spinnerView.startAnimating()
-    }
-    
-    private func postSave() {
-        
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(CaConstants.SaveActivityDelay))
-        dispatch_after(time, dispatch_get_main_queue()) {
-            self.spinnerView.stopAnimating()
-            self.view.alpha = 1.0
-            self.exit()
+        for index in 1...(waypoints!.count - 1) {
+            minLat = min(minLat, waypoints![index].latitude.doubleValue)
+            maxLat = min(maxLat, waypoints![index].latitude.doubleValue)
+            minLong = min(minLong, waypoints![index].longitude.doubleValue)
+            maxLong = min(maxLong, waypoints![index].longitude.doubleValue)
         }
-    }
-    
-    func discard() {
         
-        let alert = UIAlertController(title: nil, message: "Remove this trip?", preferredStyle: UIAlertControllerStyle.Alert)
-        let discardAction = UIAlertAction(title: "Yes, remove", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
-            CaDataManager.instance.rollback(self.trip!)
-            self.exit()
-        }
-        let cancelAction = UIAlertAction(title: "No, continue", style: UIAlertActionStyle.Cancel) { (UIAlertAction) -> Void in }
-        alert.addAction(discardAction)
-        alert.addAction(cancelAction)
-        presentViewController(alert, animated: true) { () -> Void in }
-    }
-    
-    func exit() {
-    
-        trip = nil
-        performSegueWithIdentifier(self.exitSegue!, sender: self)
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat)/2, longitude: (minLong + maxLong)/2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat)*1.1, longitudeDelta: (maxLong - minLong)*1.1)
+        
+        return MKCoordinateRegion(center: center, span: span)
     }
 
+    // Return the polyline of waypoints that trace the trip's route.
+    //
+    private func tripRoutePolyline() -> MKPolyline {
+        
+        var coordinates = [CLLocationCoordinate2D]()
+        
+        if  let waypoints = trip?.waypoints.allObjects as? [Waypoint] {
+            for waypoint in waypoints {
+                coordinates.append(CLLocationCoordinate2D(latitude: waypoint.latitude.doubleValue, longitude: waypoint.longitude.doubleValue))
+            }
+        }
+        return MKPolyline(coordinates: &coordinates, count: coordinates.count)
+    }
+}
+
+extension CaLogTripSummaryController: MKMapViewDelegate {
+    
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        // Only expecting a polyline overlay therefore skip checking of overlay
+        // type.
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = CaStyle.MapRouteLineColor
+        renderer.lineWidth = CaStyle.MapRouteLineWidth
+        return renderer
+    }
 }
