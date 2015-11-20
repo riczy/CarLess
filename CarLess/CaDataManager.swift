@@ -146,8 +146,11 @@ class CaDataManager {
         
         let fetchRequest = NSFetchRequest(entityName: "Trip")
         let sortDescriptor = NSSortDescriptor(key: "startTimestamp", ascending: false)
+        
         fetchRequest.includesPendingChanges = false
         fetchRequest.sortDescriptors = [sortDescriptor]
+        fetchRequest.predicate = NSPredicate(format: "pending = %@", argumentArray: [false])
+        
         if limit != nil {
             fetchRequest.fetchLimit = limit!
         }
