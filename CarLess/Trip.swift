@@ -36,6 +36,12 @@ class Trip: NSManagedObject {
         }
     }
     
+    var mpg: Double? {
+        get {
+            return vehicle?.combinedMpg
+        }
+    }
+    
     func getDistanceInUnit(unit: LengthUnit) -> Double {
         
         return distance.doubleValue * unit.conversionFactor
@@ -47,9 +53,13 @@ class Trip: NSManagedObject {
         self.distance = distance.doubleValue / unit.conversionFactor
     }
     
+    //
+    // Return the money, in US dollars, saved by taking this car less trip.
+    //
+    // The savings cannot be calculated if the vehicle setting is not established.
+    //
     func moneySaved() -> NSDecimalNumber? {
         
-        let mpg = vehicle?.combinedMpg
         let currencyBehavior = NSDecimalNumberHandler.defaultCurrencyNumberHandler()
 
         if fuelPrice != nil && mpg != nil {
@@ -62,10 +72,31 @@ class Trip: NSManagedObject {
         return nil
     }
     
+    //
+    // Return the fuel, in gallons, saved by taking this car less trip.
+    //
+    // The savings cannot be calculated if the vehicle setting is not established.
+    //
     func fuelSaved() -> Double? {
         
-        if let mpg = vehicle?.combinedMpg {
-            return getDistanceInUnit(LengthUnit.Mile) / mpg
+        if mpg != nil {
+            return getDistanceInUnit(LengthUnit.Mile) / mpg!
+        }
+        return nil
+    }
+    
+    //
+    // Returned the estimated CO2 that was saved by taking this trip.
+    //
+    // The CO2 cannot be calculated if the vehicle setting is not established.
+    //
+    func co2Saved() -> Double? {
+        
+        if vehicle != nil && mpg != nil {
+            let atvType = vehicle!.atvType
+            let distanceInMiles = getDistanceInUnit(LengthUnit.Mile)
+            let co2Coefficient = atvType?.lowercaseString == "diesel" ? 22.4 : 19.6
+            return (co2Coefficient / mpg!) * distanceInMiles
         }
         return nil
     }

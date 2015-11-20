@@ -161,6 +161,20 @@ class CaLogTripSummaryController: UIViewController {
         moneySavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(moneySavedTitleLabel)
         
+        co2SavedLabel = UILabel()
+        co2SavedLabel.font = valueFont
+        co2SavedLabel.textAlignment = NSTextAlignment.Center
+        co2SavedLabel.textColor = CaStyle.InputFieldColor
+        co2SavedLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(co2SavedLabel)
+        
+        co2SavedTitleLabel = UILabel()
+        co2SavedTitleLabel.font = valueTitleFont
+        co2SavedTitleLabel.textAlignment = NSTextAlignment.Center
+        co2SavedTitleLabel.textColor = CaStyle.InputLabelColor
+        co2SavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(co2SavedTitleLabel)
+        
         spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
         spinnerView.color = CaStyle.ActivitySpinnerColor
         spinnerView.center = view.center
@@ -187,7 +201,7 @@ class CaLogTripSummaryController: UIViewController {
     
     private func loadConstraints() {
         
-        let valueWidth: CGFloat = view.frame.size.width / 3.0
+        let valueWidth: CGFloat = view.frame.size.width / 4.0
         let valueTopMargin: CGFloat = 20
         let valueTitleTopMargin: CGFloat = 3
         
@@ -210,9 +224,13 @@ class CaLogTripSummaryController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
         view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         
+        view.addConstraint(NSLayoutConstraint(item: co2SavedLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeImageView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTopMargin))
+        view.addConstraint(NSLayoutConstraint(item: co2SavedLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
+        view.addConstraint(NSLayoutConstraint(item: co2SavedLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: distanceLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        
         view.addConstraint(NSLayoutConstraint(item: fuelSavedLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeImageView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTopMargin))
         view.addConstraint(NSLayoutConstraint(item: fuelSavedLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
-        view.addConstraint(NSLayoutConstraint(item: fuelSavedLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: distanceLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: fuelSavedLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: co2SavedLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
         
         view.addConstraint(NSLayoutConstraint(item: moneySavedLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeImageView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTopMargin))
         view.addConstraint(NSLayoutConstraint(item: moneySavedLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
@@ -223,19 +241,24 @@ class CaLogTripSummaryController: UIViewController {
         view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
         view.addConstraint(NSLayoutConstraint(item: distanceTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         
+        view.addConstraint(NSLayoutConstraint(item: co2SavedTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: co2SavedLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTitleTopMargin))
+        view.addConstraint(NSLayoutConstraint(item: co2SavedTitleLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
+        view.addConstraint(NSLayoutConstraint(item: co2SavedTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: distanceTitleLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        
         view.addConstraint(NSLayoutConstraint(item: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: fuelSavedLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTitleTopMargin))
         view.addConstraint(NSLayoutConstraint(item: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
-        view.addConstraint(NSLayoutConstraint(item: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: distanceTitleLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: co2SavedTitleLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
         
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: valueTitleTopMargin))
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: valueWidth))
         view.addConstraint(NSLayoutConstraint(item: moneySavedTitleLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: fuelSavedTitleLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
         
         if tripMapView != nil {
-            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedTitleLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedTitleLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 8))
             view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
             view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 160))
+//            view.addConstraint(NSLayoutConstraint(item: tripMapView!, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
         }
     }
     
@@ -247,16 +270,23 @@ class CaLogTripSummaryController: UIViewController {
         distanceFormatter.maximumFractionDigits = 2
         distanceFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
+        co2SavedTitleLabel.text = "CO2 saved"
         distanceTitleLabel.text = "\(distanceUnit.rawValue.lowercaseString)s"
-        fuelSavedTitleLabel.text = "fuel saved"
-        moneySavedTitleLabel.text = "money saved"
+        fuelSavedTitleLabel.text = "Fuel saved"
+        moneySavedTitleLabel.text = "Money saved"
         
         if trip == nil {
+            co2SavedLabel.text = "--"
             distanceLabel.text = "--"
             fuelSavedLabel.text = "--"
             moneySavedLabel.text = "--"
             startTimestampLabel.text = "--"
         } else {
+            if let co2Saved = trip!.co2Saved() {
+                co2SavedLabel.text = "\(distanceFormatter.stringFromNumber(co2Saved)!) lb"
+            } else {
+                co2SavedLabel.text = "--"
+            }
             distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!)"
             if let fuelSaved = trip?.fuelSaved() {
                 fuelSavedLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(fuelSaved)!) gal"

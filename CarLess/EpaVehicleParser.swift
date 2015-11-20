@@ -7,6 +7,7 @@ struct EpaVehicle : CustomStringConvertible, Mpg {
     var make: String
     var model: String
 
+    var atvType: String?
     var comb08: Int?
     var comb08U: Double?
     var combA08: Int?
@@ -14,7 +15,7 @@ struct EpaVehicle : CustomStringConvertible, Mpg {
     
     var description: String {
         
-        return "\(id), \(year) \(make) \(model), comb08 = \(comb08), comb08U = \(comb08U), combA08 = \(combA08), combA08U = \(combA08U)"
+        return "\(id), \(year) \(make) \(model), atvType = \(atvType), comb08 = \(comb08), comb08U = \(comb08U), combA08 = \(combA08), combA08U = \(combA08U)"
     }
     
     var combinedMpg : Double? {
@@ -34,15 +35,16 @@ struct EpaVehicle : CustomStringConvertible, Mpg {
         self.model = model
     }
     
-    /// Sets the properties of the given Vehicle parameter with the values from
-    /// this instance.
-    ///
+    // Sets the properties of the given Vehicle parameter with the values from
+    // this instance.
+    //
     func setPropertiesForVehicle(vehicle: Vehicle) {
         
         vehicle.year = year
         vehicle.make = make
         vehicle.model = model
         vehicle.epaVehicleId = id
+        vehicle.atvType = atvType
         vehicle.comb08 = comb08 == nil ? nil : NSNumber(long: comb08!)
         vehicle.comb08U = comb08U == nil ? nil : NSNumber(double: comb08U!)
         vehicle.combA08 = combA08 == nil ? nil : NSNumber(long: combA08!)
@@ -67,6 +69,7 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
         case Year = "year"
         case Make = "make"
         case Model = "model"
+        case AtvType = "atvType"
         case CombinedMpgFuelType1 = "comb08"
         case CombinedMpgFuelType1Unrounded = "comb08U"
         case CombinedMpgFuelType2 = "combA08"
@@ -94,6 +97,8 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
             currentElement = Element.Make
         case Element.Model.rawValue:
             currentElement = Element.Model
+        case Element.AtvType.rawValue:
+            currentElement = Element.AtvType
         case Element.CombinedMpgFuelType1.rawValue:
             currentElement = Element.CombinedMpgFuelType1
         case Element.CombinedMpgFuelType1Unrounded.rawValue:
@@ -120,6 +125,8 @@ class EpaVehicleParser : NSObject, NSXMLParserDelegate {
             workingValue.make = value
         case Element.Model.rawValue:
             workingValue.model = value
+        case Element.AtvType.rawValue:
+            workingValue.atvType = value
         case Element.CombinedMpgFuelType1.rawValue:
             workingValue.comb08 = Int(value)
         case Element.CombinedMpgFuelType1Unrounded.rawValue:
