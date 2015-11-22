@@ -88,7 +88,7 @@ class CaDataManager {
         do {
             results = try context.executeFetchRequest(fetchRequest) as? [Waypoint]
         } catch let error as NSError {
-            print("Error when fetching waypoints: \(error.localizedDescription)")
+            NSLog("Error when fetching waypoints: \(error.localizedDescription)")
         }
         
         if results == nil {
@@ -120,7 +120,6 @@ class CaDataManager {
         
         if trip.managedObjectContext!.hasChanges {
             do {
-                print("\(trip), waypoints.count = \(trip.waypoints.count)")
                 try trip.managedObjectContext!.save()
             } catch let error as NSError {
                 NSLog("Error when saving trip: \(error.localizedDescription)")
@@ -164,7 +163,7 @@ class CaDataManager {
         do {
             results = try context.executeFetchRequest(fetchRequest) as? [Trip]
         } catch let error as NSError {
-            print("Error when fetching trips: \(error.localizedDescription)")
+            NSLog("Error when fetching trips: \(error.localizedDescription)")
         }
         
         if results == nil {
@@ -191,7 +190,6 @@ class CaDataManager {
         if vehicle.managedObjectContext!.hasChanges {
             do {
                 try vehicle.managedObjectContext!.save()
-                print(vehicle)
             } catch let error as NSError {
                 NSLog("Error when saving vehicle: \(error.localizedDescription)")
             }
@@ -209,7 +207,7 @@ class CaDataManager {
         do {
             results = try context.executeFetchRequest(fetchRequest) as? [Vehicle]
         } catch let error as NSError {
-            print("Error when fetching vehicles: \(error.localizedDescription)")
+            NSLog("Error when fetching vehicles: \(error.localizedDescription)")
         }
         
         return results == nil ? [Vehicle]() : results!
@@ -260,7 +258,6 @@ class CaDataManager {
                 try settings.managedObjectContext!.save()
                 _defaultDistanceUnit = settings.distanceUnit
                 _defaultVehicle = settings.vehicle
-                print(settings)
             } catch let error as NSError {
                 NSLog("Error when saving vehicle: \(error.localizedDescription)")
             }
@@ -302,7 +299,7 @@ class CaDataManager {
         do {
             results = try context.executeFetchRequest(fetchRequest) as? [Setting]
         } catch let error as NSError {
-            print("Error when fetching settings: \(error.localizedDescription)")
+            NSLog("Error when fetching settings: \(error.localizedDescription)")
         }
         
         return results == nil || results?.count == 0 ? nil : results![0]
