@@ -4,24 +4,29 @@ import UIKit
 class CaTripSummaryView: UIView {
     
     // MARK: - UI Properties
-    var startTimestampLabel: UILabel!
-    var co2SavedLabel: UILabel!
-    var moneySavedLabel: UILabel!
-    var fuelSavedLabel: UILabel!
-    var co2SavedTitleLabel: UILabel!
-    var moneySavedTitleLabel: UILabel!
-    var fuelSavedTitleLabel: UILabel!
-    var distanceLabel: UILabel!
-    var modeLabel: UILabel!
+    var startTimestampLabel = UILabel()
+    var co2SavedLabel = UILabel()
+    var moneySavedLabel = UILabel()
+    var fuelSavedLabel = UILabel()
+    var co2SavedTitleLabel = UILabel()
+    var moneySavedTitleLabel = UILabel()
+    var fuelSavedTitleLabel = UILabel()
+    var distanceLabel = UILabel()
+    var modeLabel = UILabel()
     var mapView: MKMapView?
     var noMapView: UIView?
     var showMap: Bool = true
     
+
     init(frame: CGRect, showMap: Bool) {
         
         super.init(frame: frame)
         self.showMap = showMap
-        didLoad()
+        if showMap {
+            mapView = MKMapView()
+        } else {
+            noMapView = UIView()
+        }
     }
     
     convenience init(showMap: Bool) {
@@ -37,18 +42,18 @@ class CaTripSummaryView: UIView {
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        didLoad()
     }
 
     override func layoutSubviews() {
         
         super.layoutSubviews()
+        styleElements()
         loadConstraints()
     }
     
-    private func didLoad() {
+    private func styleElements() {
         
-        
+        let alignment = NSTextAlignment.Center
         let valueFont: UIFont = {
             let fontDescriptor = UIFont.preferredFontForTextStyle(UIFontTextStyleBody).fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
             return UIFont(descriptor: fontDescriptor, size: 0)
@@ -59,77 +64,65 @@ class CaTripSummaryView: UIView {
         
         backgroundColor = CaStyle.ViewBgColor
         
-        startTimestampLabel = UILabel()
-        startTimestampLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        startTimestampLabel.font = valueTitleFont
         startTimestampLabel.textAlignment = NSTextAlignment.Center
         startTimestampLabel.textColor = CaStyle.InstructionHeadlineColor
         startTimestampLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let alignment = NSTextAlignment.Center
-        
-        fuelSavedLabel = UILabel()
         fuelSavedLabel.font = valueFont
         fuelSavedLabel.textAlignment = alignment
         fuelSavedLabel.textColor = CaStyle.InputFieldColor
         fuelSavedLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        moneySavedLabel = UILabel()
         moneySavedLabel.font = valueFont
         moneySavedLabel.textAlignment = alignment
         moneySavedLabel.textColor = CaStyle.InputFieldColor
         moneySavedLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        co2SavedLabel = UILabel()
         co2SavedLabel.font = valueFont
         co2SavedLabel.textAlignment = alignment
         co2SavedLabel.textColor = CaStyle.InputFieldColor
         co2SavedLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        fuelSavedTitleLabel = UILabel()
         fuelSavedTitleLabel.font = valueTitleFont
         fuelSavedTitleLabel.text = "Fuel"
         fuelSavedTitleLabel.textAlignment = alignment
         fuelSavedTitleLabel.textColor = CaStyle.InputLabelColor
         fuelSavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        moneySavedTitleLabel = UILabel()
         moneySavedTitleLabel.font = valueTitleFont
         moneySavedTitleLabel.text = "Money"
         moneySavedTitleLabel.textAlignment = alignment
         moneySavedTitleLabel.textColor = CaStyle.InputLabelColor
         moneySavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        co2SavedTitleLabel = UILabel()
         co2SavedTitleLabel.font = valueTitleFont
         co2SavedTitleLabel.text = "CO\u{2082}"
         co2SavedTitleLabel.textAlignment = alignment
         co2SavedTitleLabel.textColor = CaStyle.InputLabelColor
         co2SavedTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        distanceLabel = UILabel()
         distanceLabel.font = valueFont
         distanceLabel.textAlignment = alignment
         distanceLabel.textColor = CaStyle.InputFieldColor
         distanceLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        modeLabel = UILabel()
         modeLabel.font = valueTitleFont
         modeLabel.textAlignment = alignment
         modeLabel.textColor = CaStyle.InputFieldColor
         modeLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        noMapView = UIView()
-        noMapView!.backgroundColor = UIColor.grayColor()
-        noMapView!.translatesAutoresizingMaskIntoConstraints = false
         
         if showMap {
-            mapView = MKMapView()
             mapView!.mapType = MKMapType.Standard
             mapView!.rotateEnabled = true
             mapView!.scrollEnabled = true
             mapView!.showsCompass = true
             mapView!.translatesAutoresizingMaskIntoConstraints = false
             mapView!.zoomEnabled = true
+        } else {
+            noMapView!.backgroundColor = UIColor.grayColor()
+            noMapView!.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
@@ -167,7 +160,22 @@ class CaTripSummaryView: UIView {
         addConstraint(NSLayoutConstraint(item: hrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: hrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
         
-        let mapAreaView = mapView == nil ? noMapView! : mapView!
+        let mapAreaView = showMap ? mapView! : noMapView!
+        if !showMap {
+            let noMapLabel = UILabel()
+            noMapLabel.font = CaStyle.TripSummarySectionHeadingFont
+            noMapLabel.numberOfLines = 0
+            noMapLabel.text = "This trip was entered manually."
+            noMapLabel.textAlignment = NSTextAlignment.Center
+            noMapLabel.textColor = UIColor.whiteColor()
+            noMapLabel.translatesAutoresizingMaskIntoConstraints = false
+            mapAreaView.addSubview(noMapLabel)
+            mapAreaView.addConstraint(NSLayoutConstraint(item: noMapLabel, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: mapAreaView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: -20))
+            mapAreaView.addConstraint(NSLayoutConstraint(item: noMapLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: mapAreaView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+            mapAreaView.addConstraint(NSLayoutConstraint(item: noMapLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: mapAreaView, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+            
+        }
+        
         addSubview(mapAreaView)
         addConstraint(NSLayoutConstraint(item: mapAreaView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: hrView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: mapAreaView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))

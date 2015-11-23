@@ -50,7 +50,11 @@ class CaTripSummaryController: UIViewController {
         distanceFormatter.maximumFractionDigits = 2
         distanceFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
-        summaryView.startTimestampLabel.text = CaFormatter.timestamp.stringFromDate(trip!.startTimestamp)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = NSDateFormatterStyle.LongStyle
+        dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+        
+        summaryView.startTimestampLabel.text = dateFormatter.stringFromDate(trip!.startTimestamp)
         summaryView.co2SavedLabel.text = trip.co2Saved() == nil ? "--" : "\(distanceFormatter.stringFromNumber(trip.co2Saved()!)!) lb"
         summaryView.fuelSavedLabel.text = trip.fuelSaved() == nil ? "--" : "\(CaFormatter.decimalDisplay.stringFromNumber(trip.fuelSaved()!)!) gal"
         summaryView.moneySavedLabel.text = trip.moneySaved() == nil ? "--" : CaFormatter.money.stringFromNumber(trip.moneySaved()!)
