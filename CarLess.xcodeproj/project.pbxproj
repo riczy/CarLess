@@ -17,6 +17,8 @@
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
 		8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */; };
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
+		844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */; };
+		844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
 		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; };
@@ -67,6 +69,8 @@
 		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
 		8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleMenuParser.swift; sourceTree = "<group>"; };
+		844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryView.swift; sourceTree = "<group>"; };
+		844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryController.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleParser.swift; sourceTree = "<group>"; };
 		8470900B1BD424C600F9D236 /* CaNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaNetworkManager.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 				8407179D1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift */,
 				8407179F1BC2EB1E00C65BB9 /* CaTripsSummary.swift */,
 				847BFC431BF26FCC001BF9D1 /* CaTripDetailController.swift */,
+				844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */,
+				844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */,
 			);
 			name = Trips;
 			sourceTree = "<group>";
@@ -377,6 +383,7 @@
 				84E6953E1B86B56D000185BE /* CaLogTripSummaryController.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift in Sources */,
 				84E61A311B98AB5000D927B8 /* Trip.swift in Sources */,
+				844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */,
 				848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */,
 				84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
@@ -391,6 +398,7 @@
 				84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */,
 				8489293A1B3E41C80045C39E /* CaLogController.swift in Sources */,
 				8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */,
+				844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
 				84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */,
 				84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */,

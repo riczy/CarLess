@@ -114,10 +114,11 @@ class CaTripsController: UITableViewController {
             let dvc = segue.destinationViewController as! CaTripsPeriodicSummaryController
             dvc.period = selectedIndexPath?.row == 0 ? SummaryPeriod.Weekly : SummaryPeriod.Monthly
             
-        } else if segue.identifier == CaSegue.TripsHomeToTripDetail {
+        //} else if segue.identifier == CaSegue.TripsHomeToTripDetail {
+        } else if segue.identifier == CaSegue.TripsHomeToTripSummary {
             
             if selectedIndexPath != nil {
-                let dvc = segue.destinationViewController as! CaTripDetailController
+                let dvc = segue.destinationViewController as! CaTripSummaryController
                 let trip = tripAtIndexPath(selectedIndexPath!)
                 dvc.trip = trip
             }
@@ -168,7 +169,8 @@ class CaTripsController: UITableViewController {
         if indexPath.section == 0 {
             performSegueWithIdentifier(CaSegue.TripsHomeToTripPeriodicSummary, sender: self)
         } else {
-            performSegueWithIdentifier(CaSegue.TripsHomeToTripDetail, sender: self)
+            //performSegueWithIdentifier(CaSegue.TripsHomeToTripDetail, sender: self)
+            performSegueWithIdentifier(CaSegue.TripsHomeToTripSummary, sender: self)
         }
     }
     

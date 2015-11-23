@@ -363,11 +363,31 @@
                     <connections>
                         <segue destination="A4I-fg-XrG" kind="show" identifier="TripsHomeToTripPeriodicSummarySegue" id="LYQ-Sq-G6y"/>
                         <segue destination="F7A-nj-VAP" kind="show" identifier="TripsHomeToTripDetailSegue" id="NZQ-WQ-hTC"/>
+                        <segue destination="h4X-DN-OXc" kind="show" identifier="TripsHomeToTripSummarySegue" id="Hom-bD-gc0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ep-hK-V9C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2473" y="-1567"/>
+        </scene>
+        <!--Ca Trip Summary Controller-->
+        <scene sceneID="bMI-yH-mJQ">
+            <objects>
+                <viewController id="h4X-DN-OXc" customClass="CaTripSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yrb-u5-yKm"/>
+                        <viewControllerLayoutGuide type="bottom" id="aiZ-VG-4F7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6eT-KD-SVS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2a6-3f-uOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1758" y="-2292"/>
         </scene>
         <!--Trips Summary-->
         <scene sceneID="O2b-7X-GF7">

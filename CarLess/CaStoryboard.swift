@@ -18,6 +18,7 @@ struct CaSegue {
     static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
     static let TripPeriodicSummaryToTripsHome = "TripPeriodicSummaryToTripsHomeSegue"
     static let TripsHomeToTripDetail = "TripsHomeToTripDetailSegue"
+    static let TripsHomeToTripSummary = "TripsHomeToTripSummarySegue"
 }
 
 struct CaConstants {
@@ -152,6 +153,13 @@ struct CaStyle {
     }
     static let CellTripsTotalsRowColor = CaColor.FadedSlateGray
     static let CellTripsTotalsRowBgColor = CaColor.Lime200
+    
+    static var TripSummarySectionHeadingFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
+    static let TripSummarySectionHeadingColor = CaColor.FadedSlateGray
     
     // MARK: - Vehicle Specific
     static var MpgLabelFont: UIFont {
