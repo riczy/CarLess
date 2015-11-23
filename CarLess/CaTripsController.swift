@@ -43,6 +43,7 @@ class CaTripsController: UITableViewController {
     private var headerDateFormatter : NSDateFormatter!
     private var headerWeekDayFormatter : NSDateFormatter!
     private var cellTimeFormatter : NSDateFormatter!
+    private var distanceFormatter : NSNumberFormatter!
     private var tripsMap : [String : [Trip]]!
     private var tripsMapOrderedKeys : [String]!
     private var selectedIndexPath: NSIndexPath?
@@ -71,6 +72,12 @@ class CaTripsController: UITableViewController {
         cellTimeFormatter = NSDateFormatter()
         cellTimeFormatter.dateStyle = NSDateFormatterStyle.NoStyle
         cellTimeFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+
+        distanceFormatter = NSNumberFormatter()
+        distanceFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        distanceFormatter.minimum = 0
+        distanceFormatter.minimumFractionDigits = 0
+        distanceFormatter.maximumFractionDigits = 2
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -226,7 +233,7 @@ class CaTripsController: UITableViewController {
         let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
         cell.startTimeLabel.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
-        cell.distanceLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+        cell.distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
         cell.modeImageView.image = UIImage(named: trip.modeType.imageFilename)
 
         cell.startTimeLabel.font = CaStyle.CellRowFont
