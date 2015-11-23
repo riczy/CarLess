@@ -76,11 +76,13 @@ class CaTripSummaryController: UIViewController {
         var minLong = waypoints[0].longitude.doubleValue
         var maxLong = waypoints[0].longitude.doubleValue
         
-        for index in 1...(waypoints.count - 1) {
-            minLat = min(minLat, waypoints[index].latitude.doubleValue)
-            maxLat = max(maxLat, waypoints[index].latitude.doubleValue)
-            minLong = min(minLong, waypoints[index].longitude.doubleValue)
-            maxLong = max(maxLong, waypoints[index].longitude.doubleValue)
+        if waypoints.count > 1 {
+            for index in 1...(waypoints.count - 1) {
+                minLat = min(minLat, waypoints[index].latitude.doubleValue)
+                maxLat = max(maxLat, waypoints[index].latitude.doubleValue)
+                minLong = min(minLong, waypoints[index].longitude.doubleValue)
+                maxLong = max(maxLong, waypoints[index].longitude.doubleValue)
+            }
         }
         
         let center = CLLocationCoordinate2D(latitude: (minLat + maxLat)/2, longitude: (minLong + maxLong)/2)

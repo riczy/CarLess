@@ -187,6 +187,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         }
         trip.logType = LogType.Manual
         trip.modeType = mode!
+        trip.pending = false
         trip.startTimestamp = datePicker.date
         trip.endTimestamp = nil
         
