@@ -2,48 +2,62 @@ import UIKit
 
 class CaTripsPeriodicSummaryCell: UITableViewCell {
    
+    var co2SavedTotalLabel = UILabel()
     var dateLabel = UILabel()
-    var tripsCountLabel = UILabel()
-    var moneySavedTotalLabel = UILabel()
+    var distanceLabel = UILabel()
     var fuelSavedTotalLabel = UILabel()
+    var moneySavedTotalLabel = UILabel()
+    var tripsCountLabel = UILabel()
+    
     
     override func layoutSubviews() {
         
         super.layoutSubviews()
         
         let frameWidth = contentView.frame.size.width - CaStyle.LeftViewPadding - CaStyle.RightViewPadding
-        let dateWidth = frameWidth * 0.25
-        let tripsWidth = frameWidth * 0.15
-        let moneyWidth = frameWidth * 0.3
-        let fuelWidth = frameWidth * 0.3
+        let dateWidth = frameWidth * 0.15
+        let tripsWidth = frameWidth * 0.1
+        let moneyWidth = frameWidth * 0.2
+        let fuelWidth = frameWidth * 0.15
+        let distanceWidth = frameWidth * 0.2
+        let co2Width = frameWidth * 0.2
+        
         
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(dateLabel)
-        
-        tripsCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(tripsCountLabel)
-        
-        fuelSavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(fuelSavedTotalLabel)
-        
-        moneySavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(moneySavedTotalLabel)
-        
         contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem:  contentView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: CaStyle.LeftViewPadding))
         contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: dateLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: dateWidth))
         
+        tripsCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(tripsCountLabel)
         contentView.addConstraint(NSLayoutConstraint(item: tripsCountLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: dateLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: tripsCountLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: tripsCountLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: tripsWidth))
         
-        contentView.addConstraint(NSLayoutConstraint(item: fuelSavedTotalLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: tripsCountLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
+        distanceLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(distanceLabel)
+        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: tripsCountLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: distanceWidth))
+        
+        moneySavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(moneySavedTotalLabel)
+        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: distanceLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: moneyWidth))
+        
+        fuelSavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(fuelSavedTotalLabel)
+        contentView.addConstraint(NSLayoutConstraint(item: fuelSavedTotalLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: moneySavedTotalLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: fuelSavedTotalLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
         contentView.addConstraint(NSLayoutConstraint(item: fuelSavedTotalLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: fuelWidth))
         
-        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: fuelSavedTotalLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
-        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
-        contentView.addConstraint(NSLayoutConstraint(item: moneySavedTotalLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: moneyWidth))
+        co2SavedTotalLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(co2SavedTotalLabel)
+        contentView.addConstraint(NSLayoutConstraint(item: co2SavedTotalLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: fuelSavedTotalLabel, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: co2SavedTotalLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0.0))
+        contentView.addConstraint(NSLayoutConstraint(item: co2SavedTotalLabel, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: co2Width))
         
     }
 }
@@ -99,14 +113,18 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         if indexPath.row == 0 {
             cell.dateLabel.text = period == SummaryPeriod.Monthly ? "Month" : "Week"
             cell.tripsCountLabel.text = "Trips"
-            cell.moneySavedTotalLabel.text = "Money Saved"
-            cell.fuelSavedTotalLabel.text = "Fuel Saved"
+            cell.moneySavedTotalLabel.text = "Money\n(\(CaFormatter.money.currencySymbol))"
+            cell.fuelSavedTotalLabel.text = "Fuel\n(gal)"
+            cell.distanceLabel.text = "Distance\n(\(CaDataManager.instance.defaultDistanceUnit.abbreviation))"
+            cell.co2SavedTotalLabel.text = "CO\u{2082}\n(lb)"
             applyHeaderCellStyle(cell)
         } else if indexPath.row == 1 {
             cell.dateLabel.text = ""
             cell.tripsCountLabel.text = "\(dataTotals.tripsCount)"
             cell.moneySavedTotalLabel.text = CaFormatter.money.stringFromNumber(dataTotals.moneySavedTotal)
             cell.fuelSavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(dataTotals.fuelSavedTotal)
+            cell.distanceLabel.text = CaFormatter.decimalDisplay.stringFromNumber(dataTotals.distanceInUnit(CaDataManager.instance.defaultDistanceUnit))
+            cell.co2SavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(dataTotals.co2SavedTotal)
             applyTotalsCellStyle(cell)
         } else {
             let summary = data[indexPath.row - 2]
@@ -114,6 +132,8 @@ class CaTripsPeriodicSummaryController: UITableViewController {
             cell.tripsCountLabel.text = "\(summary.tripsCount)"
             cell.moneySavedTotalLabel.text = CaFormatter.money.stringFromNumber(summary.moneySavedTotal)
             cell.fuelSavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(summary.fuelSavedTotal)
+            cell.distanceLabel.text = CaFormatter.decimalDisplay.stringFromNumber(summary.distanceInUnit(CaDataManager.instance.defaultDistanceUnit))
+            cell.co2SavedTotalLabel.text = CaFormatter.decimalDisplay.stringFromNumber(summary.co2SavedTotal)
             applyCellStyle(cell)
         }
         
@@ -147,6 +167,16 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         cell.moneySavedTotalLabel.numberOfLines = 0
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
         
+        cell.co2SavedTotalLabel.textColor = CaStyle.CellHeaderColor
+        cell.co2SavedTotalLabel.font = CaStyle.CellHeaderFont
+        cell.co2SavedTotalLabel.numberOfLines = 0
+        cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.distanceLabel.textColor = CaStyle.CellHeaderColor
+        cell.distanceLabel.font = CaStyle.CellHeaderFont
+        cell.distanceLabel.numberOfLines = 0
+        cell.distanceLabel.textAlignment = NSTextAlignment.Right
+        
         cell.backgroundColor = CaStyle.CellHeaderBgColor
     }
     
@@ -167,25 +197,41 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         cell.moneySavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
         
+        cell.co2SavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.co2SavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.distanceLabel.textColor = CaStyle.CellTripsTotalsRowColor
+        cell.distanceLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.distanceLabel.textAlignment = NSTextAlignment.Right
+     
         cell.backgroundColor = CaStyle.CellTripsTotalsRowBgColor
     }
 
     private func applyCellStyle(cell: CaTripsPeriodicSummaryCell) {
         
         cell.dateLabel.textColor = CaStyle.CellRowColor
-        cell.dateLabel.font = CaStyle.CellRowFont
+        cell.dateLabel.font = CaStyle.CellTripsRowFont
         
         cell.tripsCountLabel.textColor = CaStyle.CellRowColor
-        cell.tripsCountLabel.font = CaStyle.CellRowFont
+        cell.tripsCountLabel.font = CaStyle.CellTripsRowFont
         cell.tripsCountLabel.textAlignment = NSTextAlignment.Right
         
         cell.fuelSavedTotalLabel.textColor = CaStyle.CellRowColor
-        cell.fuelSavedTotalLabel.font = CaStyle.CellRowFont
+        cell.fuelSavedTotalLabel.font = CaStyle.CellTripsRowFont
         cell.fuelSavedTotalLabel.textAlignment = NSTextAlignment.Right
         
         cell.moneySavedTotalLabel.textColor = CaStyle.CellRowColor
-        cell.moneySavedTotalLabel.font = CaStyle.CellRowFont
+        cell.moneySavedTotalLabel.font = CaStyle.CellTripsRowFont
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.co2SavedTotalLabel.textColor = CaStyle.CellRowColor
+        cell.co2SavedTotalLabel.font = CaStyle.CellTripsRowFont
+        cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        
+        cell.distanceLabel.textColor = CaStyle.CellRowColor
+        cell.distanceLabel.font = CaStyle.CellTripsRowFont
+        cell.distanceLabel.textAlignment = NSTextAlignment.Right
         
         cell.backgroundColor = CaStyle.CellRowBgColor
     }

@@ -228,12 +228,13 @@ class CaTripsController: UITableViewController {
     private func tableViewTripCell(indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("TripCell", forIndexPath: indexPath) as! CaTripTableViewCell
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         
         let trip = tripAtIndexPath(indexPath)
         let distanceUnit = CaDataManager.instance.defaultDistanceUnit
         
         cell.startTimeLabel.text = cellTimeFormatter.stringFromDate(trip.startTimestamp)
-        cell.distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+        cell.distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip.distanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
         cell.modeImageView.image = UIImage(named: trip.modeType.imageFilename)
 
         cell.startTimeLabel.font = CaStyle.CellRowFont

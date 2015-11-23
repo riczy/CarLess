@@ -23,7 +23,7 @@ class CaLogTrackedTripProgressController: UIViewController {
         }
         set {
             trip.distance = newValue
-            distanceValueLabel.text = CaFormatter.decimalDisplay.stringFromNumber(trip.getDistanceInUnit(CaDataManager.instance.defaultDistanceUnit))
+            distanceValueLabel.text = CaFormatter.decimalDisplay.stringFromNumber(trip.distanceInUnit(CaDataManager.instance.defaultDistanceUnit))
         }
     }
     private var lastLocation: CLLocation!

@@ -5,28 +5,27 @@ class CaTripsSummary: NSObject {
     private let currencyBehavior = NSDecimalNumberHandler.defaultCurrencyNumberHandler()
     var startDate: NSDate
     var endDate: NSDate
-    var tripsCount: Int
-    var moneySavedTotal: NSDecimalNumber
-    var fuelSavedTotal: Double
+    var tripsCount: Int = 0
+    var moneySavedTotal: NSDecimalNumber = 0
+    var fuelSavedTotal: Double = 0
+    var co2SavedTotal: Double = 0
+    var distanceTotal: Double = 0
     
     override var description: String {
         get {
-            return "\(startDate) - \(endDate) | tripsCount = \(tripsCount), moneySavedTotal = \(moneySavedTotal), fuelSavedTotal = \(fuelSavedTotal)"
+            return "\(startDate) - \(endDate) | tripsCount = \(tripsCount), distanceTotal = \(distanceTotal), moneySavedTotal = \(moneySavedTotal), fuelSavedTotal = \(fuelSavedTotal), co2SavedTotal = \(co2SavedTotal)"
         }
     }
+
+    init(startDate: NSDate, endDate: NSDate) {
     
-    convenience init(startDate: NSDate, endDate: NSDate) {
-        
-        self.init(startDate: startDate, endDate: endDate, tripsCount: 0, moneySavedTotal: NSDecimalNumber.zero(), fuelSavedTotal: 0.0)
-    }
-    
-    init(startDate: NSDate, endDate: NSDate, tripsCount: Int, moneySavedTotal: NSDecimalNumber, fuelSavedTotal: Double) {
-        
         self.startDate = startDate
         self.endDate = endDate
-        self.tripsCount = tripsCount
-        self.moneySavedTotal = moneySavedTotal
-        self.fuelSavedTotal = fuelSavedTotal
+    }
+    
+    func distanceInUnit(unit: LengthUnit) -> Double {
+        
+        return distanceTotal * unit.conversionFactor
     }
     
     func isWithinRange(trip: Trip) -> Bool {
@@ -39,11 +38,15 @@ class CaTripsSummary: NSObject {
         if isWithinRange(trip) {
             
             ++tripsCount
+            distanceTotal += trip.distance.doubleValue
             if let money = trip.moneySaved() {
                 moneySavedTotal = moneySavedTotal.decimalNumberByAdding(money, withBehavior: currencyBehavior)
             }
             if let fuel = trip.fuelSaved() {
                 fuelSavedTotal += fuel
+            }
+            if let co2 = trip.co2Saved() {
+                co2SavedTotal += co2
             }
             return true
         }

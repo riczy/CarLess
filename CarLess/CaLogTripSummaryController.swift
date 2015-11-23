@@ -286,7 +286,7 @@ class CaLogTripSummaryController: UIViewController {
             } else {
                 co2SavedLabel.text = "--"
             }
-            distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!)"
+            distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip!.distanceInUnit(distanceUnit))!)"
             if let fuelSaved = trip?.fuelSaved() {
                 fuelSavedLabel.text = "\(CaFormatter.decimalDisplay.stringFromNumber(fuelSaved)!) gal"
             } else {

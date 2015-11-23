@@ -42,7 +42,7 @@ class Trip: NSManagedObject {
         }
     }
     
-    func getDistanceInUnit(unit: LengthUnit) -> Double {
+    func distanceInUnit(unit: LengthUnit) -> Double {
         
         return distance.doubleValue * unit.conversionFactor
     }
@@ -64,7 +64,7 @@ class Trip: NSManagedObject {
 
         if fuelPrice != nil && mpg != nil {
             if !(fuelPrice!.isEqualToNumber(NSDecimalNumber.notANumber())) {
-                var value = fuelPrice!.decimalNumberByMultiplyingBy(NSDecimalNumber(double: getDistanceInUnit(LengthUnit.Mile)), withBehavior: currencyBehavior)
+                var value = fuelPrice!.decimalNumberByMultiplyingBy(NSDecimalNumber(double: distanceInUnit(LengthUnit.Mile)), withBehavior: currencyBehavior)
                 value = value.decimalNumberByDividingBy(NSDecimalNumber(double: mpg!), withBehavior: currencyBehavior)
                 return value
             }
@@ -80,7 +80,7 @@ class Trip: NSManagedObject {
     func fuelSaved() -> Double? {
         
         if mpg != nil {
-            return getDistanceInUnit(LengthUnit.Mile) / mpg!
+            return distanceInUnit(LengthUnit.Mile) / mpg!
         }
         return nil
     }
@@ -94,7 +94,7 @@ class Trip: NSManagedObject {
         
         if vehicle != nil && mpg != nil {
             let atvType = vehicle!.atvType
-            let distanceInMiles = getDistanceInUnit(LengthUnit.Mile)
+            let distanceInMiles = distanceInUnit(LengthUnit.Mile)
             let co2Coefficient = atvType?.lowercaseString == "diesel" ? 22.4 : 19.6
             return (co2Coefficient / mpg!) * distanceInMiles
         }

@@ -145,9 +145,14 @@ struct CaStyle {
     static let CellValueFontMinimumScaleFactor: CGFloat = 0.6
     
     // MARK: - Trips Specific
+    static var CellTripsRowFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
     static var CellTripsTotalsRowFont: UIFont {
         get {
-            let fontDescriptor = CaStyle.CellRowFont.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
+            let fontDescriptor = CaStyle.CellTripsRowFont.fontDescriptor().fontDescriptorWithSymbolicTraits(UIFontDescriptorSymbolicTraits.TraitBold)
             return UIFont(descriptor: fontDescriptor, size: 0)
         }
     }

@@ -54,7 +54,7 @@ class CaTripSummaryController: UIViewController {
         summaryView.co2SavedLabel.text = trip.co2Saved() == nil ? "--" : "\(distanceFormatter.stringFromNumber(trip.co2Saved()!)!) lb"
         summaryView.fuelSavedLabel.text = trip.fuelSaved() == nil ? "--" : "\(CaFormatter.decimalDisplay.stringFromNumber(trip.fuelSaved()!)!) gal"
         summaryView.moneySavedLabel.text = trip.moneySaved() == nil ? "--" : CaFormatter.money.stringFromNumber(trip.moneySaved()!)
-        summaryView.distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip!.getDistanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
+        summaryView.distanceLabel.text = "\(distanceFormatter.stringFromNumber(trip!.distanceInUnit(distanceUnit))!) \(distanceUnit.abbreviation)"
         summaryView.modeLabel.text = "\(trip.modeType.rawValue)"
     
     }
