@@ -169,10 +169,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.LogManualTripHomeToSummary {
-            let vc = segue.destinationViewController as! CaLogTripSummaryController
+            let vc = segue.destinationViewController as! LogManualTripSummaryController
             vc.trip = self.trip
-            vc.isSaveableSummary = false
-            vc.exitSegue = CaSegue.LogManualTripSummaryToHome
         }
     }
     

@@ -146,6 +146,29 @@
             </objects>
             <point key="canvasLocation" x="-1556" y="-472"/>
         </scene>
+        <!--Log Manual Trip Summary-->
+        <scene sceneID="5YN-Ek-zPa">
+            <objects>
+                <viewController title="Log Manual Trip Summary" id="6jz-3f-LsO" customClass="LogManualTripSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W4C-vQ-K9K"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ve1-DH-YMM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6m6-Aj-PYM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="G6Q-fM-F7z" kind="unwind" identifier="LogManualTripSummaryToHomeSegue" unwindAction="returnToManualLogEntryHome:" id="aTM-TU-h2c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iOJ-FR-b4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="G6Q-fM-F7z" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1187" y="189"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -242,7 +265,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cVO-pp-O8B" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1116" y="483"/>
+            <point key="canvasLocation" x="-1166" y="958"/>
         </scene>
         <!--Log Manual Trip-->
         <scene sceneID="Z9P-b5-hUF">
@@ -260,7 +283,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
-                        <segue destination="Ou4-FC-MJj" kind="presentation" identifier="LogManualTripHomeToSummarySegue" id="NkO-ds-wf1"/>
+                        <segue destination="6jz-3f-LsO" kind="presentation" identifier="LogManualTripHomeToSummarySegue" id="h7A-qV-alX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Em5-de-J1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -411,7 +434,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fFw-CH-pyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="woA-BH-hR5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1788" y="-1567"/>
+            <point key="canvasLocation" x="-1758" y="-1567"/>
         </scene>
         <!--Log-->
         <scene sceneID="78T-SJ-Orw">
@@ -459,7 +482,4 @@
         <image name="tab-log" width="22" height="22"/>
         <image name="tab-settings" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="NkO-ds-wf1"/>
-    </inferredMetricsTieBreakers>
 </document>

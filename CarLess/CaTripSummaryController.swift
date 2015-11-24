@@ -5,6 +5,7 @@ class CaTripSummaryController: UIViewController {
     
     var trip: Trip!
     var summaryView: CaTripSummaryView!
+    var navigationBar: UINavigationBar?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +17,7 @@ class CaTripSummaryController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    private func constructViews() {
+    func constructViews() {
 
         let showMap = trip.waypoints.count > 0
         summaryView = CaTripSummaryView(showMap: showMap)
@@ -26,11 +27,13 @@ class CaTripSummaryController: UIViewController {
             summaryView.mapView!.addOverlay(tripRoutePolyline())
         }
 
-        
-        // TODO: How to account for nav bar, if any, in constraints?
         var navBarHeight: CGFloat = 0.0
-        if let navbar = navigationController?.navigationBar {
-            navBarHeight = navbar.frame.height
+        if navigationBar == nil {
+            if let navbar = navigationController?.navigationBar {
+                navBarHeight = navbar.frame.height
+            }
+        } else {
+            navBarHeight = navigationBar!.frame.height
         }
         
         summaryView.translatesAutoresizingMaskIntoConstraints = false
