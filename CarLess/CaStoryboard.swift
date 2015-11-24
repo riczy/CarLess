@@ -24,7 +24,7 @@ struct CaSegue {
 struct CaConstants {
     
     static let SaveActivityDelay = 2.0 * Double(NSEC_PER_SEC)
-    static let SaveDisplayAlpha: CGFloat = 0.3
+    static let SaveDisplayAlpha: CGFloat = 0.5
 }
 
 struct CaColor {

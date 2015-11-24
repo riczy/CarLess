@@ -150,7 +150,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     private func preSave() {
         
-        view.alpha = CaConstants.SaveDisplayAlpha
+        //view.alpha = CaConstants.SaveDisplayAlpha
         saveButton.enabled = false
         spinnerView.startAnimating()
     }
@@ -365,9 +365,9 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         self.view.addSubview(saveButton)
 
         spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        spinnerView.center = view.center
         spinnerView.color = CaStyle.ActivitySpinnerColor
         spinnerView.hidesWhenStopped = true
+        spinnerView.center = view.center
         view.addSubview(spinnerView)
 
         initializeDatePicker()

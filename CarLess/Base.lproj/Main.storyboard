@@ -238,12 +238,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yda-hS-thl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1913" y="958"/>
+            <point key="canvasLocation" x="-1939" y="958"/>
         </scene>
         <!--Log Trip Summary-->
         <scene sceneID="Ycj-V5-V7r">
             <objects>
-                <viewController title="Log Trip Summary" modalTransitionStyle="flipHorizontal" id="Ou4-FC-MJj" customClass="CaLogTripSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Log Trip Summary" modalTransitionStyle="flipHorizontal" id="Ou4-FC-MJj" customClass="LogTrackedTripSummaryController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wGD-Qo-DGo"/>
                         <viewControllerLayoutGuide type="bottom" id="M65-XW-8xB"/>
@@ -259,7 +259,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="cVO-pp-O8B" kind="unwind" identifier="LogTrackedTripSummaryToHomeSegue" unwindAction="returnToTrackingLogEntryHome:" id="MIY-ng-MVJ"/>
-                        <segue destination="cVO-pp-O8B" kind="unwind" identifier="LogManualTripSummaryToHomeSegue" unwindAction="returnToManualLogEntryHome:" id="3OY-QV-wep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWL-nD-HWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -20,6 +20,7 @@
 		844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */; };
 		844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */; };
 		844A2F221C03DE670054CBAF /* LogManualTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */; };
+		844A2F241C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2F231C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
 		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; };
@@ -73,6 +74,7 @@
 		844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryView.swift; sourceTree = "<group>"; };
 		844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryController.swift; sourceTree = "<group>"; };
 		844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManualTripSummaryController.swift; sourceTree = "<group>"; };
+		844A2F231C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTrackedTripSummaryController.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleParser.swift; sourceTree = "<group>"; };
 		8470900B1BD424C600F9D236 /* CaNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaNetworkManager.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				84278FF31B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift */,
 				84E6953D1B86B56D000185BE /* CaLogTripSummaryController.swift */,
 				844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */,
+				844A2F231C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,
 				84F37D3E1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift in Sources */,
+				844A2F241C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift in Sources */,
 				8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */,
 				84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */,
 				84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */,
