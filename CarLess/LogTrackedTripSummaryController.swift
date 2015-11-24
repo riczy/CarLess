@@ -48,7 +48,7 @@ class LogTrackedTripSummaryController: CaTripSummaryController {
     
     private func preSave() {
         
-        //view.alpha = CaConstants.SaveDisplayAlpha
+        view.alpha = CaConstants.SaveDisplayAlpha
         spinnerView.startAnimating()
     }
     

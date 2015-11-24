@@ -150,7 +150,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     private func preSave() {
         
-        //view.alpha = CaConstants.SaveDisplayAlpha
+        view.alpha = CaConstants.SaveDisplayAlpha
         saveButton.enabled = false
         spinnerView.startAnimating()
     }
