@@ -251,6 +251,8 @@ class CaVehicleController: UIViewController {
         
         view.backgroundColor = CaStyle.ViewBgColor
         navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        navigationController?.navigationBar.tintColor = CaStyle.NavBarTintColor
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: CaStyle.NavBarTitleColor]
         
         navigationItem.title = "Vehicle"
         

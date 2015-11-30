@@ -99,6 +99,8 @@ class CaDistanceUnitListController: UITableViewController {
     private func styleView() {
         
         navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        navigationController?.navigationBar.tintColor = CaStyle.NavBarTintColor
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: CaStyle.NavBarTitleColor]
         view.backgroundColor = CaStyle.ViewBgColor
     }
     

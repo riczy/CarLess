@@ -31,31 +31,36 @@ struct CaColor {
 
     // Hex 3B3833
     static let FadedSlateGray = UIColor(red: 59.0/255.0, green: 59.0/255.0, blue: 49.0/255.0, alpha: 1.0) // 3B3B31
-
-    // Lime
-    static let Lime200 = UIColor(red: 240.0/255.0, green: 244.0/255.0, blue: 195.0/255.0, alpha: 1.0) // D4E157
-    static let Lime400 = UIColor(red: 212.0/255.0, green: 225.0/255.0, blue: 87.0/255.0, alpha: 1.0) // D4E157
-    static let Lime500 = UIColor(red: 205.0/255.0, green: 220.0/255.0, blue: 57.0/255.0, alpha: 1.0) // CDDC39
-    static let Lime700 = UIColor(red: 175.0/255.0, green: 180.0/255.0, blue: 43.0/255.0, alpha: 1.0) // AFB42B
-    static let Lime900 = UIColor(red: 130.0/255.0, green: 119.0/255.0, blue: 23.0/255.0, alpha: 1.0) // 827717
     
-    // Blue
-    static let Blue500 = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0) // 2196F3
-    static let Blue700 = UIColor(red: 25.0/255.0, green: 118.0/255.0, blue: 210.0/255.0, alpha: 1.0) // 1976D2
+    // Orange
+    static let Orange100 = UIColor(red: 255.0/255.0, green: 224.0/255.0, blue: 178.0/255.0, alpha: 1.0) // FFE0B2
+    static let Orange800 = UIColor(red: 239.0/255.0, green: 103.0/255.0, blue: 0.0, alpha: 1.0) // EF6C00
+    static let Orange900 = UIColor(red: 230.0/255.0, green: 81.0/255.0, blue: 0.0, alpha: 1.0) // E65100
     
     // Light Blue
     static let LightBlue900 = UIColor(red: 1.0/255.0, green: 87.0/255.0, blue: 155.0/255.0, alpha: 1.0) // 01579B
     
-    // Light Green
-    static let LightGreen900 = UIColor(red: 51.0/255.0, green: 105.0/255.0, blue: 30.0/255.0, alpha: 1.0) // 33691E
+    // Blue
+    static let Blue500 = UIColor(red: 33.0/255.0, green: 150.0/255.0, blue: 243.0/255.0, alpha: 1.0) // 2196F3
+    
+    // Teal
+    static let Teal50 = UIColor(red: 224.0/255.0, green: 242.0/255.0, blue: 241.0/255.0, alpha: 1.0) // E0F2F1
+    static let Teal100 = UIColor(red: 178.0/255.0, green: 223.0/255.0, blue: 219.0/255.0, alpha: 1.0) // B2DFDB
+    static let Teal200 = UIColor(red: 128.0/255.0, green: 203.0/255.0, blue: 196.0/255.0, alpha: 1.0) // 80CBC4
+    static let Teal300 = UIColor(red: 77.0/255.0, green: 182.0/255.0, blue: 172.0/255.0, alpha: 1.0) // 4DB6AC
+    static let Teal400 = UIColor(red: 38.0/255.0, green: 166.0/255.0, blue: 154.0/255.0, alpha: 1.0) // 26A69A
+    static let Teal500 = UIColor(red: 0, green: 150.0/255.0, blue: 136.0/255.0, alpha: 1.0) // 009688
+    static let Teal600 = UIColor(red: 0, green: 137.0/255.0, blue: 123.0/255.0, alpha: 1.0) // 00897B
+    static let Teal700 = UIColor(red: 0, green: 121.0/255.0, blue: 107.0/255.0, alpha: 1.0) // 00796B
+    static let Teal800 = UIColor(red: 0, green: 105.0/255.0, blue: 92.0/255.0, alpha: 1.0) // 00695C
+    static let Teal900 = UIColor(red: 0, green: 77.0/255.0, blue: 64.0/255.0, alpha: 1.0) // 004D40
     
     // Red
     static let Red400 = UIColor(red: 239.0/255.0, green: 83.0/255.0, blue: 80.0/255.0, alpha: 1.0) // EF5350
-    static let Red600 = UIColor(red: 229.0/255.0, green: 57.0/255.0, blue: 53.0/255.0, alpha: 1.0) // E53935
-    static let Red700 = UIColor(red: 211.0/255.0, green: 47.0/255.0, blue: 47.0/255.0, alpha: 1.0) // D32F2F
-    static let Red900 = UIColor(red: 183.0/255.0, green: 28.0/255.0, blue: 28.0/255.0, alpha: 1.0) // B71C1C
     
     // Grey
+    static let Grey200 = UIColor(red: 238.0/255.0, green: 238.0/255.0, blue: 238.0/255.0, alpha: 1.0) // EEEEEE
+    static let Grey800 = UIColor(red: 66.0/255.0, green: 66.0/255.0, blue: 66.0/255.0, alpha: 1.0) // 424242
     static let Grey900 = UIColor(red: 33.0/255.0, green: 33.0/255.0, blue: 33.0/255.0, alpha: 1.0) // 212121
 }
 
@@ -66,13 +71,15 @@ struct CaStyle {
     
     static let ButtonWidth: CGFloat = 132.0
     static let ButtonHeight: CGFloat = 42.0
-    static let ButtonBorderWidth: CGFloat = 0.0
+    static let ButtonBorderWidth: CGFloat = 1.0
     
     static let ViewBgColor = UIColor.whiteColor()
     static let TabBarBgTintColor = UIColor.blackColor()
-    static let TabBarTintColor = CaColor.Lime400
-    static let NavBarBgTintColor = CaColor.Lime700
-    static let NavBarTintColor = UIColor.blackColor()
+    static let TabBarTintColor = CaColor.Teal300
+    static let NavBarBgTintColor = CaColor.Teal700
+    static let NavBarTintColor = CaColor.Teal100
+    static let NavBarTitleColor = UIColor.whiteColor()
+    static let SegmentControlColor = UIColor.whiteColor()
 
     static var InstructionHeadlineFont: UIFont {
         get {
@@ -93,11 +100,10 @@ struct CaStyle {
             return UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
         }
     }
-    static let InputLabelColor = CaColor.Lime900
+    static let InputLabelColor = CaColor.Teal700
     static let InputFieldColor = CaColor.FadedSlateGray
-    static let InputFieldHrColor = UIColor(red: 59.0/255.0, green: 56.0/255.0, blue: 51.0/255.0, alpha: 0.3) //CaColor.Lime200
-    static let InputFieldHrFocusColor = CaColor.Lime200
-    static let InputFieldHrThickness: CGFloat = 1.0
+    static let InputFieldHrColor = UIColor.whiteColor()
+    static let InputFieldHrThickness: CGFloat = 0.0
     static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
     
     /* The verticle (y) spacing between an input label and its value field. */
@@ -134,11 +140,11 @@ struct CaStyle {
     // MARK: - Default Table Colors
     
     static let CellBgColor = UIColor.whiteColor()
-    static let CellLabelColor = CaColor.Lime900
+    static let CellLabelColor = CaColor.Teal700
     static let CellValueColor = CaColor.FadedSlateGray
     
     static let CellHeaderColor = UIColor.whiteColor()
-    static let CellHeaderBgColor = CaColor.FadedSlateGray
+    static let CellHeaderBgColor = CaColor.Grey800
     static let CellRowColor = CaColor.FadedSlateGray
     static let CellRowBgColor = UIColor.whiteColor()
     
@@ -156,8 +162,8 @@ struct CaStyle {
             return UIFont(descriptor: fontDescriptor, size: 0)
         }
     }
-    static let CellTripsTotalsRowColor = CaColor.FadedSlateGray
-    static let CellTripsTotalsRowBgColor = CaColor.Lime200
+    static let CellTripsTotalsRowColor = CaColor.Orange900
+    static let CellTripsTotalsRowBgColor = CaColor.Grey200
     
     static var TripSummarySectionHeadingFont: UIFont {
         get {
@@ -198,20 +204,22 @@ struct CaStyle {
             return UIFont(descriptor: fontDescriptor, size: 48)
         }
     }
-    static let LogSegmentControlColor = UIColor.blackColor()
+    static let LogSegmentControlColor = CaStyle.SegmentControlColor
+    static let LogHeadlineBgColor = CaColor.Teal300
+    static let LogHeadlineColor = CaStyle.InstructionHeadlineColor
     static let LogSaveButtonColor = UIColor.whiteColor()
-    static let LogSaveButtonBgColor = CaColor.LightBlue900
-    static let LogSaveButtonBorderColor = CaColor.LightBlue900
+    static let LogSaveButtonBgColor = CaColor.Orange900
+    static let LogSaveButtonBorderColor =  CaColor.Orange800
     static let LogStartButtonColor = UIColor.whiteColor()
-    static let LogStartButtonBgColor = CaColor.LightGreen900
-    static let LogStartButtonBorderColor = CaColor.LightGreen900
-    static let LogDistanceLabelColor = UIColor.whiteColor()
+    static let LogStartButtonBgColor = CaColor.Orange900
+    static let LogStartButtonBorderColor = CaColor.Orange800
+    static let LogDistanceLabelColor = CaColor.Orange100
     static let LogDistanceDisplayColor = UIColor.whiteColor()
-    static let LogProgressViewBgColor = CaColor.Red700
-    static let LogProgressViewHrColor = CaColor.Red900
-    static let LogStopButtonColor = UIColor.whiteColor()
-    static let LogStopButtonBgColor = CaColor.Red700
-    static let LogStopButtonBorderColor = CaColor.Red700
+    static let LogProgressViewBgColor = CaColor.Orange900
+    static let LogProgressViewHrColor = CaColor.Orange800
+    static let LogStopButtonColor = CaColor.LightBlue900
+    static let LogStopButtonBgColor = UIColor.whiteColor()
+    static let LogStopButtonBorderColor = UIColor.whiteColor()
     
     
     static let ActivitySpinnerColor = CaColor.Red400

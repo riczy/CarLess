@@ -15,6 +15,8 @@ class LogManualTripSummaryController: CaTripSummaryController {
         
         navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 64))
         navigationBar!.barTintColor = CaStyle.NavBarBgTintColor
+        navigationBar!.tintColor = CaStyle.NavBarTintColor
+        navigationBar!.titleTextAttributes = [NSForegroundColorAttributeName: CaStyle.NavBarTitleColor]
         navigationBar!.translatesAutoresizingMaskIntoConstraints = false
         navigationBar!.items = [ navigationItem ]
         

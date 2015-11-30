@@ -55,6 +55,8 @@ class CaTripsController: UITableViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.barTintColor = CaStyle.NavBarBgTintColor
+        navigationController?.navigationBar.tintColor = CaStyle.NavBarTintColor
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: CaStyle.NavBarTitleColor]
         view.backgroundColor = CaStyle.ViewBgColor
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SummaryCell")
@@ -164,7 +166,7 @@ class CaTripsController: UITableViewController {
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if section == 0 {
-            return nil
+            return "Trips Summary"
         }
         let date = keyDateFormatter.dateFromString(tripsMapOrderedKeys[section - 1])!
         return "\(headerWeekDayFormatter.stringFromDate(date))  \(headerDateFormatter.stringFromDate(date))"
@@ -218,7 +220,7 @@ class CaTripsController: UITableViewController {
     private func tableViewSummaryCell(indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("SummaryCell", forIndexPath: indexPath)
-        cell.textLabel?.text = indexPath.row == 0 ? "Weekly summary" : "Monthly summary"
+        cell.textLabel?.text = indexPath.row == 0 ? "By week" : "By month"
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
         cell.textLabel?.textColor = CaStyle.CellLabelColor
         cell.textLabel?.font = CaStyle.CellLabelFont

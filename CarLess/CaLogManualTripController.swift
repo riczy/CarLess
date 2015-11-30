@@ -5,15 +5,14 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
 
     // MARK: - UI Properties
     
+    private var headingView: UIView!
+    private var headingLabel: UILabel!
     private var distanceLabel: UILabel!
     private var distanceTextField: UITextField!
-    private var distanceHrView: UIView!
     private var timestampLabel: UILabel!
     private var timestampTextField: UITextField!
-    private var timestampHrView: UIView!
     private var modeLabel: UILabel!
     private var modeTextField: UITextField!
-    private var modeHrView: UIView!
     private var saveButton: UIButton!
     private var datePicker: UIDatePicker!
     private var modePicker: UIPickerView!
@@ -285,6 +284,20 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         let alignment = NSTextAlignment.Center
         view.backgroundColor = CaStyle.ViewBgColor
         
+        headingView = UIView()
+        headingView.translatesAutoresizingMaskIntoConstraints = false
+        headingView.backgroundColor = CaStyle.LogHeadlineBgColor
+        view.addSubview(headingView)
+        
+        headingLabel = UILabel()
+        headingLabel.font = CaStyle.InstructionHeadlineFont
+        headingLabel.numberOfLines = 0
+        headingLabel.text = "Enter your trip and save"
+        headingLabel.textAlignment = NSTextAlignment.Center
+        headingLabel.textColor = CaStyle.LogHeadlineColor
+        headingLabel.translatesAutoresizingMaskIntoConstraints = false
+        headingView.addSubview(headingLabel)
+       
         timestampLabel = UILabel()
         timestampLabel.font = CaStyle.InputLabelFont
         timestampLabel.text = "Start date and time"
@@ -304,14 +317,9 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         timestampTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timestampTextField)
         
-        timestampHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
-        timestampHrView.backgroundColor = CaStyle.InputFieldHrColor
-        timestampHrView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(timestampHrView)
-        
         modeLabel = UILabel()
         modeLabel.font = CaStyle.InputLabelFont
-        modeLabel.text = "Mode"
+        modeLabel.text = "Transportation"
         modeLabel.textAlignment = alignment
         modeLabel.textColor = CaStyle.InputLabelColor
         modeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -322,17 +330,12 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         modeTextField.borderStyle = UITextBorderStyle.None
         modeTextField.font = CaStyle.InputFieldFont
         modeTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        modeTextField.placeholder = "Mode"
+        modeTextField.placeholder = "Transportation"
         modeTextField.textAlignment = alignment
         modeTextField.textColor = CaStyle.InputFieldColor
         modeTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(modeTextField)
         
-        modeHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
-        modeHrView.backgroundColor = CaStyle.InputFieldHrColor
-        modeHrView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modeHrView)
-
         distanceLabel = UILabel()
         distanceLabel.font = CaStyle.InputLabelFont
         distanceLabel.text = "Distance"
@@ -355,11 +358,6 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         distanceTextField.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(distanceTextField)
         
-        distanceHrView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: CaStyle.InputFieldHrThickness))
-        distanceHrView.backgroundColor = CaStyle.InputFieldHrColor
-        distanceHrView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(distanceHrView)
-        
         saveButton = CaComponent.createButton(title: "Save trip", color: CaStyle.LogSaveButtonColor, bgColor: CaStyle.LogSaveButtonBgColor, borderColor: CaStyle.LogSaveButtonBorderColor)
         saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(saveButton)
@@ -377,8 +375,19 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     private func setConstraints() {
         
+        let instructionHeight : CGFloat = self.view.frame.height / 4.0
         
-        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 30.0))
+        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: instructionHeight))
+        
+        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
+        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
+        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Left, relatedBy: .Equal, toItem: headingView, attribute: .Left, multiplier: 1.0, constant: 30))
+        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Right, relatedBy: .Equal, toItem: headingView, attribute: .Right, multiplier: 1.0, constant: -30))
+        
+        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
         view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -386,13 +395,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
-        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupHrVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
-        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: timestampHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampHrView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
+        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
         view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -400,13 +403,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
-        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupHrVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
-        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: modeHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeHrView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
+        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
         view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
@@ -414,14 +411,9 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
-        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupHrVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.InputFieldHrThickness))
-        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: distanceHrView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
         
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.0, constant: -30.0))
+        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding * -1))
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
         view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
 
