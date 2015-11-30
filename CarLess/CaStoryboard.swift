@@ -34,6 +34,9 @@ struct CaColor {
     
     // Orange
     static let Orange100 = UIColor(red: 255.0/255.0, green: 224.0/255.0, blue: 178.0/255.0, alpha: 1.0) // FFE0B2
+    static let Orange500 = UIColor(red: 255.0/255.0, green: 152.0/255.0, blue: 0.0, alpha: 1.0) // FF9800
+    static let Orange600 = UIColor(red: 251.0/255.0, green: 140.0/255.0, blue: 0.0, alpha: 1.0) // FB8C00
+    static let Orange700 = UIColor(red: 245.0/255.0, green: 124.0/255.0, blue: 0.0, alpha: 1.0) // F57C00
     static let Orange800 = UIColor(red: 239.0/255.0, green: 103.0/255.0, blue: 0.0, alpha: 1.0) // EF6C00
     static let Orange900 = UIColor(red: 230.0/255.0, green: 81.0/255.0, blue: 0.0, alpha: 1.0) // E65100
     
@@ -170,7 +173,17 @@ struct CaStyle {
             return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
         }
     }
+    static let TripSummarySectionHeadingBgColor = UIColor.whiteColor()
     static let TripSummarySectionHeadingColor = CaColor.FadedSlateGray
+    static let TripSummarySectionSavingsBgColor = CaColor.Orange700
+    
+    static let TripSummaryHeadingDateColor = CaColor.FadedSlateGray
+    static let TripSummaryHeadingDistanceColor = CaColor.Orange700
+    static let TripSummaryHeadingModeColor = CaColor.FadedSlateGray
+    
+    static let TripSummarySavingsTitleColor = UIColor.whiteColor()
+    static let TripSummarySavingsValueColor = UIColor.whiteColor()
+    static let TripSummarySavingsLabelColor = CaColor.FadedSlateGray
     
     // MARK: - Vehicle Specific
     static var MpgLabelFont: UIFont {

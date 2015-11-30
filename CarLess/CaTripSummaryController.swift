@@ -27,18 +27,12 @@ class CaTripSummaryController: UIViewController {
             summaryView.mapView!.addOverlay(tripRoutePolyline())
         }
 
-        var navBarHeight: CGFloat = 0.0
-        if navigationBar == nil {
-            if let navbar = navigationController?.navigationBar {
-                navBarHeight = navbar.frame.height
-            }
-        } else {
-            navBarHeight = navigationBar!.frame.height
-        }
-        
+        self.edgesForExtendedLayout = UIRectEdge.None
+        let navBarHeight: CGFloat = navigationBar == nil ? 0.0 : navigationBar!.frame.height
+
         summaryView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(summaryView)
-        view.addConstraint(NSLayoutConstraint(item: summaryView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: navBarHeight + 4))
+        view.addConstraint(NSLayoutConstraint(item: summaryView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: navBarHeight))
         view.addConstraint(NSLayoutConstraint(item: summaryView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: summaryView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: summaryView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
