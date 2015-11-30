@@ -152,30 +152,36 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         
         cell.dateLabel.textColor = CaStyle.CellHeaderColor
         cell.dateLabel.font = CaStyle.CellHeaderFont
+        cell.dateLabel.adjustsFontSizeToFitWidth = true
         
         cell.tripsCountLabel.textColor = CaStyle.CellHeaderColor
         cell.tripsCountLabel.font = CaStyle.CellHeaderFont
         cell.tripsCountLabel.textAlignment = NSTextAlignment.Right
+        cell.tripsCountLabel.adjustsFontSizeToFitWidth = true
         
         cell.fuelSavedTotalLabel.textColor = CaStyle.CellHeaderColor
         cell.fuelSavedTotalLabel.font = CaStyle.CellHeaderFont
         cell.fuelSavedTotalLabel.numberOfLines = 0
         cell.fuelSavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.fuelSavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.moneySavedTotalLabel.textColor = CaStyle.CellHeaderColor
         cell.moneySavedTotalLabel.font = CaStyle.CellHeaderFont
         cell.moneySavedTotalLabel.numberOfLines = 0
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.moneySavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.co2SavedTotalLabel.textColor = CaStyle.CellHeaderColor
         cell.co2SavedTotalLabel.font = CaStyle.CellHeaderFont
         cell.co2SavedTotalLabel.numberOfLines = 0
         cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.co2SavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.distanceLabel.textColor = CaStyle.CellHeaderColor
         cell.distanceLabel.font = CaStyle.CellHeaderFont
         cell.distanceLabel.numberOfLines = 0
         cell.distanceLabel.textAlignment = NSTextAlignment.Right
+        cell.distanceLabel.adjustsFontSizeToFitWidth = true
         
         cell.backgroundColor = CaStyle.CellHeaderBgColor
     }
@@ -184,26 +190,32 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         
         cell.dateLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.dateLabel.font = CaStyle.CellTripsTotalsRowFont
+        cell.dateLabel.adjustsFontSizeToFitWidth = true
         
         cell.tripsCountLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.tripsCountLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.tripsCountLabel.textAlignment = NSTextAlignment.Right
+        cell.tripsCountLabel.adjustsFontSizeToFitWidth = true
         
         cell.fuelSavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.fuelSavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.fuelSavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.fuelSavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.moneySavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.moneySavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.moneySavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.co2SavedTotalLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.co2SavedTotalLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.co2SavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.distanceLabel.textColor = CaStyle.CellTripsTotalsRowColor
         cell.distanceLabel.font = CaStyle.CellTripsTotalsRowFont
         cell.distanceLabel.textAlignment = NSTextAlignment.Right
+        cell.distanceLabel.adjustsFontSizeToFitWidth = true
      
         cell.backgroundColor = CaStyle.CellTripsTotalsRowBgColor
     }
@@ -212,26 +224,32 @@ class CaTripsPeriodicSummaryController: UITableViewController {
         
         cell.dateLabel.textColor = CaStyle.CellRowColor
         cell.dateLabel.font = CaStyle.CellTripsRowFont
+        cell.dateLabel.adjustsFontSizeToFitWidth = true
         
         cell.tripsCountLabel.textColor = CaStyle.CellRowColor
         cell.tripsCountLabel.font = CaStyle.CellTripsRowFont
         cell.tripsCountLabel.textAlignment = NSTextAlignment.Right
+        cell.tripsCountLabel.adjustsFontSizeToFitWidth = true
         
         cell.fuelSavedTotalLabel.textColor = CaStyle.CellRowColor
         cell.fuelSavedTotalLabel.font = CaStyle.CellTripsRowFont
         cell.fuelSavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.fuelSavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.moneySavedTotalLabel.textColor = CaStyle.CellRowColor
         cell.moneySavedTotalLabel.font = CaStyle.CellTripsRowFont
         cell.moneySavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.moneySavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.co2SavedTotalLabel.textColor = CaStyle.CellRowColor
         cell.co2SavedTotalLabel.font = CaStyle.CellTripsRowFont
         cell.co2SavedTotalLabel.textAlignment = NSTextAlignment.Right
+        cell.co2SavedTotalLabel.adjustsFontSizeToFitWidth = true
         
         cell.distanceLabel.textColor = CaStyle.CellRowColor
         cell.distanceLabel.font = CaStyle.CellTripsRowFont
         cell.distanceLabel.textAlignment = NSTextAlignment.Right
+        cell.distanceLabel.adjustsFontSizeToFitWidth = true
         
         cell.backgroundColor = CaStyle.CellRowBgColor
     }
