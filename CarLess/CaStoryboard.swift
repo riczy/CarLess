@@ -69,8 +69,8 @@ struct CaStyle {
     static let LeftViewPadding: CGFloat = 15.0
     static let RightViewPadding: CGFloat = 15.0
     
-    static let ButtonWidth: CGFloat = 132.0
-    static let ButtonHeight: CGFloat = 42.0
+    static let ButtonWidth: CGFloat = 138.0
+    static let ButtonHeight: CGFloat = 44.0
     static let ButtonBorderWidth: CGFloat = 1.0
     
     static let ViewBgColor = UIColor.whiteColor()
@@ -102,8 +102,8 @@ struct CaStyle {
     }
     static let InputLabelColor = CaColor.Teal700
     static let InputFieldColor = CaColor.FadedSlateGray
-    static let InputFieldHrColor = UIColor.whiteColor()
-    static let InputFieldHrThickness: CGFloat = 0.0
+    static let InputFieldHrColor = CaColor.Grey200
+    static let InputFieldHrThickness: CGFloat = 1.0
     static let InputFieldFontMinimumScaleFactor: CGFloat = 0.6
     
     /* The verticle (y) spacing between an input label and its value field. */
