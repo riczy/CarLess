@@ -173,17 +173,17 @@ struct CaStyle {
             return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
         }
     }
-    static let TripSummarySectionHeadingBgColor = UIColor.whiteColor()
+    static let TripSummarySectionHeadingBgColor = CaColor.Teal300//UIColor.whiteColor()
     static let TripSummarySectionHeadingColor = CaColor.FadedSlateGray
-    static let TripSummarySectionSavingsBgColor = CaColor.Orange700
+    static let TripSummarySectionSavingsBgColor = CaColor.Orange900
     
-    static let TripSummaryHeadingDateColor = CaColor.FadedSlateGray
-    static let TripSummaryHeadingDistanceColor = CaColor.Orange700
-    static let TripSummaryHeadingModeColor = CaColor.FadedSlateGray
+    static let TripSummaryHeadingDateColor = CaColor.Teal900
+    static let TripSummaryHeadingDistanceColor = CaColor.Teal900
+    static let TripSummaryHeadingModeColor = CaColor.Teal900
     
     static let TripSummarySavingsTitleColor = UIColor.whiteColor()
     static let TripSummarySavingsValueColor = UIColor.whiteColor()
-    static let TripSummarySavingsLabelColor = CaColor.FadedSlateGray
+    static let TripSummarySavingsLabelColor = CaColor.Orange100//CaColor.FadedSlateGray
     
     // MARK: - Vehicle Specific
     static var MpgLabelFont: UIFont {

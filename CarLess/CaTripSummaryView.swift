@@ -64,7 +64,7 @@ class CaTripSummaryView: UIView {
         
         backgroundColor = CaStyle.ViewBgColor
         
-        startTimestampLabel.font = valueTitleFont
+        startTimestampLabel.font = valueFont
         startTimestampLabel.textAlignment = NSTextAlignment.Center
         startTimestampLabel.textColor = CaStyle.TripSummaryHeadingDateColor
         startTimestampLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +128,8 @@ class CaTripSummaryView: UIView {
     
     private func loadConstraints() {
     
-        let viewHeight: CGFloat = 90
+        let headingViewHeight: CGFloat = 130
+        let savingsViewHeight: CGFloat = 80
         let viewElementVerticleMargin: CGFloat = 3
         
         let sectionLeftPadding: CGFloat = 10
@@ -141,7 +142,7 @@ class CaTripSummaryView: UIView {
         addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: viewHeight))
+        addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: headingViewHeight))
         
         headingView.addSubview(distanceLabel)
         addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
@@ -168,7 +169,7 @@ class CaTripSummaryView: UIView {
         addConstraint(NSLayoutConstraint(item: savingsView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: savingsView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: savingsView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: savingsView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: viewHeight))
+        addConstraint(NSLayoutConstraint(item: savingsView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: savingsViewHeight))
         
         
         savingsView.addSubview(moneySavedLabel)
