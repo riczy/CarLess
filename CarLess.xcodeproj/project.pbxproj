@@ -38,6 +38,7 @@
 		84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC80961BCB3330006570A2 /* CaVehicleController.swift */; };
 		84ADCAAD1BC5710F00763D71 /* CaTripsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */; };
 		84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */; };
+		84C37CBB1C0F7F3A008750EE /* LegalWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37CBA1C0F7F3A008750EE /* LegalWebViewController.swift */; };
 		84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */; };
 		84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */; };
 		84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */; };
@@ -95,6 +96,7 @@
 		84AC80961BCB3330006570A2 /* CaVehicleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaVehicleController.swift; sourceTree = "<group>"; };
 		84ADCAAC1BC5710F00763D71 /* CaTripsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripsController.swift; sourceTree = "<group>"; };
 		84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaDistanceUnitListController.swift; sourceTree = "<group>"; };
+		84C37CBA1C0F7F3A008750EE /* LegalWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalWebViewController.swift; sourceTree = "<group>"; };
 		84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaFuelPriceFinder.swift; sourceTree = "<group>"; };
 		84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EiaWeeklyFuelPriceParser.swift; sourceTree = "<group>"; };
 		84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarLess.xcdatamodel; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				84AC80961BCB3330006570A2 /* CaVehicleController.swift */,
 				841C62FD1BB2BF10002FF0BD /* CaVehiclePickerController.swift */,
 				84B7AC671BB89BEB00B5F17E /* CaDistanceUnitListController.swift */,
+				84C37CBA1C0F7F3A008750EE /* LegalWebViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				847BFC441BF26FCC001BF9D1 /* CaTripDetailController.swift in Sources */,
 				8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
+				84C37CBB1C0F7F3A008750EE /* LegalWebViewController.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
 				841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */,
 				84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */,

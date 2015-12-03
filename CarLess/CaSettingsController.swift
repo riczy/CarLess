@@ -20,6 +20,8 @@ class CaSettingsController: UITableViewController {
     private var vehicleLabel: UILabel!
     private var distanceUnitLabel: UILabel!
     private var distanceUnitPicker: UIPickerView!
+    private let legalOptions: [(cellTitle: String, url: String, viewTitle: String)] = [ ("Terms", "http://riczy.com/carless/terms.html", "Terms of Service"), ("Privacy", "http://riczy.com/carless/privacy.html", "Privacy Policy"), ("Credits", "http://riczy.com/carless/credits.html", "Application Credits") ]
+    private var legalRowRequested = 0
     
     // MARK: - Lifecycle
     
@@ -28,6 +30,15 @@ class CaSettingsController: UITableViewController {
         super.viewDidLoad()
         styleView()
         tableView.registerClass(CaSettingsTableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == CaSegue.SettingsToLegal {
+            let vc = segue.destinationViewController as! LegalWebViewController
+            vc.url = legalOptions[legalRowRequested].url
+            vc.title = legalOptions[legalRowRequested].viewTitle
+        }
     }
     
     // MARK: - Navigation
@@ -47,7 +58,7 @@ class CaSettingsController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,8 +66,11 @@ class CaSettingsController: UITableViewController {
         // Preferences
         if section == 0 {
             return 2
-            // About
+        // Legal
         } else if section == 1 {
+            return legalOptions.count
+        // About
+        } else if section == 2 {
             return 1
         }
         
@@ -69,15 +83,15 @@ class CaSettingsController: UITableViewController {
         let section = indexPath.section
         let row = indexPath.row
         
-        // Preferences
         if section == 0 {
             if row == 0 {
                 return buildDistanceUnitPreferenceCell(indexPath)
             } else if row == 1 {
                 return buildVehiclePreferenceCell(indexPath)
             }
-        // About
         } else if section == 1 {
+            return buildLegalCell(indexPath)
+        } else if section == 2 {
             if row == 0 {
                 return buildVersionCell(indexPath)
             }
@@ -92,6 +106,8 @@ class CaSettingsController: UITableViewController {
         if section == 0 {
             return "Preferences"
         } else if section == 1 {
+            return "Legal"
+        } else if section == 2 {
             return "About"
         }
         
@@ -108,10 +124,12 @@ class CaSettingsController: UITableViewController {
             // Distance Unit
             if row == 0 {
                 performSegueWithIdentifier(CaSegue.SettingsToDistanceUnit, sender: self)
-            // Vehicle
             } else if row == 1 {
                 performSegueWithIdentifier(CaSegue.SettingsToVehicle, sender: self)
             }
+        } else if section == 1 {
+            legalRowRequested = row
+            performSegueWithIdentifier(CaSegue.SettingsToLegal, sender: self)
         }
     }
         
@@ -148,7 +166,7 @@ class CaSettingsController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Version"
-        cell.detailTextLabel?.text = "0.8 15NOV23-1351"
+        cell.detailTextLabel?.text = "0.12 15DEC01-1439"
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         applyStyleForCell(cell)
         return cell
@@ -160,6 +178,15 @@ class CaSettingsController: UITableViewController {
         cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row)"
         cell.detailTextLabel?.text = "Missing cell setup"
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        return cell
+    }
+    
+    private func buildLegalCell(indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        cell.textLabel?.text = legalOptions[indexPath.row].cellTitle
+        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+        applyStyleForCell(cell)
         return cell
     }
     

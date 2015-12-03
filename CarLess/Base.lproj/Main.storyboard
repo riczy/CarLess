@@ -23,6 +23,7 @@
                     <connections>
                         <segue destination="YzV-zL-SKa" kind="show" identifier="SettingsToDistanceUnitSegue" id="yDU-8w-PJU"/>
                         <segue destination="fXF-Rg-7i3" kind="show" identifier="SettingsToVehicleSegue" id="aqc-0v-Z6U"/>
+                        <segue destination="VUS-bj-cgg" kind="show" identifier="SettingsToLegalSegue" id="Vsu-tS-i1M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20S-26-BxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -144,7 +145,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsn-l1-Ex9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="nel-nC-966" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1556" y="-472"/>
+            <point key="canvasLocation" x="-1557" y="-438"/>
+        </scene>
+        <!--Legal-->
+        <scene sceneID="lru-YJ-XWK">
+            <objects>
+                <viewController title="Legal" id="VUS-bj-cgg" customClass="LegalWebViewController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ght-li-omR"/>
+                        <viewControllerLayoutGuide type="bottom" id="xZV-Dn-F6T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0zt-So-eCy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="5cI-Vo-iIA" kind="unwind" unwindAction="returnToSettingsMain:" id="WkG-y8-Iwk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p8w-0N-0Sj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5cI-Vo-iIA" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-904" y="-508"/>
         </scene>
         <!--Log Manual Trip Summary-->
         <scene sceneID="5YN-Ek-zPa">
@@ -167,7 +191,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOJ-FR-b4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="G6Q-fM-F7z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-1187" y="189"/>
+            <point key="canvasLocation" x="-1221" y="301"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
