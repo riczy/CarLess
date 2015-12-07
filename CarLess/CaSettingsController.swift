@@ -166,7 +166,7 @@ class CaSettingsController: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         cell.textLabel?.text = "Version"
-        cell.detailTextLabel?.text = "0.12 15DEC01-1439"
+        cell.detailTextLabel?.text = currentVersion()
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         applyStyleForCell(cell)
         return cell
@@ -211,6 +211,22 @@ class CaSettingsController: UITableViewController {
         cell.detailTextLabel?.textColor = CaStyle.CellValueColor
         cell.detailTextLabel?.adjustsFontSizeToFitWidth = true
         cell.detailTextLabel?.minimumScaleFactor = CaStyle.CellValueFontMinimumScaleFactor
+    }
+    
+    // MARK: - Miscellaneous
+    
+    private func currentVersion() -> String {
+        
+        var fullVersion = ""
+        if let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist") {
+            let infoDictionary = NSDictionary(contentsOfFile: path)
+            let version = infoDictionary?.objectForKey("CFBundleShortVersionString")
+            let build = infoDictionary?.objectForKey("CFBundleVersion")
+            if version != nil && build != nil {
+                fullVersion = "\(version!)  Build \(build!)"
+            }
+        }
+        return fullVersion
     }
 
 }
