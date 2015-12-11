@@ -5,23 +5,18 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
 
     // MARK: - UI Properties
     
-    private var headingView: UIView!
-    private var headingLabel: UILabel!
-    private var distanceLabel: UILabel!
-    private var distanceTextField: UITextField!
-    private var timestampLabel: UILabel!
-    private var timestampTextField: UITextField!
-    private var modeLabel: UILabel!
-    private var modeTextField: UITextField!
-    private var saveButton: UIButton!
+    private var scrollView: UIScrollView!
+    private var logEntryView: CaLogManualTripView!
     private var datePicker: UIDatePicker!
     private var modePicker: UIPickerView!
     private var spinnerView: UIActivityIndicatorView!
     
+    // MARK: - Properties
+    
     private var distance: NSNumber? {
         get {
-            if distanceTextField.text != nil {
-                if let tempDistance = CaFormatter.distance.numberFromString(distanceTextField.text!) {
+            if logEntryView.distanceTextField.text != nil {
+                if let tempDistance = CaFormatter.distance.numberFromString(logEntryView.distanceTextField.text!) {
                     return tempDistance
                 }
             }
@@ -38,8 +33,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         }
     }
     
+    private var activeTextField: UITextField?
  
-    // MARK: - Properties
     private var trip: Trip?
     private var lastSelectedModeIndex = 0
     
@@ -50,16 +45,56 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        setComponents()
-        setConstraints()
+        
+        logEntryView = CaLogManualTripView()
+        
+        scrollView = UIScrollView()
+        scrollView.addSubview(logEntryView)
+        view.addSubview(scrollView)
+        
+        logEntryView.saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+        spinnerView.color = CaStyle.ActivitySpinnerColor
+        spinnerView.hidesWhenStopped = true
+        spinnerView.center = view.center
+        view.addSubview(spinnerView)
+        
+        logEntryView.distanceTextField.tag = Tag.DistanceField
+        logEntryView.distanceTextField.delegate = self
+        logEntryView.modeTextField.delegate = self
+        logEntryView.timestampTextField.delegate = self
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        logEntryView.addGestureRecognizer(tap)
+        
+        initializeDatePicker()
+        initializeModePicker()
+        initializeDecimalPad()
     }
     
     override func viewDidAppear(animated: Bool) {
         reset()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.registerForKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unregisterFromKeyboardNotifications()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        logEntryView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - topLayoutGuide.length - bottomLayoutGuide.length)
+        scrollView.frame = logEntryView.frame
+        scrollView.contentSize = logEntryView.frame.size
+    }
+   
     // MARK: - View Initializations
     
     private func initializeDatePicker() {
@@ -78,8 +113,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
 
-        timestampTextField.inputView = datePicker
-        timestampTextField.inputAccessoryView = toolbar
+        logEntryView.timestampTextField.inputView = datePicker
+        logEntryView.timestampTextField.inputAccessoryView = toolbar
     }
     
     private func initializeDecimalPad() {
@@ -94,7 +129,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         toolbar.setItems([spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
         
-        distanceTextField.inputAccessoryView = toolbar
+        logEntryView.distanceTextField.inputAccessoryView = toolbar
     }
     
     private func initializeModePicker() {
@@ -114,8 +149,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
        
-        modeTextField.inputView = modePicker
-        modeTextField.inputAccessoryView = toolbar
+        logEntryView.modeTextField.inputView = modePicker
+        logEntryView.modeTextField.inputAccessoryView = toolbar
     }
     
     // MARK: - View Actions
@@ -150,7 +185,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     private func preSave() {
         
         view.alpha = CaConstants.SaveDisplayAlpha
-        saveButton.enabled = false
+        logEntryView.saveButton.enabled = false
         spinnerView.startAnimating()
     }
     
@@ -159,7 +194,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         let time = dispatch_time(DISPATCH_TIME_NOW, Int64(CaConstants.SaveActivityDelay))
         dispatch_after(time, dispatch_get_main_queue()) {
             self.spinnerView.stopAnimating()
-            self.saveButton.enabled = true
+            self.logEntryView.saveButton.enabled = true
             self.view.alpha = 1.0
             self.performSegueWithIdentifier(CaSegue.LogManualTripHomeToSummary, sender: self)
        }
@@ -197,13 +232,13 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         
         datePicker.date = NSDate()
         datePicker.maximumDate = datePicker.date.addDays(1)
-        timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
+        logEntryView.timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
         
-        distanceTextField.text = nil
-        distanceTextField.placeholder = "0.0 \(CaDataManager.instance.defaultDistanceUnit.rawValue.lowercaseString)s"
+        logEntryView.distanceTextField.text = nil
+        logEntryView.distanceTextField.placeholder = "0.0 \(CaDataManager.instance.defaultDistanceUnit.rawValue.lowercaseString)s"
         
         lastSelectedModeIndex = 0
-        modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
+        logEntryView.modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
@@ -215,18 +250,18 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     func datePickerDone() {
         
-        timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
-        timestampTextField.resignFirstResponder()
+        logEntryView.timestampTextField.text = CaFormatter.timestamp.stringFromDate(datePicker.date)
+        logEntryView.timestampTextField.resignFirstResponder()
     }
     
     func datePickerCancel() {
         
-        timestampTextField.resignFirstResponder()
+        logEntryView.timestampTextField.resignFirstResponder()
     }
     
     func decimalPadDone() {
         
-        distanceTextField.resignFirstResponder()
+        logEntryView.distanceTextField.resignFirstResponder()
     }
     
     func modePickerDone() {
@@ -234,15 +269,15 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         let selectedModeIndex = modePicker.selectedRowInComponent(0)
         if selectedModeIndex > -1 {
             let selectedMode = Mode.allValues[selectedModeIndex]
-            modeTextField.text = selectedMode.description
+            logEntryView.modeTextField.text = selectedMode.description
             lastSelectedModeIndex = selectedModeIndex
         }
-        modeTextField.resignFirstResponder()
+        logEntryView.modeTextField.resignFirstResponder()
     }
     
     func modePickerCancel() {
         
-        modeTextField.resignFirstResponder()
+        logEntryView.modeTextField.resignFirstResponder()
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
@@ -277,146 +312,59 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         return true
     }
     
-    // MARK: - View Construction
-    
-    private func setComponents() {
-        
-        let alignment = NSTextAlignment.Center
-        view.backgroundColor = CaStyle.ViewBgColor
-        
-        headingView = UIView()
-        headingView.translatesAutoresizingMaskIntoConstraints = false
-        headingView.backgroundColor = CaStyle.LogHeadlineBgColor
-        view.addSubview(headingView)
-        
-        headingLabel = UILabel()
-        headingLabel.font = CaStyle.InstructionHeadlineFont
-        headingLabel.numberOfLines = 0
-        headingLabel.text = "Enter your trip and save"
-        headingLabel.textAlignment = NSTextAlignment.Center
-        headingLabel.textColor = CaStyle.LogHeadlineColor
-        headingLabel.translatesAutoresizingMaskIntoConstraints = false
-        headingView.addSubview(headingLabel)
-       
-        timestampLabel = UILabel()
-        timestampLabel.font = CaStyle.InputLabelFont
-        timestampLabel.text = "Start date and time"
-        timestampLabel.textAlignment = alignment
-        timestampLabel.textColor = CaStyle.InputLabelColor
-        timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(timestampLabel)
-        
-        timestampTextField = UITextField()
-        timestampTextField.adjustsFontSizeToFitWidth = true
-        timestampTextField.borderStyle = UITextBorderStyle.None
-        timestampTextField.font = CaStyle.InputFieldFont
-        timestampTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        timestampTextField.placeholder = "Start date and time"
-        timestampTextField.textAlignment = alignment
-        timestampTextField.textColor = CaStyle.InputFieldColor
-        timestampTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(timestampTextField)
-        
-        modeLabel = UILabel()
-        modeLabel.font = CaStyle.InputLabelFont
-        modeLabel.text = "Transportation"
-        modeLabel.textAlignment = alignment
-        modeLabel.textColor = CaStyle.InputLabelColor
-        modeLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modeLabel)
-
-        modeTextField = UITextField()
-        modeTextField.adjustsFontSizeToFitWidth = true
-        modeTextField.borderStyle = UITextBorderStyle.None
-        modeTextField.font = CaStyle.InputFieldFont
-        modeTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        modeTextField.placeholder = "Transportation"
-        modeTextField.textAlignment = alignment
-        modeTextField.textColor = CaStyle.InputFieldColor
-        modeTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modeTextField)
-        
-        distanceLabel = UILabel()
-        distanceLabel.font = CaStyle.InputLabelFont
-        distanceLabel.text = "Distance"
-        distanceLabel.textAlignment = alignment
-        distanceLabel.textColor = CaStyle.InputLabelColor
-        distanceLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(distanceLabel)
-        
-        distanceTextField = UITextField()
-        distanceTextField.adjustsFontSizeToFitWidth = true
-        distanceTextField.borderStyle = UITextBorderStyle.None
-        distanceTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
-        distanceTextField.delegate = self
-        distanceTextField.font = CaStyle.InputFieldFont
-        distanceTextField.keyboardType = UIKeyboardType.DecimalPad
-        distanceTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        distanceTextField.tag = Tag.DistanceField
-        distanceTextField.textAlignment = alignment
-        distanceTextField.textColor = CaStyle.InputFieldColor
-        distanceTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(distanceTextField)
-        
-        saveButton = CaComponent.createButton(title: "Save trip", color: CaStyle.LogSaveButtonColor, bgColor: CaStyle.LogSaveButtonBgColor, borderColor: CaStyle.LogSaveButtonBorderColor)
-        saveButton.addTarget(self, action: "save", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(saveButton)
-
-        spinnerView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
-        spinnerView.color = CaStyle.ActivitySpinnerColor
-        spinnerView.hidesWhenStopped = true
-        spinnerView.center = view.center
-        view.addSubview(spinnerView)
-
-        initializeDatePicker()
-        initializeModePicker()
-        initializeDecimalPad()
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
     }
     
-    private func setConstraints() {
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
+    }
+    
+    // MARK: - Keyboard
+    
+    func registerForKeyboardNotifications() {
         
-        let instructionHeight : CGFloat = self.view.frame.height / 4.0
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        center.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func unregisterFromKeyboardNotifications() {
         
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: instructionHeight))
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
         
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Left, relatedBy: .Equal, toItem: headingView, attribute: .Left, multiplier: 1.0, constant: 30))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Right, relatedBy: .Equal, toItem: headingView, attribute: .Right, multiplier: 1.0, constant: -30))
+        let info : NSDictionary = notification.userInfo!
+        let keyboardSize = (info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue as CGRect!).size
         
-        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: timestampLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        let contentInsets: UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
         
-        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: timestampTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: timestampTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: distanceLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: distanceLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: distanceTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding * -1))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: saveButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        var tempRect = self.view.frame
+        tempRect.size.height -= keyboardSize.height;
+        if activeTextField != nil {
+            let containsPoint = CGRectContainsPoint(tempRect, activeTextField!.frame.origin)
+            if !containsPoint {
+                scrollView.scrollRectToVisible(activeTextField!.frame, animated: true)
+            }
+        }
+    }
 
+    func keyboardWillBeHidden(notification: NSNotification) {
+        
+        let contentInsets = UIEdgeInsets(top: topLayoutGuide.length, left: 0.0, bottom: bottomLayoutGuide.length, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+        activeTextField?.resignFirstResponder()
     }
 
 }
