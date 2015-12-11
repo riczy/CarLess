@@ -2,17 +2,11 @@ import UIKit
 import MapKit
 
 class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
-    // MARK: - UI Properties
-    
-    private var headingView: UIView!
-    private var headingLabel: UILabel!
-    private var modeLabel: UILabel!
-    private var modeTextField: UITextField!
-    private var modePicker: UIPickerView!
-    private var startButton: UIButton!
     
     // MARK: - Properties
+    private var scrollView: UIScrollView!
+    private var entryView: CaLogTrackedTripView!
+    private var modePicker: UIPickerView!
     
     private var lastSelectedModeIndex = 0
 
@@ -31,14 +25,44 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         }
     }
     
+    private var activeTextField: UITextField?
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        setComponents()
-        setConstraints()
+        
+        entryView = CaLogTrackedTripView()
+        
+        scrollView = UIScrollView()
+        scrollView.addSubview(entryView)
+        view.addSubview(scrollView)
+        
+        entryView.startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
+        initializeModePicker()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        entryView.addGestureRecognizer(tap)
+
         reset()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.registerForKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unregisterFromKeyboardNotifications()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        entryView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - topLayoutGuide.length - bottomLayoutGuide.length)
+        scrollView.frame = entryView.frame
+        scrollView.contentSize = entryView.frame.size
     }
     
     // MARK: - Navigation
@@ -107,13 +131,13 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         toolbar.userInteractionEnabled = true
         
-        modeTextField.inputView = modePicker
-        modeTextField.inputAccessoryView = toolbar
+        entryView.modeTextField.inputView = modePicker
+        entryView.modeTextField.inputAccessoryView = toolbar
     }
    
     private func updateDisplayForMode(mode: Mode) {
         
-        modeTextField.text = mode.description
+        entryView.modeTextField.text = mode.description
     }
     
     // MARK: - Scene Actions
@@ -125,12 +149,12 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
             mode = Mode.allValues[selectedModeIndex]
             lastSelectedModeIndex = selectedModeIndex
         }
-        modeTextField.resignFirstResponder()
+        entryView.modeTextField.resignFirstResponder()
     }
     
     func modePickerCancel() {
         
-        modeTextField.resignFirstResponder()
+        entryView.modeTextField.resignFirstResponder()
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
     }
     
@@ -151,79 +175,51 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         return Mode.allValues[row].description
     }
     
-    // MARK: - View Construction
+    // MARK: - Keyboard
     
-    private func setComponents() {
-
-        view.backgroundColor = CaStyle.ViewBgColor
+    func registerForKeyboardNotifications() {
         
-        headingView = UIView()
-        headingView.translatesAutoresizingMaskIntoConstraints = false
-        headingView.backgroundColor = CaStyle.LogHeadlineBgColor
-        view.addSubview(headingView)
-        
-        headingLabel = UILabel()
-        headingLabel.font = CaStyle.InstructionHeadlineFont
-        headingLabel.numberOfLines = 0
-        headingLabel.text = "Choose your transportation and start tracking"
-        headingLabel.textAlignment = NSTextAlignment.Center
-        headingLabel.textColor = CaStyle.LogHeadlineColor
-        headingLabel.translatesAutoresizingMaskIntoConstraints = false
-        headingView.addSubview(headingLabel)
-        
-        modeLabel = UILabel()
-        modeLabel.font = CaStyle.InputLabelFont
-        modeLabel.text = "Transportation"
-        modeLabel.textAlignment = NSTextAlignment.Center
-        modeLabel.textColor = CaStyle.InputLabelColor
-        modeLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modeLabel)
-
-        modeTextField = UITextField()
-        modeTextField.adjustsFontSizeToFitWidth = true
-        modeTextField.borderStyle = UITextBorderStyle.None
-        modeTextField.font = CaStyle.InputFieldFont
-        modeTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
-        modeTextField.placeholder = "Mode"
-        modeTextField.textAlignment = NSTextAlignment.Center
-        modeTextField.textColor = CaStyle.InputFieldColor
-        modeTextField.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modeTextField)
-        
-        initializeModePicker()
-        
-        startButton = CaComponent.createButton(title: "Start tracking", color: CaStyle.LogStartButtonColor, bgColor: CaStyle.LogStartButtonBgColor, borderColor: CaStyle.LogStartButtonBorderColor)
-        startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
-        self.view.addSubview(startButton)
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "keyboardWasShown:", name: UIKeyboardDidShowNotification, object: nil)
+        center.addObserver(self, selector: "keyboardWillBeHidden:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    private func setConstraints() {
+    func unregisterFromKeyboardNotifications() {
         
-        let instructionHeight : CGFloat = self.view.frame.height / 4.0
-
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: headingView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: instructionHeight))
-
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Left, relatedBy: .Equal, toItem: headingView, attribute: .Left, multiplier: 1.0, constant: 30))
-        headingView.addConstraint(NSLayoutConstraint(item: headingLabel, attribute: .Right, relatedBy: .Equal, toItem: headingView, attribute: .Right, multiplier: 1.0, constant: -30))
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: headingView, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: modeLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
-        view.addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
-        
-        
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding * -1))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonWidth))
-        view.addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: CaStyle.ButtonHeight))
+        let center:  NSNotificationCenter = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        center.removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        
+        let info : NSDictionary = notification.userInfo!
+        let keyboardSize = (info.objectForKey(UIKeyboardFrameBeginUserInfoKey)?.CGRectValue as CGRect!).size
+        
+        let contentInsets: UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
+        scrollView.contentInset = contentInsets;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        
+        var tempRect = self.view.frame
+        tempRect.size.height -= keyboardSize.height;
+        if activeTextField != nil {
+            let containsPoint = CGRectContainsPoint(tempRect, activeTextField!.frame.origin)
+            if !containsPoint {
+                scrollView.scrollRectToVisible(activeTextField!.frame, animated: true)
+            }
+        }
+    }
+    
+    func keyboardWillBeHidden(notification: NSNotification) {
+        
+        let contentInsets = UIEdgeInsets(top: topLayoutGuide.length, left: 0.0, bottom: bottomLayoutGuide.length, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+        activeTextField?.resignFirstResponder()
+    }
+    
 }
