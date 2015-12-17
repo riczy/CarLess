@@ -5,10 +5,10 @@ import Foundation
 /// The data obtained in this class are weekly retail fuel prices for the entire U.S.,
 /// all grades and all formulations. Pricing units are expressed in dollars per gallon.
 ///
-class CaFuelPriceFinder: NSObject {
+class FuelPriceFinder: NSObject {
     
-    static let instance = CaFuelPriceFinder()
-    private var cache = CaFuelPriceCache()
+    static let instance = FuelPriceFinder()
+    private var cache = FuelPriceCache()
     
     private override init() {
     }
@@ -48,7 +48,7 @@ class CaFuelPriceFinder: NSObject {
     }
 }
 
-struct CaFuelPriceCache {
+struct FuelPriceCache {
     
     private let maxCacheSize = 5
     private var cache = [EiaWeeklyFuelPrice]()

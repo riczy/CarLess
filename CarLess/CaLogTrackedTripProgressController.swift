@@ -95,7 +95,7 @@ class CaLogTrackedTripProgressController: UIViewController {
             let onError = {() -> Void in
                 
             }
-            CaFuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onSuccess, onError: onError)
+            FuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onSuccess, onError: onError)
         } else {
             locationManager.requestAlwaysAuthorization()
         }

@@ -173,7 +173,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
                 self.trip = trip
                 self.postSave()
             }
-            CaFuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onFuelPriceFindSuccess, onError: onFuelPriceFindError)
+            FuelPriceFinder.instance.fuelPrice(forDate: trip.startTimestamp, onSuccess: onFuelPriceFindSuccess, onError: onFuelPriceFindError)
        }
     }
     

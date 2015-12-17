@@ -41,7 +41,7 @@
 		84C37CBB1C0F7F3A008750EE /* LegalWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37CBA1C0F7F3A008750EE /* LegalWebViewController.swift */; };
 		84C37CBD1C16050D008750EE /* CaLogManualTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37CBC1C16050D008750EE /* CaLogManualTripView.swift */; };
 		84C37CF91C1B57D4008750EE /* CaLogTrackedTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37CF81C1B57D4008750EE /* CaLogTrackedTripView.swift */; };
-		84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */; };
+		84E3D2B11BBAD20B0099D928 /* FuelPriceFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B01BBAD20B0099D928 /* FuelPriceFinder.swift */; };
 		84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */; };
 		84E4F0E31B7835A70006C069 /* CarLess.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */; };
 		84E4F0E51B78D9170006C069 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E4F0E41B78D9170006C069 /* MapKit.framework */; };
@@ -101,7 +101,7 @@
 		84C37CBA1C0F7F3A008750EE /* LegalWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LegalWebViewController.swift; sourceTree = "<group>"; };
 		84C37CBC1C16050D008750EE /* CaLogManualTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogManualTripView.swift; sourceTree = "<group>"; };
 		84C37CF81C1B57D4008750EE /* CaLogTrackedTripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogTrackedTripView.swift; sourceTree = "<group>"; };
-		84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaFuelPriceFinder.swift; sourceTree = "<group>"; };
+		84E3D2B01BBAD20B0099D928 /* FuelPriceFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuelPriceFinder.swift; sourceTree = "<group>"; };
 		84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EiaWeeklyFuelPriceParser.swift; sourceTree = "<group>"; };
 		84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CarLess.xcdatamodel; sourceTree = "<group>"; };
 		84E4F0E41B78D9170006C069 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -250,11 +250,11 @@
 		84E3D2AF1BBAD0140099D928 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */,
+				84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */,
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
-				84E3D2B01BBAD20B0099D928 /* CaFuelPriceFinder.swift */,
-				84E3D2B21BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift */,
-				84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */,
+				84E3D2B01BBAD20B0099D928 /* FuelPriceFinder.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -410,7 +410,7 @@
 				84C37CBD1C16050D008750EE /* CaLogManualTripView.swift in Sources */,
 				84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */,
 				841C63021BB3054C002FF0BD /* Setting.swift in Sources */,
-				84E3D2B11BBAD20B0099D928 /* CaFuelPriceFinder.swift in Sources */,
+				84E3D2B11BBAD20B0099D928 /* FuelPriceFinder.swift in Sources */,
 				8489293A1B3E41C80045C39E /* CaLogController.swift in Sources */,
 				8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */,
 				844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */,
