@@ -5,26 +5,32 @@ import Foundation
  */
 enum Mode: String {
     
-    case Walk = "Walk"
     case Bicycle = "Bicycle"
-    case Rideshare = "Rideshare"
     case Bus = "Bus"
+    case Rideshare = "Rideshare"
+    case Subway = "Subway"
+    case Telecommute = "Telecommute"
     case Train = "Train"
+    case Walk = "Walk"
     
     var imageFilename: String {
         
         get {
             switch self {
-            case .Walk:
-                return "trans-walk"
             case .Bicycle:
                 return "trans-bike"
             case .Bus:
                 return "trans-bus"
-            case .Train:
-                return "trans-train"
             case .Rideshare:
                 return "trans-rideshare"
+            case .Subway:
+                return "trans-subway"
+            case .Telecommute:
+                return "trans-telecommute"
+            case .Train:
+                return "trans-train"
+            case .Walk:
+                return "trans-walk"
             }
         }
     }
@@ -36,7 +42,7 @@ enum Mode: String {
         }
     }
     
-    static let allValues = [Walk, Bicycle, Bus, Train, Rideshare]
+    static let allValues = [Bicycle, Bus, Rideshare, Subway, Telecommute, Train, Walk]
 }
 
 /* 
