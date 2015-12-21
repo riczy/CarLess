@@ -50,6 +50,10 @@
 		84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E61A321B98AB5000D927B8 /* Waypoint.swift */; };
 		84F37D3E1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */; };
 		84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F37D3F1BD717AC00FC1437 /* NSDecimalNumber.swift */; };
+		84FB318F1C2323930090E614 /* TripCreatePointsCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */; };
+		84FB31911C23402C0090E614 /* TripCreatePointsCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB31901C23402C0090E614 /* TripCreatePointsCalculatorTests.swift */; };
+		84FB31941C265EBD0090E614 /* MigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB31931C265EBD0090E614 /* MigrationManager.swift */; };
+		84FB31961C270C610090E614 /* Migration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FB31951C270C610090E614 /* Migration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +114,11 @@
 		84E61A321B98AB5000D927B8 /* Waypoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Waypoint.swift; sourceTree = "<group>"; };
 		84F37D3D1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EiaWeeklyFuelPrice.swift; sourceTree = "<group>"; };
 		84F37D3F1BD717AC00FC1437 /* NSDecimalNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDecimalNumber.swift; sourceTree = "<group>"; };
+		84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCreatePointsCalculator.swift; sourceTree = "<group>"; };
+		84FB31901C23402C0090E614 /* TripCreatePointsCalculatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCreatePointsCalculatorTests.swift; sourceTree = "<group>"; };
+		84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CarLessDataModel v2.xcdatamodel"; sourceTree = "<group>"; };
+		84FB31931C265EBD0090E614 /* MigrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationManager.swift; sourceTree = "<group>"; };
+		84FB31951C270C610090E614 /* Migration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Migration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,10 +167,11 @@
 		84760EC61B680DBF00355E52 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				84FB31951C270C610090E614 /* Migration.swift */,
+				841C63011BB3054C002FF0BD /* Setting.swift */,
 				8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */,
 				84E61A301B98AB5000D927B8 /* Trip.swift */,
 				84E61A321B98AB5000D927B8 /* Waypoint.swift */,
-				841C63011BB3054C002FF0BD /* Setting.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -213,6 +223,7 @@
 				84278FF11B7CD05900F20BA7 /* CaStoryboard.swift */,
 				84760EC41B6808A700355E52 /* CaTypes.swift */,
 				844B61DA1B4B72BB00A32D77 /* MainViewController.swift */,
+				84FB31931C265EBD0090E614 /* MigrationManager.swift */,
 				848929101B3C486B0045C39E /* Supporting Files */,
 			);
 			path = CarLess;
@@ -233,6 +244,7 @@
 		848929271B3C486B0045C39E /* CarLessTests */ = {
 			isa = PBXGroup;
 			children = (
+				84FB31901C23402C0090E614 /* TripCreatePointsCalculatorTests.swift */,
 				8489292A1B3C486B0045C39E /* CarLessTests.swift */,
 				848929281B3C486B0045C39E /* Supporting Files */,
 			);
@@ -255,6 +267,7 @@
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
 				84E3D2B01BBAD20B0099D928 /* FuelPriceFinder.swift */,
+				84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -404,6 +417,7 @@
 				8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
 				84C37CBB1C0F7F3A008750EE /* LegalWebViewController.swift in Sources */,
+				84FB31941C265EBD0090E614 /* MigrationManager.swift in Sources */,
 				8410EDF61B90D0880044E714 /* CaDataManager.swift in Sources */,
 				84C37CF91C1B57D4008750EE /* CaLogTrackedTripView.swift in Sources */,
 				841C62FE1BB2BF10002FF0BD /* CaVehiclePickerController.swift in Sources */,
@@ -411,7 +425,9 @@
 				84AC80971BCB3330006570A2 /* CaVehicleController.swift in Sources */,
 				841C63021BB3054C002FF0BD /* Setting.swift in Sources */,
 				84E3D2B11BBAD20B0099D928 /* FuelPriceFinder.swift in Sources */,
+				84FB318F1C2323930090E614 /* TripCreatePointsCalculator.swift in Sources */,
 				8489293A1B3E41C80045C39E /* CaLogController.swift in Sources */,
+				84FB31961C270C610090E614 /* Migration.swift in Sources */,
 				8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */,
 				844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */,
 				84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */,
@@ -428,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8489292B1B3C486B0045C39E /* CarLessTests.swift in Sources */,
+				84FB31911C23402C0090E614 /* TripCreatePointsCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,9 +661,10 @@
 		84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */,
 				84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */,
 			);
-			currentVersion = 84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */;
+			currentVersion = 84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */;
 			path = CarLess.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

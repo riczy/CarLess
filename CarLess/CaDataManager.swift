@@ -20,14 +20,19 @@ class CaDataManager {
         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
         context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
         context.persistentStoreCoordinator = psc
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
+            
+            let options = [ NSMigratePersistentStoresAutomaticallyOption: true,
+                NSInferMappingModelAutomaticallyOption: true ]
             let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
             let docURL = urls[urls.endIndex - 1]
             let storeURL = docURL.URLByAppendingPathComponent("DataModel.sqlite")
             do {
-                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: nil)
+                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options)
+                MigrationManager().run()
             } catch {
-                fatalError("Error migrating store: \(error)")
+                fatalError("Error opening persistent data store: \(error)")
             }
         }
     }
@@ -108,6 +113,7 @@ class CaDataManager {
         let trip = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: context) as! Trip
         trip.id = NSUUID().UUIDString
         trip.distance = 0.0
+        trip.points = 0
         
         return trip
     }
@@ -120,6 +126,9 @@ class CaDataManager {
         
         if trip.managedObjectContext!.hasChanges {
             do {
+                if trip.objectID.temporaryID {
+                    TripCreatePointsCalculator.calculatePointsForTrip(trip)
+                }
                 try trip.managedObjectContext!.save()
             } catch let error as NSError {
                 NSLog("Error when saving trip: \(error.localizedDescription)")
