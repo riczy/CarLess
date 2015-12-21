@@ -6,36 +6,8 @@ class CaDataManager {
     
     static let instance = CaDataManager()
     
-    var context: NSManagedObjectContext
+    var context: NSManagedObjectContext!
     
-    
-    private init() {
-        
-        guard let modelURL = NSBundle.mainBundle().URLForResource("CarLess", withExtension: "momd") else {
-            fatalError("Error loading model from bundle.")
-        }
-        guard let mom = NSManagedObjectModel(contentsOfURL: modelURL) else {
-            fatalError("Error initializing managed object model from: \(modelURL)")
-        }
-        let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
-        context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        context.persistentStoreCoordinator = psc
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)) {
-            
-            let options = [ NSMigratePersistentStoresAutomaticallyOption: true,
-                NSInferMappingModelAutomaticallyOption: true ]
-            let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            let docURL = urls[urls.endIndex - 1]
-            let storeURL = docURL.URLByAppendingPathComponent("DataModel.sqlite")
-            do {
-                try psc.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: storeURL, options: options)
-                MigrationManager().run()
-            } catch {
-                fatalError("Error opening persistent data store: \(error)")
-            }
-        }
-    }
     
     // MARK: - Generic
     

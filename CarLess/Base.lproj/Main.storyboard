@@ -154,7 +154,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="5cI-Vo-iIA" kind="unwind" unwindAction="returnToSettingsMain:" id="WkG-y8-Iwk"/>
+                        <segue destination="5cI-Vo-iIA" kind="unwind" identifier="LegalToSettingsSegue" unwindAction="returnToSettingsMain:" id="WkG-y8-Iwk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p8w-0N-0Sj" userLabel="First Responder" sceneMemberID="firstResponder"/>

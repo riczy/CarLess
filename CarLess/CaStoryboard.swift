@@ -15,6 +15,7 @@ struct CaSegue {
     static let SettingsToDistanceUnit = "SettingsToDistanceUnitSegue"
     static let DistanceUnitToSettings = "DistanceUnitToSettingsSegue"
     static let SettingsToLegal = "SettingsToLegalSegue"
+    static let LegalToSettings = "LegalToSettingsSegue"
     
     static let TripsHomeToTripPeriodicSummary = "TripsHomeToTripPeriodicSummarySegue"
     static let TripPeriodicSummaryToTripsHome = "TripPeriodicSummaryToTripsHomeSegue"
