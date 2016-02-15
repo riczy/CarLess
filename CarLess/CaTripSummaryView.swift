@@ -27,6 +27,7 @@ class CaTripSummaryView: UIView {
         } else {
             noMapView = UIView()
         }
+        initComponents()
     }
     
     convenience init(showMap: Bool) {
@@ -47,11 +48,10 @@ class CaTripSummaryView: UIView {
     override func layoutSubviews() {
         
         super.layoutSubviews()
-        styleElements()
         loadConstraints()
     }
     
-    private func styleElements() {
+    private func initComponents() {
         
         let alignment = NSTextAlignment.Center
         let valueFont: UIFont = {

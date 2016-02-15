@@ -155,6 +155,64 @@ class CaDataManager {
         
     }
     
+    /**
+     * Returns the current total reputation points that this user has. If the user
+     * has no reputation points then zero is returned.
+     */
+    func fetchReputation() -> Int {
+        
+        var pointsTotal = 0
+        
+        let expression = NSExpressionDescription()
+        expression.name = "pointsTotal";
+        expression.expression =  NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "points")])
+        expression.expressionResultType = NSAttributeType.DoubleAttributeType
+        
+        let fetchRequest = NSFetchRequest(entityName: "Trip")
+        fetchRequest.predicate = NSPredicate(format: "pending = %@", argumentArray: [false])
+        fetchRequest.propertiesToFetch = [expression]
+        fetchRequest.resultType = .DictionaryResultType
+        
+        do {
+            let results = try context.executeFetchRequest(fetchRequest)
+            let dict = results[0] as! [String:Int]
+            pointsTotal = dict["pointsTotal"]!
+        } catch let error as NSError {
+            NSLog("Error when fetching trips: \(error.localizedDescription)")
+        }
+        
+        return pointsTotal
+    }
+    
+    /**
+     * Returns the reputation points that the user had 7 days ago.
+     */
+    func fetchWeekAgoReputation() -> Int {
+        
+        var pointsTotal = 0
+        
+        let expression = NSExpressionDescription()
+        expression.name = "pointsTotal";
+        expression.expression =  NSExpression(forFunction: "sum:", arguments:[NSExpression(forKeyPath: "points")])
+        expression.expressionResultType = NSAttributeType.DoubleAttributeType
+        
+        let weekago = NSDate().addDays(-7)
+        let fetchRequest = NSFetchRequest(entityName: "Trip")
+        fetchRequest.predicate = NSPredicate(format: "pending = %@ and startTimestamp <= %@", argumentArray: [false, weekago])
+        fetchRequest.propertiesToFetch = [expression]
+        fetchRequest.resultType = .DictionaryResultType
+        
+        do {
+            let results = try context.executeFetchRequest(fetchRequest)
+            let dict = results[0] as! [String:Int]
+            pointsTotal = dict["pointsTotal"]!
+        } catch let error as NSError {
+            NSLog("Error when fetching trips: \(error.localizedDescription)")
+        }
+        
+        return pointsTotal
+    }
+    
     // MARK: - Vehicles
     
     func initVehicle() -> Vehicle {

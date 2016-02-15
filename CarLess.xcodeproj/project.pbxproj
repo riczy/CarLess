@@ -17,6 +17,8 @@
 		84278FF61B83A3AA00F20BA7 /* CaLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */; };
 		8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */; };
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
+		8440034B1C2ED47300B12BCA /* ReputationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440034A1C2ED47300B12BCA /* ReputationController.swift */; };
+		8440034D1C2ED4F500B12BCA /* ReputationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440034C1C2ED4F500B12BCA /* ReputationView.swift */; };
 		844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */; };
 		844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */; };
 		844A2F221C03DE670054CBAF /* LogManualTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */; };
@@ -77,6 +79,8 @@
 		84278FF51B83A3AA00F20BA7 /* CaLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLocationManager.swift; sourceTree = "<group>"; };
 		8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleMenuParser.swift; sourceTree = "<group>"; };
+		8440034A1C2ED47300B12BCA /* ReputationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReputationController.swift; sourceTree = "<group>"; };
+		8440034C1C2ED4F500B12BCA /* ReputationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReputationView.swift; sourceTree = "<group>"; };
 		844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryView.swift; sourceTree = "<group>"; };
 		844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryController.swift; sourceTree = "<group>"; };
 		844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManualTripSummaryController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,16 @@
 			name = Log;
 			sourceTree = "<group>";
 		};
+		844003471C2C563E00B12BCA /* Reputation */ = {
+			isa = PBXGroup;
+			children = (
+				84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */,
+				8440034A1C2ED47300B12BCA /* ReputationController.swift */,
+				8440034C1C2ED4F500B12BCA /* ReputationView.swift */,
+			);
+			name = Reputation;
+			sourceTree = "<group>";
+		};
 		84760EC11B670EF900355E52 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +224,7 @@
 		8489290F1B3C486B0045C39E /* CarLess */ = {
 			isa = PBXGroup;
 			children = (
+				844003471C2C563E00B12BCA /* Reputation */,
 				84E3D2AF1BBAD0140099D928 /* Parsers */,
 				8479F6B41BA0C165004B6C08 /* Settings */,
 				84E61A341B9A911500D927B8 /* Trips */,
@@ -267,7 +282,6 @@
 				8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */,
 				845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */,
 				84E3D2B01BBAD20B0099D928 /* FuelPriceFinder.swift */,
-				84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -411,8 +425,10 @@
 				844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */,
 				848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */,
 				84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */,
+				8440034D1C2ED4F500B12BCA /* ReputationView.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
+				8440034B1C2ED47300B12BCA /* ReputationController.swift in Sources */,
 				847BFC441BF26FCC001BF9D1 /* CaTripDetailController.swift in Sources */,
 				8407179E1BC2A02000C65BB9 /* CaTripsPeriodicSummaryController.swift in Sources */,
 				848929131B3C486B0045C39E /* AppDelegate.swift in Sources */,
