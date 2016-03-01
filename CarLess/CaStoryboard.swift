@@ -158,6 +158,7 @@ struct CaStyle {
     // MARK: - Reputation Specific
     static let RepPointsSectionBgColor = UIColor.whiteColor()
     static let RepPointsLabelColor = CaColor.Orange900
+    static let RepPointsNoChangeLabelColor = CaColor.Orange900
     
     // MARK: - Trips Specific
     static var CellTripsRowFont: UIFont {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -184,25 +184,6 @@
             </objects>
             <point key="canvasLocation" x="-1221" y="301"/>
         </scene>
-        <!--Reputation-->
-        <scene sceneID="p7U-Uh-5wK">
-            <objects>
-                <viewController id="Raw-fy-xiv" customClass="ReputationController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sFk-NK-2z1"/>
-                        <viewControllerLayoutGuide type="bottom" id="otc-DK-TGf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="a3i-4k-s31">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Reputation" id="JYY-Cq-6LW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uNl-vn-Vev" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2392" y="-2913"/>
-        </scene>
         <!--Main View Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -221,13 +202,13 @@
                     <connections>
                         <segue destination="5dm-4C-6sw" kind="relationship" relationship="viewControllers" id="NYm-hv-Bdl"/>
                         <segue destination="bFK-3u-FNi" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
-                        <segue destination="n2c-f6-ggk" kind="relationship" relationship="viewControllers" id="fTF-Ps-lJY"/>
+                        <segue destination="hFV-63-uEa" kind="relationship" relationship="viewControllers" id="g1F-uF-xUF"/>
                         <segue destination="H6X-lS-6Zo" kind="relationship" relationship="viewControllers" id="xlp-8t-G2I"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4039" y="-858"/>
+            <point key="canvasLocation" x="-4259" y="-1567"/>
         </scene>
         <!--Log Tracked Trip-->
         <scene sceneID="Y3b-0k-Bbk">
@@ -378,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2a6-3f-uOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-946" y="-2292"/>
+            <point key="canvasLocation" x="-1678" y="-2300"/>
         </scene>
         <!--Trips Summary-->
         <scene sceneID="O2b-7X-GF7">
@@ -422,6 +403,42 @@
             </objects>
             <point key="canvasLocation" x="-3543" y="182"/>
         </scene>
+        <!--Reputation-->
+        <scene sceneID="Flm-ew-ce9">
+            <objects>
+                <navigationController id="hFV-63-uEa" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reputation" image="tab-points" id="YZI-kT-x8c"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="38J-eX-rcy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Vrf-yx-XSa" kind="relationship" relationship="rootViewController" id="Vrn-wR-0w4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BD9-Z6-zZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3216" y="-2419"/>
+        </scene>
+        <!--Reputation Controller-->
+        <scene sceneID="U4J-Hj-JV9">
+            <objects>
+                <viewController id="Vrf-yx-XSa" customClass="ReputationController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="liC-A4-yCT"/>
+                        <viewControllerLayoutGuide type="bottom" id="3mm-I8-IDw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iw6-sZ-9a2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="v5Q-kZ-ACq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jc5-LZ-Llp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2490" y="-2419"/>
+        </scene>
         <!--Trips-->
         <scene sceneID="qWP-1v-CGn">
             <objects>
@@ -440,25 +457,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KB3-wG-q3H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3216" y="-1567"/>
-        </scene>
-        <!--Reputation-->
-        <scene sceneID="FH4-X8-7oD">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="n2c-f6-ggk" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reputation" image="tab-points" id="C1t-f5-lWl"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Oin-8r-xAi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Raw-fy-xiv" kind="relationship" relationship="rootViewController" id="Neg-W0-DOh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0el-O9-vtt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3204" y="-2913"/>
         </scene>
     </scenes>
     <resources>

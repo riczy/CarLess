@@ -94,7 +94,15 @@ class ReputationView: UIView {
             attrText.addAttributes(labelAttrDict, range: text.rangeOfString(labelText))
             weekAgoPointsLabel.attributedText = attrText
         } else {
-            weekAgoPointsLabel.text = nil
+            
+            let text = "No change in the past week" as NSString
+            let attrText = NSMutableAttributedString(string: text as String)
+            let labelAttrDict = [
+                NSForegroundColorAttributeName: CaStyle.RepPointsNoChangeLabelColor,
+                NSFontAttributeName: UIFont.systemFontOfSize(12)
+            ]
+            attrText.addAttributes(labelAttrDict, range: NSMakeRange(0, text.length))
+            weekAgoPointsLabel.attributedText = attrText
         }
     }
     
