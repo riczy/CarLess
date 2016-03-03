@@ -108,6 +108,35 @@ enum LengthUnit : String {
 }
 
 /*
+ * Category of transportation for a commuting trip.
+ */
+enum Category: String {
+    
+    case Dining = "Dining"
+    case Entertainment = "Entertainment"
+    case Social = "Friends, Family or Social"
+    case Grocery = "Grocery"
+    case Medical = "Medical Appointment"
+    case Meeting = "Meeting"
+    case Park = "Parks or Recreation"
+    case School = "School or University"
+    case Shopping = "Shopping"
+    case Work = "Work"
+    case Worship = "Place of Worship"
+    case Other = "Other"
+    
+    
+    var description: String {
+        
+        get {
+            return self.rawValue
+        }
+    }
+    
+    static let allValues = [Dining, Entertainment, Social, Grocery, Medical, Meeting, Park, School, Shopping, Work, Worship, Other]
+}
+
+/*
  * Indicates the type of log entry made for a commuting trip.
  */
 enum LogType: String {
