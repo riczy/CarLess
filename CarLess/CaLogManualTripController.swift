@@ -37,8 +37,8 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
     
     private var category: Category? {
         get {
-            if lastSelectedModeIndex > 0 && lastSelectedModeIndex < categoryData.count {
-                return categoryData[lastSelectedModeIndex]
+            if lastSelectedCategoryIndex > 0 && lastSelectedCategoryIndex < categoryData.count {
+                return categoryData[lastSelectedCategoryIndex]
             }
             return nil
         }
