@@ -160,6 +160,16 @@ struct CaStyle {
     static let RepPointsLabelColor = CaColor.Orange900
     static let RepPointsNoChangeLabelColor = CaColor.Orange900
     
+    // MARK: - Trip List
+    static var TripListCellFont: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
+    static let TripListCellTimestampColor = CaColor.FadedSlateGray
+    static let TripListCellDistanceColor = CaColor.Orange600
+    static let TripListCellCategoryColor = CaColor.Red400
+    
     // MARK: - Trips Specific
     static var CellTripsRowFont: UIFont {
         get {
