@@ -5,6 +5,7 @@ import CoreLocation
 @objc(Trip)
 class Trip: NSManagedObject {
 
+    @NSManaged private var categoryTypeCode: String?
     @NSManaged var distance: NSNumber
     @NSManaged var endTimestamp: NSDate?
     @NSManaged var fuelPrice: NSDecimalNumber?
@@ -19,9 +20,21 @@ class Trip: NSManagedObject {
     @NSManaged var vehicle: Vehicle?
     @NSManaged var waypoints: NSMutableSet
     
+    var categoryType: Category? {
+        get {
+            if categoryTypeCode != nil {
+                return Category(rawValue: categoryTypeCode!)
+            }
+            return nil
+        }
+        set {
+            categoryTypeCode = newValue?.rawValue
+        }
+    }
+    
     var logType: LogType {
         get {
-            return LogType(rawValue: self.logTypeCode)!
+            return LogType(rawValue: logTypeCode)!
         }
         set {
             logTypeCode = newValue.rawValue
@@ -30,7 +43,7 @@ class Trip: NSManagedObject {
     
     var modeType: Mode {
         get {
-            return Mode(rawValue: self.modeTypeCode)!
+            return Mode(rawValue: modeTypeCode)!
         }
         set {
             modeTypeCode = newValue.rawValue

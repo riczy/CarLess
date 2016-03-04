@@ -90,6 +90,7 @@
 		8470900B1BD424C600F9D236 /* CaNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaNetworkManager.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
+		84771CC01C88EF14002A2048 /* CarLessDataModel v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CarLessDataModel v3.xcdatamodel"; sourceTree = "<group>"; };
 		847810EC1B8CB8DA00B5AC53 /* CaLogManualTripController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaLogManualTripController.swift; sourceTree = "<group>"; };
 		847BFC431BF26FCC001BF9D1 /* CaTripDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripDetailController.swift; sourceTree = "<group>"; };
 		8489290D1B3C486B0045C39E /* CarLess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarLess.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -677,10 +678,11 @@
 		84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84771CC01C88EF14002A2048 /* CarLessDataModel v3.xcdatamodel */,
 				84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */,
 				84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */,
 			);
-			currentVersion = 84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */;
+			currentVersion = 84771CC01C88EF14002A2048 /* CarLessDataModel v3.xcdatamodel */;
 			path = CarLess.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

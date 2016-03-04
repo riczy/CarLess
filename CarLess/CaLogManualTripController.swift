@@ -203,6 +203,7 @@ class CaLogManualTripController: UIViewController, UITextFieldDelegate, UIPicker
         } else {
             trip.setDistance(0.0, hasUnitType: CaDataManager.instance.defaultDistanceUnit)
         }
+        trip.categoryType = category
         trip.logType = LogType.Manual
         trip.modeType = mode!
         trip.pending = false
