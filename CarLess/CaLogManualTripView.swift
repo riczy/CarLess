@@ -100,7 +100,6 @@ class CaLogManualTripView: UIView {
         
         categoryTextField.adjustsFontSizeToFitWidth = true
         categoryTextField.borderStyle = UITextBorderStyle.None
-        categoryTextField.clearButtonMode = UITextFieldViewMode.WhileEditing
         categoryTextField.font = CaStyle.InputFieldFont
         categoryTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
         categoryTextField.placeholder = "The purpose of your trip"

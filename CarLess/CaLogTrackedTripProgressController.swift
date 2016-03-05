@@ -15,6 +15,7 @@ class CaLogTrackedTripProgressController: UIViewController {
     // MARK: - Properties
     
     var mode: Mode!
+    var category: Category?
     private var trip: Trip!
     private var waypointCounter = 0
     private var distanceTraveled: Double {
@@ -71,6 +72,7 @@ class CaLogTrackedTripProgressController: UIViewController {
             mapView.showsUserLocation = true
             
             trip = CaDataManager.instance.initTrip()
+            trip.categoryType = category
             trip.distance = 0.0
             trip.endTimestamp = nil
             trip.logType = LogType.Tracked

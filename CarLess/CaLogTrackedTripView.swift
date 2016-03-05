@@ -8,6 +8,8 @@ class CaLogTrackedTripView: UIView {
     var headingLabel = UILabel()
     var modeLabel = UILabel()
     var modeTextField = UITextField()
+    var categoryLabel = UILabel()
+    var categoryTextField = UITextField()
     var startButton = CaComponent.createButton(title: "Start tracking", color: CaStyle.LogStartButtonColor, bgColor: CaStyle.LogStartButtonBgColor, borderColor: CaStyle.LogStartButtonBorderColor)
     
     override init(frame: CGRect) {
@@ -53,7 +55,21 @@ class CaLogTrackedTripView: UIView {
         modeTextField.textColor = CaStyle.InputFieldColor
         modeTextField.translatesAutoresizingMaskIntoConstraints = false
         
-    }
+        categoryLabel.font = CaStyle.InputLabelFont
+        categoryLabel.text = "Category"
+        categoryLabel.textAlignment = NSTextAlignment.Center
+        categoryLabel.textColor = CaStyle.InputLabelColor
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        categoryTextField.adjustsFontSizeToFitWidth = true
+        categoryTextField.borderStyle = UITextBorderStyle.None
+        categoryTextField.font = CaStyle.InputFieldFont
+        categoryTextField.minimumFontSize = CaStyle.InputFieldFontMinimumScaleFactor
+        categoryTextField.placeholder = "The purpose of your trip"
+        categoryTextField.textAlignment = NSTextAlignment.Center
+        categoryTextField.textColor = CaStyle.InputFieldColor
+        categoryTextField.translatesAutoresizingMaskIntoConstraints = false
+   }
     
     private func setConstraints() {
         
@@ -80,6 +96,16 @@ class CaLogTrackedTripView: UIView {
         addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
         addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
         addConstraint(NSLayoutConstraint(item: modeTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        addSubview(categoryLabel)
+        addConstraint(NSLayoutConstraint(item: categoryLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: modeTextField, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupVerticlePadding))
+        addConstraint(NSLayoutConstraint(item: categoryLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        addConstraint(NSLayoutConstraint(item: categoryLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
+        
+        addSubview(categoryTextField)
+        addConstraint(NSLayoutConstraint(item: categoryTextField, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: categoryLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: CaStyle.InputGroupLvVerticlePadding))
+        addConstraint(NSLayoutConstraint(item: categoryTextField, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 20.0))
+        addConstraint(NSLayoutConstraint(item: categoryTextField, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -20.0))
         
         addSubview(startButton)
         addConstraint(NSLayoutConstraint(item: startButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0.0))

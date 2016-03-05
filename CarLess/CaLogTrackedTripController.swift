@@ -1,31 +1,44 @@
 import UIKit
 import MapKit
 
-class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class CaLogTrackedTripController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    // MARK: - UI Properties
+    private var scrollView: UIScrollView!
+    private var logEntryView: CaLogTrackedTripView!
+    private var modePicker: UIPickerView!
+    private var categoryPicker: UIPickerView!
     
     // MARK: - Properties
-    private var scrollView: UIScrollView!
-    private var entryView: CaLogTrackedTripView!
-    private var modePicker: UIPickerView!
     
+    private var categoryData: [Category?] = []
     private var lastSelectedModeIndex = 0
+    private var lastSelectedCategoryIndex = 0
 
-    private var _mode: Mode?
-    private var mode: Mode {
+    private var mode: Mode? {
         get {
-            if _mode == nil {
-                _mode = Mode.allValues.first
-                updateDisplayForMode(_mode!)
+            if lastSelectedModeIndex >= 0 && lastSelectedModeIndex < Mode.allValues.count {
+                return Mode.allValues[lastSelectedModeIndex]
             }
-            return _mode!
+            return nil
         }
-        set {
-            _mode = newValue
-            updateDisplayForMode(_mode!)
+    }
+    
+    private var category: Category? {
+        get {
+            if lastSelectedCategoryIndex > 0 && lastSelectedCategoryIndex < categoryData.count {
+                return categoryData[lastSelectedCategoryIndex]
+            }
+            return nil
         }
     }
     
     private var activeTextField: UITextField?
+    
+    private struct Tag {
+        static let ModePicker = 300
+        static let CategoryPicker = 400
+    }
     
     // MARK: - View Lifecycle
     
@@ -33,18 +46,48 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         
         super.viewDidLoad()
         
-        entryView = CaLogTrackedTripView()
+        logEntryView = CaLogTrackedTripView()
         
         scrollView = UIScrollView()
-        scrollView.addSubview(entryView)
+        scrollView.addSubview(logEntryView)
         view.addSubview(scrollView)
         
-        entryView.startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
-        initializeModePicker()
+        logEntryView.startButton.addTarget(self, action: "startTracking", forControlEvents: UIControlEvents.TouchUpInside)
         
+        
+        // Initialize category data; the first item is nil
+        //
+        categoryData.append(nil)
+        for cat in Category.allValues {
+            categoryData.append(cat)
+        }
+        
+        // Dismiss the keyboard on view tap
+        //
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        entryView.addGestureRecognizer(tap)
+        logEntryView.addGestureRecognizer(tap)
+        
+        modePicker = UIPickerView()
+        modePicker.dataSource = self
+        modePicker.delegate = self
+        modePicker.tag = Tag.ModePicker
+        logEntryView.modeTextField.inputView = modePicker
 
+        categoryPicker = UIPickerView()
+        categoryPicker.dataSource = self
+        categoryPicker.delegate = self
+        categoryPicker.tag = Tag.CategoryPicker
+        logEntryView.categoryTextField.inputView = categoryPicker
+        
+        // Set the text field delegates to self so that the view knows to where to
+        // scroll so that the active text field is not covered when a keyboard
+        // appears on the screen.
+        //
+        logEntryView.modeTextField.delegate = self
+        logEntryView.categoryTextField.delegate = self
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         reset()
     }
     
@@ -60,9 +103,9 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        entryView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - topLayoutGuide.length - bottomLayoutGuide.length)
-        scrollView.frame = entryView.frame
-        scrollView.contentSize = entryView.frame.size
+        logEntryView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - topLayoutGuide.length - bottomLayoutGuide.length)
+        scrollView.frame = logEntryView.frame
+        scrollView.contentSize = logEntryView.frame.size
     }
     
     // MARK: - Navigation
@@ -80,12 +123,12 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         return true
     }
     
-
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == CaSegue.LogTrackedTripHomeToProgress {
             let vc = segue.destinationViewController as! CaLogTrackedTripProgressController
             vc.mode = mode
+            vc.category = category
         }
     }
     
@@ -101,8 +144,12 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     private func reset() {
         
         lastSelectedModeIndex = 0
-        mode = Mode.allValues[lastSelectedModeIndex]
+        logEntryView.modeTextField.text = Mode.allValues[lastSelectedModeIndex].description
         modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
+        
+        lastSelectedCategoryIndex = 0
+        logEntryView.categoryTextField.text = categoryData[lastSelectedCategoryIndex]?.description
+        categoryPicker.selectRow(lastSelectedCategoryIndex, inComponent: 0, animated: false)
     }
     
     
@@ -112,53 +159,8 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
         reset()
     }
     
-    // MARK: - View Initializations
     
-    private func initializeModePicker() {
-        
-        modePicker = UIPickerView()
-        modePicker.dataSource = self
-        modePicker.delegate = self
-        
-        let toolbar = UIToolbar()
-        toolbar.barStyle = UIBarStyle.Default
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerDone"))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("modePickerCancel"))
-        
-        toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolbar.userInteractionEnabled = true
-        
-        entryView.modeTextField.inputView = modePicker
-        entryView.modeTextField.inputAccessoryView = toolbar
-    }
-   
-    private func updateDisplayForMode(mode: Mode) {
-        
-        entryView.modeTextField.text = mode.description
-    }
-    
-    // MARK: - Scene Actions
-    
-    func modePickerDone() {
-        
-        let selectedModeIndex = modePicker.selectedRowInComponent(0)
-        if selectedModeIndex > -1 {
-            mode = Mode.allValues[selectedModeIndex]
-            lastSelectedModeIndex = selectedModeIndex
-        }
-        entryView.modeTextField.resignFirstResponder()
-    }
-    
-    func modePickerCancel() {
-        
-        entryView.modeTextField.resignFirstResponder()
-        modePicker.selectRow(lastSelectedModeIndex, inComponent: 0, animated: false)
-    }
-    
-    // MARK: - UIPicker Delegate Methods
+    // MARK: - UIPicker DataSource Methods
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         
@@ -167,12 +169,39 @@ class CaLogTrackedTripController: UIViewController, UIPickerViewDataSource, UIPi
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return Mode.allValues.count;
+        return pickerView.tag == Tag.ModePicker ?
+            Mode.allValues.count : categoryData.count
     }
+    
+    // MARK: - UIPicker Delegate Methods
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return Mode.allValues[row].description
+        return pickerView.tag == Tag.ModePicker ?
+            Mode.allValues[row].description :
+            categoryData[row]?.description
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if pickerView.tag == Tag.ModePicker {
+            logEntryView.modeTextField.text = Mode.allValues[row].description
+            lastSelectedModeIndex = row
+            
+        } else {
+            logEntryView.categoryTextField.text = categoryData[row]?.description
+            lastSelectedCategoryIndex = row
+        }
+    }
+    
+    // MARK: - UITextField Delegate Methods
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
     }
     
     // MARK: - Keyboard
