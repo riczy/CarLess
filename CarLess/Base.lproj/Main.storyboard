@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -202,7 +202,6 @@
                     <connections>
                         <segue destination="5dm-4C-6sw" kind="relationship" relationship="viewControllers" id="NYm-hv-Bdl"/>
                         <segue destination="bFK-3u-FNi" kind="relationship" relationship="viewControllers" id="ObT-Zi-W3K"/>
-                        <segue destination="hFV-63-uEa" kind="relationship" relationship="viewControllers" id="g1F-uF-xUF"/>
                         <segue destination="H6X-lS-6Zo" kind="relationship" relationship="viewControllers" id="xlp-8t-G2I"/>
                     </connections>
                 </tabBarController>
@@ -403,42 +402,6 @@
             </objects>
             <point key="canvasLocation" x="-3543" y="182"/>
         </scene>
-        <!--Reputation-->
-        <scene sceneID="Flm-ew-ce9">
-            <objects>
-                <navigationController id="hFV-63-uEa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Reputation" image="tab-points" id="YZI-kT-x8c"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="38J-eX-rcy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Vrf-yx-XSa" kind="relationship" relationship="rootViewController" id="Vrn-wR-0w4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BD9-Z6-zZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3216" y="-2419"/>
-        </scene>
-        <!--Reputation Controller-->
-        <scene sceneID="U4J-Hj-JV9">
-            <objects>
-                <viewController id="Vrf-yx-XSa" customClass="ReputationController" customModule="CarLess" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="liC-A4-yCT"/>
-                        <viewControllerLayoutGuide type="bottom" id="3mm-I8-IDw"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="iw6-sZ-9a2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="v5Q-kZ-ACq"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Jc5-LZ-Llp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2490" y="-2419"/>
-        </scene>
         <!--Trips-->
         <scene sceneID="qWP-1v-CGn">
             <objects>
@@ -462,7 +425,6 @@
     <resources>
         <image name="tab-activity" width="25" height="25"/>
         <image name="tab-log" width="25" height="25"/>
-        <image name="tab-points" width="25" height="25"/>
         <image name="tab-settings" width="25" height="25"/>
     </resources>
 </document>

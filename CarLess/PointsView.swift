@@ -1,6 +1,6 @@
 import UIKit
 
-class ReputationView: UIView {
+class PointsView: UIView {
 
     // MARK: - UI Properties
     private var pointsLabel = UILabel()
@@ -41,6 +41,8 @@ class ReputationView: UIView {
     }
     
     private func initComponents() {
+        
+        backgroundColor = UIColor.yellowColor() // CaStyle.RepPointsSectionBgColor
 
         setPointsLabelText()
         setWeekAgoPointsLabelText()
@@ -108,26 +110,16 @@ class ReputationView: UIView {
     
     private func setConstraints() {
         
-        let pointsView = UIView()
-        pointsView.backgroundColor = CaStyle.RepPointsSectionBgColor
-        pointsView.translatesAutoresizingMaskIntoConstraints = false;
-        addSubview(pointsView)
-        addConstraint(NSLayoutConstraint(item: pointsView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: pointsView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: pointsView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: pointsView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 120))
+        addSubview(pointsLabel)
+        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: -10))
+        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         
-        pointsView.addSubview(pointsLabel)
-        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: pointsView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: -10))
-        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: pointsView, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: pointsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: pointsView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
-        
-        pointsView.addSubview(weekAgoPointsLabel)
+        addSubview(weekAgoPointsLabel)
         addConstraint(NSLayoutConstraint(item: weekAgoPointsLabel, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: pointsLabel, attribute: NSLayoutAttribute.Bottom, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: weekAgoPointsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: pointsView, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
-        addConstraint(NSLayoutConstraint(item: weekAgoPointsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: pointsView, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: weekAgoPointsLabel, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: 0))
+        addConstraint(NSLayoutConstraint(item: weekAgoPointsLabel, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 0))
         
-
     }
     
 }

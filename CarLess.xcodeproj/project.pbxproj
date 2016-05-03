@@ -18,13 +18,15 @@
 		8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */; };
 		8433ACA31BA90632004CA5CF /* EpaVehicleMenuParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */; };
 		8440034B1C2ED47300B12BCA /* ReputationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440034A1C2ED47300B12BCA /* ReputationController.swift */; };
-		8440034D1C2ED4F500B12BCA /* ReputationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440034C1C2ED4F500B12BCA /* ReputationView.swift */; };
+		8440034D1C2ED4F500B12BCA /* PointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440034C1C2ED4F500B12BCA /* PointsView.swift */; };
 		844A2EE01C0165EB0054CBAF /* CaTripSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */; };
 		844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */; };
 		844A2F221C03DE670054CBAF /* LogManualTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */; };
 		844A2F241C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A2F231C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift */; };
 		844B61DB1B4B72BB00A32D77 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844B61DA1B4B72BB00A32D77 /* MainViewController.swift */; };
 		845E2CC01BADCA0A00069513 /* EpaVehicleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */; };
+		846CD19A1C8E3B860011E266 /* MilestonesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CD1991C8E3B860011E266 /* MilestonesView.swift */; };
+		846CD19D1C9126EE0011E266 /* MilestoneCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846CD19C1C9126ED0011E266 /* MilestoneCalculator.swift */; };
 		8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8470900B1BD424C600F9D236 /* CaNetworkManager.swift */; };
 		84760EC31B670F2200355E52 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC21B670F2200355E52 /* DateExtension.swift */; };
 		84760EC51B6808A700355E52 /* CaTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84760EC41B6808A700355E52 /* CaTypes.swift */; };
@@ -80,13 +82,16 @@
 		8433AC9A1BA1FD63004CA5CF /* Vehicle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		8433ACA21BA90632004CA5CF /* EpaVehicleMenuParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleMenuParser.swift; sourceTree = "<group>"; };
 		8440034A1C2ED47300B12BCA /* ReputationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReputationController.swift; sourceTree = "<group>"; };
-		8440034C1C2ED4F500B12BCA /* ReputationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReputationView.swift; sourceTree = "<group>"; };
+		8440034C1C2ED4F500B12BCA /* PointsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PointsView.swift; sourceTree = "<group>"; };
 		844A2EDF1C0165EB0054CBAF /* CaTripSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryView.swift; sourceTree = "<group>"; };
 		844A2EE11C0173290054CBAF /* CaTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTripSummaryController.swift; sourceTree = "<group>"; };
 		844A2F211C03DE670054CBAF /* LogManualTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManualTripSummaryController.swift; sourceTree = "<group>"; };
 		844A2F231C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogTrackedTripSummaryController.swift; sourceTree = "<group>"; };
 		844B61DA1B4B72BB00A32D77 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		845E2CBF1BADCA0A00069513 /* EpaVehicleParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpaVehicleParser.swift; sourceTree = "<group>"; };
+		846CD1991C8E3B860011E266 /* MilestonesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestonesView.swift; sourceTree = "<group>"; };
+		846CD19B1C9121BF0011E266 /* CarLessDataModel v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "CarLessDataModel v4.xcdatamodel"; sourceTree = "<group>"; };
+		846CD19C1C9126ED0011E266 /* MilestoneCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestoneCalculator.swift; sourceTree = "<group>"; };
 		8470900B1BD424C600F9D236 /* CaNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaNetworkManager.swift; sourceTree = "<group>"; };
 		84760EC21B670F2200355E52 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		84760EC41B6808A700355E52 /* CaTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaTypes.swift; sourceTree = "<group>"; };
@@ -165,7 +170,9 @@
 			children = (
 				84FB318E1C2323930090E614 /* TripCreatePointsCalculator.swift */,
 				8440034A1C2ED47300B12BCA /* ReputationController.swift */,
-				8440034C1C2ED4F500B12BCA /* ReputationView.swift */,
+				8440034C1C2ED4F500B12BCA /* PointsView.swift */,
+				846CD1991C8E3B860011E266 /* MilestonesView.swift */,
+				846CD19C1C9126ED0011E266 /* MilestoneCalculator.swift */,
 			);
 			name = Reputation;
 			sourceTree = "<group>";
@@ -414,11 +421,13 @@
 				847810ED1B8CB8DA00B5AC53 /* CaLogManualTripController.swift in Sources */,
 				84760EC51B6808A700355E52 /* CaTypes.swift in Sources */,
 				84E61A331B98AB5000D927B8 /* Waypoint.swift in Sources */,
+				846CD19D1C9126EE0011E266 /* MilestoneCalculator.swift in Sources */,
 				84F37D3E1BD70C7300FC1437 /* EiaWeeklyFuelPrice.swift in Sources */,
 				844A2F241C03EE0E0054CBAF /* LogTrackedTripSummaryController.swift in Sources */,
 				8470900C1BD424C600F9D236 /* CaNetworkManager.swift in Sources */,
 				84B7AC681BB89BEC00B5F17E /* CaDistanceUnitListController.swift in Sources */,
 				84E3D2B31BBB62DB0099D928 /* EiaWeeklyFuelPriceParser.swift in Sources */,
+				846CD19A1C8E3B860011E266 /* MilestonesView.swift in Sources */,
 				8433AC9B1BA1FD63004CA5CF /* Vehicle.swift in Sources */,
 				840717A01BC2EB1E00C65BB9 /* CaTripsSummary.swift in Sources */,
 				84278FF41B83848B00F20BA7 /* CaLogTrackedTripProgressController.swift in Sources */,
@@ -426,7 +435,7 @@
 				844A2EE21C0173290054CBAF /* CaTripSummaryController.swift in Sources */,
 				848929171B3C486B0045C39E /* CaSettingsController.swift in Sources */,
 				84F37D401BD717AC00FC1437 /* NSDecimalNumber.swift in Sources */,
-				8440034D1C2ED4F500B12BCA /* ReputationView.swift in Sources */,
+				8440034D1C2ED4F500B12BCA /* PointsView.swift in Sources */,
 				84278FF21B7CD05900F20BA7 /* CaStoryboard.swift in Sources */,
 				84760EC31B670F2200355E52 /* DateExtension.swift in Sources */,
 				8440034B1C2ED47300B12BCA /* ReputationController.swift in Sources */,
@@ -678,11 +687,12 @@
 		84E4F0E11B7835A70006C069 /* CarLess.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				846CD19B1C9121BF0011E266 /* CarLessDataModel v4.xcdatamodel */,
 				84771CC01C88EF14002A2048 /* CarLessDataModel v3.xcdatamodel */,
 				84FB31921C23BCC70090E614 /* CarLessDataModel v2.xcdatamodel */,
 				84E4F0E21B7835A70006C069 /* CarLess.xcdatamodel */,
 			);
-			currentVersion = 84771CC01C88EF14002A2048 /* CarLessDataModel v3.xcdatamodel */;
+			currentVersion = 846CD19B1C9121BF0011E266 /* CarLessDataModel v4.xcdatamodel */;
 			path = CarLess.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

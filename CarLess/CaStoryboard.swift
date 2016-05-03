@@ -159,6 +159,11 @@ struct CaStyle {
     static let RepPointsSectionBgColor = UIColor.whiteColor()
     static let RepPointsLabelColor = CaColor.Orange900
     static let RepPointsNoChangeLabelColor = CaColor.Orange900
+    static var RepMilestoneName: UIFont {
+        get {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        }
+    }
     
     // MARK: - Trip List
     static var TripListCellFont: UIFont {
